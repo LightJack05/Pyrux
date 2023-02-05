@@ -1,0 +1,30 @@
+<!-- Copyright (c) Microsoft Corporation and Contributors. -->
+<!-- Licensed under the MIT License. -->
+
+<Window
+    x:Class="Pyrux.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Pyrux"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid>
+        <Border Background="{ThemeResource SystemChromeMediumColor}"/>
+        <NavigationView x:Name="ngvMainWindow" PaneDisplayMode="Auto" ItemInvoked="ngvMainWindow_ItemInvoked" IsBackButtonVisible="Collapsed">
+            <NavigationView.MenuItems>
+                <NavigationViewItem Icon="List" Tag="levelSelect" Content="Level Selection"/>
+                <NavigationViewItem Icon="Document" Tag="exerciseView" Content="Exercise View"/>
+                <NavigationViewItem Icon="Help" Tag="hint" Content="Hint"/>
+                <NavigationViewItem Tag="docs" Content="API Documentation"/>
+            </NavigationView.MenuItems>
+            <NavigationView.FooterMenuItems>
+                <NavigationViewItem Icon="Help" Tag="about" Content="About"/>
+            </NavigationView.FooterMenuItems>
+            <ScrollViewer>
+                <Frame x:Name="ctfMain" Padding="0,0,0,0" IsTabStop="True"/>
+            </ScrollViewer>
+        </NavigationView>
+    </Grid>
+</Window>

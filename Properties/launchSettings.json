@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Pyrux (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Pyrux (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
