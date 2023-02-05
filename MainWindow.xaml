@@ -12,7 +12,7 @@
 
     <Grid>
         <Border Background="{ThemeResource SystemChromeMediumColor}"/>
-        <NavigationView x:Name="ngvMainWindow" PaneDisplayMode="Auto" ItemInvoked="ngvMainWindow_ItemInvoked" IsBackButtonVisible="Collapsed">
+        <NavigationView x:Name="ngvMainWindow" PaneDisplayMode="Auto" ItemInvoked="ngvMainWindow_ItemInvoked" Loaded="ngvMainWindow_Loaded" IsBackButtonVisible="Collapsed">
             <NavigationView.MenuItems>
                 <NavigationViewItem Icon="List" Tag="levelSelect" Content="Level Selection"/>
                 <NavigationViewItem Icon="Document" Tag="exerciseView" Content="Exercise View"/>
