@@ -18,6 +18,9 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Microsoft.UI;
+using System.Reflection.Metadata.Ecma335;
+using Windows.ApplicationModel.Wallet;
+using Windows.UI.ViewManagement;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -29,6 +32,16 @@ namespace Pyrux.Pages
     /// </summary>
     public sealed partial class ExercisePage : Page
     {
+        private PyruxLevel _activeLevel;
+        internal PyruxLevel ActiveLevel { 
+            get => _activeLevel; 
+            set { 
+                _activeLevel = value;
+                BuildPlayGrid();
+                LoadLevelIntoPage();
+                UpdateDisplay();
+            }  
+        }
         public ExercisePage()
         {
             this.InitializeComponent();
@@ -45,55 +58,61 @@ namespace Pyrux.Pages
         {
             // Test level creation
             PyruxLevelMapLayout levelLayout = new PyruxLevelMapLayout(
-                        new bool[3, 3] {
-                        {true, true, true},
-                        {false, true, false },
-                        {false, false, false }
+                        new bool[,] {
+                        {true, true, true, false, false, false, false, false, false},
+                        {false, true, false, true, false, false, false, false, false },
+                        {false, false, false, false, false, false, false, false, false },
+                        {false, false, false, false, false, false, false, false, false },
+                        {false, false, false, false, false, false, false, false, false },
+                        {false, false, false, false, false, false, false, false, false },
+                        {false, false, false, false, false, false, false, false, false },
+                        {false, false, false, false, false, false, false, false, false },
+                        {false, false, false, false, false, false, false, false, false }
                         },
 
-                        new int[3, 3] {
-                            {0,0,0},
-                            {1,0,0 },
-                            {1,1,1 }
+                        new int[,] {
+                            {0,0,0,0,0,0,0,0,0},
+                            {0,0,0,0,0,0,0,0,0},
+                            {1,0,0,0,0,0,0,0,0},
+                            {1,1,4,0,0,0,0,0,0},
+                            {0,0,0,6,0,0,0,0,0},
+                            {0,0,0,0,0,0,0,0,0},
+                            {0,0,0,15,0,0,0,0,0},
+                            {0,0,0,0,0,0,0,0,0},
+                            {0,0,0,0,0,0,0,0,0}
                         },
 
                         new PositionVector2(1, 0),
-                        new PositionVector2(1, 0),
-                        5,
-                        5
+                        new PositionVector2(1, 0)
                     );
 
-            LoadLevelIntoPage(new PyruxLevel("Testlevel", "Test your shit!", true, levelLayout));
+            ActiveLevel = new PyruxLevel("Testlevel", "Test your shit!", true, levelLayout);
         }
-
-
 
         /// <summary>
         /// Load a level into the exercise page
         /// </summary>
-        /// <param name="level">The level instance to load.</param>
-        void LoadLevelIntoPage(PyruxLevel level)
+        void LoadLevelIntoPage()
         {
-            expTaskExpander.Header = level.LevelName;
-            txtTaskBox.Text = level.Task;
-            BuildPlayGrid(level);
+            expTaskExpander.Header = ActiveLevel.LevelName;
+            txtTaskBox.Text = ActiveLevel.Task;
+            BuildPlayGrid();
         }
 
         /// <summary>
         /// Build the Grid for the level that is loaded.
         /// </summary>
-        /// <param name="level">The level</param>
-        void BuildPlayGrid(PyruxLevel level)
+        void BuildPlayGrid()
         {
             grdPlayField.Children.Clear();
             grdPlayField.RowDefinitions.Clear();
             grdPlayField.ColumnDefinitions.Clear();
 
-            for (int i = 0; i < level.MapLayout.SizeY; i++)
+            for (int i = 0; i < ActiveLevel.MapLayout.SizeY; i++)
             {
                 grdPlayField.RowDefinitions.Add(new RowDefinition());
             }
-            for (int j = 0; j < level.MapLayout.SizeX; j++)
+            for (int j = 0; j < ActiveLevel.MapLayout.SizeX; j++)
             {
                 grdPlayField.ColumnDefinitions.Add(new ColumnDefinition());
             }
@@ -113,6 +132,48 @@ namespace Pyrux.Pages
                     Grid.SetRow(border, j);
                 }
             }
+        }
+
+        void UpdateDisplay()
+        {
+            PyruxLevelMapLayout mapLayout = ActiveLevel.MapLayout;
+
+            for (int i = 0; i < mapLayout.WallLayout.GetLength(0); i++)
+            {
+                for (int j = 0; j < mapLayout.WallLayout.GetLength(1); j++)
+                {
+                    Border border = (Border)grdPlayField.Children[i * grdPlayField.ColumnDefinitions.Count() + j];
+                    Image image = (Image)border.Child;
+                    if (mapLayout.WallLayout[j, i])
+                    {
+                        image.Source = new BitmapImage(new Uri("ms-appx:///Assets/Textures/Wall.png"));
+                    }
+                    else if (!mapLayout.WallLayout[j,i] && (mapLayout.CollectablesLayout[j, i] == 0))
+                    {
+                        if(Application.Current.RequestedTheme == ApplicationTheme.Dark)
+                        {
+                            image.Source = new BitmapImage(new Uri("ms-appx:///Assets/Textures/Background/dark.png"));
+                        }
+                        else
+                        {
+                            image.Source = new BitmapImage(new Uri("ms-appx:///Assets/Textures/Background/light.png"));
+                        }
+                    }
+                    else
+                    {
+                        if (mapLayout.CollectablesLayout[j, i] <= 9 && mapLayout.CollectablesLayout[j, i] > 0)
+                        {
+                            image.Source = new BitmapImage(new Uri($"ms-appx:///Assets/Textures/Collectables/Collectables{mapLayout.CollectablesLayout[j, i]}.png"));
+                        }
+                        else
+                        {
+                            image.Source = new BitmapImage(new Uri($"ms-appx:///Assets/Textures/Collectables/Collectables9.png"));
+                        }
+                    }
+                    
+                }
+            }
+
         }
     }
 }

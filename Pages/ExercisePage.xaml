@@ -26,7 +26,7 @@
                 Header="Task"
                 Margin="10,10,10,10"
                 x:Name="expTaskExpander">
-            <ScrollViewer MaxHeight="500" Background="Red">
+            <ScrollViewer MaxHeight="500">
                 <TextBox AcceptsReturn="True" IsReadOnly="True" IsEnabled="False" x:Name="txtTaskBox">
                 </TextBox>
             </ScrollViewer>
@@ -35,7 +35,7 @@
         <Grid VerticalAlignment="Stretch" x:Name="grdMainSplit" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
 
             <Grid Grid.Column="0" VerticalAlignment="Stretch" Margin="10,10,10,10" >
@@ -59,29 +59,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <Grid Name="grdPlayField" Background="Red" >
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Border Grid.Row="0" Grid.Column="1" Background="Black">
-                            <Image Source="ms-appx:///Assets/Wall.png" Margin="5,5,5,5"/>
-                        </Border>
-                        <Border Grid.Row="1" Grid.Column="1" Background="Black">
-                            <Image Source="ms-appx:///Assets/Wall.png" Margin="5,5,5,5"/>
-                        </Border>
-                        <Border Grid.Row="2" Grid.Column="1" Background="Black">
-                            <Image Source="ms-appx:///Assets/Wall.png" Margin="5,5,5,5"/>
-                        </Border>
-                        <Border Grid.Row="1" Grid.Column="1" Background="Black">
-                            <Image Source="ms-appx:///Assets/Wall.png" Margin="5,5,5,5"/>
-                        </Border>
+                    <Grid Name="grdPlayField" Background="Black" >
                     </Grid>
                 </Grid>
             </Grid>
