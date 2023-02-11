@@ -32,6 +32,7 @@ namespace Pyrux.Pages
     /// </summary>
     public sealed partial class ExercisePage : Page
     {
+        private Image CharImage;
         private PyruxLevel _activeLevel;
         internal PyruxLevel ActiveLevel { 
             get => _activeLevel; 
@@ -83,7 +84,7 @@ namespace Pyrux.Pages
                         },
 
                         new PositionVector2(5, 5),
-                        2
+                        1
                     );
 
             ActiveLevel = new PyruxLevel("Testlevel", "Test your shit!", true, levelLayout);
@@ -135,10 +136,12 @@ namespace Pyrux.Pages
 
             Image charImage = new();
             charImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Textures/Player.png"));
+            charImage.RenderTransformOrigin = new(.5, .5);
+            charImage.RenderTransform = new RotateTransform { Angle = 90 * ActiveLevel.MapLayout.CurrentPlayerDirection };
             grdPlayField.Children.Add(charImage);
             Grid.SetColumn(charImage, ActiveLevel.MapLayout.StartPosition.X);
             Grid.SetRow(charImage, ActiveLevel.MapLayout.StartPosition.Y);
-            charImage.Rotation = 90 * ActiveLevel.MapLayout.CurrentPlayerDirection;
+            CharImage = charImage;
         }
 
         void UpdateDisplay()
