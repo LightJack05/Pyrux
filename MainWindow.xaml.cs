@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation and Contributors.
 // Licensed under the MIT License.
 
+using Microsoft.UI;
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -13,10 +15,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Services.TargetedContent;
+using WinRT.Interop;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -39,6 +43,9 @@ namespace Pyrux
         public MainWindow()
         {
             this.InitializeComponent();
+            ExtendsContentIntoTitleBar = true;
+            SetTitleBar(AppTitleBar);
+            
         }
 
         private void ngvMainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -80,6 +87,8 @@ namespace Pyrux
             }
         }
 
-        
+        private void Window_Activated(object sender, WindowActivatedEventArgs args)
+        {
+        }
     }
 }

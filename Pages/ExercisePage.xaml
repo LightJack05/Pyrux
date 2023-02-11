@@ -9,9 +9,82 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Loaded="Page_Loaded">
 
     <Grid>
-        <TextBlock>Exercise page</TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Expander
+                Grid.Row="0"
+                IsExpanded="True"
+                ExpandDirection="Down"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Stretch"
+                Header="Task"
+                Margin="10,10,10,10"
+                x:Name="expTaskExpander">
+            <ScrollViewer MaxHeight="500" Background="Red">
+                <TextBox AcceptsReturn="True" IsReadOnly="True" IsEnabled="False" x:Name="txtTaskBox">
+                </TextBox>
+            </ScrollViewer>
+        </Expander>
+
+        <Grid VerticalAlignment="Stretch" x:Name="grdMainSplit" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0" VerticalAlignment="Stretch" Margin="10,10,10,10" >
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="TBD"/>
+                    <TextBox VerticalAlignment="Stretch" AcceptsReturn="True"/>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Column="1" Margin="10,10,10,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10,10,10,10">
+                    <Button Content="Run"/>
+                </StackPanel>
+
+                <Grid Grid.Row="1" Height="Auto" Width="Auto" Name="grdPlayFieldBoundary" SizeChanged="grdPlayFieldBoundary_SizeChanged">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Name="grdPlayField" Background="Red" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Row="0" Grid.Column="1" Background="Black">
+                            <Image Source="ms-appx:///Assets/Wall.png" Margin="5,5,5,5"/>
+                        </Border>
+                        <Border Grid.Row="1" Grid.Column="1" Background="Black">
+                            <Image Source="ms-appx:///Assets/Wall.png" Margin="5,5,5,5"/>
+                        </Border>
+                        <Border Grid.Row="2" Grid.Column="1" Background="Black">
+                            <Image Source="ms-appx:///Assets/Wall.png" Margin="5,5,5,5"/>
+                        </Border>
+                        <Border Grid.Row="1" Grid.Column="1" Background="Black">
+                            <Image Source="ms-appx:///Assets/Wall.png" Margin="5,5,5,5"/>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>
