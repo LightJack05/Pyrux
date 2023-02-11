@@ -10,17 +10,21 @@ namespace Pyrux.DataManagement
     {
         public bool[,] WallLayout { get; set; }
         public int[,] CollectablesLayout { get; set; }
-        PositionVector2 startPosition { get; set; }
-        PositionVector2 currentPlayerPosition { get; set; }
+        public PositionVector2 StartPosition { get; set; }
+        public PositionVector2 CurrentPlayerPosition { get; set; }
+        public int StartPlayerDirection { get; set; }
+        public int CurrentPlayerDirection { get; set; }
         public int SizeX { get => WallLayout.GetLength(0); }
         public int SizeY { get => WallLayout.GetLength(1); }
 
-        public PyruxLevelMapLayout(bool[,] wallLayout, int[,] collectablesLayout, PositionVector2 startPosition, PositionVector2 currentPlayerPosition)
+        public PyruxLevelMapLayout(bool[,] wallLayout, int[,] collectablesLayout, PositionVector2 startPosition, int startPlayerDirection)
         {
             WallLayout = wallLayout;
             CollectablesLayout = collectablesLayout;
-            this.startPosition = startPosition;
-            this.currentPlayerPosition = currentPlayerPosition;
+            StartPosition = startPosition;
+            CurrentPlayerPosition = startPosition;
+            StartPlayerDirection = startPlayerDirection;
+            CurrentPlayerDirection = startPlayerDirection;
         }
     }
 }

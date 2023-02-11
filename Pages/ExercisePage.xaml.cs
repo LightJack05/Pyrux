@@ -82,8 +82,8 @@ namespace Pyrux.Pages
                             {0,0,0,0,0,0,0,0,0}
                         },
 
-                        new PositionVector2(1, 0),
-                        new PositionVector2(1, 0)
+                        new PositionVector2(5, 5),
+                        2
                     );
 
             ActiveLevel = new PyruxLevel("Testlevel", "Test your shit!", true, levelLayout);
@@ -132,6 +132,13 @@ namespace Pyrux.Pages
                     Grid.SetRow(border, j);
                 }
             }
+
+            Image charImage = new();
+            charImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Textures/Player.png"));
+            grdPlayField.Children.Add(charImage);
+            Grid.SetColumn(charImage, ActiveLevel.MapLayout.StartPosition.X);
+            Grid.SetRow(charImage, ActiveLevel.MapLayout.StartPosition.Y);
+            charImage.Rotation = 90 * ActiveLevel.MapLayout.CurrentPlayerDirection;
         }
 
         void UpdateDisplay()

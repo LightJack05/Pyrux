@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Pyrux.DataManagement
 {
-    internal class PyruxLevel
+    internal partial class PyruxLevel
     {
-        public string LevelName { get; set; }
-        public string Task { get; set; }
-        public string Hint { get; set; }
-        public bool IsBuiltIn { get; set; }
+        public string LevelName { get; }
+        public string Task { get; }
+        public string Hint { get; }
+        public bool IsBuiltIn { get; }
         public PyruxLevelMapLayout MapLayout { get; set; }
 
         public PyruxLevel(string levelName, string task, bool isBuiltIn, PyruxLevelMapLayout mapLayout)
