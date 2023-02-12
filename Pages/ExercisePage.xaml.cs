@@ -21,6 +21,9 @@ using Microsoft.UI;
 using System.Reflection.Metadata.Ecma335;
 using Windows.ApplicationModel.Wallet;
 using Windows.UI.ViewManagement;
+using System.Threading;
+using System.Threading.Tasks;
+using Windows.UI.Core;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -90,6 +93,11 @@ namespace Pyrux.Pages
             ActiveLevel = new PyruxLevel("Testlevel", "Test your shit!", true, levelLayout);
         }
 
+        private void btnStart_Click(object sender, RoutedEventArgs e)
+        {
+            ArbitraryCodeExecution();
+        }
+
         /// <summary>
         /// Load a level into the exercise page
         /// </summary>
@@ -144,7 +152,7 @@ namespace Pyrux.Pages
             CharImage = charImage;
         }
 
-        void UpdateDisplay()
+        public void UpdateDisplay()
         {
             PyruxLevelMapLayout mapLayout = ActiveLevel.MapLayout;
 
@@ -185,5 +193,29 @@ namespace Pyrux.Pages
             }
 
         }
+
+
+        void ArbitraryCodeExecution()
+        {
+            Thread externalCodeExecutionThread = new Thread(new ThreadStart(this.CodeExecutionThread));
+            externalCodeExecutionThread.IsBackground = true;
+            externalCodeExecutionThread.Start();
+        }
+
+        void CodeExecutionThread()
+        {
+            ActiveLevel.TurnLeft();
+            //grdPlayField.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, () =>
+            //{
+            //    UpdateDisplay();
+            //});
+            Window.Current.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => UpdateDisplay());
+            
+            //DispatcherQueue.TryEnqueue(() => { this.UpdateDisplay(); });
+            ActiveLevel.TurnLeft();
+            UpdateDisplay();
+        }
+
+        
     }
 }

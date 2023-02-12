@@ -21,5 +21,23 @@ namespace Pyrux.DataManagement
             IsBuiltIn = isBuiltIn;
             MapLayout = mapLayout;
         }
+
+        public PyruxLevel Copy()
+        {
+            return new PyruxLevel(
+                LevelName, 
+                Task, 
+                IsBuiltIn, 
+                new PyruxLevelMapLayout(
+                    MapLayout.WallLayout,
+                    MapLayout.CollectablesLayout,
+                    new PositionVector2(
+                        MapLayout.StartPosition.X,
+                        MapLayout.StartPosition.Y
+                        ),
+                    MapLayout.StartPlayerDirection
+                    )
+                );
+        }
     }
 }
