@@ -155,6 +155,9 @@ namespace Pyrux.Pages
         public void UpdateDisplay()
         {
             PyruxLevelMapLayout mapLayout = ActiveLevel.MapLayout;
+            Image charImage = (Image)grdPlayField.Children.Last();
+            charImage.RenderTransform = new RotateTransform { Angle = 90 * ActiveLevel.MapLayout.CurrentPlayerDirection };
+
 
             for (int i = 0; i < mapLayout.WallLayout.GetLength(0); i++)
             {
@@ -195,26 +198,33 @@ namespace Pyrux.Pages
         }
 
 
-        void ArbitraryCodeExecution()
+        async void ArbitraryCodeExecution()
         {
-            Thread externalCodeExecutionThread = new Thread(new ThreadStart(this.CodeExecutionThread));
-            externalCodeExecutionThread.IsBackground = true;
-            externalCodeExecutionThread.Start();
+            await ActiveLevel.TurnLeft();
+            UpdateDisplay();
+            await ActiveLevel.TurnLeft();
+            UpdateDisplay();
+            await ActiveLevel.TurnLeft();
+            UpdateDisplay();
+
+            //Thread externalCodeExecutionThread = new Thread(new ThreadStart(this.CodeExecutionThread));
+            //externalCodeExecutionThread.IsBackground = true;
+            //externalCodeExecutionThread.Start();
         }
 
-        void CodeExecutionThread()
-        {
-            ActiveLevel.TurnLeft();
-            //grdPlayField.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, () =>
-            //{
-            //    UpdateDisplay();
-            //});
-            Window.Current.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => UpdateDisplay());
+        //void CodeExecutionThread()
+        //{
+        //    ActiveLevel.TurnLeft();
+        //    //grdPlayField.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, () =>
+        //    //{
+        //    //    UpdateDisplay();
+        //    //});
+        //    Window.Current.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => UpdateDisplay());
             
-            //DispatcherQueue.TryEnqueue(() => { this.UpdateDisplay(); });
-            ActiveLevel.TurnLeft();
-            UpdateDisplay();
-        }
+        //    //DispatcherQueue.TryEnqueue(() => { this.UpdateDisplay(); });
+        //    ActiveLevel.TurnLeft();
+        //    UpdateDisplay();
+        //}
 
         
     }

@@ -1,51 +1,54 @@
-﻿using System.Threading;
+﻿using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+
 namespace Pyrux.DataManagement;
 
 internal partial class PyruxLevel
 {
     public int ExecutionDelayInMilliseconds { get; set; } = 1000;
-    public void TurnRight()
+    public async Task TurnRight()
     {
         MapLayout.CurrentPlayerDirection++;
-        Thread.Sleep(ExecutionDelayInMilliseconds);
+        await System.Threading.Tasks.Task.Delay(ExecutionDelayInMilliseconds);
     }
 
-    public void TurnLeft()
+    public async Task TurnLeft()
     {
         MapLayout.CurrentPlayerDirection--;
 
-        Thread.Sleep(ExecutionDelayInMilliseconds);
+        await System.Threading.Tasks.Task.Delay(ExecutionDelayInMilliseconds);
     }
 
-    public void GoForward()
+    public async Task GoForward()
     {
 
-        Thread.Sleep(ExecutionDelayInMilliseconds);
+        await System.Threading.Tasks.Task.Delay(ExecutionDelayInMilliseconds);
     }
 
-    public void TakeScrew()
+    public async Task TakeScrew()
     {
 
-        Thread.Sleep(ExecutionDelayInMilliseconds);
+        await System.Threading.Tasks.Task.Delay(ExecutionDelayInMilliseconds);
     }
 
-    public void PlaceScrew()
+    public async Task PlaceScrew()
     {
 
-        Thread.Sleep(ExecutionDelayInMilliseconds);
+        await System.Threading.Tasks.Task.Delay(ExecutionDelayInMilliseconds);
     }
 
-    public bool WallAhead()
+    public async Task<bool> WallAhead()
     {
 
-        Thread.Sleep(ExecutionDelayInMilliseconds);
+        await System.Threading.Tasks.Task.Delay(ExecutionDelayInMilliseconds);
         return false;
     }
 
-    public bool ScrewThere()
+    public async Task<bool> ScrewThere()
     {
 
-        Thread.Sleep(ExecutionDelayInMilliseconds);
+        await System.Threading.Tasks.Task.Delay(ExecutionDelayInMilliseconds);
         return false;
     }
 
