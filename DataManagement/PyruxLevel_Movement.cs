@@ -9,57 +9,59 @@ namespace Pyrux.DataManagement;
 internal partial class PyruxLevel
 {
     public int ExecutionDelayInMilliseconds { get; set; } = 1000;
-    public async Task TurnRight()
+    public void TurnRight()
     {
         MapLayout.CurrentPlayerDirection++;
         QueueUpdate();
-        await System.Threading.Tasks.Task.Delay(ExecutionDelayInMilliseconds);
+        //await System.Threading.Tasks.Task.Delay(ExecutionDelayInMilliseconds);
+        Thread.Sleep(ExecutionDelayInMilliseconds);
     }
 
-    public async Task TurnLeft()
+    public void TurnLeft()
     {
         MapLayout.CurrentPlayerDirection--;
         QueueUpdate();
-        await System.Threading.Tasks.Task.Delay(ExecutionDelayInMilliseconds);
+        //await System.Threading.Tasks.Task.Delay(ExecutionDelayInMilliseconds);
+        Thread.Sleep(ExecutionDelayInMilliseconds);
     }
 
-    public async Task GoForward()
+    public void GoForward()
     {
 
         QueueUpdate();
-        await System.Threading.Tasks.Task.Delay(ExecutionDelayInMilliseconds);
+        Thread.Sleep(ExecutionDelayInMilliseconds);
     }
 
-    public async Task TakeScrew()
+    public void TakeScrew()
     {
 
         QueueUpdate();
-        await System.Threading.Tasks.Task.Delay(ExecutionDelayInMilliseconds);
+        Thread.Sleep(ExecutionDelayInMilliseconds);
     }
 
-    public async Task PlaceScrew()
+    public void PlaceScrew()
     {
 
         QueueUpdate();
-        await System.Threading.Tasks.Task.Delay(ExecutionDelayInMilliseconds);
+        Thread.Sleep(ExecutionDelayInMilliseconds);
     }
 
-    public async Task<bool> WallAhead()
+    public bool WallAhead()
     {
 
         QueueUpdate();
-        await System.Threading.Tasks.Task.Delay(ExecutionDelayInMilliseconds);
+        Thread.Sleep(ExecutionDelayInMilliseconds);
         return false;
     }
 
-    public async Task<bool> ScrewThere()
+    public bool ScrewThere()
     {
         QueueUpdate();
-        await System.Threading.Tasks.Task.Delay(ExecutionDelayInMilliseconds);
+        Thread.Sleep(ExecutionDelayInMilliseconds);
         return false;
     }
 
-    public async void QueueUpdate()
+    public void QueueUpdate()
     {
         DispatcherQueue dispatcherQueue = ExercisePage.Instance.DispatcherQueue;
         dispatcherQueue.TryEnqueue(() =>

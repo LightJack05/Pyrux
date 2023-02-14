@@ -41,14 +41,16 @@ namespace Pyrux.Pages
         public static ExercisePage Instance { get; private set; }
         private Image CharImage;
         private PyruxLevel _activeLevel;
-        internal PyruxLevel ActiveLevel { 
-            get => _activeLevel; 
-            set { 
+        internal PyruxLevel ActiveLevel
+        {
+            get => _activeLevel;
+            set
+            {
                 _activeLevel = value;
                 BuildPlayGrid();
                 LoadLevelIntoPage();
                 UpdateDisplay();
-            }  
+            }
         }
         public ExercisePage()
         {
@@ -174,9 +176,9 @@ namespace Pyrux.Pages
                     {
                         image.Source = new BitmapImage(new Uri("ms-appx:///Assets/Textures/Wall.png"));
                     }
-                    else if (!mapLayout.WallLayout[j,i] && (mapLayout.CollectablesLayout[j, i] == 0))
+                    else if (!mapLayout.WallLayout[j, i] && (mapLayout.CollectablesLayout[j, i] == 0))
                     {
-                        if(Application.Current.RequestedTheme == ApplicationTheme.Dark)
+                        if (Application.Current.RequestedTheme == ApplicationTheme.Dark)
                         {
                             image.Source = new BitmapImage(new Uri("ms-appx:///Assets/Textures/Background/dark.png"));
                         }
@@ -196,7 +198,7 @@ namespace Pyrux.Pages
                             image.Source = new BitmapImage(new Uri($"ms-appx:///Assets/Textures/Collectables/Collectables9.png"));
                         }
                     }
-                    
+
                 }
             }
 
@@ -211,23 +213,21 @@ namespace Pyrux.Pages
 
 
             string pythonCode = $@"
+
+
+
 for i in range(3):
     TurnLeft()
-    print('Ran')
                 ";
             ScriptEngine scriptEngine = Python.CreateEngine();
             ScriptScope scriptScope = scriptEngine.CreateScope();
-            scriptScope.SetVariable("TurnLeft", this.ActiveLevel.TurnLeft);
+            scriptScope.SetVariable("TurnLeft", () => this.ActiveLevel.TurnLeft());
 
-            
-            scriptEngine.Execute(pythonCode, scriptScope);
-
-
-
+            Task.Factory.StartNew(() =>
+            {
+                scriptEngine.Execute(pythonCode, scriptScope);
+            });
         }
 
-        
-
-        
     }
 }

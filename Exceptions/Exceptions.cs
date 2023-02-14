@@ -35,3 +35,15 @@ class NoScrewInInventoryException : Exception
 
     }
 }
+
+class ExecutionCancelledException : Exception
+{
+    public ExecutionCancelledException()
+    {
+
+    }
+    public ExecutionCancelledException(string message) : base(message)
+    {
+
+    }
+}
