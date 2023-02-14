@@ -207,14 +207,7 @@ namespace Pyrux.Pages
 
         void ArbitraryCodeExecution()
         {
-            //TODO: Continue to move python code to background thread.
-            //TODO: Create python library for additional functionality.
-            //TODO: Make sure python code can run without UI Lockup.
-
-
             string pythonCode = $@"
-
-
 
 for i in range(3):
     TurnLeft()
