@@ -24,6 +24,8 @@ using Windows.UI.ViewManagement;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.UI.Core;
+using IronPython.Hosting;
+using Microsoft.Scripting.Hosting;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -201,33 +203,30 @@ namespace Pyrux.Pages
         }
 
 
-        async void ArbitraryCodeExecution()
+        void ArbitraryCodeExecution()
         {
-            await ActiveLevel.TurnLeft();
-            UpdateDisplay();
-            await ActiveLevel.TurnLeft();
-            UpdateDisplay();
-            await ActiveLevel.TurnLeft();
-            UpdateDisplay();
+            //TODO: Continue to move python code to background thread.
+            //TODO: Create python library for additional functionality.
+            //TODO: Make sure python code can run without UI Lockup.
 
-            //Thread externalCodeExecutionThread = new Thread(new ThreadStart(this.CodeExecutionThread));
-            //externalCodeExecutionThread.IsBackground = true;
-            //externalCodeExecutionThread.Start();
+
+            string pythonCode = $@"
+for i in range(3):
+    TurnLeft()
+    print('Ran')
+                ";
+            ScriptEngine scriptEngine = Python.CreateEngine();
+            ScriptScope scriptScope = scriptEngine.CreateScope();
+            scriptScope.SetVariable("TurnLeft", this.ActiveLevel.TurnLeft);
+
+            
+            scriptEngine.Execute(pythonCode, scriptScope);
+
+
+
         }
 
-        //void CodeExecutionThread()
-        //{
-        //    ActiveLevel.TurnLeft();
-        //    //grdPlayField.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, () =>
-        //    //{
-        //    //    UpdateDisplay();
-        //    //});
-        //    Window.Current.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => UpdateDisplay());
-            
-        //    //DispatcherQueue.TryEnqueue(() => { this.UpdateDisplay(); });
-        //    ActiveLevel.TurnLeft();
-        //    UpdateDisplay();
-        //}
+        
 
         
     }

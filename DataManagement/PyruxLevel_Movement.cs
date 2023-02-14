@@ -1,4 +1,5 @@
-﻿using Pyrux.Pages;
+﻿using Microsoft.UI.Dispatching;
+using Pyrux.Pages;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,53 +12,60 @@ internal partial class PyruxLevel
     public async Task TurnRight()
     {
         MapLayout.CurrentPlayerDirection++;
-        ExercisePage.Instance.UpdateDisplay();
+        QueueUpdate();
         await System.Threading.Tasks.Task.Delay(ExecutionDelayInMilliseconds);
     }
 
     public async Task TurnLeft()
     {
         MapLayout.CurrentPlayerDirection--;
-        ExercisePage.Instance.UpdateDisplay();
+        QueueUpdate();
         await System.Threading.Tasks.Task.Delay(ExecutionDelayInMilliseconds);
     }
 
     public async Task GoForward()
     {
 
-        ExercisePage.Instance.UpdateDisplay();
+        QueueUpdate();
         await System.Threading.Tasks.Task.Delay(ExecutionDelayInMilliseconds);
     }
 
     public async Task TakeScrew()
     {
 
-        ExercisePage.Instance.UpdateDisplay();
+        QueueUpdate();
         await System.Threading.Tasks.Task.Delay(ExecutionDelayInMilliseconds);
     }
 
     public async Task PlaceScrew()
     {
 
-        ExercisePage.Instance.UpdateDisplay();
+        QueueUpdate();
         await System.Threading.Tasks.Task.Delay(ExecutionDelayInMilliseconds);
     }
 
     public async Task<bool> WallAhead()
     {
 
-        ExercisePage.Instance.UpdateDisplay();
+        QueueUpdate();
         await System.Threading.Tasks.Task.Delay(ExecutionDelayInMilliseconds);
         return false;
     }
 
     public async Task<bool> ScrewThere()
     {
-
-        ExercisePage.Instance.UpdateDisplay();
+        QueueUpdate();
         await System.Threading.Tasks.Task.Delay(ExecutionDelayInMilliseconds);
         return false;
     }
 
+    public async void QueueUpdate()
+    {
+        DispatcherQueue dispatcherQueue = ExercisePage.Instance.DispatcherQueue;
+        dispatcherQueue.TryEnqueue(() =>
+        {
+            ExercisePage.Instance.UpdateDisplay();
+        });
 
+    }
 }
