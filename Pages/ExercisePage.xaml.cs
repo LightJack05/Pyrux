@@ -35,6 +35,8 @@ namespace Pyrux.Pages
     /// </summary>
     public sealed partial class ExercisePage : Page
     {
+
+        public static ExercisePage Instance { get; private set; }
         private Image CharImage;
         private PyruxLevel _activeLevel;
         internal PyruxLevel ActiveLevel { 
@@ -49,6 +51,7 @@ namespace Pyrux.Pages
         public ExercisePage()
         {
             this.InitializeComponent();
+            Instance = this;
         }
 
         private void grdPlayFieldBoundary_SizeChanged(object sender, SizeChangedEventArgs e)
