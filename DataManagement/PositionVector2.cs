@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Pyrux.DataManagement
 {
-    internal class PositionVector2 : IEquatable<PositionVector2>
+    internal class PositionVector2 : IEquatable<PositionVector2>/*, IAdditionOperators<PositionVector2>*/
     {
         public int X { get; set; }
         public int Y { get; set; }

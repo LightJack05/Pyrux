@@ -234,6 +234,9 @@ namespace Pyrux.Pages
             Pyrux.LevelIO.LevelSaving.Save(ActiveLevel);
         }
 
-
+        private void txtCodeEditor_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ActiveLevel.Script = txtCodeEditor.Text;
+        }
     }
 }

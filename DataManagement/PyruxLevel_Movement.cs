@@ -27,6 +27,7 @@ internal partial class PyruxLevel
 
     public void GoForward()
     {
+        
 
         QueueUpdate();
         Thread.Sleep(ExecutionDelayInMilliseconds);

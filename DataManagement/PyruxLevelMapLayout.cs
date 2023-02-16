@@ -12,12 +12,12 @@ namespace Pyrux.DataManagement
         public int[,] CollectablesLayout { get; set; }
         public PositionVector2 StartPosition { get; set; }
         public PositionVector2 CurrentPlayerPosition { get; set; }
-        public uint StartPlayerDirection { get; set; }
-        public uint CurrentPlayerDirection { get; set; }
+        public byte StartPlayerDirection { get; set; }
+        public byte CurrentPlayerDirection { get; set; }
         public int SizeX { get => WallLayout.GetLength(0); }
         public int SizeY { get => WallLayout.GetLength(1); }
 
-        public PyruxLevelMapLayout(bool[,] wallLayout, int[,] collectablesLayout, PositionVector2 startPosition, uint startPlayerDirection)
+        public PyruxLevelMapLayout(bool[,] wallLayout, int[,] collectablesLayout, PositionVector2 startPosition, byte startPlayerDirection)
         {
             WallLayout = wallLayout;
             CollectablesLayout = collectablesLayout;

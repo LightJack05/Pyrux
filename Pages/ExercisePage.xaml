@@ -41,7 +41,7 @@
             <Grid Grid.Column="0" VerticalAlignment="Stretch" Margin="10,10,10,10" >
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="TBD"/>
-                    <TextBox VerticalAlignment="Stretch" AcceptsReturn="True" x:Name="txtCodeEditor"/>
+                    <TextBox VerticalAlignment="Stretch" AcceptsReturn="True" x:Name="txtCodeEditor" TextChanged="txtCodeEditor_TextChanged"/>
                 </StackPanel>
             </Grid>
 
