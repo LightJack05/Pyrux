@@ -17,7 +17,7 @@ internal static class LevelLoading
 
         if (isBuiltIn)
         {
-            string filePath = Path.Combine(Environment.SpecialFolder.ApplicationData.ToString(), "Pyrux", "builtin", $"{levelName}.json");
+            string filePath = Path.Combine(Environment.SpecialFolder.ApplicationData.ToString(), "Pyrux", "Levels", "Builtin", $"{levelName}", "LevelData.json");
             if (File.Exists(filePath))
             {
                 using (StreamReader sr = new StreamReader(filePath))

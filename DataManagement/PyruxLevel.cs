@@ -13,6 +13,7 @@ namespace Pyrux.DataManagement
         public string Hint { get; }
         public bool IsBuiltIn { get; }
         public PyruxLevelMapLayout MapLayout { get; set; }
+        public string Script { get; set; } = "";
 
         public PyruxLevel(string levelName, string task, bool isBuiltIn, PyruxLevelMapLayout mapLayout)
         {

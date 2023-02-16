@@ -52,6 +52,7 @@
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10,10,10,10">
                     <Button Content="Run" x:Name="btnStart" Click="btnStart_Click"/>
+                    <Button Content="Export" x:Name="btnExport" />
                 </StackPanel>
 
                 <Grid Grid.Row="1" Height="Auto" Width="Auto" Name="grdPlayFieldBoundary" SizeChanged="grdPlayFieldBoundary_SizeChanged">

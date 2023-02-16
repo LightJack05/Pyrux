@@ -26,6 +26,8 @@ using System.Threading.Tasks;
 using Windows.UI.Core;
 using IronPython.Hosting;
 using Microsoft.Scripting.Hosting;
+using Newtonsoft.Json;
+using Windows.Storage;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -152,7 +154,7 @@ namespace Pyrux.Pages
             Image charImage = new();
             charImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Textures/Player.png"));
             charImage.RenderTransformOrigin = new(.5, .5);
-            charImage.RenderTransform = new RotateTransform { Angle = 90 * ActiveLevel.MapLayout.CurrentPlayerDirection };
+            charImage.RenderTransform = new RotateTransform { Angle = 90d * ActiveLevel.MapLayout.CurrentPlayerDirection };
             grdPlayField.Children.Add(charImage);
             Grid.SetColumn(charImage, ActiveLevel.MapLayout.StartPosition.X);
             Grid.SetRow(charImage, ActiveLevel.MapLayout.StartPosition.Y);
@@ -207,6 +209,9 @@ namespace Pyrux.Pages
 
         void ArbitraryCodeExecution()
         {
+            //TODO: Add references for other methods.
+            //TODO: Add a mockup library for the code editor's Autocomplete/Intellisense.
+            //TODO: Add non-execution block that is used to import the mockup library that is removed once the file is imported into the program.
             string pythonCode = $@"
 
 for i in range(3):
@@ -222,5 +227,18 @@ for i in range(3):
             });
         }
 
+        //private async void btnExport_Click(object sender, RoutedEventArgs e)
+        //{
+        //    StorageFolder localStorageFolder = ApplicationData.Current.LocalFolder;
+            
+            
+
+        //    using (StreamWriter sw = new(Path.Combine(appdataLevelPath, "LevelData.json")))
+        //    {
+        //        sw.Write(JsonConvert.SerializeObject(ActiveLevel));
+        //    }
+        //}
+
+        
     }
 }

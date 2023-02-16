@@ -52,6 +52,16 @@ namespace Pyrux
         {
             ngvMainWindow.SelectedItem = ngvMainWindow.MenuItems[0];
             NavViewNavigate("levelSelect", new Microsoft.UI.Xaml.Media.Animation.EntranceNavigationTransitionInfo());
+            CheckAppdata();
+        }
+
+        async void CheckAppdata()
+        {
+            if (!await Pyrux.LevelIO.AppdataManagement.VerifyAppdataIntegrityAsync())
+            {
+                await Pyrux.LevelIO.AppdataManagement.ClearAppdataAsync();
+                await Pyrux.LevelIO.AppdataManagement.ConstructAppdataAsync();
+            }
         }
 
         private void ngvMainWindow_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
