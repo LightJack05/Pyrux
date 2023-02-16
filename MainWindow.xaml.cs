@@ -32,6 +32,9 @@ namespace Pyrux
     /// </summary>
     public sealed partial class MainWindow : Window
     {
+        /// <summary>
+        /// List of pages in the navigation menu.
+        /// </summary>
         public List<(string Tag, Type Page)> contentDictionary = new()
         {
             ("levelSelect",typeof(LevelSelectPage)),
@@ -54,7 +57,9 @@ namespace Pyrux
             NavViewNavigate("levelSelect", new Microsoft.UI.Xaml.Media.Animation.EntranceNavigationTransitionInfo());
             CheckAppdata();
         }
-
+        /// <summary>
+        /// Check if the current Appdata is still consistent with the layout it should have, and rebuild it if it isn't.
+        /// </summary>
         async void CheckAppdata()
         {
             if (!await Pyrux.LevelIO.AppdataManagement.VerifyAppdataIntegrityAsync())
@@ -63,7 +68,12 @@ namespace Pyrux
                 await Pyrux.LevelIO.AppdataManagement.ConstructAppdataAsync();
             }
         }
-
+        /// <summary>
+        /// Run when an item is invoked on the navigationview.
+        /// Switch the content frame to the page selected.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         private void ngvMainWindow_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
             if (args.IsSettingsInvoked)
@@ -76,7 +86,11 @@ namespace Pyrux
                 NavViewNavigate(navItemTag, args.RecommendedNavigationTransitionInfo);
             }
         }
-
+        /// <summary>
+        /// Navigate the content frame to the selected page.
+        /// </summary>
+        /// <param name="navItemTag">Tag of the selected page.</param>
+        /// <param name="transitionInfo">Transitioninfo for transition animation.</param>
         private void NavViewNavigate(string navItemTag, Microsoft.UI.Xaml.Media.Animation.NavigationTransitionInfo transitionInfo)
         {
             Type page = null;

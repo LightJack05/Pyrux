@@ -8,15 +8,57 @@ namespace Pyrux.DataManagement
 {
     internal class PyruxLevelMapLayout
     {
+        /// <summary>
+        /// The layout of Walls in the map.
+        /// </summary>
         public bool[,] WallLayout { get; set; }
+        /// <summary>
+        /// The layout of the collectables in the map.
+        /// </summary>
         public int[,] CollectablesLayout { get; set; }
+        /// <summary>
+        /// The position the player started at.
+        /// </summary>
         public PositionVector2 StartPosition { get; set; }
+        /// <summary>
+        /// The current position of the player.
+        /// </summary>
         public PositionVector2 CurrentPlayerPosition { get; set; }
+        /// <summary>
+        /// The direction the player started in.
+        /// 0 = Right
+        /// 1 = Down
+        /// 2 = Left
+        /// 3 = Up
+        /// </summary>
         public byte StartPlayerDirection { get; set; }
+        /// <summary>
+        /// The direction the player is currently facing.
+        /// 0 = Right
+        /// 1 = Down
+        /// 2 = Left
+        /// 3 = Up
+        /// </summary>
         public byte CurrentPlayerDirection { get; set; }
-        public int SizeX { get => WallLayout.GetLength(0); }
-        public int SizeY { get => WallLayout.GetLength(1); }
-
+        /// <summary>
+        /// Number of screws in the players inventory.
+        /// </summary>
+        public int PlayerScrewInventory { get; set; }
+        /// <summary>
+        /// Size of the Map in X-direction.
+        /// </summary>
+        public int SizeX { get => WallLayout.GetLength(1); }
+        /// <summary>
+        /// Size of the Map in Y-direction.
+        /// </summary>
+        public int SizeY { get => WallLayout.GetLength(0); }
+        /// <summary>
+        /// Initializes a new maplayout. Should be bound to a PyruxLevel instance.
+        /// </summary>
+        /// <param name="wallLayout">The layout of walls in the map.</param>
+        /// <param name="collectablesLayout">The layout of the collectables in the map.</param>
+        /// <param name="startPosition">The position the player should start at.</param>
+        /// <param name="startPlayerDirection">The direction the player should start in.</param>
         public PyruxLevelMapLayout(bool[,] wallLayout, int[,] collectablesLayout, PositionVector2 startPosition, byte startPlayerDirection)
         {
             WallLayout = wallLayout;
@@ -26,5 +68,33 @@ namespace Pyrux.DataManagement
             StartPlayerDirection = startPlayerDirection;
             CurrentPlayerDirection = startPlayerDirection;
         }
+        /// <summary>
+        /// Get the number of screws at a specific position.
+        /// </summary>
+        /// <param name="position">The position to check.</param>
+        /// <returns>Number of screws at the given position.</returns>
+        public int GetScrewNumberAtPosition(PositionVector2 position)
+        {
+            return CollectablesLayout[position.Y, position.X];
+        }
+        /// <summary>
+        /// Set the screw number at a given position.
+        /// </summary>
+        /// <param name="position">The position to set.</param>
+        /// <param name="number">The value to set the position to.</param>
+        public void SetScrewNumberAtPosition(PositionVector2 position, int number)
+        {
+            CollectablesLayout[position.Y, position.X] = number;
+        }
+        /// <summary>
+        /// Check if there is a wall at a given position.
+        /// </summary>
+        /// <param name="position">The position to check.</param>
+        /// <returns>True if there is a wall at the position given, otherwise false.</returns>
+        public bool IsWallAtPosition(PositionVector2 position)
+        {
+            return WallLayout[position.Y, position.X];
+        }
+        
     }
 }
