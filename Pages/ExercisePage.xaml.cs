@@ -99,7 +99,7 @@ namespace Pyrux.Pages
                         1
                     );
 
-            ActiveLevel = new PyruxLevel("Testlevel", "Test your shit!", true, levelLayout);
+            ActiveLevel = new PyruxLevel("TestlevelModified", "Test your shit, it works!", true, levelLayout);
         }
 
         private void btnStart_Click(object sender, RoutedEventArgs e)
@@ -115,6 +115,11 @@ namespace Pyrux.Pages
             expTaskExpander.Header = ActiveLevel.LevelName;
             txtTaskBox.Text = ActiveLevel.Task;
             BuildPlayGrid();
+        }
+
+        void LoadCodeIntoEditor()
+        {
+            txtCodeEditor.Text = ActiveLevel.Script;
         }
 
         /// <summary>
@@ -212,11 +217,8 @@ namespace Pyrux.Pages
             //TODO: Add references for other methods.
             //TODO: Add a mockup library for the code editor's Autocomplete/Intellisense.
             //TODO: Add non-execution block that is used to import the mockup library that is removed once the file is imported into the program.
-            string pythonCode = $@"
 
-for i in range(3):
-    TurnLeft()
-                ";
+            string pythonCode = ActiveLevel.Script;
             ScriptEngine scriptEngine = Python.CreateEngine();
             ScriptScope scriptScope = scriptEngine.CreateScope();
             scriptScope.SetVariable("TurnLeft", () => this.ActiveLevel.TurnLeft());
@@ -227,18 +229,11 @@ for i in range(3):
             });
         }
 
-        //private async void btnExport_Click(object sender, RoutedEventArgs e)
-        //{
-        //    StorageFolder localStorageFolder = ApplicationData.Current.LocalFolder;
-            
-            
+        private void btnExport_Click(object sender, RoutedEventArgs e)
+        {
+            Pyrux.LevelIO.LevelSaving.Save(ActiveLevel);
+        }
 
-        //    using (StreamWriter sw = new(Path.Combine(appdataLevelPath, "LevelData.json")))
-        //    {
-        //        sw.Write(JsonConvert.SerializeObject(ActiveLevel));
-        //    }
-        //}
 
-        
     }
 }
