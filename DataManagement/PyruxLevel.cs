@@ -40,12 +40,13 @@ namespace Pyrux.DataManagement
         /// <param name="task">The string describing the task of the level.</param>
         /// <param name="isBuiltIn">Determines whether the level is built in, or user created.</param>
         /// <param name="mapLayout"> The maplayout of the level. Contains walls, playerposition, playerdirection, collectable layout etc. Should be an instance of the PyruxMapLayout class.</param>
-        public PyruxLevel(string levelName, string task, bool isBuiltIn, PyruxLevelMapLayout mapLayout)
+        public PyruxLevel(string levelName, string task, bool isBuiltIn, PyruxLevelMapLayout mapLayout, string script)
         {
             LevelName = levelName;
             Task = task;
             IsBuiltIn = isBuiltIn;
             MapLayout = mapLayout;
+            Script = script;
         }
         /// <summary>
         /// Creates a copy of the PyruxLevel that is not linked to the original.
@@ -65,7 +66,8 @@ namespace Pyrux.DataManagement
                         MapLayout.StartPosition.Y
                         ),
                     MapLayout.StartPlayerDirection
-                    )
+                    ),
+                Script
                 );
         }
     }

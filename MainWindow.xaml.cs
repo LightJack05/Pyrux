@@ -55,19 +55,9 @@ namespace Pyrux
         {
             ngvMainWindow.SelectedItem = ngvMainWindow.MenuItems[0];
             NavViewNavigate("levelSelect", new Microsoft.UI.Xaml.Media.Animation.EntranceNavigationTransitionInfo());
-            CheckAppdata();
+            
         }
-        /// <summary>
-        /// Check if the current Appdata is still consistent with the layout it should have, and rebuild it if it isn't.
-        /// </summary>
-        async void CheckAppdata()
-        {
-            if (!await Pyrux.LevelIO.AppdataManagement.VerifyAppdataIntegrityAsync())
-            {
-                await Pyrux.LevelIO.AppdataManagement.ClearAppdataAsync();
-                await Pyrux.LevelIO.AppdataManagement.ConstructAppdataAsync();
-            }
-        }
+        
         /// <summary>
         /// Run when an item is invoked on the navigationview.
         /// Switch the content frame to the page selected.
@@ -113,6 +103,9 @@ namespace Pyrux
 
         private void Window_Activated(object sender, WindowActivatedEventArgs args)
         {
+            LevelIO.AppdataManagement.CheckAppdata();
         }
+
+        
     }
 }

@@ -10,6 +10,18 @@ namespace Pyrux.LevelIO
 {
     internal class AppdataManagement
     {
+        /// <summary>
+        /// Check if the current Appdata is still consistent with the layout it should have, and rebuild it if it isn't.
+        /// </summary>
+        public static async void CheckAppdata()
+        {
+            if (!await VerifyAppdataIntegrityAsync())
+            {
+                await ClearAppdataAsync();
+                await ConstructAppdataAsync();
+            }
+        }
+
         public static async Task ConstructAppdataAsync()
         {
             StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
@@ -49,7 +61,7 @@ namespace Pyrux.LevelIO
             }
             else
             {
-                throw new FileNotFoundException();
+                throw new AppdataFolderNotFoundException();
             }
         }
 

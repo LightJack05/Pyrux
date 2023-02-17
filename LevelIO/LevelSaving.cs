@@ -21,6 +21,7 @@ namespace Pyrux.LevelIO
         /// <exception cref="NotImplementedException">Thrown if the appdata folder is inaccessible or corrupted.</exception>
         public static async void Save(PyruxLevel activeLevel)
         {
+            AppdataManagement.CheckAppdata();
             StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
             string levelJson = JsonConvert.SerializeObject(activeLevel);
             string levelName = activeLevel.LevelName;
@@ -52,12 +53,12 @@ namespace Pyrux.LevelIO
                 }
                 else
                 {
-                    throw new NotImplementedException();
+                    throw new LevelsFolderNotFoundException();
                 }
             }
             else
             {
-                throw new NotImplementedException();
+                throw new AppdataFolderNotFoundException();
             }
         }
         /// <summary>

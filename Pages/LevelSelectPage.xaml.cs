@@ -8,6 +8,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using Pyrux.DataManagement;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -29,6 +30,16 @@ namespace Pyrux.Pages
         public LevelSelectPage()
         {
             this.InitializeComponent();
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoadLevelIntoStaticStorage(true, "TestlevelModified");
+        }
+        async void LoadLevelIntoStaticStorage(bool isBuiltIn,string levelName)
+        {
+            PyruxLevel level = await LevelIO.LevelLoading.LoadLevel(isBuiltIn,levelName);
+            DataManagement.StaticDataStore.ActiveLevel = level.Copy();
         }
     }
 }

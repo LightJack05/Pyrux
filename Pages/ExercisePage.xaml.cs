@@ -62,9 +62,6 @@ namespace Pyrux.Pages
             set
             {
                 _activeLevel = value;
-                BuildPlayGrid();
-                LoadLevelIntoPage();
-                UpdateDisplay();
             }
         }
         private PyruxLevel _activeLevel;
@@ -96,6 +93,8 @@ namespace Pyrux.Pages
                 //TODO: Create empty level. (Make logic for that.)
                 throw new NotImplementedException();
             }
+
+            LoadLevelIntoPage();
         }
         /// <summary>
         /// Start the ArbitraryCodeExecution method.
@@ -114,7 +113,9 @@ namespace Pyrux.Pages
         {
             expTaskExpander.Header = ActiveLevel.LevelName;
             txtTaskBox.Text = ActiveLevel.Task;
+            txtCodeEditor.Text = ActiveLevel.Script;
             BuildPlayGrid();
+            UpdateDisplay();
         }
 
         /// <summary>
