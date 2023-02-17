@@ -92,11 +92,6 @@
                     <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
                     <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
                     <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
                 </VariableSizedWrapGrid>
 
             </ScrollViewer>

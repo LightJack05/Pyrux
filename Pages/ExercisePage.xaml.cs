@@ -43,11 +43,7 @@ namespace Pyrux.Pages
         /// Current instance of the Page.
         /// </summary>
         public static ExercisePage Instance { get; private set; }
-        /// <summary>
-        /// Execution delay for every movement step.
-        /// </summary>
-        public ref int ExecutionDelayInMilliseconds { get => ref _executionDelay; }
-        private int _executionDelay = 1000;
+        
         /// <summary>
         /// Whether the current execution of the script should be cancelled.
         /// </summary>
@@ -98,7 +94,7 @@ namespace Pyrux.Pages
             if(ActiveLevel == null)
             {
                 //TODO: Create empty level. (Make logic for that.)
-
+                throw new NotImplementedException();
             }
         }
         /// <summary>

@@ -10,10 +10,6 @@ namespace Pyrux.DataManagement;
 internal partial class PyruxLevel
 {
     /// <summary>
-    /// Reference to the execution delay specified in the Exercisepage instance.
-    /// </summary>
-    private int _executionDelayInMilliseconds = ExercisePage.Instance.ExecutionDelayInMilliseconds;
-    /// <summary>
     /// Make the player turn right.
     /// </summary>
     public void TurnRight()
@@ -182,7 +178,7 @@ internal partial class PyruxLevel
     private void WaitAndCheckIfCancelled()
     {
         //TODO: Set ExecutionCancelled to false again.
-        for (int i = 0; i < _executionDelayInMilliseconds; i += 10)
+        for (int i = 0; i < DataManagement.StaticDataStore.ExecutionDelayInMilliseconds; i += 10)
         {
             if (ExercisePage.Instance.ExecutionCancelled)
             {
