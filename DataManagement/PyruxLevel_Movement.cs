@@ -110,7 +110,7 @@ internal partial class PyruxLevel
     /// <summary>
     /// Check if there is a wall ahead of the player.
     /// </summary>
-    /// <returns></returns>
+    /// <returns>True if a wall is found ahead, false if not.</returns>
     /// <exception cref="ArgumentOutOfRangeException">Thrown when the angle of the player on the map is not a valid movement direction (up,down,left,right).</exception>
     public bool WallAhead()
     {

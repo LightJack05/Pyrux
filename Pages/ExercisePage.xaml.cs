@@ -94,37 +94,12 @@ namespace Pyrux.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            // Test level creation
-            PyruxLevelMapLayout levelLayout = new PyruxLevelMapLayout(
-                        new bool[,] {
-                        {true, true, true, false, false, false, false, false, false},
-                        {false, true, false, true, false, false, false, false, false },
-                        {false, false, false, false, false, false, false, false, false },
-                        {false, false, false, false, false, false, false, false, false },
-                        {false, false, false, false, false, false, false, false, false },
-                        {false, false, false, false, false, false, false, false, false },
-                        {false, false, false, false, false, false, false, false, false },
-                        {false, false, false, false, false, false, false, false, false },
-                        {false, false, false, false, false, false, false, false, false }
-                        },
+            ActiveLevel = StaticDataStore.ActiveLevel;
+            if(ActiveLevel == null)
+            {
+                //TODO: Create empty level. (Make logic for that.)
 
-                        new int[,] {
-                            {0,0,0,0,0,0,0,0,0},
-                            {0,0,0,0,0,0,0,0,0},
-                            {1,0,0,0,0,0,0,0,0},
-                            {1,1,4,0,0,0,0,0,0},
-                            {0,0,0,6,0,0,0,0,0},
-                            {0,0,0,0,0,0,0,0,0},
-                            {0,0,0,15,0,0,0,0,0},
-                            {0,0,0,0,0,0,0,0,0},
-                            {0,0,0,0,0,0,0,0,0}
-                        },
-
-                        new PositionVector2(5, 5),
-                        0
-                    );
-
-            ActiveLevel = new PyruxLevel("TestlevelModified", "Test your shit, it works!", true, levelLayout);
+            }
         }
         /// <summary>
         /// Start the ArbitraryCodeExecution method.

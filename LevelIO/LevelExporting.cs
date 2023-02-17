@@ -9,12 +9,12 @@ namespace Pyrux.LevelIO
 {
     internal class LevelExporting
     {
-        public static async void SaveData(PyruxLevel currentLevelData)
+        public static void SaveData(PyruxLevel currentLevelData)
         {
 
         }
 
-        public static async void SaveData(PyruxLevel currentLevelData, string path)
+        public static void SaveData(PyruxLevel currentLevelData, string path)
         {
 
         }
