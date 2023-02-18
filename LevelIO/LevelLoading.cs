@@ -14,7 +14,6 @@ internal static class LevelLoading
     /// <param name="levelName">The name of the level to load.</param>
     /// <exception cref="LevelJsonNotFoundException">Thrown when the JSON file containing level data can not be found.</exception>
     /// <exception cref="LevelNotFoundException">Thrown when the levels folder could not be found.</exception>
-    /// 
     public static async Task<PyruxLevel> LoadLevel(bool isBuiltIn, string levelName)
     {
         AppdataManagement.CheckAppdata();
@@ -82,5 +81,14 @@ internal static class LevelLoading
         {
             throw new LevelNotFoundException($"The folder {levelName} could not be found in {levelsFolderOrganization.Path}.");
         }
+    }
+
+    public static async List<PyruxLevel> FindBuiltInLevels()
+    {
+        AppdataManagement.CheckAppdata();
+        StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
+        StorageFolder levelsFolder = ((StorageFolder)await appdataFolder.TryGetItemAsync("Levels"));
+        StorageFolder levelsFolderOrganization = ((StorageFolder)await levelsFolder.TryGetItemAsync("Builtins"));
+
     }
 }

@@ -16,7 +16,11 @@ namespace Pyrux.LevelIO
                 await ConstructAppdataAsync();
             }
         }
-
+        /// <summary>
+        /// Create the default Appdata folder structure.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="AppdataFolderNotFoundException">Thrown when the top level appdata folder could not be found.</exception>
         public static async Task ConstructAppdataAsync()
         {
             StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
@@ -60,6 +64,10 @@ namespace Pyrux.LevelIO
             }
         }
 
+        /// <summary>
+        /// Verify that the Appdata folder's integrity is given.
+        /// </summary>
+        /// <returns>True when integrity is given, false if not.</returns>
         public static async Task<bool> VerifyAppdataIntegrityAsync()
         {
             StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
@@ -89,10 +97,18 @@ namespace Pyrux.LevelIO
 
         }
 
+        /// <summary>
+        /// Delete the entire contents of the appdata folder, including the directory structure.
+        /// </summary>
+        /// <exception cref="AppdataFolderNotFoundException">Thrown when the top level appdata folder could not be found.</exception>
         public static async Task ClearAppdataAsync()
         {
 
             StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
+            if(appdataFolder== null)
+            {
+                throw new AppdataFolderNotFoundException();
+            }
 
             var storageFolders = await appdataFolder.GetFoldersAsync();
             foreach (StorageFolder folder in storageFolders)

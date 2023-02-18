@@ -26,6 +26,10 @@
         /// The script running on the level.
         /// </summary>
         public string Script { get; set; } = "";
+        /// <summary>
+        /// Determines whether the Level has been completed before.
+        /// </summary>
+        public bool Completed { get; set; } = false;
 
         /// <summary>
         /// Initialize a new PyruxLevel.

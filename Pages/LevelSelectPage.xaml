@@ -38,61 +38,8 @@
             
             <ScrollViewer Grid.Row="1">
 
-                <VariableSizedWrapGrid Orientation="Horizontal">
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
-                    <Button Content="Test" Margin="10,10,10,10" Height="150" Width="150"/>
+                <VariableSizedWrapGrid Orientation="Horizontal" x:Name="vsgBuiltinLevels">
+                    
                 </VariableSizedWrapGrid>
 
             </ScrollViewer>
