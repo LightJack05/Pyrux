@@ -1,13 +1,4 @@
-﻿using Newtonsoft.Json;
-using Pyrux.DataManagement;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.Devices.AllJoyn;
-using Windows.Media.AppBroadcasting;
+﻿using Pyrux.DataManagement;
 using Windows.Storage;
 
 namespace Pyrux.LevelIO
@@ -25,11 +16,11 @@ namespace Pyrux.LevelIO
             StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
             string levelJson = JsonConvert.SerializeObject(activeLevel);
             string levelName = activeLevel.LevelName;
-            
-            if(appdataFolder != null)
+
+            if (appdataFolder != null)
             {
                 StorageFolder levelsFolder = ((StorageFolder)await appdataFolder.TryGetItemAsync("Levels"));
-                if(levelsFolder != null)
+                if (levelsFolder != null)
                 {
                     StorageFolder levelsFolderOrganization = null;
 
@@ -72,7 +63,7 @@ namespace Pyrux.LevelIO
             string levelDataPath = Path.Combine(levelFolder.Path, "LevelData.json");
             string levelScriptPath = Path.Combine(levelFolder.Path, "LevelScript.py");
 
-            if(!activeLevel.IsBuiltIn)
+            if (!activeLevel.IsBuiltIn)
             {
                 if (File.Exists(levelDataPath))
                 {

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Windows.Storage;
 
 namespace Pyrux.LevelIO
@@ -80,12 +75,12 @@ namespace Pyrux.LevelIO
                 return false;
             }
 
-            if(await levelsFolder.TryGetItemAsync("Builtins") == null)
+            if (await levelsFolder.TryGetItemAsync("Builtins") == null)
             {
                 return false;
             }
 
-            if(await levelsFolder.TryGetItemAsync("UserCreated") == null)
+            if (await levelsFolder.TryGetItemAsync("UserCreated") == null)
             {
                 return false;
             }

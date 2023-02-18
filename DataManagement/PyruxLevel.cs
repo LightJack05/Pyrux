@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Pyrux.DataManagement
+﻿namespace Pyrux.DataManagement
 {
     internal partial class PyruxLevel
     {
@@ -55,9 +49,9 @@ namespace Pyrux.DataManagement
         public PyruxLevel Copy()
         {
             return new PyruxLevel(
-                LevelName, 
-                Task, 
-                IsBuiltIn, 
+                LevelName,
+                Task,
+                IsBuiltIn,
                 new PyruxLevelMapLayout(
                     MapLayout.WallLayout,
                     MapLayout.CollectablesLayout,

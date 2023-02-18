@@ -1,12 +1,12 @@
-﻿namespace Pyrux.Exceptions;
+﻿namespace Pyrux.UserEndExceptions;
 /// <summary>
 /// Thrown if the player runs into a wall.
 /// </summary>
 class WallAheadException : Exception
 {
-    public WallAheadException() 
-    { 
-    
+    public WallAheadException()
+    {
+
     }
     public WallAheadException(string message) : base(message)
     {

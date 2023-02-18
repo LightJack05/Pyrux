@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Pyrux.DataManagement
+﻿namespace Pyrux.DataManagement
 {
     internal class PyruxLevelMapLayout
     {
@@ -95,6 +89,6 @@ namespace Pyrux.DataManagement
         {
             return WallLayout[position.Y, position.X];
         }
-        
+
     }
 }

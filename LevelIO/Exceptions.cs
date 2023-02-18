@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Pyrux.LevelIO
+﻿namespace Pyrux.LevelIO
 {
     class AppdataFolderNotFoundException : Exception
     {
@@ -24,8 +18,8 @@ namespace Pyrux.LevelIO
         public LevelNotFoundException(string message) : base(message) { }
     }
 
-    class InvalidLevelJsonException : Exception 
-    { 
+    class InvalidLevelJsonException : Exception
+    {
         public InvalidLevelJsonException() { }
         public InvalidLevelJsonException(string message) : base(message) { }
     }

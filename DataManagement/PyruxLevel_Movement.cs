@@ -1,9 +1,6 @@
 ﻿using Microsoft.UI.Dispatching;
-using Pyrux.Pages;
-using System.Diagnostics;
-using System.Linq;
+
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Pyrux.DataManagement;
 
@@ -31,7 +28,7 @@ internal partial class PyruxLevel
     /// Make the player go forward.
     /// </summary>
     /// <exception cref="ArgumentOutOfRangeException">Thrown when the angle of the player on the map is not a valid movement direction (up,down,left,right).</exception>
-    /// <exception cref="Pyrux.Exceptions.WallAheadException">Thrown when the movement results in a collision with a wall, or the position would move outside the map.</exception>
+    /// <exception cref="Pyrux.UserEndExceptions.WallAheadException">Thrown when the movement results in a collision with a wall, or the position would move outside the map.</exception>
     public void GoForward()
     {
         PositionVector2 movementVector = new();
@@ -54,9 +51,9 @@ internal partial class PyruxLevel
         }
 
         PositionVector2 newPosition = MapLayout.CurrentPlayerPosition.Copy() + movementVector;
-        if(WallAhead())
+        if (WallAhead())
         {
-            throw new Pyrux.Exceptions.WallAheadException("The border of the playing field was hit.");
+            throw new Pyrux.UserEndExceptions.WallAheadException("The border of the playing field was hit.");
         }
 
         MapLayout.CurrentPlayerPosition = newPosition;
@@ -67,18 +64,18 @@ internal partial class PyruxLevel
     /// <summary>
     /// Take one screw from the tile and place it into the inventory.
     /// </summary>
-    /// <exception cref="Pyrux.Exceptions.NoScrewOnTileException">Thrown if there is no screw on the tile.</exception>
+    /// <exception cref="Pyrux.UserEndExceptions.NoScrewOnTileException">Thrown if there is no screw on the tile.</exception>
     public void TakeScrew()
     {
 
-        if(MapLayout.GetScrewNumberAtPosition(MapLayout.CurrentPlayerPosition) > 0)
+        if (MapLayout.GetScrewNumberAtPosition(MapLayout.CurrentPlayerPosition) > 0)
         {
             MapLayout.SetScrewNumberAtPosition(MapLayout.CurrentPlayerPosition, MapLayout.GetScrewNumberAtPosition(MapLayout.CurrentPlayerPosition) - 1);
             MapLayout.PlayerScrewInventory++;
         }
         else
         {
-            throw new Pyrux.Exceptions.NoScrewOnTileException("There was no screw to pick up on the tile.");
+            throw new Pyrux.UserEndExceptions.NoScrewOnTileException("There was no screw to pick up on the tile.");
         }
 
         QueueUpdate();
@@ -87,7 +84,7 @@ internal partial class PyruxLevel
     /// <summary>
     /// Take a screw from the inventory and place it on the tile below the player.
     /// </summary>
-    /// <exception cref="Pyrux.Exceptions.NoScrewInInventoryException">Thrown when there is no screw in the inventory.</exception>
+    /// <exception cref="Pyrux.UserEndExceptions.NoScrewInInventoryException">Thrown when there is no screw in the inventory.</exception>
     public void PlaceScrew()
     {
         if (MapLayout.PlayerScrewInventory > 0)
@@ -97,7 +94,7 @@ internal partial class PyruxLevel
         }
         else
         {
-            throw new Pyrux.Exceptions.NoScrewInInventoryException("There was no screw to place in the inventory.");
+            throw new Pyrux.UserEndExceptions.NoScrewInInventoryException("There was no screw to place in the inventory.");
         }
 
         QueueUpdate();
@@ -134,7 +131,7 @@ internal partial class PyruxLevel
         {
             return true;
         }
-        else if(MapLayout.IsWallAtPosition(newPosition))
+        else if (MapLayout.IsWallAtPosition(newPosition))
         {
             return true;
         }
@@ -174,7 +171,7 @@ internal partial class PyruxLevel
     /// Wait for the amount of milliseconds specified in _executionDelayInMilliseconds.
     /// 
     /// </summary>
-    /// <exception cref="Pyrux.Exceptions.ExecutionCancelledException">Thrown when the execution is cancelled. (Instance of the Exercise page get's it's ExecutionCanceled property set to true.)</exception>
+    /// <exception cref="Pyrux.UserEndExceptions.ExecutionCancelledException">Thrown when the execution is cancelled. (Instance of the Exercise page get's it's ExecutionCanceled property set to true.)</exception>
     private void WaitAndCheckIfCancelled()
     {
         //TODO: Set ExecutionCancelled to false again.
@@ -182,10 +179,10 @@ internal partial class PyruxLevel
         {
             if (ExercisePage.Instance.ExecutionCancelled)
             {
-                throw new Pyrux.Exceptions.ExecutionCancelledException();
+                throw new Pyrux.UserEndExceptions.ExecutionCancelledException();
             }
             Thread.Sleep(10);
         }
-        
+
     }
 }
