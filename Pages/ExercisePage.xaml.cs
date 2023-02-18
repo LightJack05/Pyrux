@@ -4,6 +4,7 @@
 using IronPython.Hosting;
 using Microsoft.Scripting.Hosting;
 using Microsoft.UI;
+using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml.Media.Imaging;
 using Pyrux.DataManagement;
 using System.Threading.Tasks;
@@ -26,12 +27,13 @@ namespace Pyrux.Pages
         /// <summary>
         /// Whether the current execution of the script should be cancelled.
         /// </summary>
-        public bool ExecutionCancelled { get => _executionCanceled; private set => _executionCanceled = value; }
+        public bool ExecutionCancelled { get => _executionCanceled; set => _executionCanceled = value; }
         private bool _executionCanceled = false;
         /// <summary>
         /// The image of the Char.
         /// </summary>
-        private Image CharImage;
+        private Image _charImage;
+        private PyruxLevelMapLayout _displayedMapLayout;
         /// <summary>
         /// The currently active level in the page.
         /// </summary>
@@ -67,13 +69,12 @@ namespace Pyrux.Pages
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             ActiveLevel = StaticDataStore.ActiveLevel;
-            if (ActiveLevel == null)
+            if (StaticDataStore.ActiveLevel == null)
             {
-                //TODO: Create empty level. (Make logic for that.)
-                throw new NotImplementedException();
+                ActiveLevel = new("", "", false, new(new bool[10, 10], new int[10, 10], new(), 0), "");
             }
-
             LoadLevelIntoPage();
+            StaticDataStore.OriginalActiveLevelMapLayout = ActiveLevel.MapLayout.Copy();
         }
         /// <summary>
         /// Start the ArbitraryCodeExecution method.
@@ -82,7 +83,14 @@ namespace Pyrux.Pages
         /// <param name="e"></param>
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
+            ResetLayoutToStart();
             ArbitraryCodeExecution();
+        }
+
+        private void ResetLayoutToStart()
+        {
+            ActiveLevel.MapLayout = StaticDataStore.OriginalActiveLevelMapLayout.Copy();
+            UpdateDisplay();
         }
 
         /// <summary>
@@ -121,6 +129,7 @@ namespace Pyrux.Pages
                 {
                     Border border = new();
                     Image image = new();
+                    image.PointerPressed += Tile_Clicked;
                     border.Child = image;
                     border.Background = new SolidColorBrush(Colors.Black);
                     image.Margin = new(3);
@@ -138,13 +147,10 @@ namespace Pyrux.Pages
             grdPlayField.Children.Add(charImage);
             Grid.SetColumn(charImage, ActiveLevel.MapLayout.StartPosition.X);
             Grid.SetRow(charImage, ActiveLevel.MapLayout.StartPosition.Y);
-            CharImage = charImage;
+            _charImage = charImage;
         }
 
-        /// <summary>
-        /// Update the grid that is displaying the playing field so it matches the background data.
-        /// </summary>
-        public void UpdateDisplay()
+        public void FullDisplayRedraw()
         {
             PyruxLevelMapLayout mapLayout = ActiveLevel.MapLayout;
             Image charImage = (Image)grdPlayField.Children.Last();
@@ -188,6 +194,72 @@ namespace Pyrux.Pages
 
                 }
             }
+            _displayedMapLayout = mapLayout.Copy();
+        }
+        /// <summary>
+        /// Update the grid that is displaying the playing field so it matches the background data.
+        /// </summary>
+        public void UpdateDisplay()
+        {
+            if(_displayedMapLayout == null)
+            {
+                FullDisplayRedraw();
+                return;
+            }
+
+            PyruxLevelMapLayout mapLayout = ActiveLevel.MapLayout;
+            Image charImage = (Image)grdPlayField.Children.Last();
+            charImage.RenderTransform = new RotateTransform { Angle = 90 * ActiveLevel.MapLayout.CurrentPlayerDirection };
+            Grid.SetColumn(charImage, ActiveLevel.MapLayout.CurrentPlayerPosition.X);
+            Grid.SetRow(charImage, ActiveLevel.MapLayout.CurrentPlayerPosition.Y);
+
+
+            for (int i = 0; i < mapLayout.WallLayout.GetLength(0); i++)
+            {
+                for (int j = 0; j < mapLayout.WallLayout.GetLength(1); j++)
+                {
+                    Border border = (Border)grdPlayField.Children[i * grdPlayField.ColumnDefinitions.Count() + j];
+                    Image image = (Image)border.Child;
+                    if (mapLayout.WallLayout[j, i])
+                    {
+                        if((mapLayout.WallLayout[j, i] != _displayedMapLayout.WallLayout[j, i]))
+                        {
+                            image.Source = new BitmapImage(new Uri("ms-appx:///Assets/Textures/Wall.png"));
+                        }
+                    }
+                    else if ((!mapLayout.WallLayout[j, i] && (mapLayout.CollectablesLayout[j, i] == 0)))
+                    {
+                        if (mapLayout.WallLayout[j, i] != _displayedMapLayout.WallLayout[j, i])
+                        {
+                            if (Application.Current.RequestedTheme == ApplicationTheme.Dark)
+                            {
+                                image.Source = new BitmapImage(new Uri("ms-appx:///Assets/Textures/Background/dark.png"));
+                            }
+                            else
+                            {
+                                image.Source = new BitmapImage(new Uri("ms-appx:///Assets/Textures/Background/light.png"));
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (mapLayout.CollectablesLayout[j,i] != _displayedMapLayout.CollectablesLayout[j, i])
+                        {
+                            //TODO: Add light mode collectables.
+                            if (mapLayout.CollectablesLayout[j, i] <= 9 && mapLayout.CollectablesLayout[j, i] > 0)
+                            {
+                                image.Source = new BitmapImage(new Uri($"ms-appx:///Assets/Textures/Collectables/Collectables{mapLayout.CollectablesLayout[j, i]}.png"));
+                            }
+                            else
+                            {
+                                image.Source = new BitmapImage(new Uri($"ms-appx:///Assets/Textures/Collectables/Collectables9.png"));
+                            }
+                        }
+                    }
+                }
+            }
+
+            _displayedMapLayout = mapLayout.Copy();
 
         }
 
@@ -199,7 +271,6 @@ namespace Pyrux.Pages
         /// </summary>
         void ArbitraryCodeExecution()
         {
-            //TODO: Add references for other methods.
             //TODO: Add a mockup library for the code editor's Autocomplete/Intellisense.
             //TODO: Add non-execution block that is used to import the mockup library that is removed once the file is imported into the program.
 
@@ -218,7 +289,13 @@ namespace Pyrux.Pages
             Task.Factory.StartNew(() =>
             {
                 scriptEngine.Execute(pythonCode, scriptScope);
+                DispatcherQueue dispatcherQueue = ExercisePage.Instance.DispatcherQueue;
+                dispatcherQueue.TryEnqueue(() =>
+                {
+                    ResetLayoutToStart();
+                });
             });
+
         }
 
         private void btnExport_Click(object sender, RoutedEventArgs e)
@@ -234,5 +311,25 @@ namespace Pyrux.Pages
         {
             ActiveLevel.Script = txtCodeEditor.Text;
         }
+
+        private void Tile_Clicked(object sender, RoutedEventArgs e)
+        {
+            //Change this!
+            if (ActiveLevel.IsBuiltIn)
+            {
+                Border border = VisualTreeHelper.GetParent((Image)sender) as Border;
+                CreateWall(new PositionVector2(Grid.GetColumn(border), Grid.GetRow(border)));
+            }
+        }
+        void CreateWall(PositionVector2 position)
+        {
+            if (position != ActiveLevel.MapLayout.CurrentPlayerPosition)
+            {
+                ActiveLevel.MapLayout.WallLayout[position.Y, position.X] = !ActiveLevel.MapLayout.WallLayout[position.Y, position.X];
+            }
+            UpdateDisplay();
+        }
     }
+
+
 }

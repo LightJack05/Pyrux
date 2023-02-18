@@ -35,14 +35,41 @@
                     <SymbolIcon Symbol="Save"/>
                 </Button>
             </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" Background="{ThemeResource SystemChromeLowColor}" CornerRadius="10" Margin="20">
+                    <Grid Margin="20">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Text="Built in levels"/>
+
+                        <ScrollViewer Grid.Row="1">
+                            <VariableSizedWrapGrid Orientation="Horizontal" x:Name="vsgBuiltinLevels"/>
+                        </ScrollViewer>
+                    </Grid>
+                </Border>
+                
+
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Custom levels"/>
+
+                    <ScrollViewer Grid.Row="1">
+                        <VariableSizedWrapGrid Orientation="Horizontal" x:Name="vsgCustomLevels"/>
+                    </ScrollViewer>
+                </Grid>
+            </Grid>
             
-            <ScrollViewer Grid.Row="1">
-
-                <VariableSizedWrapGrid Orientation="Horizontal" x:Name="vsgBuiltinLevels">
-                    
-                </VariableSizedWrapGrid>
-
-            </ScrollViewer>
         </Grid>
 
     </Grid>

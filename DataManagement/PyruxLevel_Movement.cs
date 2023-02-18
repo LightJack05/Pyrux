@@ -53,7 +53,7 @@ internal partial class PyruxLevel
         PositionVector2 newPosition = MapLayout.CurrentPlayerPosition.Copy() + movementVector;
         if (WallAhead())
         {
-            throw new Pyrux.UserEndExceptions.WallAheadException("The border of the playing field was hit.");
+            throw new Pyrux.UserEndExceptions.WallAheadException("A wall was hit.");
         }
 
         MapLayout.CurrentPlayerPosition = newPosition;
@@ -179,6 +179,8 @@ internal partial class PyruxLevel
         {
             if (ExercisePage.Instance.ExecutionCancelled)
             {
+                ExercisePage.Instance.ExecutionCancelled = false;
+
                 throw new Pyrux.UserEndExceptions.ExecutionCancelledException();
             }
             Thread.Sleep(10);

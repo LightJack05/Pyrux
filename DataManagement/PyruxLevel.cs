@@ -56,15 +56,7 @@
                 LevelName,
                 Task,
                 IsBuiltIn,
-                new PyruxLevelMapLayout(
-                    MapLayout.WallLayout,
-                    MapLayout.CollectablesLayout,
-                    new PositionVector2(
-                        MapLayout.StartPosition.X,
-                        MapLayout.StartPosition.Y
-                        ),
-                    MapLayout.StartPlayerDirection
-                    ),
+                MapLayout.Copy(),
                 Script
                 );
         }

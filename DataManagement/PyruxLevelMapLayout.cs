@@ -90,5 +90,35 @@
             return WallLayout[position.Y, position.X];
         }
 
+        public PyruxLevelMapLayout Copy()
+        {
+            bool[,] wallLayoutCopy = new bool[WallLayout.GetLength(0), WallLayout.GetLength(1)];
+            for (int i = 0; i < WallLayout.GetLength(0); i++)
+            {
+                for (int j = 0; j < WallLayout.GetLength(1); j++)
+                {
+                    wallLayoutCopy[i, j] = WallLayout[i, j];
+                }
+            }
+
+            int[,] collectablesCopy = new int[CollectablesLayout.GetLength(0),CollectablesLayout.GetLength(1)];
+            for (int i = 0; i < CollectablesLayout.GetLength(0); i++)
+            {
+                for (int j = 0; j < CollectablesLayout.GetLength(1); j++)
+                {
+                    collectablesCopy[i, j] = CollectablesLayout[i, j];
+                }
+            }
+
+            PyruxLevelMapLayout newLayout = new PyruxLevelMapLayout(
+                wallLayoutCopy,
+                collectablesCopy,
+                StartPosition.Copy(),
+                StartPlayerDirection);
+            newLayout.CurrentPlayerPosition= CurrentPlayerPosition.Copy();
+            newLayout.CurrentPlayerDirection= CurrentPlayerDirection;
+            return newLayout;
+        }
+
     }
 }

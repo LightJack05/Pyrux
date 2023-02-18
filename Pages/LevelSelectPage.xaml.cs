@@ -22,10 +22,12 @@ namespace Pyrux.Pages
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             LoadBuiltinLevelsIntoMenu();
+            LoadCustomLevelsIntoMenu();
         }
 
         async void LoadBuiltinLevelsIntoMenu()
         {
+            vsgBuiltinLevels.Children.Clear();
             List<PyruxLevel> levels = await Pyrux.LevelIO.LevelLoading.FindBuiltInLevels();
             StaticDataStore.BuiltInLevels = new(levels);
             foreach (PyruxLevel level in levels)
@@ -41,9 +43,29 @@ namespace Pyrux.Pages
                 levelButton.Margin = new Thickness(25);
                 levelButton.Click += LevelButton_Clicked;
 
-
-
                 vsgBuiltinLevels.Children.Add(levelButton);
+            }
+        }
+
+        async void LoadCustomLevelsIntoMenu()
+        {
+            vsgBuiltinLevels.Children.Clear();
+            List<PyruxLevel> levels = await Pyrux.LevelIO.LevelLoading.FindUserCreatedLevels();
+            StaticDataStore.UserCreatedLevels = new(levels);
+            foreach (PyruxLevel level in levels)
+            {
+                Button levelButton = new Button();
+                TextBlock levelText = new TextBlock();
+                levelText.Text = level.LevelName;
+                levelText.TextWrapping = TextWrapping.Wrap;
+
+                levelButton.Content = levelText;
+                levelButton.Width = 150;
+                levelButton.Height = 150;
+                levelButton.Margin = new Thickness(25);
+                levelButton.Click += LevelButton_Clicked;
+
+                vsgCustomLevels.Children.Add(levelButton);
             }
         }
         private void LevelButton_Clicked(object sender, RoutedEventArgs e)
@@ -59,7 +81,7 @@ namespace Pyrux.Pages
             MainWindow.Instance.NavViewNavigate("exerciseView", new Microsoft.UI.Xaml.Media.Animation.CommonNavigationTransitionInfo());
             MainWindow.Instance.NavViewSetSelection(1);
         }
-        async void LoadLevelIntoStaticStorage(PyruxLevel level)
+        void LoadLevelIntoStaticStorage(PyruxLevel level)
         {
             DataManagement.StaticDataStore.ActiveLevel = level.Copy();
         }
