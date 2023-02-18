@@ -13,6 +13,7 @@ namespace Pyrux
     /// </summary>
     public sealed partial class MainWindow : Window
     {
+        public static MainWindow Instance;
         /// <summary>
         /// List of pages in the navigation menu.
         /// </summary>
@@ -29,13 +30,13 @@ namespace Pyrux
             this.InitializeComponent();
             ExtendsContentIntoTitleBar = true;
             SetTitleBar(AppTitleBar);
-
+            Instance = this;
         }
 
         private void ngvMainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             ngvMainWindow.SelectedItem = ngvMainWindow.MenuItems[0];
-            NavViewNavigate("levelSelect", new Microsoft.UI.Xaml.Media.Animation.EntranceNavigationTransitionInfo());
+            NavViewNavigate("levelSelect", new Microsoft.UI.Xaml.Media.Animation.CommonNavigationTransitionInfo());
 
         }
 
@@ -62,7 +63,7 @@ namespace Pyrux
         /// </summary>
         /// <param name="navItemTag">Tag of the selected page.</param>
         /// <param name="transitionInfo">Transitioninfo for transition animation.</param>
-        private void NavViewNavigate(string navItemTag, Microsoft.UI.Xaml.Media.Animation.NavigationTransitionInfo transitionInfo)
+        public void NavViewNavigate(string navItemTag, Microsoft.UI.Xaml.Media.Animation.NavigationTransitionInfo transitionInfo)
         {
             Type page = null;
             if (navItemTag == "settings")
@@ -80,6 +81,11 @@ namespace Pyrux
             {
                 ctfMain.Navigate(page, null, transitionInfo);
             }
+        }
+
+        public void NavViewSetSelection(int index)
+        {
+            ngvMainWindow.SelectedItem = ngvMainWindow.MenuItems[index];
         }
 
         private void Window_Activated(object sender, WindowActivatedEventArgs args)

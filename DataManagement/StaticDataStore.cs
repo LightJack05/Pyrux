@@ -10,5 +10,7 @@
         /// The execution delay in milliseconds for each movement step.
         /// </summary>
         public static int ExecutionDelayInMilliseconds { get; set; }
+        public static List<PyruxLevel> BuiltInLevels { get; set; }
+        public static List<PyruxLevel> UserCreatedLevels { get; set; }
     }
 }
