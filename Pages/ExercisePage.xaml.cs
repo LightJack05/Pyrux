@@ -75,6 +75,7 @@ namespace Pyrux.Pages
             }
             LoadLevelIntoPage();
             StaticDataStore.OriginalActiveLevelMapLayout = ActiveLevel.MapLayout.Copy();
+            FullDisplayRedraw();
         }
         /// <summary>
         /// Start the ArbitraryCodeExecution method.
