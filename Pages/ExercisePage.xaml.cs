@@ -23,6 +23,17 @@ namespace Pyrux.Pages
         /// Current instance of the Page.
         /// </summary>
         public static ExercisePage Instance { get; private set; }
+        /// <summary>
+        /// The index of the selected tool.
+        /// 0 - Walls
+        /// 1 - Screws
+        /// 2 - Player Movement
+        /// </summary>
+        private static int SelectedToolIndex { get; set; }
+        /// <summary>
+        /// Determines whether the python script is currently being executed.
+        /// </summary>
+        public bool PythonScriptRunning { get; private set; }
 
         /// <summary>
         /// Whether the current execution of the script should be cancelled.
@@ -86,6 +97,30 @@ namespace Pyrux.Pages
         {
             ResetLayoutToStart();
             ArbitraryCodeExecution();
+        }
+        private void btnReset_Click(object sender, RoutedEventArgs e)
+        {
+            ResetLayoutToStart();
+        }
+
+        private void btnWallTool_Click(object sender, RoutedEventArgs e)
+        {
+            SelectedToolIndex = 0;
+        }
+
+        private void btnScrewTool_Click(object sender, RoutedEventArgs e)
+        {
+            SelectedToolIndex = 1;
+        }
+
+        private void btnPlayerTool_Click(object sender, RoutedEventArgs e)
+        {
+            SelectedToolIndex = 2;
+        }
+
+        private void btnRotate_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO: Turn the player!
         }
 
         private void ResetLayoutToStart()
@@ -202,7 +237,7 @@ namespace Pyrux.Pages
         /// </summary>
         public void UpdateDisplay()
         {
-            if(_displayedMapLayout == null)
+            if (_displayedMapLayout == null)
             {
                 FullDisplayRedraw();
                 return;
@@ -223,7 +258,7 @@ namespace Pyrux.Pages
                     Image image = (Image)border.Child;
                     if (mapLayout.WallLayout[j, i])
                     {
-                        if((mapLayout.WallLayout[j, i] != _displayedMapLayout.WallLayout[j, i]))
+                        if ((mapLayout.WallLayout[j, i] != _displayedMapLayout.WallLayout[j, i]))
                         {
                             image.Source = new BitmapImage(new Uri("ms-appx:///Assets/Textures/Wall.png"));
                         }
@@ -244,7 +279,7 @@ namespace Pyrux.Pages
                     }
                     else
                     {
-                        if (mapLayout.CollectablesLayout[j,i] != _displayedMapLayout.CollectablesLayout[j, i])
+                        if (mapLayout.CollectablesLayout[j, i] != _displayedMapLayout.CollectablesLayout[j, i])
                         {
                             //TODO: Add light mode collectables.
                             if (mapLayout.CollectablesLayout[j, i] <= 9 && mapLayout.CollectablesLayout[j, i] > 0)
@@ -275,28 +310,36 @@ namespace Pyrux.Pages
             //TODO: Add a mockup library for the code editor's Autocomplete/Intellisense.
             //TODO: Add non-execution block that is used to import the mockup library that is removed once the file is imported into the program.
 
-            string pythonCode = ActiveLevel.Script;
-            ScriptEngine scriptEngine = Python.CreateEngine();
-            ScriptScope scriptScope = scriptEngine.CreateScope();
-            scriptScope.SetVariable("TurnLeft", () => this.ActiveLevel.TurnLeft());
-            scriptScope.SetVariable("TurnRight", () => this.ActiveLevel.TurnRight());
-            scriptScope.SetVariable("GoForward", () => this.ActiveLevel.GoForward());
-            scriptScope.SetVariable("TakeScrew", () => this.ActiveLevel.TakeScrew());
-            scriptScope.SetVariable("PlaceScrew", () => this.ActiveLevel.PlaceScrew());
-            scriptScope.SetVariable("WallAhead", () => this.ActiveLevel.WallAhead());
-            scriptScope.SetVariable("ScrewThere", () => this.ActiveLevel.ScrewThere());
-
-
-            Task.Factory.StartNew(() =>
+            if (!PythonScriptRunning)
             {
-                scriptEngine.Execute(pythonCode, scriptScope);
-                DispatcherQueue dispatcherQueue = ExercisePage.Instance.DispatcherQueue;
-                dispatcherQueue.TryEnqueue(() =>
-                {
-                    ResetLayoutToStart();
-                });
-            });
+                btnStart.IsEnabled = false;
+                PythonScriptRunning = true;
+                string pythonCode = ActiveLevel.Script;
+                ScriptEngine scriptEngine = Python.CreateEngine();
+                ScriptScope scriptScope = scriptEngine.CreateScope();
+                scriptScope.SetVariable("TurnLeft", () => this.ActiveLevel.TurnLeft());
+                scriptScope.SetVariable("TurnRight", () => this.ActiveLevel.TurnRight());
+                scriptScope.SetVariable("GoForward", () => this.ActiveLevel.GoForward());
+                scriptScope.SetVariable("TakeScrew", () => this.ActiveLevel.TakeScrew());
+                scriptScope.SetVariable("PlaceScrew", () => this.ActiveLevel.PlaceScrew());
+                scriptScope.SetVariable("WallAhead", () => this.ActiveLevel.WallAhead());
+                scriptScope.SetVariable("ScrewThere", () => this.ActiveLevel.ScrewThere());
 
+
+                Task.Factory.StartNew(() =>
+                {
+                    scriptEngine.Execute(pythonCode, scriptScope);
+
+                    ExercisePage.Instance.PythonScriptRunning = false;
+
+                    DispatcherQueue dispatcherQueue = ExercisePage.Instance.DispatcherQueue;
+                    dispatcherQueue.TryEnqueue(() =>
+                    {
+                        ExercisePage.Instance.btnStart.IsEnabled = true;
+                    });
+
+                });
+            }
         }
 
         private void btnExport_Click(object sender, RoutedEventArgs e)
@@ -315,18 +358,38 @@ namespace Pyrux.Pages
 
         private void Tile_Clicked(object sender, RoutedEventArgs e)
         {
-            //Change this!
-            if (ActiveLevel.IsBuiltIn)
+
+            Border clickedBorder = VisualTreeHelper.GetParent((Image)sender) as Border;
+            switch (SelectedToolIndex)
             {
-                Border border = VisualTreeHelper.GetParent((Image)sender) as Border;
-                CreateWall(new PositionVector2(Grid.GetColumn(border), Grid.GetRow(border)));
+                case 0:
+                    SwitchWall(new PositionVector2(Grid.GetColumn(clickedBorder), Grid.GetRow(clickedBorder)));
+                    break;
+                case 1:
+                    //TODO: Place/Take screw.
+                    break;
+                case 2:
+                    PositionVector2 newPlayerPosition = new PositionVector2(Grid.GetColumn(clickedBorder), Grid.GetRow(clickedBorder));
+                    MovePlayer(newPlayerPosition);
+                    break;
+                default:
+                    break;
             }
+
         }
-        void CreateWall(PositionVector2 position)
+        void SwitchWall(PositionVector2 position)
         {
             if (position != ActiveLevel.MapLayout.CurrentPlayerPosition)
             {
                 ActiveLevel.MapLayout.WallLayout[position.Y, position.X] = !ActiveLevel.MapLayout.WallLayout[position.Y, position.X];
+            }
+            UpdateDisplay();
+        }
+        void MovePlayer(PositionVector2 position)
+        {
+            if (!ActiveLevel.MapLayout.WallLayout[position.Y, position.X])
+            {
+                ActiveLevel.MapLayout.CurrentPlayerPosition= position.Copy();
             }
             UpdateDisplay();
         }

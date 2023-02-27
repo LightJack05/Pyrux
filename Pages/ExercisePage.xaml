@@ -66,19 +66,19 @@
                     <Button Grid.Column="0" x:Name="btnStart" Margin="10" Click="btnStart_Click">
                         <SymbolIcon Symbol="Play"/>
                     </Button>
-                    <Button Grid.Column="2" x:Name="btnReset" Margin="10">
+                    <Button Grid.Column="2" x:Name="btnReset" Margin="10" Click="btnReset_Click">
                         <SymbolIcon Symbol="Refresh"/>
                     </Button>
-                    <Button Grid.Column="3" x:Name="btnWallTool" Margin="10">
+                    <Button Grid.Column="3" x:Name="btnWallTool" Margin="10" Click="btnWallTool_Click">
                         <SymbolIcon Symbol="Placeholder"/>
                     </Button>
-                    <Button Grid.Column="4" x:Name="btnScrewTool" Margin="10">
+                    <Button Grid.Column="4" x:Name="btnScrewTool" Margin="10" Click="btnScrewTool_Click">
                         <SymbolIcon Symbol="Setting"/>
                     </Button>
-                    <Button Grid.Column="5" x:Name="btnPlayerTool" Margin="10">
+                    <Button Grid.Column="5" x:Name="btnPlayerTool" Margin="10" Click="btnPlayerTool_Click">
                         <SymbolIcon Symbol="Contact"/>
                     </Button>
-                    <Button Grid.Column="6" x:Name="btnRotate" Margin="10">
+                    <Button Grid.Column="6" x:Name="btnRotate" Margin="10" Click="btnRotate_Click">
                         <SymbolIcon Symbol="Rotate"/>
                     </Button>
                     <Button Grid.Column="8" x:Name="btnSave" Margin="10" Click="btnExport_Click">
