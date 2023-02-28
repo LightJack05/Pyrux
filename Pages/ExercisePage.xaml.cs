@@ -162,7 +162,7 @@ namespace Pyrux.Pages
         /// <summary>
         /// Load a level into the exercise page
         /// </summary>
-        void LoadLevelIntoPage()
+        private void LoadLevelIntoPage()
         {
             expTaskExpander.Header = ActiveLevel.LevelName;
             txtCodeEditor.Text = ActiveLevel.Script;
@@ -173,7 +173,7 @@ namespace Pyrux.Pages
         /// <summary>
         /// Build the Grid for the level that is loaded.
         /// </summary>
-        void BuildPlayGrid()
+        private void BuildPlayGrid()
         {
             grdPlayField.Children.Clear();
             grdPlayField.RowDefinitions.Clear();
@@ -334,7 +334,7 @@ namespace Pyrux.Pages
         /// Will add variables of the basic movement methods to the python environment.
         /// NOTE: Code will execute in another thread to keep UI responsive.
         /// </summary>
-        void ArbitraryCodeExecution()
+        private void ArbitraryCodeExecution()
         {
             //TODO: Add a mockup library for the code editor's Autocomplete/Intellisense.
             //TODO: Add non-execution block that is used to import the mockup library that is removed once the file is imported into the program.
@@ -411,12 +411,13 @@ namespace Pyrux.Pages
             }
 
         }
+
         /// <summary>
         /// On the given position, switch between placed wall and empty square.
         /// Refuse if there are screws on the tile or the player is on it.
         /// </summary>
         /// <param name="position">Position of the tile that should be changed.</param>
-        void SwitchWall(PositionVector2 position)
+        private void SwitchWall(PositionVector2 position)
         {
             if (position != ActiveLevel.MapLayout.CurrentPlayerPosition && ActiveLevel.MapLayout.GetScrewNumberAtPosition(position) == 0)
             {
@@ -425,7 +426,8 @@ namespace Pyrux.Pages
             UpdateDisplay();
             SaveNewLayout();
         }
-        void MovePlayer(PositionVector2 position)
+
+        private void MovePlayer(PositionVector2 position)
         {
             if (!ActiveLevel.MapLayout.WallLayout[position.Y, position.X])
             {
@@ -435,14 +437,14 @@ namespace Pyrux.Pages
             SaveNewLayout();
         }
 
-        void TurnPlayer()
+        private void TurnPlayer()
         {
             ActiveLevel.MapLayout.CurrentPlayerDirection++;
             UpdateDisplay();
             SaveNewLayout();
         }
 
-        void SaveNewLayout()
+        private void SaveNewLayout()
         {
             StaticDataStore.OriginalActiveLevelMapLayout = ActiveLevel.MapLayout.Copy();
         }

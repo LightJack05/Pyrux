@@ -24,7 +24,7 @@ namespace Pyrux.Pages
             LoadCustomLevelsIntoMenu();
         }
 
-        async void LoadBuiltinLevelsIntoMenu()
+        private async void LoadBuiltinLevelsIntoMenu()
         {
             vsgBuiltinLevels.Children.Clear();
             List<PyruxLevel> levels = await Pyrux.LevelIO.LevelLoading.FindBuiltInLevels();
@@ -46,7 +46,7 @@ namespace Pyrux.Pages
             }
         }
 
-        async void LoadCustomLevelsIntoMenu()
+        private async void LoadCustomLevelsIntoMenu()
         {
             vsgBuiltinLevels.Children.Clear();
             List<PyruxLevel> levels = await Pyrux.LevelIO.LevelLoading.FindUserCreatedLevels();
@@ -93,7 +93,8 @@ namespace Pyrux.Pages
             MainWindow.Instance.NavViewNavigate("exerciseView", new Microsoft.UI.Xaml.Media.Animation.CommonNavigationTransitionInfo());
             MainWindow.Instance.NavViewSetSelection(1);
         }
-        void LoadLevelIntoStaticStorage(PyruxLevel level)
+
+        private void LoadLevelIntoStaticStorage(PyruxLevel level)
         {
             DataManagement.StaticDataStore.ActiveLevel = level.Copy();
         }
