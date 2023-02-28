@@ -63,7 +63,7 @@ namespace Pyrux.Pages
                 levelButton.Width = 150;
                 levelButton.Height = 150;
                 levelButton.Margin = new Thickness(25);
-                levelButton.Click += LevelButton_Clicked;
+                levelButton.Click += CustomLevelButton_Clicked;
 
                 vsgCustomLevels.Children.Add(levelButton);
             }
@@ -75,6 +75,19 @@ namespace Pyrux.Pages
             { 
                 ContentPresenter contentPresenter = VisualTreeHelper.GetChild((Button)sender,0) as ContentPresenter;
                 TextBlock textBlock = VisualTreeHelper.GetChild(contentPresenter,0) as TextBlock;
+                return textBlock.Text == x.LevelName;
+            });
+            LoadLevelIntoStaticStorage(level);
+            MainWindow.Instance.NavViewNavigate("exerciseView", new Microsoft.UI.Xaml.Media.Animation.CommonNavigationTransitionInfo());
+            MainWindow.Instance.NavViewSetSelection(1);
+        }
+
+        private void CustomLevelButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            PyruxLevel level = StaticDataStore.UserCreatedLevels.Find(x =>
+            {
+                ContentPresenter contentPresenter = VisualTreeHelper.GetChild((Button)sender, 0) as ContentPresenter;
+                TextBlock textBlock = VisualTreeHelper.GetChild(contentPresenter, 0) as TextBlock;
                 return textBlock.Text == x.LevelName;
             });
             LoadLevelIntoStaticStorage(level);

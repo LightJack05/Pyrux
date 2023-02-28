@@ -9,7 +9,7 @@
         /// <summary>
         /// The string describing the task of the level.
         /// </summary>
-        public string Task { get; }
+        public string Task { get; set; }
         /// <summary>
         /// A hint for completing the level. Can use MarkDown and is displayed on the "Hint" page.
         /// </summary>

@@ -23,82 +23,124 @@
                 ExpandDirection="Down"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Stretch"
                 Header="Task"
-                Margin="10,10,10,10"
+                Margin="20,10,10,10"
+                CornerRadius="10"
                 x:Name="expTaskExpander">
-            <ScrollViewer MaxHeight="500">
-                <TextBox AcceptsReturn="True" IsReadOnly="True" IsEnabled="False" x:Name="txtTaskBox">
-                </TextBox>
-            </ScrollViewer>
+            <Grid HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition MaxHeight="500"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Background="{ThemeResource SystemChromeMediumColor}" CornerRadius="10" MinHeight="50">
+                        <ScrollViewer Grid.Row="1" MaxHeight="500" HorizontalAlignment="Stretch">
+                            <TextBlock Text="This is a test!" HorizontalAlignment="Stretch" Margin="10" x:Name="txtLevelTask"/>
+                        </ScrollViewer>
+                    </Border>
+                    <Button x:Name="btnEditTask" Margin="10,10,10,10" HorizontalAlignment="Right" VerticalAlignment="Top" IsEnabled="True" Click="btnEditTask_Click">
+                        <SymbolIcon Symbol="Edit"/>
+                    </Button>
+                </Grid>
+            </Grid>
         </Expander>
 
         <Grid VerticalAlignment="Stretch" x:Name="grdMainSplit" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1.5*"/>
             </Grid.ColumnDefinitions>
-
-            <Grid Grid.Column="0" VerticalAlignment="Stretch" Margin="10,10,10,10" >
-                <StackPanel Orientation="Vertical">
-                    <TextBlock Text="TBD"/>
-                    <TextBox VerticalAlignment="Stretch" AcceptsReturn="True" x:Name="txtCodeEditor" TextChanged="txtCodeEditor_TextChanged"/>
-                </StackPanel>
-            </Grid>
-
-            <Grid Grid.Column="1" Margin="10,10,10,10">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0" Margin="10,10,10,10">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" x:Name="btnStart" Margin="10" Click="btnStart_Click">
-                        <SymbolIcon Symbol="Play"/>
-                    </Button>
-                    <Button Grid.Column="2" x:Name="btnReset" Margin="10" Click="btnReset_Click">
-                        <SymbolIcon Symbol="Refresh"/>
-                    </Button>
-                    <Button Grid.Column="3" x:Name="btnWallTool" Margin="10" Click="btnWallTool_Click">
-                        <SymbolIcon Symbol="Placeholder"/>
-                    </Button>
-                    <Button Grid.Column="4" x:Name="btnScrewTool" Margin="10" Click="btnScrewTool_Click">
-                        <SymbolIcon Symbol="Setting"/>
-                    </Button>
-                    <Button Grid.Column="5" x:Name="btnPlayerTool" Margin="10" Click="btnPlayerTool_Click">
-                        <SymbolIcon Symbol="Contact"/>
-                    </Button>
-                    <Button Grid.Column="6" x:Name="btnRotate" Margin="10" Click="btnRotate_Click">
-                        <SymbolIcon Symbol="Rotate"/>
-                    </Button>
-                    <Button Grid.Column="8" x:Name="btnSave" Margin="10" Click="btnExport_Click">
-                        <SymbolIcon Symbol="Save"/>
-                    </Button>
-                    <Button Grid.Column="9" x:Name="btnSaveAs" Margin="10">
-                        <SymbolIcon Symbol="SaveLocal"/>
-                    </Button>
-
-                </Grid>
-
-                <Grid Grid.Row="1" Height="Auto" Width="Auto" Name="grdPlayFieldBoundary" SizeChanged="grdPlayFieldBoundary_SizeChanged">
+            
+            <Border Grid.Column="0" Background="{ThemeResource SystemChromeLowColor}" CornerRadius="10" Margin="20,10,10,10">
+                <Grid Grid.Column="0" VerticalAlignment="Stretch" Margin="20,10,20,10" >
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <Grid Name="grdPlayField" Background="Black" >
+                    <Grid Grid.Row="0" Margin="0,10,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" x:Name="btnStart" Margin="0,10,10,10" Click="btnStart_Click">
+                            <SymbolIcon Symbol="Play"/>
+                        </Button>
+                        <Button Grid.Column="2" x:Name="btnReset" Margin="10,10,0,10" Click="btnReset_Click">
+                            <SymbolIcon Symbol="Refresh"/>
+                        </Button>
+                    </Grid>
+
+                    <StackPanel Orientation="Vertical" Grid.Row="1">
+                        <TextBlock Text="[WIP]"/>
+                        <TextBox VerticalAlignment="Stretch" AcceptsReturn="True" x:Name="txtCodeEditor" TextChanged="txtCodeEditor_TextChanged"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <Border Grid.Column="1" Background="{ThemeResource SystemChromeLowColor}" CornerRadius="10" Margin="10">
+                <Grid Margin="10,10,10,10">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Margin="10,10,10,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Column="0" x:Name="btnWallTool" Margin="10" Click="btnWallTool_Click">
+                            <SymbolIcon Symbol="Placeholder"/>
+                        </Button>
+                        <Button Grid.Column="1" x:Name="btnScrewTool" Margin="10" Click="btnScrewTool_Click">
+                            <SymbolIcon Symbol="Setting"/>
+                        </Button>
+                        <Button Grid.Column="2" x:Name="btnPlayerTool" Margin="10" Click="btnPlayerTool_Click">
+                            <SymbolIcon Symbol="Contact"/>
+                        </Button>
+                        <Button Grid.Column="3" x:Name="btnRotate" Margin="10" Click="btnRotate_Click">
+                            <SymbolIcon Symbol="Rotate"/>
+                        </Button>
+                        <Button Grid.Column="5" x:Name="btnSave" Margin="10">
+                            <SymbolIcon Symbol="Save"/>
+                        </Button>
+                        <Button Grid.Column="6" x:Name="btnSaveAs" Margin="10" Click="btnExport_Click">
+                            <SymbolIcon Symbol="SaveLocal"/>
+                        </Button>
+
+                    </Grid>
+
+                    <Grid Grid.Row="1" Height="Auto" Width="Auto" Name="grdPlayFieldBoundary" SizeChanged="grdPlayFieldBoundary_SizeChanged">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Name="grdPlayField" Background="Black" >
+                        </Grid>
                     </Grid>
                 </Grid>
-            </Grid>
+            </Border>
         </Grid>
     </Grid>
+    
+    
+    <!--Popups/Teachingtips-->
+    
+    
 </Page>

@@ -24,6 +24,8 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Pages\AboutPage.xaml" />
+    <None Remove="Pages\ContentDialogs\EditTaskContentDialog.xaml" />
+    <None Remove="Pages\ContentDialogs\PlaceScrewsDialog.xaml" />
     <None Remove="Pages\DocsPage.xaml" />
     <None Remove="Pages\ExercisePage.xaml" />
     <None Remove="Pages\HintPage.xaml" />
@@ -65,6 +67,11 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Pages\ContentDialogs\PlaceScrewsDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
     <Page Update="Pages\SettingsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -91,6 +98,11 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\LevelSelectPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\ContentDialogs\EditTaskContentDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

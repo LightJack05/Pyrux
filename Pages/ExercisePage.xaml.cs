@@ -5,9 +5,14 @@ using IronPython.Hosting;
 using Microsoft.Scripting.Hosting;
 using Microsoft.UI;
 using Microsoft.UI.Dispatching;
+using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media.Imaging;
 using Pyrux.DataManagement;
+using Pyrux.Pages.ContentDialogs;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.VoiceCommands;
+using Windows.Services.Maps;
+using Windows.UI.Core;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -64,6 +69,7 @@ namespace Pyrux.Pages
         {
             this.InitializeComponent();
             Instance = this;
+
         }
         /// <summary>
         /// On resize, change the size of the grid to keep every tile square.
@@ -87,6 +93,19 @@ namespace Pyrux.Pages
             LoadLevelIntoPage();
             StaticDataStore.OriginalActiveLevelMapLayout = ActiveLevel.MapLayout.Copy();
             FullDisplayRedraw();
+            if (ActiveLevel.IsBuiltIn)
+            {
+                btnScrewTool.IsEnabled = false;
+                btnRotate.IsEnabled = false;
+                btnWallTool.IsEnabled = false;
+                btnPlayerTool.IsEnabled = false;
+                SelectedToolIndex = -1;
+            }
+            else
+            {
+                btnWallTool.IsEnabled = false;
+                SelectedToolIndex = 0;
+            }
         }
         /// <summary>
         /// Start the ArbitraryCodeExecution method.
@@ -95,7 +114,10 @@ namespace Pyrux.Pages
         /// <param name="e"></param>
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
-            ResetLayoutToStart();
+            if (ActiveLevel.IsBuiltIn)
+            {
+                ResetLayoutToStart();
+            }
             ArbitraryCodeExecution();
         }
         private void btnReset_Click(object sender, RoutedEventArgs e)
@@ -106,21 +128,33 @@ namespace Pyrux.Pages
         private void btnWallTool_Click(object sender, RoutedEventArgs e)
         {
             SelectedToolIndex = 0;
+            btnWallTool.IsEnabled = false;
+
+            btnScrewTool.IsEnabled = true;
+            btnPlayerTool.IsEnabled = true;
         }
 
         private void btnScrewTool_Click(object sender, RoutedEventArgs e)
         {
             SelectedToolIndex = 1;
+            btnScrewTool.IsEnabled = false;
+
+            btnWallTool.IsEnabled = true;
+            btnPlayerTool.IsEnabled = true;
         }
 
         private void btnPlayerTool_Click(object sender, RoutedEventArgs e)
         {
             SelectedToolIndex = 2;
+            btnPlayerTool.IsEnabled = false;
+
+            btnWallTool.IsEnabled = true;
+            btnScrewTool.IsEnabled = true;
         }
 
         private void btnRotate_Click(object sender, RoutedEventArgs e)
         {
-            //TODO: Turn the player!
+            TurnPlayer();
         }
 
         private void ResetLayoutToStart()
@@ -135,7 +169,6 @@ namespace Pyrux.Pages
         void LoadLevelIntoPage()
         {
             expTaskExpander.Header = ActiveLevel.LevelName;
-            txtTaskBox.Text = ActiveLevel.Task;
             txtCodeEditor.Text = ActiveLevel.Script;
             BuildPlayGrid();
             UpdateDisplay();
@@ -265,7 +298,7 @@ namespace Pyrux.Pages
                     }
                     else if ((!mapLayout.WallLayout[j, i] && (mapLayout.CollectablesLayout[j, i] == 0)))
                     {
-                        if (mapLayout.WallLayout[j, i] != _displayedMapLayout.WallLayout[j, i])
+                        if (mapLayout.WallLayout[j, i] != _displayedMapLayout.WallLayout[j, i] || mapLayout.CollectablesLayout[j, i] != _displayedMapLayout.CollectablesLayout[j, i])
                         {
                             if (Application.Current.RequestedTheme == ApplicationTheme.Dark)
                             {
@@ -356,6 +389,11 @@ namespace Pyrux.Pages
             ActiveLevel.Script = txtCodeEditor.Text;
         }
 
+        /// <summary>
+        /// On clicking a tile, apply the selected tool to the tile that was clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Tile_Clicked(object sender, RoutedEventArgs e)
         {
 
@@ -366,7 +404,7 @@ namespace Pyrux.Pages
                     SwitchWall(new PositionVector2(Grid.GetColumn(clickedBorder), Grid.GetRow(clickedBorder)));
                     break;
                 case 1:
-                    //TODO: Place/Take screw.
+                    ChangeScrewsTool(new PositionVector2(Grid.GetColumn(clickedBorder), Grid.GetRow(clickedBorder)));
                     break;
                 case 2:
                     PositionVector2 newPlayerPosition = new PositionVector2(Grid.GetColumn(clickedBorder), Grid.GetRow(clickedBorder));
@@ -377,22 +415,126 @@ namespace Pyrux.Pages
             }
 
         }
+        void AddScrew(PositionVector2 position)
+        {
+            ActiveLevel.MapLayout.CollectablesLayout[position.Y, position.X]++;
+        }
+        void RemoveScrew(PositionVector2 position)
+        {
+            if (ActiveLevel.MapLayout.CollectablesLayout[position.Y, position.X] > 0)
+            {
+                ActiveLevel.MapLayout.CollectablesLayout[position.Y, position.X]--;
+            }
+        }
+        /// <summary>
+        /// On the given position, switch between placed wall and empty square.
+        /// Refuse if there are screws on the tile or the player is on it.
+        /// </summary>
+        /// <param name="position">Position of the tile that should be changed.</param>
         void SwitchWall(PositionVector2 position)
         {
-            if (position != ActiveLevel.MapLayout.CurrentPlayerPosition)
+            if (position != ActiveLevel.MapLayout.CurrentPlayerPosition && ActiveLevel.MapLayout.GetScrewNumberAtPosition(position) == 0)
             {
                 ActiveLevel.MapLayout.WallLayout[position.Y, position.X] = !ActiveLevel.MapLayout.WallLayout[position.Y, position.X];
             }
             UpdateDisplay();
+            SaveNewLayout();
         }
         void MovePlayer(PositionVector2 position)
         {
             if (!ActiveLevel.MapLayout.WallLayout[position.Y, position.X])
             {
-                ActiveLevel.MapLayout.CurrentPlayerPosition= position.Copy();
+                ActiveLevel.MapLayout.CurrentPlayerPosition = position.Copy();
             }
             UpdateDisplay();
+            SaveNewLayout();
         }
+
+        void TurnPlayer()
+        {
+            ActiveLevel.MapLayout.CurrentPlayerDirection++;
+            UpdateDisplay();
+            SaveNewLayout();
+        }
+
+        void SaveNewLayout()
+        {
+            StaticDataStore.OriginalActiveLevelMapLayout = ActiveLevel.MapLayout.Copy();
+        }
+
+        private void btnEditTask_Click(object sender, RoutedEventArgs e)
+        {
+            ShowTaskEditDialogAsync();
+        }
+
+        private async void ShowTaskEditDialogAsync()
+        {
+            ContentDialog taskEditDialog = new();
+            taskEditDialog.XamlRoot = this.Content.XamlRoot;
+            taskEditDialog.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
+            taskEditDialog.Title = "Change the level description";
+            taskEditDialog.PrimaryButtonText = "Save";
+            taskEditDialog.SecondaryButtonText = "Cancel";
+            taskEditDialog.DefaultButton = ContentDialogButton.Primary;
+            taskEditDialog.Content = new ContentDialogs.EditTaskContentDialog();
+
+            ContentDialogResult result = await taskEditDialog.ShowAsync();
+
+            if(result == ContentDialogResult.Primary)
+            {
+                ChangeTaskDialogCompleted();
+            }
+        }
+        
+        private void ChangeTaskDialogCompleted()
+        {
+            UpdateTaskText(ContentDialogs.EditTaskContentDialog.LevelDescription);
+        }
+        private void UpdateTaskText(string text)
+        {
+            ActiveLevel.Task = text;
+            txtLevelTask.Text = ActiveLevel.Task;
+        }
+
+        private void ChangeScrewsTool(PositionVector2 position)
+        {
+            if (!ActiveLevel.MapLayout.WallLayout[position.Y, position.X])
+            {
+                PlaceScrewsDialog.Position = position;
+                ShowScrewNumberChangeDialog();
+            }
+        }
+
+        private async void ShowScrewNumberChangeDialog()
+        {
+            ContentDialog screwNumberChangeDialog = new();
+            screwNumberChangeDialog.XamlRoot = this.Content.XamlRoot;
+            screwNumberChangeDialog.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
+            screwNumberChangeDialog.Title = "Screws";
+            screwNumberChangeDialog.PrimaryButtonText = "Save";
+            screwNumberChangeDialog.SecondaryButtonText = "Cancel";
+            screwNumberChangeDialog.DefaultButton = ContentDialogButton.Primary;
+            screwNumberChangeDialog.Content = new PlaceScrewsDialog();
+
+            ContentDialogResult result = await screwNumberChangeDialog.ShowAsync();
+            if(result == ContentDialogResult.Primary)
+            {
+                ScrewNumberChangeDialogFinished();
+            }
+            
+        }
+        private void ScrewNumberChangeDialogFinished()
+        {
+            UpdateScrewCount(PlaceScrewsDialog.Position, PlaceScrewsDialog.ScrewNumber);
+        }
+
+        private void UpdateScrewCount(PositionVector2 position, int count)
+        {
+            ActiveLevel.MapLayout.SetScrewNumberAtPosition(position, count);
+            SaveNewLayout();
+            UpdateDisplay();
+        }
+
     }
 
 
