@@ -2,6 +2,10 @@
 // Licensed under the MIT License.
 
 using Pyrux.DataManagement;
+using Pyrux.LevelIO;
+using Pyrux.Pages.ContentDialogs;
+using System.Drawing;
+using Windows.UI;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -20,8 +24,11 @@ namespace Pyrux.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            LoadBuiltinLevelsIntoMenu();
-            LoadCustomLevelsIntoMenu();
+            if(!AppdataManagement.AppdataCorrupted)
+            {
+                LoadBuiltinLevelsIntoMenu();
+                LoadCustomLevelsIntoMenu();
+            }
         }
 
         private async void LoadBuiltinLevelsIntoMenu()
@@ -98,5 +105,44 @@ namespace Pyrux.Pages
         {
             DataManagement.StaticDataStore.ActiveLevel = level.Copy();
         }
+
+        private void btnNewLevel_Click(object sender, RoutedEventArgs e)
+        {
+            if(StaticDataStore.ActiveLevel != null)
+            {
+                ShowConfirmationDialogue();
+            }
+            else
+            {
+                CreateNewLevel();
+            }
+        }
+
+        async void ShowConfirmationDialogue()
+        {
+            ContentDialog confirmationDialogue = new();
+            confirmationDialogue.XamlRoot = this.Content.XamlRoot;
+            confirmationDialogue.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
+            confirmationDialogue.Title = "Are you sure?";
+            confirmationDialogue.MinHeight = 300;
+            confirmationDialogue.PrimaryButtonText = "Continue";
+            confirmationDialogue.SecondaryButtonText = "Cancel";
+            confirmationDialogue.DefaultButton = ContentDialogButton.Primary;
+            confirmationDialogue.Content = new ConfirmLevelCreationWithOpenLevel();
+
+            ContentDialogResult result = await confirmationDialogue.ShowAsync();
+            if (result == ContentDialogResult.Primary)
+            {
+                CreateNewLevel();
+            }
+        }
+
+        private static void CreateNewLevel()
+        {
+            StaticDataStore.ActiveLevel = null;
+            MainWindow.Instance.NavViewNavigate("exerciseView", new Microsoft.UI.Xaml.Media.Animation.CommonNavigationTransitionInfo());
+            MainWindow.Instance.NavViewSetSelection(1);
+        }
+
     }
 }

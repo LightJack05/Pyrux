@@ -84,11 +84,19 @@ namespace Pyrux.Pages
             ActiveLevel = StaticDataStore.ActiveLevel;
             if (StaticDataStore.ActiveLevel == null)
             {
-                ActiveLevel = new("", "", false, new(new bool[10, 10], new int[10, 10], new(), 0), "");
+                CreateNewLevel();
             }
-            LoadLevelIntoPage();
-            StaticDataStore.OriginalActiveLevelMapLayout = ActiveLevel.MapLayout.Copy();
-            FullDisplayRedraw();
+            else
+            {
+                LoadLevelIntoPage();
+                StaticDataStore.OriginalActiveLevelMapLayout = ActiveLevel.MapLayout.Copy();
+                FullDisplayRedraw();
+                PrepareToolSelection();
+            }
+        }
+
+        private void PrepareToolSelection()
+        {
             if (ActiveLevel.IsBuiltIn)
             {
                 btnScrewTool.IsEnabled = false;
@@ -102,6 +110,42 @@ namespace Pyrux.Pages
                 btnWallTool.IsEnabled = false;
                 SelectedToolIndex = 0;
             }
+        }
+
+        async void CreateNewLevel()
+        {
+            ContentDialog createlevelDialogue = new();
+            createlevelDialogue.XamlRoot = this.Content.XamlRoot;
+            createlevelDialogue.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
+            createlevelDialogue.Title = "Create new level";
+            createlevelDialogue.PrimaryButtonText = "Create";
+            createlevelDialogue.SecondaryButtonText = "Cancel";
+            createlevelDialogue.DefaultButton = ContentDialogButton.Primary;
+            createlevelDialogue.Content = new LevelCreationDialogue();
+
+            ContentDialogResult result = await createlevelDialogue.ShowAsync();
+            if (result == ContentDialogResult.Primary)
+            {
+                LevelCreationDialogueFinished();
+            }
+        }
+
+        void LevelCreationDialogueFinished()
+        {
+            ActiveLevel = new PyruxLevel(
+                LevelCreationDialogue.LevelName, 
+                "", 
+                false, 
+                new PyruxLevelMapLayout(
+                    new bool[LevelCreationDialogue.PlayingFieldSize, LevelCreationDialogue.PlayingFieldSize], 
+                    new int[LevelCreationDialogue.PlayingFieldSize, LevelCreationDialogue.PlayingFieldSize], 
+                    new(0, 0), 
+                    0), 
+                "");
+            LoadLevelIntoPage();
+            StaticDataStore.ActiveLevel = ActiveLevel;
+            PrepareToolSelection();
+
         }
         /// <summary>
         /// Start the ArbitraryCodeExecution method.
@@ -167,7 +211,7 @@ namespace Pyrux.Pages
             expTaskExpander.Header = ActiveLevel.LevelName;
             txtCodeEditor.Text = ActiveLevel.Script;
             BuildPlayGrid();
-            UpdateDisplay();
+            FullDisplayRedraw();
         }
 
         /// <summary>

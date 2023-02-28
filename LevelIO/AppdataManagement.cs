@@ -1,20 +1,55 @@
-﻿using System.Threading.Tasks;
+﻿using Pyrux.Pages.ContentDialogs;
+using System.Threading.Tasks;
 using Windows.Storage;
 
 namespace Pyrux.LevelIO
 {
     internal class AppdataManagement
     {
+        public static bool AppdataCorrupted { get; private set; } = false;
+        public static bool AppdataValidationCompleted { get; private set; } = false;
         /// <summary>
         /// Check if the current Appdata is still consistent with the layout it should have, and rebuild it if it isn't.
         /// </summary>
-        public static async void CheckAppdata()
+        public static async Task CheckAppdata()
         {
             if (!await VerifyAppdataIntegrityAsync())
             {
-                await ClearAppdataAsync();
-                await ConstructAppdataAsync();
+                if(await IsAppdataEmpty())
+                {
+                    await ResetAppdata();
+                }
+                else
+                {
+                    AppdataCorrupted = true;
+                    AppdataValidationCompleted = true;
+                }
             }
+            else
+            {
+                AppdataValidationCompleted = true;
+            }
+        }
+
+        public static async Task<bool> IsAppdataEmpty()
+        {
+            StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
+            if((await appdataFolder.GetFoldersAsync()).Count == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static async Task ResetAppdata()
+        {
+            AppdataCorrupted = false;
+            AppdataValidationCompleted = true;
+            await ClearAppdataAsync();
+            await ConstructAppdataAsync();
         }
         /// <summary>
         /// Create the default Appdata folder structure.
@@ -70,31 +105,34 @@ namespace Pyrux.LevelIO
         /// <returns>True when integrity is given, false if not.</returns>
         public static async Task<bool> VerifyAppdataIntegrityAsync()
         {
-            StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
-            StorageFolder levelsFolder = (StorageFolder)await appdataFolder.TryGetItemAsync("Levels");
-
-            if (appdataFolder == null)
+            try
             {
-                return false;
+                StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
+                StorageFolder levelsFolder = (StorageFolder)await appdataFolder.TryGetItemAsync("Levels");
+
+                if (appdataFolder == null)
+                {
+                    return false;
+                }
+
+                if (await appdataFolder.TryGetItemAsync("Levels") == null)
+                {
+                    return false;
+                }
+
+                if (await levelsFolder.TryGetItemAsync("Builtins") == null)
+                {
+                    return false;
+                }
+
+                if (await levelsFolder.TryGetItemAsync("UserCreated") == null)
+                {
+                    return false;
+                }
+
+                return true;
             }
-
-            if (await appdataFolder.TryGetItemAsync("Levels") == null)
-            {
-                return false;
-            }
-
-            if (await levelsFolder.TryGetItemAsync("Builtins") == null)
-            {
-                return false;
-            }
-
-            if (await levelsFolder.TryGetItemAsync("UserCreated") == null)
-            {
-                return false;
-            }
-
-            return true;
-
+            catch (Exception ex) { return false; }
         }
 
         /// <summary>

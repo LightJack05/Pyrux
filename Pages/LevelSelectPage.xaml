@@ -27,7 +27,7 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Level Selection" FontSize="25"/>
-                <Button Grid.Column="2" Margin="10,10,10,10" IsEnabled="False">
+                <Button Grid.Column="2" Margin="10,10,10,10" IsEnabled="True" x:Name="btnNewLevel" Click="btnNewLevel_Click">
                     <SymbolIcon Symbol="Add"/>
                 </Button>
                 <Button Grid.Column="3" Margin="10,10,10,10" IsEnabled="False">

@@ -16,7 +16,7 @@ internal static class LevelLoading
     /// <exception cref="LevelNotFoundException">Thrown when the levels folder could not be found.</exception>
     public static async Task<PyruxLevel> LoadLevel(bool isBuiltIn, string levelName)
     {
-        AppdataManagement.CheckAppdata();
+        await AppdataManagement.CheckAppdata();
 
         StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
         StorageFolder levelsFolder = ((StorageFolder)await appdataFolder.TryGetItemAsync("Levels"));
@@ -140,7 +140,7 @@ internal static class LevelLoading
     public static async Task<List<PyruxLevel>> FindBuiltInLevels()
     {
         List<PyruxLevel> levels = new();
-        AppdataManagement.CheckAppdata();
+        await AppdataManagement.CheckAppdata();
         StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
         StorageFolder levelsFolder = ((StorageFolder)await appdataFolder.TryGetItemAsync("Levels"));
         StorageFolder builtInsFolder = ((StorageFolder)await levelsFolder.TryGetItemAsync("Builtins"));
@@ -157,7 +157,7 @@ internal static class LevelLoading
     public static async Task<List<PyruxLevel>> FindUserCreatedLevels()
     {
         List<PyruxLevel> levels = new();
-        AppdataManagement.CheckAppdata();
+        await AppdataManagement.CheckAppdata();
         StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
         StorageFolder levelsFolder = ((StorageFolder)await appdataFolder.TryGetItemAsync("Levels"));
         StorageFolder userCreatedFolder = ((StorageFolder)await levelsFolder.TryGetItemAsync("UserCreated"));
@@ -175,7 +175,7 @@ internal static class LevelLoading
     public static async Task<List<PyruxLevel>> FindLevelsIn(StorageFolder levelOrganizationFolder)
     {
         List<PyruxLevel> levels = new();
-        AppdataManagement.CheckAppdata();
+        await AppdataManagement.CheckAppdata();
 
         var levelFolders = await levelOrganizationFolder.GetFoldersAsync();
 

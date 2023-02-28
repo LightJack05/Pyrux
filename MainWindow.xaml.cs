@@ -6,6 +6,11 @@
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
+using Pyrux.LevelIO;
+using Pyrux.Pages.ContentDialogs;
+using System.Threading;
+using System.Threading.Tasks;
+
 namespace Pyrux
 {
     /// <summary>
@@ -33,11 +38,18 @@ namespace Pyrux
             Instance = this;
         }
 
-        private void ngvMainWindow_Loaded(object sender, RoutedEventArgs e)
+        private async void ngvMainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            ngvMainWindow.SelectedItem = ngvMainWindow.MenuItems[0];
-            NavViewNavigate("levelSelect", new Microsoft.UI.Xaml.Media.Animation.EntranceNavigationTransitionInfo());
-
+            await CheckAppdataIntegrity();
+            if (!AppdataManagement.AppdataCorrupted)
+            {
+                ngvMainWindow.SelectedItem = ngvMainWindow.MenuItems[0];
+                NavViewNavigate("levelSelect", new Microsoft.UI.Xaml.Media.Animation.EntranceNavigationTransitionInfo());
+            }
+            else
+            {
+                DisplayAppdataError();
+            }
         }
 
         /// <summary>
@@ -90,9 +102,38 @@ namespace Pyrux
 
         private void Window_Activated(object sender, WindowActivatedEventArgs args)
         {
-            LevelIO.AppdataManagement.CheckAppdata();
         }
 
+        private async Task CheckAppdataIntegrity()
+        {
+            await AppdataManagement.CheckAppdata();
+        }
+
+        private async void DisplayAppdataError()
+        {
+            if (AppdataManagement.AppdataCorrupted)
+            {
+                ContentDialog appdataErrorDialogue = new();
+                appdataErrorDialogue.XamlRoot = this.Content.XamlRoot;
+                appdataErrorDialogue.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
+                appdataErrorDialogue.Title = "Appdata corrupted.";
+                appdataErrorDialogue.PrimaryButtonText = "RESET";
+                appdataErrorDialogue.SecondaryButtonText = "Exit";
+                appdataErrorDialogue.DefaultButton = ContentDialogButton.Primary;
+                appdataErrorDialogue.Content = new Pages.ContentDialogs.ConfirmRepairAppdataFolderDialogue();
+
+                ContentDialogResult result = await appdataErrorDialogue.ShowAsync();
+                if (result == ContentDialogResult.Primary)
+                {
+                    await AppdataManagement.ResetAppdata();
+                    ngvMainWindow_Loaded(null,null);
+                }
+                else
+                {
+                    Environment.Exit(0);
+                }
+            }
+        }
 
     }
 }

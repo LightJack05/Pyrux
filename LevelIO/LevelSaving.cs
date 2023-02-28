@@ -12,7 +12,7 @@ namespace Pyrux.LevelIO
         /// <exception cref="NotImplementedException">Thrown if the appdata folder is inaccessible or corrupted.</exception>
         public static async void Save(PyruxLevel activeLevel)
         {
-            AppdataManagement.CheckAppdata();
+            await AppdataManagement.CheckAppdata();
             StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
             string levelJson = JsonConvert.SerializeObject(activeLevel);
             string levelName = activeLevel.LevelName;
