@@ -105,7 +105,7 @@ namespace Pyrux.LevelIO
         {
 
             StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
-            if(appdataFolder== null)
+            if (appdataFolder == null)
             {
                 throw new AppdataFolderNotFoundException();
             }

@@ -84,7 +84,7 @@ internal static class LevelLoading
     }
     public static async Task<PyruxLevel> LoadLevel(StorageFolder levelFolder)
     {
-        
+
         PyruxLevel level;
 
         if (File.Exists(Path.Combine(levelFolder.Path, "LevelData.json")))
@@ -128,8 +128,8 @@ internal static class LevelLoading
             }
         }
         return level;
-        
-        
+
+
     }
 
     /// <summary>

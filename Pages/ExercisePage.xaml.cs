@@ -5,14 +5,10 @@ using IronPython.Hosting;
 using Microsoft.Scripting.Hosting;
 using Microsoft.UI;
 using Microsoft.UI.Dispatching;
-using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media.Imaging;
 using Pyrux.DataManagement;
 using Pyrux.Pages.ContentDialogs;
 using System.Threading.Tasks;
-using Windows.ApplicationModel.VoiceCommands;
-using Windows.Services.Maps;
-using Windows.UI.Core;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -407,24 +403,13 @@ namespace Pyrux.Pages
                     ChangeScrewsTool(new PositionVector2(Grid.GetColumn(clickedBorder), Grid.GetRow(clickedBorder)));
                     break;
                 case 2:
-                    PositionVector2 newPlayerPosition = new PositionVector2(Grid.GetColumn(clickedBorder), Grid.GetRow(clickedBorder));
+                    PositionVector2 newPlayerPosition = new(Grid.GetColumn(clickedBorder), Grid.GetRow(clickedBorder));
                     MovePlayer(newPlayerPosition);
                     break;
                 default:
                     break;
             }
 
-        }
-        void AddScrew(PositionVector2 position)
-        {
-            ActiveLevel.MapLayout.CollectablesLayout[position.Y, position.X]++;
-        }
-        void RemoveScrew(PositionVector2 position)
-        {
-            if (ActiveLevel.MapLayout.CollectablesLayout[position.Y, position.X] > 0)
-            {
-                ActiveLevel.MapLayout.CollectablesLayout[position.Y, position.X]--;
-            }
         }
         /// <summary>
         /// On the given position, switch between placed wall and empty square.
@@ -480,12 +465,12 @@ namespace Pyrux.Pages
 
             ContentDialogResult result = await taskEditDialog.ShowAsync();
 
-            if(result == ContentDialogResult.Primary)
+            if (result == ContentDialogResult.Primary)
             {
                 ChangeTaskDialogCompleted();
             }
         }
-        
+
         private void ChangeTaskDialogCompleted()
         {
             UpdateTaskText(ContentDialogs.EditTaskContentDialog.LevelDescription);
@@ -517,11 +502,11 @@ namespace Pyrux.Pages
             screwNumberChangeDialog.Content = new PlaceScrewsDialog();
 
             ContentDialogResult result = await screwNumberChangeDialog.ShowAsync();
-            if(result == ContentDialogResult.Primary)
+            if (result == ContentDialogResult.Primary)
             {
                 ScrewNumberChangeDialogFinished();
             }
-            
+
         }
         private void ScrewNumberChangeDialogFinished()
         {

@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 using Pyrux.DataManagement;
-using System.Threading.Tasks;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -32,11 +31,11 @@ namespace Pyrux.Pages
             StaticDataStore.BuiltInLevels = new(levels);
             foreach (PyruxLevel level in levels)
             {
-                Button levelButton = new Button();
-                TextBlock levelText = new TextBlock();
+                Button levelButton = new();
+                TextBlock levelText = new();
                 levelText.Text = level.LevelName;
-                levelText.TextWrapping= TextWrapping.Wrap;
-                
+                levelText.TextWrapping = TextWrapping.Wrap;
+
                 levelButton.Content = levelText;
                 levelButton.Width = 150;
                 levelButton.Height = 150;
@@ -54,8 +53,8 @@ namespace Pyrux.Pages
             StaticDataStore.UserCreatedLevels = new(levels);
             foreach (PyruxLevel level in levels)
             {
-                Button levelButton = new Button();
-                TextBlock levelText = new TextBlock();
+                Button levelButton = new();
+                TextBlock levelText = new();
                 levelText.Text = level.LevelName;
                 levelText.TextWrapping = TextWrapping.Wrap;
 
@@ -71,10 +70,10 @@ namespace Pyrux.Pages
         private void LevelButton_Clicked(object sender, RoutedEventArgs e)
         {
 
-            PyruxLevel level = StaticDataStore.BuiltInLevels.Find(x => 
-            { 
-                ContentPresenter contentPresenter = VisualTreeHelper.GetChild((Button)sender,0) as ContentPresenter;
-                TextBlock textBlock = VisualTreeHelper.GetChild(contentPresenter,0) as TextBlock;
+            PyruxLevel level = StaticDataStore.BuiltInLevels.Find(x =>
+            {
+                ContentPresenter contentPresenter = VisualTreeHelper.GetChild((Button)sender, 0) as ContentPresenter;
+                TextBlock textBlock = VisualTreeHelper.GetChild(contentPresenter, 0) as TextBlock;
                 return textBlock.Text == x.LevelName;
             });
             LoadLevelIntoStaticStorage(level);

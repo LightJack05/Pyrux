@@ -101,7 +101,7 @@
                 }
             }
 
-            int[,] collectablesCopy = new int[CollectablesLayout.GetLength(0),CollectablesLayout.GetLength(1)];
+            int[,] collectablesCopy = new int[CollectablesLayout.GetLength(0), CollectablesLayout.GetLength(1)];
             for (int i = 0; i < CollectablesLayout.GetLength(0); i++)
             {
                 for (int j = 0; j < CollectablesLayout.GetLength(1); j++)
@@ -110,13 +110,13 @@
                 }
             }
 
-            PyruxLevelMapLayout newLayout = new PyruxLevelMapLayout(
+            PyruxLevelMapLayout newLayout = new(
                 wallLayoutCopy,
                 collectablesCopy,
                 StartPosition.Copy(),
                 StartPlayerDirection);
-            newLayout.CurrentPlayerPosition= CurrentPlayerPosition.Copy();
-            newLayout.CurrentPlayerDirection= CurrentPlayerDirection;
+            newLayout.CurrentPlayerPosition = CurrentPlayerPosition.Copy();
+            newLayout.CurrentPlayerDirection = CurrentPlayerDirection;
             return newLayout;
         }
 
