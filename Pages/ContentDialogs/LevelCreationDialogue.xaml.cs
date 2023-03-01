@@ -26,12 +26,14 @@ namespace Pyrux.Pages.ContentDialogs
     /// </summary>
     public sealed partial class LevelCreationDialogue : Page
     {
-        public static int PlayingFieldSize = 0;
+        public static int PlayingFieldSize = 2;
         public static string LevelName = "";
         string previousNameTextValue = "";
         public LevelCreationDialogue()
         {
             this.InitializeComponent();
+            PlayingFieldSize = 2;
+            LevelName = "";
         }
 
         private void TextBox_TextChanging(TextBox sender, TextBoxTextChangingEventArgs args)
