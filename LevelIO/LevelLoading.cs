@@ -146,7 +146,6 @@ internal static class LevelLoading
         StorageFolder builtInsFolder = ((StorageFolder)await levelsFolder.TryGetItemAsync("Builtins"));
 
         levels = await FindLevelsIn(builtInsFolder);
-
         return levels;
     }
     /// <summary>
@@ -163,7 +162,6 @@ internal static class LevelLoading
         StorageFolder userCreatedFolder = ((StorageFolder)await levelsFolder.TryGetItemAsync("UserCreated"));
 
         levels = await FindLevelsIn(userCreatedFolder);
-
         return levels;
     }
 

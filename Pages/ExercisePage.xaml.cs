@@ -128,23 +128,32 @@ namespace Pyrux.Pages
             {
                 LevelCreationDialogueFinished();
             }
+            
         }
 
         void LevelCreationDialogueFinished()
         {
-            ActiveLevel = new PyruxLevel(
-                LevelCreationDialogue.LevelName, 
-                "", 
-                false, 
-                new PyruxLevelMapLayout(
-                    new bool[LevelCreationDialogue.PlayingFieldSize, LevelCreationDialogue.PlayingFieldSize], 
-                    new int[LevelCreationDialogue.PlayingFieldSize, LevelCreationDialogue.PlayingFieldSize], 
-                    new(0, 0), 
-                    0), 
-                "");
-            LoadLevelIntoPage();
-            StaticDataStore.ActiveLevel = ActiveLevel;
-            PrepareToolSelection();
+            if(!(LevelCreationDialogue.LevelName == String.Empty) || (LevelCreationDialogue.LevelName.Trim().Length == 0))
+            {
+               ActiveLevel = new PyruxLevel(
+               LevelCreationDialogue.LevelName.Trim(),
+               "",
+               false,
+               new PyruxLevelMapLayout(
+                   new bool[LevelCreationDialogue.PlayingFieldSize, LevelCreationDialogue.PlayingFieldSize],
+                   new int[LevelCreationDialogue.PlayingFieldSize, LevelCreationDialogue.PlayingFieldSize],
+                   new(0, 0),
+                   0),
+               "");
+                LoadLevelIntoPage();
+                StaticDataStore.ActiveLevel = ActiveLevel;
+                PrepareToolSelection();
+            }
+            else
+            {
+                ActiveLevel = null;
+            }
+           
 
         }
         /// <summary>
@@ -210,6 +219,9 @@ namespace Pyrux.Pages
         {
             expTaskExpander.Header = ActiveLevel.LevelName;
             txtCodeEditor.Text = ActiveLevel.Script;
+            btnStart.IsEnabled = true;
+            btnSave.IsEnabled = true;
+            btnSaveAs.IsEnabled = true;
             BuildPlayGrid();
             FullDisplayRedraw();
         }
@@ -566,6 +578,10 @@ namespace Pyrux.Pages
             UpdateDisplay();
         }
 
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            Pyrux.LevelIO.LevelSaving.Save(ActiveLevel);
+        }
     }
 
 

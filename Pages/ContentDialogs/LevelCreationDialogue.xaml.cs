@@ -41,11 +41,12 @@ namespace Pyrux.Pages.ContentDialogs
                 sender.Text = previousNameTextValue;
                 sender.SelectionStart = sender.Text.Length;
                 sender.SelectionLength = 0;
-                LevelName= sender.Text;
+                LevelName = sender.Text;
             }
             else
             {
                 previousNameTextValue = sender.Text;
+                LevelName = sender.Text;
             }
         }
 
