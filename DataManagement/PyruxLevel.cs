@@ -46,6 +46,19 @@
             MapLayout = mapLayout;
             Script = script;
         }
+
+        [JsonConstructor]
+        public PyruxLevel(string levelName, string task, bool isBuiltIn, PyruxLevelMapLayout mapLayout, string script, string hint, bool completed) {
+            LevelName = levelName;
+            Task = task;
+            IsBuiltIn = isBuiltIn;
+            MapLayout = mapLayout;
+            Script = script;
+            Hint = hint;
+            Completed = completed;
+
+
+        }
         /// <summary>
         /// Creates a copy of the PyruxLevel that is not linked to the original.
         /// </summary>
@@ -57,7 +70,9 @@
                 Task,
                 IsBuiltIn,
                 MapLayout.Copy(),
-                Script
+                Script,
+                Hint,
+                Completed
                 );
         }
     }
