@@ -209,6 +209,7 @@ public sealed partial class ExercisePage
     private void LoadLevelIntoPage()
     {
         expTaskExpander.Header = ActiveLevel.LevelName;
+        txtLevelTask.Text = ActiveLevel.Task;
         txtCodeEditor.Text = ActiveLevel.Script;
         btnStart.IsEnabled = true;
         btnSave.IsEnabled = true;
