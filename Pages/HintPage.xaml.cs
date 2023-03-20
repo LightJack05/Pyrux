@@ -26,5 +26,34 @@ namespace Pyrux.Pages
                 mtbHintRenderer.Text = StaticDataStore.ActiveLevel.Hint;
             }
         }
+
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ContentDialog taskEditDialog = new();
+            taskEditDialog.XamlRoot = this.Content.XamlRoot;
+            taskEditDialog.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
+            taskEditDialog.Title = "Edit the level's hint";
+            taskEditDialog.PrimaryButtonText = "Save";
+            taskEditDialog.SecondaryButtonText = "Cancel";
+            taskEditDialog.DefaultButton = ContentDialogButton.Primary;
+            taskEditDialog.Content = new ContentDialogs.EditHintDialogue();
+
+            ContentDialogResult result = await taskEditDialog.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
+            {
+                ChangeHintDialogueCompleted();
+            }
+        }
+
+        void ChangeHintDialogueCompleted()
+        {
+            UpdateHintText(ContentDialogs.EditHintDialogue.Hint);
+        }
+
+        void UpdateHintText (string hint)
+        {
+            mtbHintRenderer.Text = hint;
+        }
     }
 }

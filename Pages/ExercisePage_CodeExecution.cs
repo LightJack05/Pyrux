@@ -3,6 +3,7 @@ using Microsoft.Scripting.Hosting;
 using Microsoft.UI.Dispatching;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using Pyrux.UserEndExceptions;
 
 namespace Pyrux.Pages;
 
@@ -30,16 +31,18 @@ public sealed partial class ExercisePage
     /// Will add variables of the basic movement methods to the python environment.
     /// NOTE: Code will execute in another thread to keep UI responsive.
     /// </summary>
-    private void ArbitraryCodeExecution()
+    private async void ArbitraryCodeExecution()
     {
         //TODO: Add a mockup library for the code editor's Autocomplete/Intellisense.
         //TODO: Add non-execution block that is used to import the mockup library that is removed once the file is imported into the program.
+
+        Exception thrownException = null;
 
         if (!PythonScriptRunning)
         {
             btnStart.IsEnabled = false;
             PythonScriptRunning = true;
-            string pythonCode = ActiveLevel.Script;
+            string pythonCode = BuildPythonCode();
             ScriptEngine scriptEngine = Python.CreateEngine();
             ScriptScope scriptScope = scriptEngine.CreateScope();
             scriptScope.SetVariable("TurnLeft", () => this.ActiveLevel.TurnLeft());
@@ -51,9 +54,17 @@ public sealed partial class ExercisePage
             scriptScope.SetVariable("ScrewThere", () => this.ActiveLevel.ScrewThere());
 
 
-            Task.Factory.StartNew(() =>
+            await Task.Factory.StartNew(() =>
             {
-                scriptEngine.Execute(pythonCode, scriptScope);
+                try
+                {
+                    scriptEngine.Execute(pythonCode, scriptScope);
+                }
+                catch (ExecutionCancelledException) { }
+                catch (Exception ex)
+                {
+                    thrownException = ex;
+                }
 
                 ExercisePage.Instance.PythonScriptRunning = false;
 
@@ -62,9 +73,39 @@ public sealed partial class ExercisePage
                 {
                     ExercisePage.Instance.btnStart.IsEnabled = true;
                 });
-
             });
         }
+        if (thrownException != null)
+        {
+            if (thrownException.GetType() == typeof(WallAheadException))
+            {
+                Debug.WriteLine("The robot hit a wall.");
+            }
+            else if (thrownException.GetType() == typeof(NoScrewOnTileException))
+            {
+
+            }
+            else if (thrownException.GetType() == typeof(NoScrewInInventoryException))
+            {
+
+            }
+        }
+    }
+
+    private string BuildPythonCode()
+    {
+        string pythonCode = "try:" + Environment.NewLine;
+        foreach (string line in ActiveLevel.Script.ReplaceLineEndings().Split(Environment.NewLine))
+        {
+            pythonCode += "    " + line + Environment.NewLine;
+        }
+        pythonCode +=
+"""
+except Exception as ex:
+    raise ex
+""";
+        pythonCode = pythonCode.ReplaceLineEndings();
+        return pythonCode;
     }
 
 }

@@ -15,7 +15,12 @@
 
     <Grid>
         <ScrollViewer>
-            <controls:MarkdownTextBlock UseSyntaxHighlighting="True" x:Name="mtbHintRenderer" CodeBackground="{ThemeResource SystemChromeLowColor}" Margin="20" Background="Transparent"/>
+            <Grid>
+                <controls:MarkdownTextBlock UseSyntaxHighlighting="True" x:Name="mtbHintRenderer" CodeBackground="{ThemeResource SystemChromeLowColor}" Margin="20" Background="Transparent"/>
+                <Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20" Click="Button_Click">
+                    <SymbolIcon Symbol="Edit"/>
+                </Button>
+            </Grid>
         </ScrollViewer>
     </Grid>
 </Page>

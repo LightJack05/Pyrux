@@ -26,7 +26,9 @@
     <None Remove="Pages\AboutPage.xaml" />
     <None Remove="Pages\ContentDialogs\ConfirmLevelCreationWithOpenLevel.xaml" />
     <None Remove="Pages\ContentDialogs\ConfirmRepairAppdataFolderDialogue.xaml" />
+    <None Remove="Pages\ContentDialogs\EditHintDialogue.xaml" />
     <None Remove="Pages\ContentDialogs\EditTaskContentDialog.xaml" />
+    <None Remove="Pages\ContentDialogs\ExceptionPages\WallAheadExceptionUserPage.xaml" />
     <None Remove="Pages\ContentDialogs\LevelCreationDialogue.xaml" />
     <None Remove="Pages\ContentDialogs\PlaceScrewsDialog.xaml" />
     <None Remove="Pages\DocsPage.xaml" />
@@ -69,6 +71,11 @@
     <Content Update="Assets\Textures\Wall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\ContentDialogs\EditHintDialogue.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\ContentDialogs\ConfirmRepairAppdataFolderDialogue.xaml">
@@ -122,6 +129,11 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\ContentDialogs\EditTaskContentDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\ContentDialogs\ExceptionPages\WallAheadExceptionUserPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
