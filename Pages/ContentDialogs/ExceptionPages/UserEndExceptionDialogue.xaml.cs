@@ -24,11 +24,19 @@ namespace Pyrux.Pages.ContentDialogs.ExceptionPages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class WallAheadExceptionUserPage : Page
+    public sealed partial class UserExceptionDialogue : Page
     {
-        public WallAheadExceptionUserPage()
+        public Exception DialogueException { get; set; }
+        public string DialogueStackTrace { get; set; }
+        public UserExceptionDialogue()
         {
             this.InitializeComponent();
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            txtExceptionInfo.Text = $"Pyrux.{DialogueException.GetType().ToString().Split(".").Last()}: {DialogueException.Message}";
+            txtStackTrace.Text = DialogueStackTrace;
         }
     }
 }

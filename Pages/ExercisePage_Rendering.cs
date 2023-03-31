@@ -208,12 +208,16 @@ public sealed partial class ExercisePage
     /// </summary>
     private void LoadLevelIntoPage()
     {
+        StaticDataStore.OriginalActiveLevelMapLayout = ActiveLevel.MapLayout.Copy();
+
         expTaskExpander.Header = ActiveLevel.LevelName;
         txtLevelTask.Text = ActiveLevel.Task;
         txtCodeEditor.Text = ActiveLevel.Script;
+        
         btnStart.IsEnabled = true;
         btnSave.IsEnabled = true;
         btnSaveAs.IsEnabled = true;
+
         BuildPlayGrid();
         FullDisplayRedraw();
     }

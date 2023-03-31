@@ -28,7 +28,7 @@
     <None Remove="Pages\ContentDialogs\ConfirmRepairAppdataFolderDialogue.xaml" />
     <None Remove="Pages\ContentDialogs\EditHintDialogue.xaml" />
     <None Remove="Pages\ContentDialogs\EditTaskContentDialog.xaml" />
-    <None Remove="Pages\ContentDialogs\ExceptionPages\WallAheadExceptionUserPage.xaml" />
+    <None Remove="Pages\ContentDialogs\ExceptionPages\UserEndExceptionDialogue.xaml" />
     <None Remove="Pages\ContentDialogs\LevelCreationDialogue.xaml" />
     <None Remove="Pages\ContentDialogs\PlaceScrewsDialog.xaml" />
     <None Remove="Pages\DocsPage.xaml" />
@@ -133,7 +133,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Pages\ContentDialogs\ExceptionPages\WallAheadExceptionUserPage.xaml">
+    <Page Update="Pages\ContentDialogs\ExceptionPages\UserEndExceptionDialogue.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

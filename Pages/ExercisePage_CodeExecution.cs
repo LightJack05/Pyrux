@@ -4,6 +4,7 @@ using Microsoft.UI.Dispatching;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using Pyrux.UserEndExceptions;
+using Pyrux.Pages.ContentDialogs.ExceptionPages;
 
 namespace Pyrux.Pages;
 
@@ -37,6 +38,7 @@ public sealed partial class ExercisePage
         //TODO: Add non-execution block that is used to import the mockup library that is removed once the file is imported into the program.
 
         Exception thrownException = null;
+        string errorStackTrace = "";
 
         if (!PythonScriptRunning)
         {
@@ -52,6 +54,9 @@ public sealed partial class ExercisePage
             scriptScope.SetVariable("PlaceScrew", () => this.ActiveLevel.PlaceScrew());
             scriptScope.SetVariable("WallAhead", () => this.ActiveLevel.WallAhead());
             scriptScope.SetVariable("ScrewThere", () => this.ActiveLevel.ScrewThere());
+            scriptScope.SetVariable("stackTrace", errorStackTrace);
+            scriptScope.SetVariable("scriptCode", ActiveLevel.Script.ReplaceLineEndings().Split(Environment.NewLine));
+            
 
 
             await Task.Factory.StartNew(() =>
@@ -64,6 +69,7 @@ public sealed partial class ExercisePage
                 catch (Exception ex)
                 {
                     thrownException = ex;
+                    errorStackTrace = scriptScope.GetVariable<string>("stackTrace");
                 }
 
                 ExercisePage.Instance.PythonScriptRunning = false;
@@ -77,31 +83,52 @@ public sealed partial class ExercisePage
         }
         if (thrownException != null)
         {
-            if (thrownException.GetType() == typeof(WallAheadException))
-            {
-                Debug.WriteLine("The robot hit a wall.");
-            }
-            else if (thrownException.GetType() == typeof(NoScrewOnTileException))
-            {
-
-            }
-            else if (thrownException.GetType() == typeof(NoScrewInInventoryException))
-            {
-
-            }
+            ShowUserEndExceptionDialogue(thrownException, errorStackTrace);
         }
+    }
+
+    private async void ShowUserEndExceptionDialogue(Exception exception, string stackTrace)
+    {
+        ContentDialog userEndExceptionDialogue = new();
+        userEndExceptionDialogue.XamlRoot = this.Content.XamlRoot;
+        userEndExceptionDialogue.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
+        userEndExceptionDialogue.Title = "An exception has occoured";
+        userEndExceptionDialogue.PrimaryButtonText = "Close";
+        userEndExceptionDialogue.DefaultButton = ContentDialogButton.Primary;
+        UserExceptionDialogue dialogueContent = new UserExceptionDialogue();
+        dialogueContent.DialogueException = exception;
+        dialogueContent.DialogueStackTrace = stackTrace;
+        userEndExceptionDialogue.Content = dialogueContent;
+        _ = await userEndExceptionDialogue.ShowAsync();
     }
 
     private string BuildPythonCode()
     {
-        string pythonCode = "try:" + Environment.NewLine;
-        foreach (string line in ActiveLevel.Script.ReplaceLineEndings().Split(Environment.NewLine))
-        {
-            pythonCode += "    " + line + Environment.NewLine;
-        }
-        pythonCode +=
+        string pythonCode = """
+import sys
+try:
+    exec(
+""" 
++
+"\"\"\""
++
+ActiveLevel.Script
++
+"\"\"\""+")"+ Environment.NewLine +
 """
 except Exception as ex:
+    exc_type, exc_value, exc_traceback = sys.exc_info()
+    tb = []
+    while exc_traceback:
+        tb.append(exc_traceback)
+        exc_traceback = exc_traceback.tb_next
+    tb.pop(0)
+    tb_str = f"{exc_type.__name__}: {exc_value}\n"
+    tb_str += "(If this is a Pyrux exception, see above for exception type.)\n\n"
+    tb_str += "Traceback (most recent call last):\n"
+    tb_str += ''.join(['At line {}, in {}\n     Code: {}\n'.format(int(tb_obj.tb_lineno), tb_obj.tb_frame.f_code.co_name,scriptCode[tb_obj.tb_lineno - 1].strip()) for tb_obj in tb])
+
+    stackTrace = tb_str
     raise ex
 """;
         pythonCode = pythonCode.ReplaceLineEndings();
