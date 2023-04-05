@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using Pyrux.UserEndExceptions;
 using Pyrux.Pages.ContentDialogs.ExceptionPages;
+using Pyrux.Pages.ContentDialogs;
 
 namespace Pyrux.Pages;
 
@@ -85,6 +86,31 @@ public sealed partial class ExercisePage
         {
             ShowUserEndExceptionDialogue(thrownException, errorStackTrace);
         }
+        else
+        {
+            if(ActiveLevel.MapLayout.Equals(ActiveLevel.GoalMapLayout))
+            {
+                ActiveLevel.Completed = true;
+                ShowLevelCompletedDialogue();
+            }
+        }
+    }
+
+    private async void ShowLevelCompletedDialogue()
+    {
+        ContentDialog userEndExceptionDialogue = new();
+        userEndExceptionDialogue.XamlRoot = this.Content.XamlRoot;
+        userEndExceptionDialogue.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
+        userEndExceptionDialogue.Title = "Level Completed!";
+        userEndExceptionDialogue.PrimaryButtonText = "Next Level";
+        userEndExceptionDialogue.SecondaryButtonText = "Level Selection";
+        userEndExceptionDialogue.CloseButtonText = "Retry";
+        userEndExceptionDialogue.DefaultButton = ContentDialogButton.Primary;
+        LevelCompletedDialogue dialogueContent = new();
+        userEndExceptionDialogue.Content = dialogueContent;
+        ContentDialogResult result = await userEndExceptionDialogue.ShowAsync();
+
+        
     }
 
     private async void ShowUserEndExceptionDialogue(Exception exception, string stackTrace)

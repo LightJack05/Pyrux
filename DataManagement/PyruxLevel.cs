@@ -23,6 +23,10 @@
         /// </summary>
         public PyruxLevelMapLayout MapLayout { get; set; }
         /// <summary>
+        /// The maplayout that is the goal of the level. Once reached, the level is completed.
+        /// </summary>
+        public PyruxLevelMapLayout GoalMapLayout { get; set; }
+        /// <summary>
         /// The script running on the level.
         /// </summary>
         public string Script { get; set; } = "";
@@ -48,7 +52,7 @@
         }
 
         [JsonConstructor]
-        public PyruxLevel(string levelName, string task, bool isBuiltIn, PyruxLevelMapLayout mapLayout, string script, string hint, bool completed) {
+        public PyruxLevel(string levelName, string task, bool isBuiltIn, PyruxLevelMapLayout mapLayout, string script, string hint, bool completed, PyruxLevelMapLayout goalMapLayout) {
             LevelName = levelName;
             Task = task;
             IsBuiltIn = isBuiltIn;
@@ -56,8 +60,7 @@
             Script = script;
             Hint = hint;
             Completed = completed;
-
-
+            GoalMapLayout = goalMapLayout;
         }
         /// <summary>
         /// Creates a copy of the PyruxLevel that is not linked to the original.
@@ -72,7 +75,8 @@
                 MapLayout.Copy(),
                 Script,
                 Hint,
-                Completed
+                Completed,
+                GoalMapLayout
                 );
         }
     }

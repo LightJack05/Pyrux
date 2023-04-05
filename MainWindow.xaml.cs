@@ -26,6 +26,7 @@ namespace Pyrux
         {
             ("levelSelect",typeof(LevelSelectPage)),
             ("exerciseView",typeof(ExercisePage)),
+            ("goalView",typeof(GoalPageView)),
             ("hint",typeof(HintPage)),
             ("docs",typeof(DocsPage)),
             ("about",typeof(AboutPage))

@@ -1,6 +1,8 @@
-﻿namespace Pyrux.DataManagement
+﻿using CommunityToolkit.WinUI.UI.Controls;
+
+namespace Pyrux.DataManagement
 {
-    internal class PyruxLevelMapLayout
+    internal class PyruxLevelMapLayout : IEquatable<PyruxLevelMapLayout>
     {
         /// <summary>
         /// The layout of Walls in the map.
@@ -120,5 +122,53 @@
             return newLayout;
         }
 
+        public bool Equals(PyruxLevelMapLayout other)
+        {
+            if(other == null) return false;
+
+            if(other.SizeX != this.SizeX || other.SizeY != this.SizeY)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < CollectablesLayout.GetLength(0); i++)
+            {
+                for (int j = 0; j < CollectablesLayout.GetLength(1); j++)
+                {
+                    if (this.CollectablesLayout[i,j] != other.CollectablesLayout[i, j])
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            for (int i = 0; i < WallLayout.GetLength(0); i++)
+            {
+                for (int j = 0; j < WallLayout.GetLength(1); j++)
+                {
+                    if (this.CollectablesLayout[i, j] != other.CollectablesLayout[i, j])
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if(PlayerScrewInventory != other.PlayerScrewInventory)
+            {
+                return false;
+            }
+
+            if((CurrentPlayerDirection * 90) % 360 != (other.CurrentPlayerDirection * 90) % 360)
+            {
+                return false;
+            }
+
+            if(!CurrentPlayerPosition.Equals(other.CurrentPlayerPosition))
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

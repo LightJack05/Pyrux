@@ -29,10 +29,12 @@
     <None Remove="Pages\ContentDialogs\EditHintDialogue.xaml" />
     <None Remove="Pages\ContentDialogs\EditTaskContentDialog.xaml" />
     <None Remove="Pages\ContentDialogs\ExceptionPages\UserEndExceptionDialogue.xaml" />
+    <None Remove="Pages\ContentDialogs\LevelCompletedDialogue.xaml" />
     <None Remove="Pages\ContentDialogs\LevelCreationDialogue.xaml" />
     <None Remove="Pages\ContentDialogs\PlaceScrewsDialog.xaml" />
     <None Remove="Pages\DocsPage.xaml" />
     <None Remove="Pages\ExercisePage.xaml" />
+    <None Remove="Pages\GoalPageView.xaml" />
     <None Remove="Pages\HintPage.xaml" />
     <None Remove="Pages\LevelSelectPage.xaml" />
     <None Remove="Pages\SettingsPage.xaml" />
@@ -71,6 +73,16 @@
     <Content Update="Assets\Textures\Wall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\GoalPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\ContentDialogs\LevelCompletedDialogue.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\ContentDialogs\EditHintDialogue.xaml">

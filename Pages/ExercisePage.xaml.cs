@@ -51,13 +51,12 @@ namespace Pyrux.Pages
         /// </summary>
         internal PyruxLevel ActiveLevel
         {
-            get => _activeLevel;
+            get => StaticDataStore.ActiveLevel;
             set
             {
-                _activeLevel = value;
+                StaticDataStore.ActiveLevel = value;
             }
         }
-        private PyruxLevel _activeLevel;
         /// <summary>
         /// Initialize the page and set the instance to itself.
         /// </summary>
