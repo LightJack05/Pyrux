@@ -102,15 +102,60 @@ public sealed partial class ExercisePage
         userEndExceptionDialogue.XamlRoot = this.Content.XamlRoot;
         userEndExceptionDialogue.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
         userEndExceptionDialogue.Title = "Level Completed!";
-        userEndExceptionDialogue.PrimaryButtonText = "Next Level";
+        
+
         userEndExceptionDialogue.SecondaryButtonText = "Level Selection";
         userEndExceptionDialogue.CloseButtonText = "Retry";
         userEndExceptionDialogue.DefaultButton = ContentDialogButton.Primary;
         LevelCompletedDialogue dialogueContent = new();
         userEndExceptionDialogue.Content = dialogueContent;
-        ContentDialogResult result = await userEndExceptionDialogue.ShowAsync();
+        bool nextLevelAvailable = CheckNextLevelAvailable();
 
-        
+        if (nextLevelAvailable)
+        {
+            userEndExceptionDialogue.PrimaryButtonText = "Next Level";
+        }
+        else
+        {
+            userEndExceptionDialogue.PrimaryButtonText = "Next Level";
+            userEndExceptionDialogue.IsPrimaryButtonEnabled = false;
+        }
+        ContentDialogResult result = await userEndExceptionDialogue.ShowAsync();
+        if (result == ContentDialogResult.Primary)
+        {
+            NextLevel();
+        }
+        else if (result == ContentDialogResult.Secondary)
+        {
+            LevelSelection();
+        }
+
+
+    }
+
+    private static bool CheckNextLevelAvailable()
+    {
+        bool nextLevelAvailable = false;
+        if (StaticDataStore.ActiveLevel.IsBuiltIn)
+        {
+            int levelIndex = StaticDataStore.BuiltInLevels.FindIndex(x => x.Equals(StaticDataStore.ActiveLevel));
+            int nextLevelIndex = levelIndex + 1;
+            if (StaticDataStore.BuiltInLevels.Count - 1 >= nextLevelIndex)
+            {
+                nextLevelAvailable = true;
+            }
+        }
+        else
+        {
+            int levelIndex = StaticDataStore.UserCreatedLevels.FindIndex(x => x.LevelName.Equals(StaticDataStore.ActiveLevel.LevelName));
+            int nextLevelIndex = levelIndex + 1;
+            if (StaticDataStore.UserCreatedLevels.Count - 1 >= nextLevelIndex)
+            {
+                nextLevelAvailable = true;
+            }
+        }
+
+        return nextLevelAvailable;
     }
 
     private async void ShowUserEndExceptionDialogue(Exception exception, string stackTrace)
