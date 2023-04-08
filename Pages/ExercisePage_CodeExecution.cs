@@ -123,11 +123,11 @@ public sealed partial class ExercisePage
         ContentDialogResult result = await userEndExceptionDialogue.ShowAsync();
         if (result == ContentDialogResult.Primary)
         {
-            NextLevel();
+            NavigateToNextLevel();
         }
         else if (result == ContentDialogResult.Secondary)
         {
-            LevelSelection();
+            NavigateToLevelSelection();
         }
 
 

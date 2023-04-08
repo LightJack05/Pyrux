@@ -76,6 +76,7 @@ public sealed partial class ExercisePage
         {
             ActiveLevel.MapLayout.WallLayout[position.Y, position.X] = !ActiveLevel.MapLayout.WallLayout[position.Y, position.X];
         }
+        ActiveLevel.GoalMapLayout.WallLayout = ActiveLevel.MapLayout.Copy().WallLayout;
         UpdateDisplay();
         SaveNewLayout();
     }

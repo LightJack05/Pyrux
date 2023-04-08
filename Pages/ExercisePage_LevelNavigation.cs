@@ -3,7 +3,7 @@
     public sealed partial class ExercisePage
     {
 
-        public void NextLevel()
+        public void NavigateToNextLevel()
         {
             
             if (StaticDataStore.ActiveLevel.IsBuiltIn)
@@ -13,6 +13,7 @@
                 if(StaticDataStore.BuiltInLevels.Count - 1 >= nextLevelIndex)
                 {
                     StaticDataStore.ActiveLevel = StaticDataStore.BuiltInLevels[nextLevelIndex];
+                    StaticDataStore.OriginalActiveLevelMapLayout = StaticDataStore.ActiveLevel.MapLayout.Copy();
                 }
             }
             else
@@ -22,6 +23,7 @@
                 if (StaticDataStore.UserCreatedLevels.Count - 1 >= nextLevelIndex)
                 {
                     StaticDataStore.ActiveLevel = StaticDataStore.UserCreatedLevels[nextLevelIndex];
+                    StaticDataStore.OriginalActiveLevelMapLayout = StaticDataStore.ActiveLevel.MapLayout.Copy();
                 }
             }
             MainWindow.Instance.NavViewNavigate("levelSelect", new Microsoft.UI.Xaml.Media.Animation.CommonNavigationTransitionInfo());
@@ -29,7 +31,7 @@
             MainWindow.Instance.NavViewSetSelection(1);
         }
 
-        public void LevelSelection()
+        public void NavigateToLevelSelection()
         {
             MainWindow.Instance.NavViewNavigate("levelSelect", new Microsoft.UI.Xaml.Media.Animation.CommonNavigationTransitionInfo());
             MainWindow.Instance.NavViewSetSelection(0);

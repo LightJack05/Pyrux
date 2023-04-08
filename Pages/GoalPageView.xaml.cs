@@ -49,21 +49,24 @@ namespace Pyrux.Pages
         private void LoadLevelIntoPage()
         {
             StaticDataStore.OriginalActiveLevelMapLayout = ActiveLevel.GoalMapLayout.Copy();
-
+            
             BuildPlayGrid();
             FullDisplayRedraw();
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            if(ActiveLevel.GoalMapLayout == null)
+            if (ActiveLevel != null)
             {
-                ActiveLevel.GoalMapLayout = ActiveLevel.MapLayout.Copy();
+                if (ActiveLevel.GoalMapLayout == null)
+                {
+                    ActiveLevel.GoalMapLayout = ActiveLevel.MapLayout.Copy();
+                }
+                LoadLevelIntoPage();
+                StaticDataStore.OriginalActiveLevelMapLayout = ActiveLevel.MapLayout.Copy();
+                FullDisplayRedraw();
+                PrepareToolSelection();
             }
-            LoadLevelIntoPage();
-            StaticDataStore.OriginalActiveLevelMapLayout = ActiveLevel.MapLayout.Copy();
-            FullDisplayRedraw();
-            PrepareToolSelection();
         }
 
         private void PrepareToolSelection()

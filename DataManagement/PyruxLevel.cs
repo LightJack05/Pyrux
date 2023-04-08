@@ -13,7 +13,7 @@
         /// <summary>
         /// A hint for completing the level. Can use MarkDown and is displayed on the "Hint" page.
         /// </summary>
-        public string Hint { get; }
+        public string Hint { get; set; }
         /// <summary>
         /// Determines whether the level is built in, or user created.
         /// </summary>

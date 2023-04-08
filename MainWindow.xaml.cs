@@ -78,6 +78,11 @@ namespace Pyrux
         /// <param name="transitionInfo">Transitioninfo for transition animation.</param>
         public void NavViewNavigate(string navItemTag, Microsoft.UI.Xaml.Media.Animation.NavigationTransitionInfo transitionInfo)
         {
+            if(ExercisePage.Instance != null)
+            {
+                ExercisePage.Instance.NavigationLayoutReset();
+            }
+
             Type page = null;
             if (navItemTag == "settings")
             {

@@ -12,9 +12,25 @@ namespace Pyrux.Pages
     /// </summary>
     public sealed partial class AboutPage : Page
     {
+        public string Version
+        {
+            get => System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+        }
+
+        public string AboutText
+        {
+            get => """
+                Pyrux is created by LightJack05.
+
+                [Copyright owned by LightJack05. Do not distribute. Pre-Production Version, to be considered confidential.]
+
+                """;
+        }
         public AboutPage()
         {
             this.InitializeComponent();
         }
+
+        
     }
 }

@@ -203,6 +203,11 @@ public sealed partial class ExercisePage
         UpdateDisplay();
     }
 
+    public void NavigationLayoutReset()
+    {
+        ActiveLevel.MapLayout = StaticDataStore.OriginalActiveLevelMapLayout.Copy();
+    }
+
     /// <summary>
     /// Load a level into the exercise page
     /// </summary>

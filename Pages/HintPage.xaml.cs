@@ -54,6 +54,7 @@ namespace Pyrux.Pages
         void UpdateHintText (string hint)
         {
             mtbHintRenderer.Text = hint;
+            StaticDataStore.ActiveLevel.Hint = hint;
         }
     }
 }
