@@ -84,6 +84,7 @@ namespace Pyrux
         {
             if(ExercisePage.Instance != null)
             {
+                ExercisePage.Instance.CancelScriptExecution();
                 ExercisePage.Instance.NavigationLayoutReset();
             }
 

@@ -1,5 +1,7 @@
 ﻿
+using Microsoft.Scripting.Hosting;
 using Pyrux.DataManagement;
+using System.Diagnostics;
 
 namespace Pyrux.Pages;
 public sealed partial class ExercisePage
@@ -197,9 +199,18 @@ public sealed partial class ExercisePage
 
     private void btnReset_Click(object sender, RoutedEventArgs e)
     {
-        ExecutionRanState = false;
-        PrepareToolSelection();
-        ResetLayoutToStart();
+        if (PythonScriptRunning)
+        {
+            CancelScriptExecution();
+
+        }
+        else
+        {
+            ExecutionRanState = false;
+            PrepareToolSelection();
+            ResetLayoutToStart();
+        }
+        
     }
 
     private void ResetLayoutToStart()
@@ -227,7 +238,6 @@ public sealed partial class ExercisePage
         
         btnStart.IsEnabled = true;
         btnSave.IsEnabled = true;
-        btnSaveAs.IsEnabled = true;
 
         BuildPlayGrid();
         FullDisplayRedraw();

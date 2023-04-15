@@ -6,12 +6,16 @@ using System.Diagnostics;
 using Pyrux.UserEndExceptions;
 using Pyrux.Pages.ContentDialogs.ExceptionPages;
 using Pyrux.Pages.ContentDialogs;
+using System.Threading;
 
 namespace Pyrux.Pages;
 
 public sealed partial class ExercisePage
 {
     public bool ExecutionRanState = false;
+    public Task PythonThread = null;
+    public CancellationTokenSource PythonCancellationTokenSource;
+    public CancellationToken PythonCancellationToken;
 
     /// <summary>
     /// Start the ArbitraryCodeExecution method.
@@ -48,8 +52,10 @@ public sealed partial class ExercisePage
         {
             btnStart.IsEnabled = false;
             PythonScriptRunning = true;
+            btnReset.Content = new SymbolIcon(Symbol.Stop);
             string pythonCode = BuildPythonCode();
             ScriptEngine scriptEngine = Python.CreateEngine();
+             
             ScriptScope scriptScope = scriptEngine.CreateScope();
             scriptScope.SetVariable("TurnLeft", () => this.ActiveLevel.TurnLeft());
             scriptScope.SetVariable("TurnRight", () => this.ActiveLevel.TurnRight());
@@ -60,26 +66,36 @@ public sealed partial class ExercisePage
             scriptScope.SetVariable("ScrewThere", () => this.ActiveLevel.ScrewThere());
             scriptScope.SetVariable("stackTrace", errorStackTrace);
             scriptScope.SetVariable("scriptCode", ActiveLevel.Script.ReplaceLineEndings().Split(Environment.NewLine));
-            
 
 
-            await Task.Factory.StartNew(() =>
+            PythonCancellationTokenSource = new();
+            PythonCancellationToken = PythonCancellationTokenSource.Token;
+
+
+            try
             {
-                try
+                PythonThread = Task.Factory.StartNew(() =>
                 {
-                    scriptEngine.Execute(pythonCode, scriptScope);
-                }
-                catch (ExecutionCancelledException) { }
-                catch (Exception ex)
-                {
-                    thrownException = ex;
-                    errorStackTrace = scriptScope.GetVariable<string>("stackTrace");
-                }
+                    try
+                    {
+                        scriptEngine.Execute(pythonCode, scriptScope);
+                    }
+                    catch (ExecutionCancelledException) { }
+                    catch (Exception ex)
+                    {
+                        thrownException = ex;
+                        errorStackTrace = scriptScope.GetVariable<string>("stackTrace");
+                    }
 
-                ExercisePage.Instance.PythonScriptRunning = false;
+                    
 
-                
-            });
+                }, PythonCancellationToken);
+                await PythonThread.WaitAsync(PythonCancellationToken);
+            }
+            catch (TaskCanceledException) { }
+            ExercisePage.Instance.PythonScriptRunning = false;
+            btnReset.Content = new SymbolIcon(Symbol.Refresh);
+
         }
         if (thrownException != null)
         {
@@ -92,6 +108,15 @@ public sealed partial class ExercisePage
                 ActiveLevel.Completed = true;
                 ShowLevelCompletedDialogue();
             }
+        }
+    }
+
+    public void CancelScriptExecution()
+    {
+        if(PythonScriptRunning)
+        {
+            ExecutionCancelled = true;
+            PythonCancellationTokenSource.Cancel();
         }
     }
 
