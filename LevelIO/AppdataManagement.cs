@@ -1,5 +1,4 @@
-﻿using Pyrux.Pages.ContentDialogs;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Windows.Storage;
 
 namespace Pyrux.LevelIO
@@ -15,7 +14,7 @@ namespace Pyrux.LevelIO
         {
             if (!await VerifyAppdataIntegrityAsync())
             {
-                if(await IsAppdataEmpty())
+                if (await IsAppdataEmpty())
                 {
                     await ResetAppdata();
                 }
@@ -34,7 +33,7 @@ namespace Pyrux.LevelIO
         public static async Task<bool> IsAppdataEmpty()
         {
             StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
-            if((await appdataFolder.GetFoldersAsync()).Count == 0)
+            if ((await appdataFolder.GetFoldersAsync()).Count == 0)
             {
                 return true;
             }
@@ -148,7 +147,7 @@ namespace Pyrux.LevelIO
                 throw new AppdataFolderNotFoundException();
             }
 
-            var storageFolders = await appdataFolder.GetFoldersAsync();
+            IReadOnlyList<StorageFolder> storageFolders = await appdataFolder.GetFoldersAsync();
             foreach (StorageFolder folder in storageFolders)
             {
                 await folder.DeleteAsync();

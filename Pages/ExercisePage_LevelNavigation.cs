@@ -5,12 +5,12 @@
 
         public void NavigateToNextLevel()
         {
-            
+
             if (StaticDataStore.ActiveLevel.IsBuiltIn)
             {
                 int levelIndex = StaticDataStore.BuiltInLevels.FindIndex(x => x.Equals(StaticDataStore.ActiveLevel));
                 int nextLevelIndex = levelIndex + 1;
-                if(StaticDataStore.BuiltInLevels.Count - 1 >= nextLevelIndex)
+                if (StaticDataStore.BuiltInLevels.Count - 1 >= nextLevelIndex)
                 {
                     StaticDataStore.ActiveLevel = StaticDataStore.BuiltInLevels[nextLevelIndex];
                     StaticDataStore.OriginalActiveLevelMapLayout = StaticDataStore.ActiveLevel.MapLayout.Copy();

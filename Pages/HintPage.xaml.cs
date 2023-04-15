@@ -5,8 +5,6 @@
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-using Pyrux.DataManagement;
-
 namespace Pyrux.Pages
 {
     /// <summary>
@@ -21,7 +19,7 @@ namespace Pyrux.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            if(StaticDataStore.ActiveLevel != null)
+            if (StaticDataStore.ActiveLevel != null)
             {
                 mtbHintRenderer.Text = StaticDataStore.ActiveLevel.Hint;
             }
@@ -46,12 +44,12 @@ namespace Pyrux.Pages
             }
         }
 
-        void ChangeHintDialogueCompleted()
+        private void ChangeHintDialogueCompleted()
         {
             UpdateHintText(ContentDialogs.EditHintDialogue.Hint);
         }
 
-        void UpdateHintText (string hint)
+        private void UpdateHintText(string hint)
         {
             mtbHintRenderer.Text = hint;
             StaticDataStore.ActiveLevel.Hint = hint;

@@ -5,9 +5,7 @@ namespace Pyrux.Pages;
 
 public sealed partial class ExercisePage
 {
-
-
-    async void CreateNewLevel()
+    private async void CreateNewLevel()
     {
         ContentDialog createlevelDialogue = new();
         createlevelDialogue.XamlRoot = this.Content.XamlRoot;
@@ -26,7 +24,7 @@ public sealed partial class ExercisePage
 
     }
 
-    void LevelCreationDialogueFinished()
+    private void LevelCreationDialogueFinished()
     {
         if (!(LevelCreationDialogue.LevelName == String.Empty) || (LevelCreationDialogue.LevelName.Trim().Length == 0))
         {

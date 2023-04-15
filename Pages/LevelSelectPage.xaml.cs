@@ -1,11 +1,8 @@
 // Copyright (c) Microsoft Corporation and Contributors.
 // Licensed under the MIT License.
 
-using Pyrux.DataManagement;
 using Pyrux.LevelIO;
 using Pyrux.Pages.ContentDialogs;
-using System.Drawing;
-using Windows.UI;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -32,7 +29,7 @@ namespace Pyrux.Pages
                     LoadBuiltinLevelsIntoMenu();
                     LoadCustomLevelsIntoMenu();
                 }
-                catch 
+                catch
                 {
                     AppdataManagement.AppdataCorrupted = true;
                     DisplayAppdataError();
@@ -154,7 +151,7 @@ namespace Pyrux.Pages
             }
         }
 
-        async void ShowConfirmationDialogue()
+        private async void ShowConfirmationDialogue()
         {
             ContentDialog confirmationDialogue = new();
             confirmationDialogue.XamlRoot = this.Content.XamlRoot;

@@ -1,5 +1,4 @@
-﻿using Pyrux.DataManagement;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Windows.Storage;
 
 namespace Pyrux.LevelIO;
@@ -19,16 +18,16 @@ internal static class LevelLoading
         await AppdataManagement.CheckAppdata();
 
         StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
-        StorageFolder levelsFolder = ((StorageFolder)await appdataFolder.TryGetItemAsync("Levels"));
+        StorageFolder levelsFolder = (StorageFolder)await appdataFolder.TryGetItemAsync("Levels");
 
         StorageFolder levelsFolderOrganization;
         if (isBuiltIn)
         {
-            levelsFolderOrganization = ((StorageFolder)await levelsFolder.TryGetItemAsync("Builtins"));
+            levelsFolderOrganization = (StorageFolder)await levelsFolder.TryGetItemAsync("Builtins");
         }
         else
         {
-            levelsFolderOrganization = ((StorageFolder)await levelsFolder.TryGetItemAsync("UserCreated"));
+            levelsFolderOrganization = (StorageFolder)await levelsFolder.TryGetItemAsync("UserCreated");
         }
         StorageFolder levelFolder = (StorageFolder)await levelsFolderOrganization.TryGetItemAsync(levelName);
         if (levelFolder != null)
@@ -142,8 +141,8 @@ internal static class LevelLoading
         List<PyruxLevel> levels = new();
         await AppdataManagement.CheckAppdata();
         StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
-        StorageFolder levelsFolder = ((StorageFolder)await appdataFolder.TryGetItemAsync("Levels"));
-        StorageFolder builtInsFolder = ((StorageFolder)await levelsFolder.TryGetItemAsync("Builtins"));
+        StorageFolder levelsFolder = (StorageFolder)await appdataFolder.TryGetItemAsync("Levels");
+        StorageFolder builtInsFolder = (StorageFolder)await levelsFolder.TryGetItemAsync("Builtins");
 
         levels = await FindLevelsIn(builtInsFolder);
         return levels;
@@ -158,8 +157,8 @@ internal static class LevelLoading
         List<PyruxLevel> levels = new();
         await AppdataManagement.CheckAppdata();
         StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
-        StorageFolder levelsFolder = ((StorageFolder)await appdataFolder.TryGetItemAsync("Levels"));
-        StorageFolder userCreatedFolder = ((StorageFolder)await levelsFolder.TryGetItemAsync("UserCreated"));
+        StorageFolder levelsFolder = (StorageFolder)await appdataFolder.TryGetItemAsync("Levels");
+        StorageFolder userCreatedFolder = (StorageFolder)await levelsFolder.TryGetItemAsync("UserCreated");
 
         levels = await FindLevelsIn(userCreatedFolder);
         return levels;
@@ -175,7 +174,7 @@ internal static class LevelLoading
         List<PyruxLevel> levels = new();
         await AppdataManagement.CheckAppdata();
 
-        var levelFolders = await levelOrganizationFolder.GetFoldersAsync();
+        IReadOnlyList<StorageFolder> levelFolders = await levelOrganizationFolder.GetFoldersAsync();
 
         foreach (StorageFolder levelFolder in levelFolders)
         {

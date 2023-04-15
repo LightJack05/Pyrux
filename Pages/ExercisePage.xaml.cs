@@ -1,14 +1,6 @@
 // Copyright (c) Microsoft Corporation and Contributors.
 // Licensed under the MIT License.
 
-using IronPython.Hosting;
-using Microsoft.Scripting.Hosting;
-using Microsoft.UI;
-using Microsoft.UI.Dispatching;
-using Microsoft.UI.Xaml.Media.Imaging;
-using Pyrux.DataManagement;
-using Pyrux.Pages.ContentDialogs;
-using System.Threading.Tasks;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -66,7 +58,7 @@ namespace Pyrux.Pages
             Instance = this;
 
         }
-        
+
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             ActiveLevel = StaticDataStore.ActiveLevel;
@@ -83,8 +75,8 @@ namespace Pyrux.Pages
             }
         }
 
-        
-        
+
+
         private void btnExport_Click(object sender, RoutedEventArgs e)
         {
             Pyrux.LevelIO.LevelSaving.Save(ActiveLevel);

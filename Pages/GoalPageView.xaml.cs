@@ -1,21 +1,7 @@
 // Copyright (c) Microsoft Corporation and Contributors.
 // Licensed under the MIT License.
 
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
 using Pyrux.Pages.ContentDialogs;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -30,9 +16,11 @@ namespace Pyrux.Pages
         private Image _charImage;
         private static int SelectedToolIndex { get; set; }
         private PyruxLevelMapLayout _displayedMapLayout;
-        PyruxLevel ActiveLevel { 
-            get => StaticDataStore.ActiveLevel; 
-            set => StaticDataStore.ActiveLevel = value; 
+
+        private PyruxLevel ActiveLevel
+        {
+            get => StaticDataStore.ActiveLevel;
+            set => StaticDataStore.ActiveLevel = value;
         }
 
         public GoalPageView()
@@ -49,7 +37,7 @@ namespace Pyrux.Pages
         private void LoadLevelIntoPage()
         {
             StaticDataStore.OriginalActiveLevelMapLayout = ActiveLevel.GoalMapLayout.Copy();
-            
+
             BuildPlayGrid();
             FullDisplayRedraw();
         }
@@ -143,7 +131,7 @@ namespace Pyrux.Pages
             {
                 for (int j = 0; j < mapLayout.WallLayout.GetLength(1); j++)
                 {
-                    Border border = (Border)grdPlayField.Children[i * grdPlayField.ColumnDefinitions.Count() + j];
+                    Border border = (Border)grdPlayField.Children[(i * grdPlayField.ColumnDefinitions.Count()) + j];
                     Image image = (Image)border.Child;
                     if (mapLayout.WallLayout[j, i])
                     {
@@ -198,16 +186,16 @@ namespace Pyrux.Pages
             {
                 for (int j = 0; j < mapLayout.WallLayout.GetLength(1); j++)
                 {
-                    Border border = (Border)grdPlayField.Children[i * grdPlayField.ColumnDefinitions.Count() + j];
+                    Border border = (Border)grdPlayField.Children[(i * grdPlayField.ColumnDefinitions.Count()) + j];
                     Image image = (Image)border.Child;
                     if (mapLayout.WallLayout[j, i])
                     {
-                        if ((mapLayout.WallLayout[j, i] != _displayedMapLayout.WallLayout[j, i]))
+                        if (mapLayout.WallLayout[j, i] != _displayedMapLayout.WallLayout[j, i])
                         {
                             image.Source = new BitmapImage(new Uri("ms-appx:///Assets/Textures/Wall.png"));
                         }
                     }
-                    else if ((!mapLayout.WallLayout[j, i] && (mapLayout.CollectablesLayout[j, i] == 0)))
+                    else if (!mapLayout.WallLayout[j, i] && (mapLayout.CollectablesLayout[j, i] == 0))
                     {
                         if (mapLayout.WallLayout[j, i] != _displayedMapLayout.WallLayout[j, i] || mapLayout.CollectablesLayout[j, i] != _displayedMapLayout.CollectablesLayout[j, i])
                         {
@@ -282,7 +270,7 @@ namespace Pyrux.Pages
             TurnPlayer();
         }
 
-        
+
 
         private void MovePlayer(PositionVector2 position)
         {

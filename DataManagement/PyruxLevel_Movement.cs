@@ -32,7 +32,7 @@ internal partial class PyruxLevel
     public void GoForward()
     {
         PositionVector2 movementVector = new();
-        switch ((MapLayout.CurrentPlayerDirection * 90) % 360)
+        switch (MapLayout.CurrentPlayerDirection * 90 % 360)
         {
             case 0:
                 movementVector = new(1, 0);
@@ -108,7 +108,7 @@ internal partial class PyruxLevel
     public bool WallAhead()
     {
         PositionVector2 movementVector = new();
-        switch ((MapLayout.CurrentPlayerDirection * 90) % 360)
+        switch (MapLayout.CurrentPlayerDirection * 90 % 360)
         {
             case 0:
                 movementVector = new(1, 0);

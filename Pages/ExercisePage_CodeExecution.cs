@@ -1,12 +1,10 @@
 ﻿using IronPython.Hosting;
 using Microsoft.Scripting.Hosting;
-using Microsoft.UI.Dispatching;
-using System.Threading.Tasks;
-using System.Diagnostics;
-using Pyrux.UserEndExceptions;
-using Pyrux.Pages.ContentDialogs.ExceptionPages;
 using Pyrux.Pages.ContentDialogs;
+using Pyrux.Pages.ContentDialogs.ExceptionPages;
+using Pyrux.UserEndExceptions;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Pyrux.Pages;
 
@@ -55,7 +53,7 @@ public sealed partial class ExercisePage
             btnReset.Content = new SymbolIcon(Symbol.Stop);
             string pythonCode = BuildPythonCode();
             ScriptEngine scriptEngine = Python.CreateEngine();
-             
+
             ScriptScope scriptScope = scriptEngine.CreateScope();
             scriptScope.SetVariable("TurnLeft", () => this.ActiveLevel.TurnLeft());
             scriptScope.SetVariable("TurnRight", () => this.ActiveLevel.TurnRight());
@@ -87,7 +85,7 @@ public sealed partial class ExercisePage
                         errorStackTrace = scriptScope.GetVariable<string>("stackTrace");
                     }
 
-                    
+
 
                 }, PythonCancellationToken);
                 await PythonThread.WaitAsync(PythonCancellationToken);
@@ -103,7 +101,7 @@ public sealed partial class ExercisePage
         }
         else
         {
-            if(ActiveLevel.MapLayout.Equals(ActiveLevel.GoalMapLayout))
+            if (ActiveLevel.MapLayout.Equals(ActiveLevel.GoalMapLayout))
             {
                 ActiveLevel.Completed = true;
                 ShowLevelCompletedDialogue();
@@ -113,7 +111,7 @@ public sealed partial class ExercisePage
 
     public void CancelScriptExecution()
     {
-        if(PythonScriptRunning)
+        if (PythonScriptRunning)
         {
             ExecutionCancelled = true;
             PythonCancellationTokenSource.Cancel();
@@ -126,7 +124,7 @@ public sealed partial class ExercisePage
         userEndExceptionDialogue.XamlRoot = this.Content.XamlRoot;
         userEndExceptionDialogue.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
         userEndExceptionDialogue.Title = "Level Completed!";
-        
+
 
         userEndExceptionDialogue.SecondaryButtonText = "Level Selection";
         userEndExceptionDialogue.CloseButtonText = "Retry";
@@ -203,13 +201,13 @@ public sealed partial class ExercisePage
 import sys
 try:
     exec(
-""" 
+"""
 +
 "\"\"\""
 +
 ActiveLevel.Script
 +
-"\"\"\""+")"+ Environment.NewLine +
+"\"\"\"" + ")" + Environment.NewLine +
 """
 except Exception as ex:
     exc_type, exc_value, exc_traceback = sys.exc_info()

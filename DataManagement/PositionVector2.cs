@@ -58,7 +58,7 @@ namespace Pyrux.DataManagement
         /// <returns>True if the two instances are equal, false if the instances are not equal.</returns>
         public bool Equals(PositionVector2 other)
         {
-            return (other.X == this.X && other.Y == this.Y);
+            return other.X == this.X && other.Y == this.Y;
         }
         /// <summary>
         /// Add two PositionVector2's to each other.

@@ -1,5 +1,4 @@
-﻿using Pyrux.DataManagement;
-using Windows.Storage;
+﻿using Windows.Storage;
 
 namespace Pyrux.LevelIO
 {
@@ -19,18 +18,18 @@ namespace Pyrux.LevelIO
 
             if (appdataFolder != null)
             {
-                StorageFolder levelsFolder = ((StorageFolder)await appdataFolder.TryGetItemAsync("Levels"));
+                StorageFolder levelsFolder = (StorageFolder)await appdataFolder.TryGetItemAsync("Levels");
                 if (levelsFolder != null)
                 {
                     StorageFolder levelsFolderOrganization = null;
 
                     if (activeLevel.IsBuiltIn)
                     {
-                        levelsFolderOrganization = ((StorageFolder)await levelsFolder.TryGetItemAsync("Builtins"));
+                        levelsFolderOrganization = (StorageFolder)await levelsFolder.TryGetItemAsync("Builtins");
                     }
                     else
                     {
-                        levelsFolderOrganization = ((StorageFolder)await levelsFolder.TryGetItemAsync("UserCreated"));
+                        levelsFolderOrganization = (StorageFolder)await levelsFolder.TryGetItemAsync("UserCreated");
                     }
                     StorageFolder levelFolder = (StorageFolder)await levelsFolderOrganization.TryGetItemAsync(levelName);
 

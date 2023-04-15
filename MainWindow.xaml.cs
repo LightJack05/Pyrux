@@ -4,8 +4,6 @@
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
 using Pyrux.LevelIO;
-using Pyrux.Pages.ContentDialogs;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Pyrux
@@ -55,7 +53,7 @@ namespace Pyrux
             }
         }
 
-        
+
 
         /// <summary>
         /// Run when an item is invoked on the navigationview.
@@ -82,7 +80,7 @@ namespace Pyrux
         /// <param name="transitionInfo">Transitioninfo for transition animation.</param>
         public void NavViewNavigate(string navItemTag, Microsoft.UI.Xaml.Media.Animation.NavigationTransitionInfo transitionInfo)
         {
-            if(ExercisePage.Instance != null)
+            if (ExercisePage.Instance != null)
             {
                 ExercisePage.Instance.CancelScriptExecution();
                 ExercisePage.Instance.NavigationLayoutReset();
@@ -95,11 +93,11 @@ namespace Pyrux
             }
             else
             {
-                var item = contentDictionary.FirstOrDefault(p => p.Tag.Equals(navItemTag));
+                (string Tag, Type Page) item = contentDictionary.FirstOrDefault(p => p.Tag.Equals(navItemTag));
                 page = item.Page;
             }
 
-            var preNavPageType = ctfMain.CurrentSourcePageType;
+            Type preNavPageType = ctfMain.CurrentSourcePageType;
             if (!(page is null) && !Type.Equals(preNavPageType, page))
             {
                 ctfMain.Navigate(page, null, transitionInfo);
@@ -142,7 +140,7 @@ namespace Pyrux
                 if (result == ContentDialogResult.Primary)
                 {
                     await AppdataManagement.ResetAppdata();
-                    ngvMainWindow_Loaded(null,null);
+                    ngvMainWindow_Loaded(null, null);
                 }
                 else
                 {

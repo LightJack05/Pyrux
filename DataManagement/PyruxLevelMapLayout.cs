@@ -1,6 +1,4 @@
-﻿using CommunityToolkit.WinUI.UI.Controls;
-
-namespace Pyrux.DataManagement
+﻿namespace Pyrux.DataManagement
 {
     internal class PyruxLevelMapLayout : IEquatable<PyruxLevelMapLayout>
     {
@@ -124,9 +122,9 @@ namespace Pyrux.DataManagement
 
         public bool Equals(PyruxLevelMapLayout other)
         {
-            if(other == null) return false;
+            if (other == null) return false;
 
-            if(other.SizeX != this.SizeX || other.SizeY != this.SizeY)
+            if (other.SizeX != this.SizeX || other.SizeY != this.SizeY)
             {
                 return false;
             }
@@ -135,7 +133,7 @@ namespace Pyrux.DataManagement
             {
                 for (int j = 0; j < CollectablesLayout.GetLength(1); j++)
                 {
-                    if (this.CollectablesLayout[i,j] != other.CollectablesLayout[i, j])
+                    if (this.CollectablesLayout[i, j] != other.CollectablesLayout[i, j])
                     {
                         return false;
                     }
@@ -153,17 +151,17 @@ namespace Pyrux.DataManagement
                 }
             }
 
-            if(PlayerScrewInventory != other.PlayerScrewInventory)
+            if (PlayerScrewInventory != other.PlayerScrewInventory)
             {
                 return false;
             }
 
-            if((CurrentPlayerDirection * 90) % 360 != (other.CurrentPlayerDirection * 90) % 360)
+            if (CurrentPlayerDirection * 90 % 360 != other.CurrentPlayerDirection * 90 % 360)
             {
                 return false;
             }
 
-            if(!CurrentPlayerPosition.Equals(other.CurrentPlayerPosition))
+            if (!CurrentPlayerPosition.Equals(other.CurrentPlayerPosition))
             {
                 return false;
             }

@@ -1,9 +1,4 @@
-﻿
-using Microsoft.Scripting.Hosting;
-using Pyrux.DataManagement;
-using System.Diagnostics;
-
-namespace Pyrux.Pages;
+﻿namespace Pyrux.Pages;
 public sealed partial class ExercisePage
 {
     /// <summary>
@@ -76,7 +71,7 @@ public sealed partial class ExercisePage
         {
             for (int j = 0; j < mapLayout.WallLayout.GetLength(1); j++)
             {
-                Border border = (Border)grdPlayField.Children[i * grdPlayField.ColumnDefinitions.Count() + j];
+                Border border = (Border)grdPlayField.Children[(i * grdPlayField.ColumnDefinitions.Count()) + j];
                 Image image = (Image)border.Child;
                 if (mapLayout.WallLayout[j, i])
                 {
@@ -131,16 +126,16 @@ public sealed partial class ExercisePage
         {
             for (int j = 0; j < mapLayout.WallLayout.GetLength(1); j++)
             {
-                Border border = (Border)grdPlayField.Children[i * grdPlayField.ColumnDefinitions.Count() + j];
+                Border border = (Border)grdPlayField.Children[(i * grdPlayField.ColumnDefinitions.Count()) + j];
                 Image image = (Image)border.Child;
                 if (mapLayout.WallLayout[j, i])
                 {
-                    if ((mapLayout.WallLayout[j, i] != _displayedMapLayout.WallLayout[j, i]))
+                    if (mapLayout.WallLayout[j, i] != _displayedMapLayout.WallLayout[j, i])
                     {
                         image.Source = new BitmapImage(new Uri("ms-appx:///Assets/Textures/Wall.png"));
                     }
                 }
-                else if ((!mapLayout.WallLayout[j, i] && (mapLayout.CollectablesLayout[j, i] == 0)))
+                else if (!mapLayout.WallLayout[j, i] && (mapLayout.CollectablesLayout[j, i] == 0))
                 {
                     if (mapLayout.WallLayout[j, i] != _displayedMapLayout.WallLayout[j, i] || mapLayout.CollectablesLayout[j, i] != _displayedMapLayout.CollectablesLayout[j, i])
                     {
@@ -210,7 +205,7 @@ public sealed partial class ExercisePage
             PrepareToolSelection();
             ResetLayoutToStart();
         }
-        
+
     }
 
     private void ResetLayoutToStart()
@@ -235,7 +230,7 @@ public sealed partial class ExercisePage
         expTaskExpander.Header = ActiveLevel.LevelName;
         txtLevelTask.Text = ActiveLevel.Task;
         txtCodeEditor.Text = ActiveLevel.Script;
-        
+
         btnStart.IsEnabled = true;
         btnSave.IsEnabled = true;
 
