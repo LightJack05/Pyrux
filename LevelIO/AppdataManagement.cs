@@ -132,7 +132,7 @@ namespace Pyrux.LevelIO
 
                 return true;
             }
-            catch (Exception ex) { return false; }
+            catch (Exception) { return false; }
         }
 
         /// <summary>

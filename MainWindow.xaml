@@ -19,7 +19,7 @@
         </Grid.RowDefinitions>
         <Grid x:Name="AppTitleBar" Background="Transparent">
             <TextBlock x:Name="TitleTextBlock" 
-                Text="{x:Bind Title}" 
+                Text="{x:Bind TitleText}" 
                 Style="{StaticResource CaptionTextBlockStyle}"
                 Grid.Column="2"
                 TextWrapping="NoWrap"
