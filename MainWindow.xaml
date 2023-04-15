@@ -19,7 +19,7 @@
         </Grid.RowDefinitions>
         <Grid x:Name="AppTitleBar" Background="Transparent">
             <TextBlock x:Name="TitleTextBlock" 
-                Text="[PRE-ALPHA] Pyrux v0.0" 
+                Text="{x:Bind Title}" 
                 Style="{StaticResource CaptionTextBlockStyle}"
                 Grid.Column="2"
                 TextWrapping="NoWrap"

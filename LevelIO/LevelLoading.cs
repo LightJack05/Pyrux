@@ -100,7 +100,7 @@ internal static class LevelLoading
                 }
                 catch (JsonException)
                 {
-                    throw new InvalidLevelJsonException($"The JSON retrieved from the level file was invalid and could not be diserialized properly.");
+                    throw new InvalidLevelJsonException($"The JSON retrieved from the level file was invalid and could not be deserialized properly.");
                 }
             }
 

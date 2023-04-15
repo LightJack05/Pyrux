@@ -6,7 +6,7 @@ namespace Pyrux.LevelIO
 {
     internal class AppdataManagement
     {
-        public static bool AppdataCorrupted { get; private set; } = false;
+        public static bool AppdataCorrupted { get; set; } = false;
         public static bool AppdataValidationCompleted { get; private set; } = false;
         /// <summary>
         /// Check if the current Appdata is still consistent with the layout it should have, and rebuild it if it isn't.

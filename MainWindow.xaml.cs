@@ -1,8 +1,5 @@
 // Copyright (c) Microsoft Corporation and Contributors.
 // Licensed under the MIT License.
-
-
-
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
@@ -18,6 +15,11 @@ namespace Pyrux
     /// </summary>
     public sealed partial class MainWindow : Window
     {
+        public string Title
+        {
+            get => "[PRE-ALPHA] Pyrux v" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+        }
+
         public static MainWindow Instance;
         /// <summary>
         /// List of pages in the navigation menu.
@@ -52,6 +54,8 @@ namespace Pyrux
                 DisplayAppdataError();
             }
         }
+
+        
 
         /// <summary>
         /// Run when an item is invoked on the navigationview.
@@ -115,7 +119,12 @@ namespace Pyrux
             await AppdataManagement.CheckAppdata();
         }
 
-        private async void DisplayAppdataError()
+        public void NavViewSetEnabled(bool enabled)
+        {
+            ngvMainWindow.IsEnabled = enabled;
+        }
+
+        public async void DisplayAppdataError()
         {
             if (AppdataManagement.AppdataCorrupted)
             {

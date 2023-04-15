@@ -11,6 +11,7 @@ namespace Pyrux.Pages;
 
 public sealed partial class ExercisePage
 {
+    public bool ExecutionRanState = false;
 
     /// <summary>
     /// Start the ArbitraryCodeExecution method.
@@ -19,10 +20,12 @@ public sealed partial class ExercisePage
     /// <param name="e"></param>
     private void btnStart_Click(object sender, RoutedEventArgs e)
     {
-        if (ActiveLevel.IsBuiltIn)
-        {
-            ResetLayoutToStart();
-        }
+        btnStart.IsEnabled = false;
+        ExecutionRanState = true;
+        btnWallTool.IsEnabled = false;
+        btnRotate.IsEnabled = false;
+        btnPlayerTool.IsEnabled = false;
+        btnScrewTool.IsEnabled = false;
         ArbitraryCodeExecution();
     }
 
@@ -75,11 +78,7 @@ public sealed partial class ExercisePage
 
                 ExercisePage.Instance.PythonScriptRunning = false;
 
-                DispatcherQueue dispatcherQueue = ExercisePage.Instance.DispatcherQueue;
-                dispatcherQueue.TryEnqueue(() =>
-                {
-                    ExercisePage.Instance.btnStart.IsEnabled = true;
-                });
+                
             });
         }
         if (thrownException != null)

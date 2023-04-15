@@ -188,12 +188,17 @@ public sealed partial class ExercisePage
         else
         {
             btnWallTool.IsEnabled = false;
+            btnScrewTool.IsEnabled = true;
+            btnRotate.IsEnabled = true;
+            btnPlayerTool.IsEnabled = true;
             SelectedToolIndex = 0;
         }
     }
 
     private void btnReset_Click(object sender, RoutedEventArgs e)
     {
+        ExecutionRanState = false;
+        PrepareToolSelection();
         ResetLayoutToStart();
     }
 
@@ -201,6 +206,7 @@ public sealed partial class ExercisePage
     {
         ActiveLevel.MapLayout = StaticDataStore.OriginalActiveLevelMapLayout.Copy();
         UpdateDisplay();
+        btnStart.IsEnabled = true;
     }
 
     public void NavigationLayoutReset()

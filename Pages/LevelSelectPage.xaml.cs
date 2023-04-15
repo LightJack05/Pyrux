@@ -22,14 +22,50 @@ namespace Pyrux.Pages
             this.InitializeComponent();
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            if(!AppdataManagement.AppdataCorrupted)
+            if (!AppdataManagement.AppdataCorrupted)
             {
-                LoadBuiltinLevelsIntoMenu();
-                LoadCustomLevelsIntoMenu();
+                try
+                {
+
+                    LoadBuiltinLevelsIntoMenu();
+                    LoadCustomLevelsIntoMenu();
+                }
+                catch 
+                {
+                    AppdataManagement.AppdataCorrupted = true;
+                    DisplayAppdataError();
+                }
             }
         }
+
+        public async void DisplayAppdataError()
+        {
+            if (AppdataManagement.AppdataCorrupted)
+            {
+                ContentDialog appdataErrorDialogue = new();
+                appdataErrorDialogue.XamlRoot = this.Content.XamlRoot;
+                appdataErrorDialogue.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
+                appdataErrorDialogue.Title = "Appdata corrupted.";
+                appdataErrorDialogue.PrimaryButtonText = "RESET";
+                appdataErrorDialogue.SecondaryButtonText = "Exit";
+                appdataErrorDialogue.DefaultButton = ContentDialogButton.Primary;
+                appdataErrorDialogue.Content = new Pages.ContentDialogs.ConfirmRepairAppdataFolderDialogue();
+
+                ContentDialogResult result = await appdataErrorDialogue.ShowAsync();
+                if (result == ContentDialogResult.Primary)
+                {
+                    await AppdataManagement.ResetAppdata();
+                    MainWindow.Instance.NavViewSetEnabled(false);
+                }
+                else
+                {
+                    Environment.Exit(0);
+                }
+            }
+        }
+
 
         private async void LoadBuiltinLevelsIntoMenu()
         {
@@ -108,7 +144,7 @@ namespace Pyrux.Pages
 
         private void btnNewLevel_Click(object sender, RoutedEventArgs e)
         {
-            if(StaticDataStore.ActiveLevel != null)
+            if (StaticDataStore.ActiveLevel != null)
             {
                 ShowConfirmationDialogue();
             }

@@ -13,6 +13,10 @@ public sealed partial class ExercisePage
     /// <param name="e"></param>
     private void Tile_Clicked(object sender, RoutedEventArgs e)
     {
+        if (ExecutionRanState)
+        {
+            return;
+        }
 
         Border clickedBorder = VisualTreeHelper.GetParent((Image)sender) as Border;
         switch (SelectedToolIndex)
