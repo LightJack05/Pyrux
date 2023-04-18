@@ -86,8 +86,6 @@
                             <TextBox VerticalAlignment="Stretch" MinHeight="100" AcceptsReturn="True" x:Name="txtCodeEditor" TextChanged="txtCodeEditor_TextChanged"/>
                         </ScrollViewer>
                     </Grid>
-                    
-                    
                 </Grid>
             </Border>
             <Border Grid.Column="1" Background="{ThemeResource SystemChromeLowColor}" CornerRadius="10" Margin="10">
