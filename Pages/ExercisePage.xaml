@@ -57,7 +57,7 @@
         <Grid VerticalAlignment="Stretch" x:Name="grdMainSplit" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="1.2*"/>
+                <ColumnDefinition Width="1.2*" MinWidth="500"/>
             </Grid.ColumnDefinitions>
             
             <Border Grid.Column="0" Background="{ThemeResource SystemChromeLowColor}" CornerRadius="10" Margin="20,10,10,10">
@@ -81,10 +81,13 @@
                         </Button>
                     </Grid>
 
-                    <StackPanel Orientation="Vertical" Grid.Row="1">
-                        <TextBlock Text="[WIP]"/>
-                        <TextBox VerticalAlignment="Stretch" AcceptsReturn="True" x:Name="txtCodeEditor" TextChanged="txtCodeEditor_TextChanged"/>
-                    </StackPanel>
+                    <Grid Grid.Row="1">
+                        <ScrollViewer Margin="0,10,0,10">
+                            <TextBox VerticalAlignment="Stretch" MinHeight="100" AcceptsReturn="True" x:Name="txtCodeEditor" TextChanged="txtCodeEditor_TextChanged"/>
+                        </ScrollViewer>
+                    </Grid>
+                    
+                    
                 </Grid>
             </Border>
             <Border Grid.Column="1" Background="{ThemeResource SystemChromeLowColor}" CornerRadius="10" Margin="10">

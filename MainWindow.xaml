@@ -37,10 +37,10 @@
             
             <NavigationView.MenuItems>
                 <NavigationViewItem Icon="List" Tag="levelSelect" Content="Level Selection"/>
-                <NavigationViewItem Icon="Document" Tag="exerciseView" Content="Exercise View"/>
+                <NavigationViewItem Icon="Play" Tag="exerciseView" Content="Level"/>
                 <NavigationViewItem Icon="Target" Tag="goalView" Content="Goal Layout"/>
                 <NavigationViewItem Icon="Help" Tag="hint" Content="Hint"/>
-                <NavigationViewItem Tag="docs" Content="API Documentation"/>
+                <NavigationViewItem Icon="Document" Tag="docs" Content="API Documentation"/>
             </NavigationView.MenuItems>
             <NavigationView.FooterMenuItems>
                 <NavigationViewItem Icon="Help" Tag="about" Content="About"/>

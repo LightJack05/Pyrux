@@ -5,6 +5,8 @@
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
+using Microsoft.Graphics.Canvas;
+
 namespace Pyrux.Pages.ContentDialogs
 {
 
@@ -27,8 +29,11 @@ namespace Pyrux.Pages.ContentDialogs
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            LevelDescription = StaticDataStore.ActiveLevel.Task;
-            txtLevelDescription.Text = LevelDescription;
+            if (StaticDataStore.ActiveLevel != null)
+            {
+                LevelDescription = StaticDataStore.ActiveLevel.Task;
+                txtLevelDescription.Text = LevelDescription;
+            }
         }
     }
 }

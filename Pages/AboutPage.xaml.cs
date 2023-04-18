@@ -27,6 +27,7 @@ namespace Pyrux.Pages
                 # __PRE-ALPHA NOTICE__
 
                 This version of the software is pre-alpha. This means it is not intended for production use.
+                This edition is not allowed to be shared, distributed, presented, used or published without explicit permission from the author.
 
                 There are currently a LOT of bugs and problems in the software. It is possible that a lot of features will not work, the software might crash, or even break the OS or hardware it is installed on.
                 I am not responsible for any damage done by use of this software, as far as permitted by applicable law. This software comes with ABSOLUTELY NO WARRANTY.

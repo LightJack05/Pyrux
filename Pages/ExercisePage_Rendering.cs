@@ -217,7 +217,10 @@ public sealed partial class ExercisePage
 
     public void NavigationLayoutReset()
     {
-        ActiveLevel.MapLayout = StaticDataStore.OriginalActiveLevelMapLayout.Copy();
+        if(ActiveLevel != null && StaticDataStore.OriginalActiveLevelMapLayout != null)
+        {
+            ActiveLevel.MapLayout = StaticDataStore.OriginalActiveLevelMapLayout.Copy();
+        }
     }
 
     /// <summary>
