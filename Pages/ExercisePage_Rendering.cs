@@ -237,6 +237,11 @@ public sealed partial class ExercisePage
         btnStart.IsEnabled = true;
         btnSave.IsEnabled = true;
 
+        if(StaticDataStore.ActiveLevel.GoalMapLayout == null)
+        {
+            StaticDataStore.ActiveLevel.GoalMapLayout = StaticDataStore.ActiveLevel.MapLayout.Copy();
+        }
+
         BuildPlayGrid();
         FullDisplayRedraw();
     }

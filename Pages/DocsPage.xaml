@@ -12,6 +12,25 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBlock Margin="20" FontSize="23">Documentation is currently unavailable.</TextBlock>
+        <Border Background="{ThemeResource SystemChromeLowColor}" CornerRadius="10" Margin="10">
+            <Grid Margin="10">
+                
+                <NavigationView
+                    x:Name="ngvDocs"
+                    PaneDisplayMode="Top"
+                    IsBackButtonVisible="Collapsed"
+                    Background="Transparent"
+                    IsSettingsVisible="False"
+                    Loaded="ngvDocs_Loaded"
+                    ItemInvoked="ngvDocs_ItemInvoked">
+                    <NavigationView.MenuItems>
+                        <NavigationViewItem Tag="movement" Content="Movement"/>
+                        <NavigationViewItem Tag="screws" Content="Screw Management"/>
+                        <NavigationViewItem Tag="python" Content="Python Logic"/>
+                    </NavigationView.MenuItems>
+                    <Frame x:Name="ctfDocs" IsTabStop="True" Padding="0" Background="{ThemeResource SystemChromeLowColor}"/>
+                </NavigationView>
+            </Grid>
+        </Border>
     </Grid>
 </Page>

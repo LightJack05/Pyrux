@@ -34,6 +34,9 @@
     <None Remove="Pages\ContentDialogs\LevelCreationDialogue.xaml" />
     <None Remove="Pages\ContentDialogs\PlaceScrewsDialog.xaml" />
     <None Remove="Pages\DocsPage.xaml" />
+    <None Remove="Pages\DocsPages\MovementDocsPage.xaml" />
+    <None Remove="Pages\DocsPages\PythonDocsPage.xaml" />
+    <None Remove="Pages\DocsPages\ScrewsDocsPage.xaml" />
     <None Remove="Pages\ExercisePage.xaml" />
     <None Remove="Pages\GoalPageView.xaml" />
     <None Remove="Pages\HintPage.xaml" />
@@ -74,6 +77,16 @@
     <Content Update="Assets\Textures\Wall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\DocsPages\PythonDocsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\DocsPages\ScrewsDocsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\GoalPageView.xaml">
@@ -147,6 +160,11 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\ContentDialogs\ExceptionPages\UserEndExceptionDialogue.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\DocsPages\MovementDocsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

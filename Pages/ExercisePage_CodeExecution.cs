@@ -91,6 +91,7 @@ public sealed partial class ExercisePage
                 await PythonThread.WaitAsync(PythonCancellationToken);
             }
             catch (TaskCanceledException) { }
+            catch (ExecutionCancelledException) { }
             ExercisePage.Instance.PythonScriptRunning = false;
             btnReset.Content = new SymbolIcon(Symbol.Refresh);
 
