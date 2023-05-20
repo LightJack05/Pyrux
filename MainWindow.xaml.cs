@@ -29,7 +29,8 @@ namespace Pyrux
             ("goalView",typeof(GoalPageView)),
             ("hint",typeof(HintPage)),
             ("docs",typeof(DocsPage)),
-            ("about",typeof(AboutPage))
+            ("about",typeof(AboutPage)),
+            ("devtools",typeof(DevToolsPage))
         };
         public MainWindow()
         {

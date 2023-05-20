@@ -44,6 +44,7 @@
             </NavigationView.MenuItems>
             <NavigationView.FooterMenuItems>
                 <NavigationViewItem Icon="Help" Tag="about" Content="About"/>
+                <NavigationViewItem Icon="Manage" Tag="devtools" Content="Developer Tools"/>
             </NavigationView.FooterMenuItems>
             <Frame x:Name="ctfMain" Padding="0,0,0,0" IsTabStop="True"/>
         </NavigationView>

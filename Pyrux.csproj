@@ -10,7 +10,6 @@
     <PublishProfile>win10-$(Platform).pubxml</PublishProfile>
     <UseWinUI>true</UseWinUI>
     <EnableMsixTooling>true</EnableMsixTooling>
-    <PackageCertificateThumbprint>C0EF3113F07967E7D0E342D4DC84614A58815210</PackageCertificateThumbprint>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
@@ -20,8 +19,9 @@
     <AppxBundle>Auto</AppxBundle>
     <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
-    <AppxPackageDir>C:\Users\elias\OneDrive\Desktop\PyruxPackage\</AppxPackageDir>
-    <Version>0.0.0.1-alpha</Version>
+    <AppxPackageDir>C:\Users\elias\Downloads\Pyrux Alpha\</AppxPackageDir>
+    <Version>0.0.0.1</Version>
+    <PackageCertificateKeyFile>Pyrux_TemporaryKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Pages\AboutPage.xaml" />
@@ -33,6 +33,7 @@
     <None Remove="Pages\ContentDialogs\LevelCompletedDialogue.xaml" />
     <None Remove="Pages\ContentDialogs\LevelCreationDialogue.xaml" />
     <None Remove="Pages\ContentDialogs\PlaceScrewsDialog.xaml" />
+    <None Remove="Pages\DevToolsPage.xaml" />
     <None Remove="Pages\DocsPage.xaml" />
     <None Remove="Pages\DocsPages\MovementDocsPage.xaml" />
     <None Remove="Pages\DocsPages\PythonDocsPage.xaml" />
@@ -77,6 +78,11 @@
     <Content Update="Assets\Textures\Wall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\DevToolsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\DocsPages\PythonDocsPage.xaml">
@@ -167,6 +173,9 @@
     <Page Update="Pages\DocsPages\MovementDocsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Pages\DocsPages\MarkDown\" />
   </ItemGroup>
 
   <!-- 

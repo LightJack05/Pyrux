@@ -22,6 +22,10 @@ namespace Pyrux.Pages
             if (StaticDataStore.ActiveLevel != null)
             {
                 mtbHintRenderer.Text = StaticDataStore.ActiveLevel.Hint;
+                if(!StaticDataStore.ActiveLevel.IsBuiltIn) 
+                { 
+                    btnEditHint.IsEnabled = true;
+                }
             }
         }
 

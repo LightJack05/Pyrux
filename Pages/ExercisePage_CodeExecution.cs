@@ -84,9 +84,6 @@ public sealed partial class ExercisePage
                         thrownException = ex;
                         errorStackTrace = scriptScope.GetVariable<string>("stackTrace");
                     }
-
-
-
                 }, PythonCancellationToken);
                 await PythonThread.WaitAsync(PythonCancellationToken);
             }
