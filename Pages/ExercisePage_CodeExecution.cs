@@ -40,8 +40,6 @@ public sealed partial class ExercisePage
     /// </summary>
     private async void ArbitraryCodeExecution()
     {
-        //TODO: Add a mockup library for the code editor's Autocomplete/Intellisense.
-        //TODO: Add non-execution block that is used to import the mockup library that is removed once the file is imported into the program.
 
         Exception thrownException = null;
         string errorStackTrace = "";
