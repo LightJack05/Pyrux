@@ -14,7 +14,7 @@
 
     <StackPanel>
         <ScrollViewer>
-            <StackPanel MinWidth="700" Background="Transparent">
+            <StackPanel Background="Transparent">
                 <TextBox PlaceholderText="Enter hint in markdown..." AcceptsReturn="True" x:Name="txtHintEditBox" TextChanged="TextBox_TextChanged"/>
             </StackPanel>
         </ScrollViewer>

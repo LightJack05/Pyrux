@@ -24,9 +24,12 @@ public sealed partial class ExercisePage
 
     }
 
-    private void LevelCreationDialogueFinished()
+    private async void LevelCreationDialogueFinished()
     {
-        if (!(LevelCreationDialogue.LevelName == String.Empty) || (LevelCreationDialogue.LevelName.Trim().Length == 0))
+        if (!((LevelCreationDialogue.LevelName == String.Empty) || 
+            (LevelCreationDialogue.LevelName.Trim().Length == 0) || 
+            StaticDataStore.UserCreatedLevels.Any<PyruxLevel>((x) => x.LevelName == LevelCreationDialogue.LevelName.Trim()) || 
+            StaticDataStore.BuiltInLevels.Any<PyruxLevel>((x) => x.LevelName == LevelCreationDialogue.LevelName.Trim())))
         {
             ActiveLevel = new PyruxLevel(
             LevelCreationDialogue.LevelName.Trim(),
@@ -45,6 +48,24 @@ public sealed partial class ExercisePage
         else
         {
             ActiveLevel = null;
+
+            ContentDialog levelCreationFailedDialogue = new();
+            levelCreationFailedDialogue.XamlRoot = this.Content.XamlRoot;
+            levelCreationFailedDialogue.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
+            levelCreationFailedDialogue.Title = "Level creation failed.";
+            levelCreationFailedDialogue.PrimaryButtonText = "Close";
+            levelCreationFailedDialogue.SecondaryButtonText = "Try Again";
+            levelCreationFailedDialogue.DefaultButton = ContentDialogButton.Primary;
+            levelCreationFailedDialogue.Content = new LevelCreationFailed();
+
+            ContentDialogResult result = await levelCreationFailedDialogue.ShowAsync();
+            if (result == ContentDialogResult.Secondary)
+            {
+                MainWindow.Instance.NavViewNavigate("levelSelect", new Microsoft.UI.Xaml.Media.Animation.CommonNavigationTransitionInfo());
+                MainWindow.Instance.NavViewNavigate("exerciseView", new Microsoft.UI.Xaml.Media.Animation.CommonNavigationTransitionInfo());
+                MainWindow.Instance.NavViewSetSelection(1);
+            }
+
         }
 
 
