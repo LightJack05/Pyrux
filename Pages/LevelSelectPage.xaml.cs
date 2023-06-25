@@ -137,6 +137,7 @@ namespace Pyrux.Pages
         private void LoadLevelIntoStaticStorage(PyruxLevel level)
         {
             DataManagement.StaticDataStore.ActiveLevel = level.Copy();
+            DataManagement.StaticDataStore.OriginalActiveLevelMapLayout = level.MapLayout.Copy();
         }
 
         private void btnNewLevel_Click(object sender, RoutedEventArgs e)

@@ -61,7 +61,6 @@ namespace Pyrux.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            ActiveLevel = StaticDataStore.ActiveLevel;
             if (StaticDataStore.ActiveLevel == null)
             {
                 CreateNewLevel();
