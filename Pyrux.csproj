@@ -19,7 +19,7 @@
     <AppxBundle>Auto</AppxBundle>
     <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
-    <AppxPackageDir>C:\Users\elias\Downloads\Pyrux Alpha\</AppxPackageDir>
+    <AppxPackageDir>C:\Users\elias\OneDrive\Desktop\Pyrux_Alpha\</AppxPackageDir>
     <Version>0.0.0.1</Version>
     <PackageCertificateKeyFile>Pyrux_TemporaryKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
