@@ -78,7 +78,10 @@ namespace Pyrux.Pages
 
         private void btnExport_Click(object sender, RoutedEventArgs e)
         {
-            Pyrux.LevelIO.LevelSaving.Save(ActiveLevel);
+            if (StaticDataStore.ActiveLevel != null)
+            {
+                Pyrux.LevelIO.LevelExporting.ExportProcess(StaticDataStore.ActiveLevel.Copy());
+            }
         }
         /// <summary>
         /// Update the script property of the level when the text box's text changes.

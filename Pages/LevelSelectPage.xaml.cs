@@ -3,6 +3,7 @@
 
 using Pyrux.LevelIO;
 using Pyrux.Pages.ContentDialogs;
+using Windows.ApplicationModel.Activation;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -88,7 +89,7 @@ namespace Pyrux.Pages
 
         private async void LoadCustomLevelsIntoMenu()
         {
-            vsgBuiltinLevels.Children.Clear();
+            vsgCustomLevels.Children.Clear();
             List<PyruxLevel> levels = await Pyrux.LevelIO.LevelLoading.FindUserCreatedLevels();
             StaticDataStore.UserCreatedLevels = new(levels);
             foreach (PyruxLevel level in levels)
@@ -178,5 +179,17 @@ namespace Pyrux.Pages
             MainWindow.Instance.NavViewSetSelection(1);
         }
 
+        private void btnImport_Click(object sender, RoutedEventArgs e)
+        {
+            ImportLevel();
+        }
+        private async void ImportLevel()
+        {
+            await LevelIO.LevelImporting.ImportLevel();
+            Page_Loaded(null, null);
+                
+        }
+
+        
     }
 }

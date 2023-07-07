@@ -39,10 +39,22 @@
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" />
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
+      <Extensions>
+        <uap:Extension Category="windows.fileTypeAssociation">
+          <uap:FileTypeAssociation Name="pyrux-level">
+            <uap:SupportedFileTypes>
+              <uap:FileType>.prxlvl</uap:FileType>
+            </uap:SupportedFileTypes>
+            <uap:DisplayName>Pyrux Level</uap:DisplayName>
+            <uap:EditFlags OpenIsSafe="true"/>
+          </uap:FileTypeAssociation>
+        </uap:Extension>
+      </Extensions>
     </Application>
   </Applications>
 
   <Capabilities>
     <rescap:Capability Name="runFullTrust" />
   </Capabilities>
+
 </Package>
