@@ -33,6 +33,7 @@
     <None Remove="Pages\ContentDialogs\LevelCompletedDialogue.xaml" />
     <None Remove="Pages\ContentDialogs\LevelCreationDialogue.xaml" />
     <None Remove="Pages\ContentDialogs\LevelCreationFailed.xaml" />
+    <None Remove="Pages\ContentDialogs\LevelExportDialogue.xaml" />
     <None Remove="Pages\ContentDialogs\PlaceScrewsDialog.xaml" />
     <None Remove="Pages\DevToolsPage.xaml" />
     <None Remove="Pages\DocsPage.xaml" />
@@ -177,6 +178,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\DocsPages\MarkDown\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\ContentDialogs\LevelExportDialogue.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\ContentDialogs\LevelCreationFailed.xaml">

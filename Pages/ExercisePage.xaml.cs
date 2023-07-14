@@ -5,6 +5,8 @@
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
+using Pyrux.Pages.ContentDialogs;
+
 namespace Pyrux.Pages
 {
     /// <summary>
@@ -76,11 +78,36 @@ namespace Pyrux.Pages
 
 
 
-        private void btnExport_Click(object sender, RoutedEventArgs e)
+        private async void btnExport_Click(object sender, RoutedEventArgs e)
         {
             if (StaticDataStore.ActiveLevel != null)
             {
-                Pyrux.LevelIO.LevelExporting.ExportProcess(StaticDataStore.ActiveLevel.Copy());
+                ContentDialog levelExportDialogue = new();
+                levelExportDialogue.XamlRoot = this.Content.XamlRoot;
+                levelExportDialogue.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
+                levelExportDialogue.Title = "Export the active level";
+                levelExportDialogue.PrimaryButtonText = "No";
+                levelExportDialogue.SecondaryButtonText = "Yes";
+                levelExportDialogue.CloseButtonText = "Cancel";
+                levelExportDialogue.DefaultButton = ContentDialogButton.Primary;
+                levelExportDialogue.Content = new LevelExportDialogue();
+
+                ContentDialogResult result = await levelExportDialogue.ShowAsync();
+
+                if (result == ContentDialogResult.Primary)
+                {
+                    PyruxLevel exportedLevel = StaticDataStore.ActiveLevel.Copy();
+                    exportedLevel.Script = "";
+                    Pyrux.LevelIO.LevelExporting.ExportProcess(exportedLevel);
+                }
+                else if (result == ContentDialogResult.Secondary)
+                {
+                    PyruxLevel exportedLevel = StaticDataStore.ActiveLevel.Copy();
+                    Pyrux.LevelIO.LevelExporting.ExportProcess(exportedLevel);
+                }
+
+
+                
             }
         }
         /// <summary>

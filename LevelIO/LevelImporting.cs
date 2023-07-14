@@ -8,8 +8,16 @@ public static class LevelImporting
     public static async Task ImportLevel()
     {
         Windows.Storage.StorageFile storageFile = await GetFilePathAsync();
+        if(storageFile == null)
+        {
+            return;
+        }
         string levelJson = ReadLevelData(storageFile);
         PyruxLevel level = ConstructPyruxLevel(levelJson);
+        if(level == null)
+        {
+            return;
+        }
         LevelSaving.Save(level);
 
     }
@@ -46,6 +54,7 @@ public static class LevelImporting
 
     private static async Task<Windows.Storage.StorageFile> GetFilePathAsync()
     {
+
         Windows.Storage.Pickers.FileOpenPicker fileOpenPicker = new();
         fileOpenPicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
         fileOpenPicker.FileTypeFilter.Add(".prxlvl");
@@ -57,6 +66,14 @@ public static class LevelImporting
         WinRT.Interop.InitializeWithWindow.Initialize(fileOpenPicker, hwnd);
 
         Windows.Storage.StorageFile saveFile = await fileOpenPicker.PickSingleFileAsync();
+        if(saveFile != null)
+        {
+
         return saveFile;
+        }
+        else
+        {
+            return null;
+        }
     }
 }
