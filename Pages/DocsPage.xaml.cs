@@ -50,10 +50,10 @@ namespace Pyrux.Pages
         public void NavViewNavigate(string navItemTag, Microsoft.UI.Xaml.Media.Animation.NavigationTransitionInfo transitionInfo)
         {
             Type page = null;
-            
+
             (string Tag, Type Page) item = contentDictionary.FirstOrDefault(p => p.Tag.Equals(navItemTag));
             page = item.Page;
-            
+
 
             Type preNavPageType = ctfDocs.CurrentSourcePageType;
             if (!(page is null) && !Type.Equals(preNavPageType, page))

@@ -7,13 +7,9 @@
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-using System.Diagnostics;
 using Microsoft.Windows.AppLifecycle;
-using System.Linq;
 using Windows.ApplicationModel.Activation;
 using Windows.Storage;
-using Pyrux.LevelIO;
-using System.Reflection.Emit;
 
 namespace Pyrux
 {
@@ -45,18 +41,16 @@ namespace Pyrux
                 fileActivatedEventArgs.Files.FirstOrDefault() is IStorageFile storageFile
                 )
             {
-                using (StreamReader sr = new(storageFile.Path))
+                using StreamReader sr = new(storageFile.Path);
+                string file = sr.ReadToEnd();
+                try
                 {
-                    string file = sr.ReadToEnd();
-                    try
-                    {
-                        PyruxLevel level = JsonConvert.DeserializeObject<PyruxLevel>(file);
-                        //TODO: Actually import the level.
-                    }
-                    catch (JsonException)
-                    {
-                        
-                    }
+                    PyruxLevel level = JsonConvert.DeserializeObject<PyruxLevel>(file);
+                    //TODO: Actually import the level.
+                }
+                catch (JsonException)
+                {
+
                 }
             }
             //Load the current settings from the appdata folder.
@@ -66,13 +60,11 @@ namespace Pyrux
                 try
                 {
                     StorageFile settingsFile = await appdataFolder.GetFileAsync("settings.json");
-                    using (StreamReader sr = new(settingsFile.Path))
-                    {
-                        string fileContent = sr.ReadToEnd();
-                        DataManagement.PyruxSettings.Instance = JsonConvert.DeserializeObject<PyruxSettings>(fileContent);
-                    }
+                    using StreamReader sr = new(settingsFile.Path);
+                    string fileContent = sr.ReadToEnd();
+                    DataManagement.PyruxSettings.Instance = JsonConvert.DeserializeObject<PyruxSettings>(fileContent);
                 }
-                catch 
+                catch
                 {
                     DataManagement.PyruxSettings.Instance = new PyruxSettings(200);
                 }
@@ -81,7 +73,7 @@ namespace Pyrux
             {
                 DataManagement.PyruxSettings.Instance = new PyruxSettings(200);
             }
-            
+
 
             m_window = new MainWindow();
             m_window.Activate();
@@ -89,7 +81,7 @@ namespace Pyrux
 
         private Window m_window;
 
-        
+
 
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Linq.Expressions;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Pyrux.LevelIO;
 
@@ -11,13 +10,13 @@ public static class LevelImporting
     public static async Task ImportLevel()
     {
         Windows.Storage.StorageFile storageFile = await GetFilePathAsync();
-        if(storageFile == null)
+        if (storageFile == null)
         {
             return;
         }
         string levelJson = ReadLevelData(storageFile);
         PyruxLevel level = ConstructPyruxLevel(levelJson);
-        if(level == null)
+        if (level == null)
         {
             return;
         }
@@ -49,19 +48,17 @@ public static class LevelImporting
     {
         try
         {
-            using (StreamReader sr = new(storageFile.Path))
-            {
-                string levelJson = sr.ReadToEnd();
-                return levelJson;
-            }
+            using StreamReader sr = new(storageFile.Path);
+            string levelJson = sr.ReadToEnd();
+            return levelJson;
         }
         catch
         {
-        
+
         }
         return "";
 
-    
+
     }
     /// <summary>
     /// Get the file to read data from.
@@ -80,10 +77,10 @@ public static class LevelImporting
         WinRT.Interop.InitializeWithWindow.Initialize(fileOpenPicker, hwnd);
 
         Windows.Storage.StorageFile saveFile = await fileOpenPicker.PickSingleFileAsync();
-        if(saveFile != null)
+        if (saveFile != null)
         {
 
-        return saveFile;
+            return saveFile;
         }
         else
         {

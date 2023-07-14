@@ -1,6 +1,4 @@
-﻿using Microsoft.UI.Xaml.Controls;
-using System.Threading.Tasks;
-using System.IO.Compression;
+﻿using System.Threading.Tasks;
 using Windows.Storage;
 
 namespace Pyrux.LevelIO
@@ -34,10 +32,8 @@ namespace Pyrux.LevelIO
             {
                 File.Delete(storageFile.Path);
             }
-            using (StreamWriter sw = new(storageFile.Path))
-            {
-                sw.Write(levelJson);
-            }
+            using StreamWriter sw = new(storageFile.Path);
+            sw.Write(levelJson);
 
         }
         /// <summary>

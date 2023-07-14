@@ -4,10 +4,7 @@
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
 using Pyrux.LevelIO;
-using System.Drawing;
 using System.Threading.Tasks;
-using Windows.ApplicationModel.Activation;
-using Windows.UI.WindowManagement;
 
 namespace Pyrux
 {

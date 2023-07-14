@@ -69,10 +69,8 @@ namespace Pyrux.LevelIO
                     File.Delete(levelDataPath);
                 }
 
-                using (StreamWriter sw = new(levelDataPath))
-                {
-                    sw.Write(levelJson);
-                }
+                using StreamWriter sw = new(levelDataPath);
+                sw.Write(levelJson);
             }
 
             if (File.Exists(levelScriptPath))

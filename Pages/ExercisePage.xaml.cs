@@ -5,7 +5,6 @@
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-using Pyrux.DataManagement;
 using Pyrux.Pages.ContentDialogs;
 
 namespace Pyrux.Pages
@@ -112,7 +111,7 @@ namespace Pyrux.Pages
                     PyruxLevel exportedLevel = StaticDataStore.ActiveLevel.Copy();
                     Pyrux.LevelIO.LevelExporting.ExportProcess(exportedLevel);
                 }
-                
+
             }
         }
         /// <summary>
