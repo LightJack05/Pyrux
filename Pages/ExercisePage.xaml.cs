@@ -18,6 +18,8 @@ namespace Pyrux.Pages
         /// Current instance of the Page.
         /// </summary>
         public static ExercisePage Instance { get; private set; }
+
+        public int ExecutionSpeed { get => StaticDataStore.ExecutionSpeed; set => StaticDataStore.ExecutionSpeed = value; }
         /// <summary>
         /// The index of the selected tool.
         /// 0 - Walls

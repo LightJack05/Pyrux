@@ -76,6 +76,7 @@
                         <Button Grid.Column="0" x:Name="btnStart" Margin="0,10,10,10" Click="btnStart_Click" IsEnabled="False">
                             <SymbolIcon Symbol="Play"/>
                         </Button>
+                        <Slider Grid.Column="1" Margin="20,0,20,0" x:Name="sldExecutionSpeed" Value="{x:Bind ExecutionSpeed}" Maximum="1000" Minimum="1"/>
                         <Button Grid.Column="2" x:Name="btnReset" Margin="10,10,0,10" Click="btnReset_Click">
                             <SymbolIcon Symbol="Refresh"/>
                         </Button>
