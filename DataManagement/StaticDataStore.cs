@@ -10,8 +10,6 @@
         /// The execution delay in milliseconds for each movement step.
         /// </summary>
         public static PyruxLevelMapLayout OriginalActiveLevelMapLayout { get; set; }
-        public static int ExecutionDelayInMilliseconds { get => 1001 - ExecutionSpeed; }
-        public static int ExecutionSpeed { get; set; } = 800;
         public static List<PyruxLevel> BuiltInLevels { get; set; }
         public static List<PyruxLevel> UserCreatedLevels { get; set; }
     }

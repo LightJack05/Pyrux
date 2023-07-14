@@ -174,8 +174,7 @@ internal partial class PyruxLevel
     /// <exception cref="Pyrux.UserEndExceptions.ExecutionCancelledException">Thrown when the execution is cancelled. (Instance of the Exercise page get's it's ExecutionCanceled property set to true.)</exception>
     private void WaitAndCheckIfCancelled()
     {
-        //TODO: Set ExecutionCancelled to false again.
-        for (int i = 0; i < DataManagement.StaticDataStore.ExecutionDelayInMilliseconds; i += 10)
+        for (int i = 0; i < DataManagement.PyruxSettings.ExecutionDelayInMilliseconds; i += 10)
         {
             if (ExercisePage.Instance.ExecutionCancelled)
             {

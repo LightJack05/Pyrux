@@ -12,6 +12,8 @@ using Microsoft.Windows.AppLifecycle;
 using System.Linq;
 using Windows.ApplicationModel.Activation;
 using Windows.Storage;
+using Pyrux.LevelIO;
+using System.Reflection.Emit;
 
 namespace Pyrux
 {
@@ -33,7 +35,7 @@ namespace Pyrux
         /// Invoked when the application is launched.
         /// </summary>
         /// <param name="args">Details about the launch request and process.</param>
-        protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
+        protected override async void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
             AppActivationArguments appActivationArguments = AppInstance.GetCurrent().GetActivatedEventArgs();
 
@@ -45,12 +47,39 @@ namespace Pyrux
                 using (StreamReader sr = new(storageFile.Path))
                 {
                     string file = sr.ReadToEnd();
-                    using (StreamWriter sw = new StreamWriter(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "FileContent.txt")))
+                    try
                     {
-                        sw.Write(file);
+                        PyruxLevel level = JsonConvert.DeserializeObject<PyruxLevel>(file);
+                    }
+                    catch (JsonException)
+                    {
+                        
                     }
                 }
             }
+
+            StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
+            if (appdataFolder != null)
+            {
+                try
+                {
+                    StorageFile settingsFile = await appdataFolder.GetFileAsync("settings.json");
+                    using (StreamReader sr = new(settingsFile.Path))
+                    {
+                        string fileContent = sr.ReadToEnd();
+                        DataManagement.PyruxSettings.Instance = JsonConvert.DeserializeObject<PyruxSettings>(fileContent);
+                    }
+                }
+                catch 
+                {
+                    DataManagement.PyruxSettings.Instance = new PyruxSettings(200);
+                }
+            }
+            else
+            {
+                DataManagement.PyruxSettings.Instance = new PyruxSettings(200);
+            }
+            
 
             m_window = new MainWindow();
             m_window.Activate();

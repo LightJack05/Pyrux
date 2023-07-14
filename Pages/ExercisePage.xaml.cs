@@ -5,6 +5,7 @@
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
+using Pyrux.DataManagement;
 using Pyrux.Pages.ContentDialogs;
 
 namespace Pyrux.Pages
@@ -19,7 +20,6 @@ namespace Pyrux.Pages
         /// </summary>
         public static ExercisePage Instance { get; private set; }
 
-        public int ExecutionSpeed { get => StaticDataStore.ExecutionSpeed; set => StaticDataStore.ExecutionSpeed = value; }
         /// <summary>
         /// The index of the selected tool.
         /// 0 - Walls
@@ -27,6 +27,8 @@ namespace Pyrux.Pages
         /// 2 - Player Movement
         /// </summary>
         private static int SelectedToolIndex { get; set; }
+
+        public int ExecutionSpeed { get => PyruxSettings.ExecutionSpeed; set => PyruxSettings.ExecutionSpeed = value; }
         /// <summary>
         /// Determines whether the python script is currently being executed.
         /// </summary>
@@ -58,13 +60,16 @@ namespace Pyrux.Pages
         /// </summary>
         public ExercisePage()
         {
+            int executionSpeed = PyruxSettings.ExecutionSpeed;
             this.InitializeComponent();
             Instance = this;
-
+            PyruxSettings.ExecutionSpeed = executionSpeed;
+            sldExecutionSpeed.Value = PyruxSettings.ExecutionSpeed;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            sldExecutionSpeed.Value = PyruxSettings.ExecutionSpeed;
             if (StaticDataStore.ActiveLevel == null)
             {
                 CreateNewLevel();
@@ -107,8 +112,6 @@ namespace Pyrux.Pages
                     PyruxLevel exportedLevel = StaticDataStore.ActiveLevel.Copy();
                     Pyrux.LevelIO.LevelExporting.ExportProcess(exportedLevel);
                 }
-
-
                 
             }
         }
@@ -127,6 +130,15 @@ namespace Pyrux.Pages
             Pyrux.LevelIO.LevelSaving.Save(ActiveLevel);
         }
 
+        private void sldExecutionSpeed_ValueChanged(object sender, Microsoft.UI.Xaml.Controls.Primitives.RangeBaseValueChangedEventArgs e)
+        {
+            PyruxSettings.ExecutionSpeed = (int)e.NewValue;
+        }
+
+        private void sldExecutionSpeed_PointerReleased(object sender, Microsoft.UI.Xaml.Input.PointerRoutedEventArgs e)
+        {
+            PyruxSettings.SaveSettings();
+        }
     }
 
 
