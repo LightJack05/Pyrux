@@ -7,6 +7,7 @@ using Pyrux.LevelIO;
 using System.Drawing;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
+using Windows.UI.WindowManagement;
 
 namespace Pyrux
 {
@@ -41,7 +42,11 @@ namespace Pyrux
             SetTitleBar(AppTitleBar);
             Instance = this;
         }
-
+        /// <summary>
+        /// Initialize the basic layout of the navigation view.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void ngvMainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             await CheckAppdataIntegrity();
@@ -55,9 +60,6 @@ namespace Pyrux
                 DisplayAppdataError();
             }
         }
-
-
-
         /// <summary>
         /// Run when an item is invoked on the navigationview.
         /// Switch the content frame to the page selected.
@@ -106,7 +108,10 @@ namespace Pyrux
                 ctfMain.Navigate(page, null, transitionInfo);
             }
         }
-
+        /// <summary>
+        /// Set the navigation view selection to the given index.
+        /// </summary>
+        /// <param name="index">Index to move the selection to.</param>
         public void NavViewSetSelection(int index)
         {
             ngvMainWindow.SelectedItem = ngvMainWindow.MenuItems[index];
@@ -115,17 +120,24 @@ namespace Pyrux
         private void Window_Activated(object sender, WindowActivatedEventArgs args)
         {
         }
-
+        /// <summary>
+        /// Run a check to see if the appdata folder is still intact.
+        /// </summary>
         private async Task CheckAppdataIntegrity()
         {
             await AppdataManagement.CheckAppdata();
         }
-
+        /// <summary>
+        /// Set the navigation view enabled or disabled.
+        /// </summary>
+        /// <param name="enabled">Enable or disable the nav view.</param>
         public void NavViewSetEnabled(bool enabled)
         {
             ngvMainWindow.IsEnabled = enabled;
         }
-
+        /// <summary>
+        /// Display an error indicating that the appdata folder has been corrupted.
+        /// </summary>
         public async void DisplayAppdataError()
         {
             if (AppdataManagement.AppdataCorrupted)

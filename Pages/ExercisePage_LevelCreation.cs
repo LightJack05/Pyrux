@@ -5,6 +5,9 @@ namespace Pyrux.Pages;
 
 public sealed partial class ExercisePage
 {
+    /// <summary>
+    /// Asks the user for parameters for a new level.
+    /// </summary>
     private async void CreateNewLevel()
     {
         ContentDialog createlevelDialogue = new();
@@ -23,7 +26,9 @@ public sealed partial class ExercisePage
         }
 
     }
-
+    /// <summary>
+    /// Creates a new level with given data from the last LevelCreationDialogue.
+    /// </summary>
     private async void LevelCreationDialogueFinished()
     {
         if (!((LevelCreationDialogue.LevelName == String.Empty) || 

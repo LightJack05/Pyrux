@@ -10,7 +10,13 @@
         /// The execution delay in milliseconds for each movement step.
         /// </summary>
         public static PyruxLevelMapLayout OriginalActiveLevelMapLayout { get; set; }
+        /// <summary>
+        /// List of built in levels.
+        /// </summary>
         public static List<PyruxLevel> BuiltInLevels { get; set; }
+        /// <summary>
+        /// List of user created levels.
+        /// </summary>
         public static List<PyruxLevel> UserCreatedLevels { get; set; }
     }
 }

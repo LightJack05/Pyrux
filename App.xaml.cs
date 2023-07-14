@@ -37,6 +37,7 @@ namespace Pyrux
         /// <param name="args">Details about the launch request and process.</param>
         protected override async void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
+            //If the app is started by a level file, import that file.
             AppActivationArguments appActivationArguments = AppInstance.GetCurrent().GetActivatedEventArgs();
 
             if (appActivationArguments.Kind is ExtendedActivationKind.File &&
@@ -50,6 +51,7 @@ namespace Pyrux
                     try
                     {
                         PyruxLevel level = JsonConvert.DeserializeObject<PyruxLevel>(file);
+                        //TODO: Actually import the level.
                     }
                     catch (JsonException)
                     {
@@ -57,7 +59,7 @@ namespace Pyrux
                     }
                 }
             }
-
+            //Load the current settings from the appdata folder.
             StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
             if (appdataFolder != null)
             {

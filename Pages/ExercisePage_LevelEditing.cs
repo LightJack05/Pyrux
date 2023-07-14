@@ -83,7 +83,10 @@ public sealed partial class ExercisePage
         UpdateDisplay();
         SaveNewLayout();
     }
-
+    /// <summary>
+    /// Move the player to the given position.
+    /// </summary>
+    /// <param name="position">The new position to move to.</param>
     private void MovePlayer(PositionVector2 position)
     {
         if (!ActiveLevel.MapLayout.WallLayout[position.Y, position.X])
@@ -93,14 +96,18 @@ public sealed partial class ExercisePage
         UpdateDisplay();
         SaveNewLayout();
     }
-
+    /// <summary>
+    /// Turn the player around.
+    /// </summary>
     private void TurnPlayer()
     {
         ActiveLevel.MapLayout.CurrentPlayerDirection++;
         UpdateDisplay();
         SaveNewLayout();
     }
-
+    /// <summary>
+    /// Save the new layout to the static data store.
+    /// </summary>
     private void SaveNewLayout()
     {
         StaticDataStore.OriginalActiveLevelMapLayout = ActiveLevel.MapLayout.Copy();
@@ -136,12 +143,19 @@ public sealed partial class ExercisePage
     {
         UpdateTaskText(ContentDialogs.EditTaskContentDialog.LevelDescription);
     }
+    /// <summary>
+    /// Set the task text to the given text.
+    /// </summary>
+    /// <param name="text">The text to set the task to.</param>
     private void UpdateTaskText(string text)
     {
         ActiveLevel.Task = text;
         txtLevelTask.Text = ActiveLevel.Task;
     }
-
+    /// <summary>
+    /// Change the screws on the given position.
+    /// </summary>
+    /// <param name="position">The position to change the screws at.</param>
     private void ChangeScrewsTool(PositionVector2 position)
     {
         if (!ActiveLevel.MapLayout.WallLayout[position.Y, position.X])
@@ -150,7 +164,9 @@ public sealed partial class ExercisePage
             ShowScrewNumberChangeDialog();
         }
     }
-
+    /// <summary>
+    /// Provides a dialogue for changing the number of screws on a tile.
+    /// </summary>
     private async void ShowScrewNumberChangeDialog()
     {
         ContentDialog screwNumberChangeDialog = new();
@@ -169,11 +185,18 @@ public sealed partial class ExercisePage
         }
 
     }
+    /// <summary>
+    /// Updates the screw count on a tile with the position and screw number from the last PlaceScrewsDialogue.
+    /// </summary>
     private void ScrewNumberChangeDialogFinished()
     {
         UpdateScrewCount(PlaceScrewsDialog.Position, PlaceScrewsDialog.ScrewNumber);
     }
-
+    /// <summary>
+    /// Update the screw count at a position.
+    /// </summary>
+    /// <param name="position">The position to update.</param>
+    /// <param name="count">The new count.</param>
     private void UpdateScrewCount(PositionVector2 position, int count)
     {
         ActiveLevel.MapLayout.SetScrewNumberAtPosition(position, count);

@@ -28,6 +28,9 @@ namespace Pyrux.Pages.DocsPages
     /// </summary>
     public sealed partial class PythonDocsPage : Page
     {
+        /// <summary>
+        /// String that is used as page content.
+        /// </summary>
         public string DocMarkDown { get => """
                 # __Python logic documentation__
                 This documentation is a VERY simplified breakdown and includes only the features that are essential for using Python within Pyrux.

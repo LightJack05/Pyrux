@@ -57,7 +57,9 @@ public sealed partial class ExercisePage
         Grid.SetRow(charImage, ActiveLevel.MapLayout.StartPosition.Y);
         _charImage = charImage;
     }
-
+    /// <summary>
+    /// Completely redraw the entire grid.
+    /// </summary>
     public void FullDisplayRedraw()
     {
         PyruxLevelMapLayout mapLayout = ActiveLevel.MapLayout;
@@ -171,7 +173,9 @@ public sealed partial class ExercisePage
 
     }
 
-
+    /// <summary>
+    /// Prepare the tool selection depending on the level type.
+    /// </summary>
     private void PrepareToolSelection()
     {
         if (ActiveLevel.IsBuiltIn)
@@ -207,14 +211,18 @@ public sealed partial class ExercisePage
         }
 
     }
-
+    /// <summary>
+    /// Reset the current level layout to the original layout preceding the execution of the script.
+    /// </summary>
     private void ResetLayoutToStart()
     {
         ActiveLevel.MapLayout = StaticDataStore.OriginalActiveLevelMapLayout.Copy();
         UpdateDisplay();
         btnStart.IsEnabled = true;
     }
-
+    /// <summary>
+    /// Reset the layout when navigating away from the page.
+    /// </summary>
     public void NavigationLayoutReset()
     {
         if(ActiveLevel != null && StaticDataStore.OriginalActiveLevelMapLayout != null)

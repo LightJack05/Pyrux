@@ -25,7 +25,7 @@ using Windows.Storage;
 namespace Pyrux.Pages
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// Provides several developer tools, not intended for end user use.
     /// </summary>
     public sealed partial class DevToolsPage : Page
     {

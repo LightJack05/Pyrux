@@ -28,7 +28,11 @@ namespace Pyrux.Pages
                 }
             }
         }
-
+        /// <summary>
+        /// Open the hint edit dialogue.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
             ContentDialog taskEditDialog = new();
@@ -47,12 +51,17 @@ namespace Pyrux.Pages
                 ChangeHintDialogueCompleted();
             }
         }
-
+        /// <summary>
+        /// Update the hint from the last execution state of an EditHintDialogue.
+        /// </summary>
         private void ChangeHintDialogueCompleted()
         {
             UpdateHintText(ContentDialogs.EditHintDialogue.Hint);
         }
-
+        /// <summary>
+        /// Update the hint on the page with the given string as markdown.
+        /// </summary>
+        /// <param name="hint">The new hint, formatted as markdown.</param>
         private void UpdateHintText(string hint)
         {
             mtbHintRenderer.Text = hint;

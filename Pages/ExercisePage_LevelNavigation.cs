@@ -3,6 +3,9 @@
     public sealed partial class ExercisePage
     {
 
+        /// <summary>
+        /// Navigate to the next level in the sequence.
+        /// </summary>
         public void NavigateToNextLevel()
         {
 
@@ -30,7 +33,9 @@
             MainWindow.Instance.NavViewNavigate("exerciseView", new Microsoft.UI.Xaml.Media.Animation.CommonNavigationTransitionInfo());
             MainWindow.Instance.NavViewSetSelection(1);
         }
-
+        /// <summary>
+        /// Navigate the user to the level selection page.
+        /// </summary>
         public void NavigateToLevelSelection()
         {
             MainWindow.Instance.NavViewNavigate("levelSelect", new Microsoft.UI.Xaml.Media.Animation.CommonNavigationTransitionInfo());

@@ -13,8 +13,17 @@ namespace Pyrux.Pages
     /// </summary>
     public sealed partial class GoalPageView : Page
     {
+        /// <summary>
+        /// The image of the character.
+        /// </summary>
         private Image _charImage;
+        /// <summary>
+        /// The selected tool index.
+        /// </summary>
         private static int SelectedToolIndex { get; set; }
+        /// <summary>
+        /// The currently displayed map layout.
+        /// </summary>
         private PyruxLevelMapLayout _displayedMapLayout;
 
         private PyruxLevel ActiveLevel
@@ -33,7 +42,9 @@ namespace Pyrux.Pages
             grdPlayField.Height = size;
             grdPlayField.Width = size;
         }
-
+        /// <summary>
+        /// Load a level into the page from the goal layout, build the display grid and fully redraw the screen.
+        /// </summary>
         private void LoadLevelIntoPage()
         {
             StaticDataStore.OriginalActiveLevelMapLayout = ActiveLevel.GoalMapLayout.Copy();
@@ -117,7 +128,9 @@ namespace Pyrux.Pages
             Grid.SetRow(charImage, ActiveLevel.GoalMapLayout.StartPosition.Y);
             _charImage = charImage;
         }
-
+        /// <summary>
+        /// Completely redraw the entire grid.
+        /// </summary>
         public void FullDisplayRedraw()
         {
             PyruxLevelMapLayout mapLayout = ActiveLevel.GoalMapLayout;

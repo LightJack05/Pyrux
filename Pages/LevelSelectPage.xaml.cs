@@ -37,7 +37,9 @@ namespace Pyrux.Pages
                 }
             }
         }
-
+        /// <summary>
+        /// Display an appdata error should the appdata be corrupted. Otherwise do nothing.
+        /// </summary>
         public async void DisplayAppdataError()
         {
             if (AppdataManagement.AppdataCorrupted)
@@ -64,7 +66,9 @@ namespace Pyrux.Pages
             }
         }
 
-
+        /// <summary>
+        /// Load the builtin levels from AppData into the Menu.
+        /// </summary>
         private async void LoadBuiltinLevelsIntoMenu()
         {
             vsgBuiltinLevels.Children.Clear();
@@ -86,7 +90,9 @@ namespace Pyrux.Pages
                 vsgBuiltinLevels.Children.Add(levelButton);
             }
         }
-
+        /// <summary>
+        /// Load the custom levels from appdata into the menu.
+        /// </summary>
         private async void LoadCustomLevelsIntoMenu()
         {
             vsgCustomLevels.Children.Clear();
@@ -134,7 +140,10 @@ namespace Pyrux.Pages
             MainWindow.Instance.NavViewNavigate("exerciseView", new Microsoft.UI.Xaml.Media.Animation.CommonNavigationTransitionInfo());
             MainWindow.Instance.NavViewSetSelection(1);
         }
-
+        /// <summary>
+        /// Load the given level into the static data store, and create a copy of the layout to be used as original layout.
+        /// </summary>
+        /// <param name="level">The level to be loaded.</param>
         private void LoadLevelIntoStaticStorage(PyruxLevel level)
         {
             DataManagement.StaticDataStore.ActiveLevel = level.Copy();
@@ -152,7 +161,9 @@ namespace Pyrux.Pages
                 CreateNewLevel();
             }
         }
-
+        /// <summary>
+        /// Show a confirmation dialogue to confirm overwriting of the current level state.
+        /// </summary>
         private async void ShowConfirmationDialogue()
         {
             ContentDialog confirmationDialogue = new();
@@ -171,7 +182,9 @@ namespace Pyrux.Pages
                 CreateNewLevel();
             }
         }
-
+        /// <summary>
+        /// Handler for creating a new level.
+        /// </summary>
         private static void CreateNewLevel()
         {
             StaticDataStore.ActiveLevel = null;
@@ -183,6 +196,9 @@ namespace Pyrux.Pages
         {
             ImportLevel();
         }
+        /// <summary>
+        /// Import a level from local storage.
+        /// </summary>
         private async void ImportLevel()
         {
             await LevelIO.LevelImporting.ImportLevel();

@@ -28,6 +28,9 @@ namespace Pyrux.Pages.DocsPages
     /// </summary>
     public sealed partial class ScrewsDocsPage : Page
     {
+        /// <summary>
+        /// String that is used as page content.
+        /// </summary>
         public string DocMarkDown { get => """
                 # __Screw management documentation__
                 ## __Taking Screws__

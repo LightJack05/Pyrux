@@ -5,7 +5,13 @@ namespace Pyrux.LevelIO
 {
     internal class AppdataManagement
     {
+        /// <summary>
+        /// True if the current appdata folder appears to be corrupted. Otherwise false.
+        /// </summary>
         public static bool AppdataCorrupted { get; set; } = false;
+        /// <summary>
+        /// True if the appdata validation has been completed. Otherwise false. Does not indicate that the validation was successful.
+        /// </summary>
         public static bool AppdataValidationCompleted { get; private set; } = false;
         /// <summary>
         /// Check if the current Appdata is still consistent with the layout it should have, and rebuild it if it isn't.
@@ -29,7 +35,10 @@ namespace Pyrux.LevelIO
                 AppdataValidationCompleted = true;
             }
         }
-
+        /// <summary>
+        /// Check if the current appdata folder is empty.
+        /// </summary>
+        /// <returns>True if the appdata folder is empty.</returns>
         public static async Task<bool> IsAppdataEmpty()
         {
             StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
@@ -42,7 +51,9 @@ namespace Pyrux.LevelIO
                 return false;
             }
         }
-
+        /// <summary>
+        /// Reset the appdata folder to defaults. Deletes all contents and then recreates the folder structure.
+        /// </summary>
         public static async Task ResetAppdata()
         {
             AppdataCorrupted = false;

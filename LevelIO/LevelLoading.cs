@@ -81,6 +81,13 @@ internal static class LevelLoading
             throw new LevelNotFoundException($"The folder {levelName} could not be found in {levelsFolderOrganization.Path}.");
         }
     }
+    /// <summary>
+    /// Create a Pyrux level from a folder in AppData.
+    /// </summary>
+    /// <param name="levelFolder">Folder of the level in the appdata folder.</param>
+    /// <returns>An instance of the pyrux level.</returns>
+    /// <exception cref="InvalidLevelJsonException">Thrown if the level JSON read is invalid.</exception>
+    /// <exception cref="LevelJsonNotFoundException">Thrown if no json file was found.</exception>
     public static async Task<PyruxLevel> LoadLevel(StorageFolder levelFolder)
     {
 

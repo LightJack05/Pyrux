@@ -28,6 +28,9 @@ namespace Pyrux.Pages.DocsPages
     /// </summary>
     public sealed partial class MovementDocsPage : Page
     {
+        /// <summary>
+        /// String that is used as page content.
+        /// </summary>
         public string DocMarkDown { get => """
                 # __Movement documentation__
                 ## Basics

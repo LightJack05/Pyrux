@@ -12,11 +12,16 @@ namespace Pyrux.Pages
     /// </summary>
     public sealed partial class AboutPage : Page
     {
+        /// <summary>
+        /// The version of the assembly.
+        /// </summary>
         public string Version
         {
             get => System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }
-
+        /// <summary>
+        /// The text displayed on the about page.
+        /// </summary>
         public string AboutText
         {
             get => """

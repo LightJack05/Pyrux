@@ -5,6 +5,9 @@ namespace Pyrux.LevelIO;
 
 public static class LevelImporting
 {
+    /// <summary>
+    /// Import a level form storage.
+    /// </summary>
     public static async Task ImportLevel()
     {
         Windows.Storage.StorageFile storageFile = await GetFilePathAsync();
@@ -21,6 +24,11 @@ public static class LevelImporting
         LevelSaving.Save(level);
 
     }
+    /// <summary>
+    /// Construct a Pyrux level from given JSON.
+    /// </summary>
+    /// <param name="levelJson">The JSON data to construct the level from.</param>
+    /// <returns>An instance of a Pyrux level constructed from the JSON. If unable to construct an Instance, returns null.</returns>
     private static PyruxLevel ConstructPyruxLevel(string levelJson)
     {
         try
@@ -32,7 +40,11 @@ public static class LevelImporting
 
         return null;
     }
-
+    /// <summary>
+    /// Read level data from a storage file.
+    /// </summary>
+    /// <param name="storageFile">File to read data from.</param>
+    /// <returns>The level data as JSON</returns>
     private static string ReadLevelData(Windows.Storage.StorageFile storageFile)
     {
         try
@@ -51,7 +63,9 @@ public static class LevelImporting
 
     
     }
-
+    /// <summary>
+    /// Get the file to read data from.
+    /// </summary>
     private static async Task<Windows.Storage.StorageFile> GetFilePathAsync()
     {
 

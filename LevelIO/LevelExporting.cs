@@ -5,8 +5,15 @@ using Windows.Storage;
 
 namespace Pyrux.LevelIO
 {
+    /// <summary>
+    /// Contains methods used for exporting levels to a file.
+    /// </summary>
     internal class LevelExporting
     {
+        /// <summary>
+        /// Export the level to a file. This will also ask the user for a location.
+        /// </summary>
+        /// <param name="exportingLevel">Level to export</param>
         public static async void ExportProcess(PyruxLevel exportingLevel)
         {
             Windows.Storage.StorageFile saveFile = await GetSavePathAsync(exportingLevel.LevelName);
@@ -16,7 +23,11 @@ namespace Pyrux.LevelIO
             }
 
         }
-
+        /// <summary>
+        /// Save the level decoded to json to a file on the disk.
+        /// </summary>
+        /// <param name="levelJson">The JSON representation of a pyrux level that should be saved.</param>
+        /// <param name="storageFile">The storage file to write the file to.</param>
         public static void SaveData(string levelJson, StorageFile storageFile)
         {
             if (File.Exists(storageFile.Path))
@@ -29,8 +40,12 @@ namespace Pyrux.LevelIO
             }
 
         }
-
-        public static async Task<Windows.Storage.StorageFile> GetSavePathAsync(string levelName)
+        /// <summary>
+        /// Get the path a level should be saved to.
+        /// </summary>
+        /// <param name="levelName">The name of the saved level. This is the default filename.</param>
+        /// <returns>A storage file to save the data to.</returns>
+        private static async Task<Windows.Storage.StorageFile> GetSavePathAsync(string levelName)
         {
             Windows.Storage.Pickers.FileSavePicker fileSavePicker = new();
             fileSavePicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
@@ -38,10 +53,10 @@ namespace Pyrux.LevelIO
             fileSavePicker.SuggestedFileName = levelName;
 
             // Get the current window's HWND by passing in the Window object
-            var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(MainWindow.Instance);
+            var windowHandle = WinRT.Interop.WindowNative.GetWindowHandle(MainWindow.Instance);
 
             // Associate the HWND with the file picker
-            WinRT.Interop.InitializeWithWindow.Initialize(fileSavePicker, hwnd);
+            WinRT.Interop.InitializeWithWindow.Initialize(fileSavePicker, windowHandle);
 
             Windows.Storage.StorageFile saveFile = await fileSavePicker.PickSaveFileAsync();
             return saveFile;

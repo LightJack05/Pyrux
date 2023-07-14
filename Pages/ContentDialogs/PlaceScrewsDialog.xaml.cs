@@ -9,7 +9,7 @@ namespace Pyrux.Pages.ContentDialogs
 {
 
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// Provides the dialogue for placing screws.
     /// </summary>
     public sealed partial class PlaceScrewsDialog : Page
     {
