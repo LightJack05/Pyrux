@@ -138,6 +138,7 @@ namespace Pyrux.Pages
         {
             PyruxSettings.SaveSettings();
         }
+
     }
 
 

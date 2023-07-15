@@ -24,8 +24,9 @@
                     ItemInvoked="ngvSettings_ItemInvoked">
                     <NavigationView.MenuItems>
                         <NavigationViewItem Tag="execution" Content="Execution"/>
-                        <Frame x:Name="ctfSettings" IsTabStop="True" Padding="0" Background="{ThemeResource SystemChromeLowColor}"/>
+                        <NavigationViewItem Tag="devtools" Content="Developer Tools"/>
                     </NavigationView.MenuItems>
+                    <Frame x:Name="ctfSettings" IsTabStop="True" Padding="0" Background="{ThemeResource SystemChromeLowColor}"/>
                 </NavigationView>
             </Grid>
         </Border>

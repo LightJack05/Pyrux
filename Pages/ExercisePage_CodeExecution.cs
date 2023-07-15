@@ -10,8 +10,10 @@ namespace Pyrux.Pages;
 
 public sealed partial class ExercisePage
 {
-    public bool ExecutionRanState = false;
-    public Task PythonThread = null;
+    public bool IsStepModeEnabled { get; set; }
+    public bool IsNextStepRequested { get; set; }
+    public bool ExecutionRanState { get; set; } = false;
+    private Task _pythonThread = null;
     public CancellationTokenSource PythonCancellationTokenSource;
     public CancellationToken PythonCancellationToken;
 
@@ -22,15 +24,61 @@ public sealed partial class ExercisePage
     /// <param name="e"></param>
     private void btnStart_Click(object sender, RoutedEventArgs e)
     {
-        btnStart.IsEnabled = false;
-        ExecutionRanState = true;
-        btnWallTool.IsEnabled = false;
-        btnRotate.IsEnabled = false;
-        btnPlayerTool.IsEnabled = false;
-        btnScrewTool.IsEnabled = false;
-        ArbitraryCodeExecution();
+        if (!PythonScriptRunning)
+        {
+
+            btnStart.Content = new SymbolIcon(Symbol.Pause);
+            ToolTipService.SetToolTip(btnStart, "Pause");
+            ExecutionRanState = true;
+            btnStep.IsEnabled = false;
+            btnWallTool.IsEnabled = false;
+            btnRotate.IsEnabled = false;
+            btnPlayerTool.IsEnabled = false;
+            btnScrewTool.IsEnabled = false;
+            ArbitraryCodeExecution();
+        }
+        else
+        {
+            if (IsStepModeEnabled)
+            {
+                IsStepModeEnabled = false;
+                IsNextStepRequested = true;
+                btnStep.IsEnabled = false;
+                btnStart.Content = new SymbolIcon(Symbol.Pause);
+                ToolTipService.SetToolTip(btnStart, "Pause");
+            }
+            else
+            {
+                IsStepModeEnabled = true;
+                btnStep.IsEnabled = true;
+                btnStart.Content = new SymbolIcon(Symbol.Play);
+                ToolTipService.SetToolTip(btnStart, "Continue");
+            }
+        }
+        System.Diagnostics.Debug.WriteLine(IsStepModeEnabled);
+        
     }
 
+
+    private void btnStep_Click(object sender, RoutedEventArgs e)
+    {
+        
+        if(!PythonScriptRunning)
+        {
+            IsNextStepRequested = true;
+            IsStepModeEnabled = true;
+            ExecutionRanState = true;
+            btnWallTool.IsEnabled = false;
+            btnRotate.IsEnabled = false;
+            btnPlayerTool.IsEnabled = false;
+            btnScrewTool.IsEnabled = false;
+            ArbitraryCodeExecution();
+        }
+        else
+        {
+            IsNextStepRequested = true;
+        }
+    }
 
     /// <summary>
     /// Execute the code that has been written by the user.
@@ -46,10 +94,10 @@ public sealed partial class ExercisePage
 
         if (!PythonScriptRunning)
         {
-            btnStart.IsEnabled = false;
             PythonScriptRunning = true;
             btnReset.Content = new SymbolIcon(Symbol.Stop);
             ToolTipService.SetToolTip(btnReset, "Stop");
+
             string pythonCode = BuildPythonCode();
             ScriptEngine scriptEngine = Python.CreateEngine();
 
@@ -71,7 +119,7 @@ public sealed partial class ExercisePage
 
             try
             {
-                PythonThread = Task.Factory.StartNew(() =>
+                _pythonThread = Task.Factory.StartNew(() =>
                 {
                     try
                     {
@@ -84,13 +132,19 @@ public sealed partial class ExercisePage
                         errorStackTrace = scriptScope.GetVariable<string>("stackTrace");
                     }
                 }, PythonCancellationToken);
-                await PythonThread.WaitAsync(PythonCancellationToken);
+                await _pythonThread.WaitAsync(PythonCancellationToken);
             }
             catch (TaskCanceledException) { }
             catch (ExecutionCancelledException) { }
             ExercisePage.Instance.PythonScriptRunning = false;
             btnReset.Content = new SymbolIcon(Symbol.Refresh);
             ToolTipService.SetToolTip(btnReset, "Reset layout");
+            btnStart.Content = new SymbolIcon(Symbol.Play);
+            ToolTipService.SetToolTip(btnStart, "Execute");
+            btnStart.IsEnabled = false;
+            btnStep.IsEnabled = false;
+            IsStepModeEnabled = false;
+            
 
         }
         if (thrownException != null)
@@ -149,8 +203,6 @@ public sealed partial class ExercisePage
         {
             NavigateToLevelSelection();
         }
-
-
     }
 
     private static bool CheckNextLevelAvailable()

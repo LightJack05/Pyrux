@@ -16,7 +16,8 @@ namespace Pyrux.Pages
     {
         public List<(string Tag, Type Page)> contentDictionary = new()
         {
-            ("movement",typeof(ExecutionSettings))
+            ("execution",typeof(ExecutionSettings)),
+            ("devtools",typeof(DevToolsPage))
         };
 
         public SettingsPage()

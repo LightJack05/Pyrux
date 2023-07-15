@@ -219,6 +219,8 @@ public sealed partial class ExercisePage
         ActiveLevel.MapLayout = StaticDataStore.OriginalActiveLevelMapLayout.Copy();
         UpdateDisplay();
         btnStart.IsEnabled = true;
+        btnStep.IsEnabled = true;
+        IsStepModeEnabled = false;
     }
     /// <summary>
     /// Reset the layout when navigating away from the page.

@@ -174,16 +174,32 @@ internal partial class PyruxLevel
     /// <exception cref="Pyrux.UserEndExceptions.ExecutionCancelledException">Thrown when the execution is cancelled. (Instance of the Exercise page get's it's ExecutionCanceled property set to true.)</exception>
     private void WaitAndCheckIfCancelled()
     {
-        for (int i = 0; i < DataManagement.PyruxSettings.ExecutionDelayInMilliseconds; i += 10)
+        if(ExercisePage.Instance.IsStepModeEnabled)
         {
-            if (ExercisePage.Instance.ExecutionCancelled)
+            while (!ExercisePage.Instance.IsNextStepRequested)
             {
-                ExercisePage.Instance.ExecutionCancelled = false;
+                if (ExercisePage.Instance.ExecutionCancelled)
+                {
+                    ExercisePage.Instance.ExecutionCancelled = false;
 
-                throw new Pyrux.UserEndExceptions.ExecutionCancelledException();
+                    throw new Pyrux.UserEndExceptions.ExecutionCancelledException();
+                }
+                Thread.Sleep(5);
             }
-            Thread.Sleep(10);
+            ExercisePage.Instance.IsNextStepRequested = false;
         }
+        else
+        {
+            for (int i = 0; i < DataManagement.PyruxSettings.ExecutionDelayInMilliseconds; i += 10)
+            {
+                if (ExercisePage.Instance.ExecutionCancelled)
+                {
+                    ExercisePage.Instance.ExecutionCancelled = false;
 
+                    throw new Pyrux.UserEndExceptions.ExecutionCancelledException();
+                }
+                Thread.Sleep(10);
+            }
+        }
     }
 }
