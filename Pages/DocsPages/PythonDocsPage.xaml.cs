@@ -103,7 +103,7 @@ namespace Pyrux.Pages.DocsPages
 
                 See the documentation for function/method definitions here: https://docs.python.org/release/3.4.0/reference/compound_stmts.html#function-definitions
                 
-                (Also includes instructions for arguments and other advaced techniques.)
+                (Also includes instructions for arguments and other advanced techniques.)
                 
                 """; }
         public PythonDocsPage()

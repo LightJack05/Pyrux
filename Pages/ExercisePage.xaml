@@ -47,7 +47,7 @@
                             <TextBlock Text="" HorizontalAlignment="Stretch" Margin="10" x:Name="txtLevelTask"/>
                         </ScrollViewer>
                     </Border>
-                    <Button x:Name="btnEditTask" Margin="10,10,10,10" HorizontalAlignment="Right" VerticalAlignment="Top" IsEnabled="True" Click="btnEditTask_Click">
+                    <Button x:Name="btnEditTask" Margin="10,10,10,10" HorizontalAlignment="Right" VerticalAlignment="Top" IsEnabled="True" Click="btnEditTask_Click" ToolTipService.ToolTip="Edit the level description">
                         <SymbolIcon Symbol="Edit"/>
                     </Button>
                 </Grid>
@@ -73,11 +73,11 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" x:Name="btnStart" Margin="0,10,10,10" Click="btnStart_Click" IsEnabled="False">
+                        <Button Grid.Column="0" x:Name="btnStart" Margin="0,10,10,10" Click="btnStart_Click" IsEnabled="False" ToolTipService.ToolTip="Execute">
                             <SymbolIcon Symbol="Play"/>
                         </Button>
-                        <Slider Grid.Column="1" Margin="20,0,20,0" x:Name="sldExecutionSpeed" Header="Execution speed" Maximum="1000" Minimum="1" ValueChanged="sldExecutionSpeed_ValueChanged" PointerCaptureLost="sldExecutionSpeed_PointerReleased"/>
-                        <Button Grid.Column="2" x:Name="btnReset" Margin="10,10,0,10" Click="btnReset_Click">
+                        <Slider Grid.Column="1" Margin="20,10,20,0" x:Name="sldExecutionSpeed" Maximum="1000" Minimum="1" ValueChanged="sldExecutionSpeed_ValueChanged" PointerCaptureLost="sldExecutionSpeed_PointerReleased" ToolTipService.ToolTip="Change the execution speed"/>
+                        <Button Grid.Column="2" x:Name="btnReset" Margin="10,10,0,10" Click="btnReset_Click" ToolTipService.ToolTip="Reset layout">
                             <SymbolIcon Symbol="Refresh"/>
                         </Button>
                     </Grid>
@@ -107,22 +107,22 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <Button Grid.Column="0" x:Name="btnWallTool" Margin="10" Click="btnWallTool_Click">
+                        <Button Grid.Column="0" x:Name="btnWallTool" Margin="10" Click="btnWallTool_Click" ToolTipService.ToolTip="Walls">
                             <SymbolIcon Symbol="Placeholder"/>
                         </Button>
-                        <Button Grid.Column="1" x:Name="btnScrewTool" Margin="10" Click="btnScrewTool_Click">
+                        <Button Grid.Column="1" x:Name="btnScrewTool" Margin="10" Click="btnScrewTool_Click" ToolTipService.ToolTip="Screws">
                             <SymbolIcon Symbol="Setting"/>
                         </Button>
-                        <Button Grid.Column="2" x:Name="btnPlayerTool" Margin="10" Click="btnPlayerTool_Click">
+                        <Button Grid.Column="2" x:Name="btnPlayerTool" Margin="10" Click="btnPlayerTool_Click" ToolTipService.ToolTip="Move player">
                             <SymbolIcon Symbol="Contact"/>
                         </Button>
-                        <Button Grid.Column="3" x:Name="btnRotate" Margin="10" Click="btnRotate_Click">
+                        <Button Grid.Column="3" x:Name="btnRotate" Margin="10" Click="btnRotate_Click" ToolTipService.ToolTip="Rotate player">
                             <SymbolIcon Symbol="Rotate"/>
                         </Button>
-                        <Button Grid.Column="5" x:Name="btnSave" Margin="10" Click="btnSave_Click" IsEnabled="False">
+                        <Button Grid.Column="5" x:Name="btnSave" Margin="10" Click="btnSave_Click" IsEnabled="False" ToolTipService.ToolTip="Save">
                             <SymbolIcon Symbol="Save"/>
                         </Button>
-                        <Button Grid.Column="6" x:Name="btnSaveAs" Margin="10" Click="btnExport_Click" IsEnabled="True">
+                        <Button Grid.Column="6" x:Name="btnSaveAs" Margin="10" Click="btnExport_Click" IsEnabled="True" ToolTipService.ToolTip="Export">
                             <SymbolIcon Symbol="SaveLocal"/>
                         </Button>
                     </Grid>

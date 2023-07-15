@@ -16,5 +16,15 @@ namespace Pyrux.Pages
         {
             this.InitializeComponent();
         }
+
+        private void ngvSettings_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ngvSettings_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+        {
+
+        }
     }
 }

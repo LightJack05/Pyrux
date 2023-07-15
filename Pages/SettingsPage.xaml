@@ -12,6 +12,20 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBlock>Settings page</TextBlock>
+        <Border Background="{ThemeResource SystemChromeLowColor}" CornerRadius="10" Margin="10">
+            <Grid Margin="10">
+                <NavigationView
+                    x:Name="ngvSettings"
+                    x:Name="ngvDocs"
+                    PaneDisplayMode="Top"
+                    IsBackButtonVisible="Collapsed"
+                    Background="Transparent"
+                    IsSettingsVisible="False"
+                    Loaded="ngvSettings_Loaded"
+                    ItemInvoked="ngvSettings_ItemInvoked">
+                    
+                </NavigationView>
+            </Grid>
+        </Border>
     </Grid>
 </Page>

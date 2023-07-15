@@ -178,6 +178,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\DocsPages\MarkDown\" />
+    <Folder Include="Pages\SettingsPages\" />
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\ContentDialogs\LevelExportDialogue.xaml">

@@ -49,6 +49,7 @@ public sealed partial class ExercisePage
             btnStart.IsEnabled = false;
             PythonScriptRunning = true;
             btnReset.Content = new SymbolIcon(Symbol.Stop);
+            ToolTipService.SetToolTip(btnReset, "Stop");
             string pythonCode = BuildPythonCode();
             ScriptEngine scriptEngine = Python.CreateEngine();
 
@@ -89,6 +90,7 @@ public sealed partial class ExercisePage
             catch (ExecutionCancelledException) { }
             ExercisePage.Instance.PythonScriptRunning = false;
             btnReset.Content = new SymbolIcon(Symbol.Refresh);
+            ToolTipService.SetToolTip(btnReset, "Reset layout");
 
         }
         if (thrownException != null)

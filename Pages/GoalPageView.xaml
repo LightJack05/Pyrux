@@ -29,13 +29,13 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Button Grid.Column="1" x:Name="btnScrewTool" Margin="10" Click="btnScrewTool_Click">
+                    <Button Grid.Column="1" x:Name="btnScrewTool" Margin="10" Click="btnScrewTool_Click" ToolTipService.ToolTip="Screws">
                         <SymbolIcon Symbol="Setting"/>
                     </Button>
-                    <Button Grid.Column="2" x:Name="btnPlayerTool" Margin="10" Click="btnPlayerTool_Click">
+                    <Button Grid.Column="2" x:Name="btnPlayerTool" Margin="10" Click="btnPlayerTool_Click" ToolTipService.ToolTip="Move player">
                         <SymbolIcon Symbol="Contact"/>
                     </Button>
-                    <Button Grid.Column="3" x:Name="btnRotate" Margin="10" Click="btnRotate_Click">
+                    <Button Grid.Column="3" x:Name="btnRotate" Margin="10" Click="btnRotate_Click" ToolTipService.ToolTip="Rotate player">
                         <SymbolIcon Symbol="Rotate"/>
                     </Button>
                     

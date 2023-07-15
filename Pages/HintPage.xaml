@@ -18,7 +18,7 @@
             <ScrollViewer Margin="10">
                 <Grid>
                     <controls:MarkdownTextBlock UseSyntaxHighlighting="True" x:Name="mtbHintRenderer" CodeBackground="{ThemeResource SystemChromeLowColor}" Margin="20" Background="Transparent"/>
-                    <Button x:Name="btnEditHint" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20" Click="Button_Click" IsEnabled="False">
+                    <Button x:Name="btnEditHint" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20" Click="Button_Click" IsEnabled="False" ToolTipService.ToolTip="Edit">
                         <SymbolIcon Symbol="Edit"/>
                     </Button>
                 </Grid>
