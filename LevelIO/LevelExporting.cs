@@ -1,6 +1,4 @@
-﻿using Microsoft.UI.Xaml.Controls;
-using System.Threading.Tasks;
-using System.IO.Compression;
+﻿using System.Threading.Tasks;
 using Windows.Storage;
 
 namespace Pyrux.LevelIO

@@ -7,13 +7,9 @@
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-using System.Diagnostics;
 using Microsoft.Windows.AppLifecycle;
-using System.Linq;
 using Windows.ApplicationModel.Activation;
 using Windows.Storage;
-using Pyrux.LevelIO;
-using System.Reflection.Emit;
 
 namespace Pyrux
 {
@@ -55,7 +51,7 @@ namespace Pyrux
                     }
                     catch (JsonException)
                     {
-                        
+
                     }
                 }
             }
@@ -72,7 +68,7 @@ namespace Pyrux
                         DataManagement.PyruxSettings.Instance = JsonConvert.DeserializeObject<PyruxSettings>(fileContent);
                     }
                 }
-                catch 
+                catch
                 {
                     DataManagement.PyruxSettings.Instance = new PyruxSettings(200);
                 }
@@ -81,7 +77,7 @@ namespace Pyrux
             {
                 DataManagement.PyruxSettings.Instance = new PyruxSettings(200);
             }
-            
+
 
             m_window = new MainWindow();
             m_window.Activate();
@@ -89,7 +85,7 @@ namespace Pyrux
 
         private Window m_window;
 
-        
+
 
     }
 }

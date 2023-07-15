@@ -1,10 +1,4 @@
-﻿using IronPython.Runtime.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.Storage;
+﻿using Windows.Storage;
 
 namespace Pyrux.DataManagement
 {
@@ -16,8 +10,8 @@ namespace Pyrux.DataManagement
         /// </summary>
         /// <param name="executionSpeed">Speed of execution between instructions.</param>
         [JsonConstructor]
-        public PyruxSettings(int executionSpeed) 
-        { 
+        public PyruxSettings(int executionSpeed)
+        {
             _executionSpeed = executionSpeed;
         }
         /// <summary>
@@ -63,7 +57,7 @@ namespace Pyrux.DataManagement
                 }
                 catch
                 {
-                    
+
                 }
             }
         }
