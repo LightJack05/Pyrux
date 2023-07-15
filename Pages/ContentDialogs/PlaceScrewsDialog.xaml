@@ -10,7 +10,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="Transparent"
-    Loaded="Page_Loaded">
+    Loaded="Page_Loaded"
+    NavigationCacheMode="Required">
 
     <StackPanel Orientation="Vertical" Background="Transparent">
         <NumberBox x:Name="nbxScrewAmount" PlaceholderText="0" ValueChanged="nbxScrewAmount_ValueChanged" Background="Transparent"/>

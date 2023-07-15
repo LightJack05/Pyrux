@@ -9,7 +9,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="Transparent">
+    Background="Transparent"
+    NavigationCacheMode="Required">
 
     <Grid>
         <TextBlock Foreground="Red" TextWrapping="WrapWholeWords" FontSize="22">The appdata folder has been corrupted. It needs to be repaired. This will CLEAR all appdata data and levels. Are you sure you wish to continue?</TextBlock>

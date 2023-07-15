@@ -10,7 +10,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    Loaded="Page_Loaded">
+    Loaded="Page_Loaded"
+    NavigationCacheMode="Required">
 
     <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch" MinWidth="700">
         <ScrollViewer MaxHeight="400" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">

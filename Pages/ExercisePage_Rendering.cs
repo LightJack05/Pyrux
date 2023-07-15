@@ -245,7 +245,10 @@ public sealed partial class ExercisePage
         txtCodeEditor.Text = ActiveLevel.Script;
 
         btnStart.IsEnabled = true;
+        btnStep.IsEnabled= true;
+        btnReset.IsEnabled = true;
         btnSave.IsEnabled = true;
+        btnExport.IsEnabled = true;
 
         if (StaticDataStore.ActiveLevel.GoalMapLayout == null)
         {
