@@ -3,6 +3,7 @@
 
 using Pyrux.LevelIO;
 using Pyrux.Pages.ContentDialogs;
+using Windows.ApplicationModel.Activation;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -202,9 +203,9 @@ namespace Pyrux.Pages
         {
             await LevelIO.LevelImporting.ImportLevel();
             Page_Loaded(null, null);
-
+                
         }
 
-
+        
     }
 }

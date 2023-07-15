@@ -36,17 +36,19 @@ internal static class LevelLoading
             if (File.Exists(Path.Combine(levelFolder.Path, "LevelData.json")))
             {
 
-                using StreamReader sr = new(Path.Combine(levelFolder.Path, "LevelData.json"));
-                string levelJson = sr.ReadToEnd();
-                try
+                using (StreamReader sr = new(Path.Combine(levelFolder.Path, "LevelData.json")))
                 {
+                    string levelJson = sr.ReadToEnd();
+                    try
+                    {
 
-                    level = JsonConvert.DeserializeObject<PyruxLevel>(levelJson);
+                        level = JsonConvert.DeserializeObject<PyruxLevel>(levelJson);
 
-                }
-                catch (JsonException)
-                {
-                    throw new InvalidLevelJsonException($"The JSON retrieved from the level file was invalid and could not be diserialized properly.");
+                    }
+                    catch (JsonException)
+                    {
+                        throw new InvalidLevelJsonException($"The JSON retrieved from the level file was invalid and could not be diserialized properly.");
+                    }
                 }
 
             }
@@ -58,15 +60,19 @@ internal static class LevelLoading
 
             if (File.Exists(Path.Combine(levelFolder.Path, "LevelScript.py")))
             {
-                using StreamReader sr = new(Path.Combine(levelFolder.Path, "LevelScript.py"));
-                string levelScript = sr.ReadToEnd();
-                level.Script = levelScript;
+                using (StreamReader sr = new(Path.Combine(levelFolder.Path, "LevelScript.py")))
+                {
+                    string levelScript = sr.ReadToEnd();
+                    level.Script = levelScript;
+                }
             }
             else
             {
                 await levelFolder.CreateFileAsync("LevelScript.py");
-                using StreamWriter sw = new(Path.Combine(levelFolder.Path, "LevelScript.py"));
-                sw.Write(level.Script);
+                using (StreamWriter sw = new(Path.Combine(levelFolder.Path, "LevelScript.py")))
+                {
+                    sw.Write(level.Script);
+                }
             }
             return level;
         }
@@ -89,17 +95,19 @@ internal static class LevelLoading
 
         if (File.Exists(Path.Combine(levelFolder.Path, "LevelData.json")))
         {
-            using StreamReader sr = new(Path.Combine(levelFolder.Path, "LevelData.json"));
-            string levelJson = sr.ReadToEnd();
-            try
+            using (StreamReader sr = new(Path.Combine(levelFolder.Path, "LevelData.json")))
             {
+                string levelJson = sr.ReadToEnd();
+                try
+                {
 
-                level = JsonConvert.DeserializeObject<PyruxLevel>(levelJson);
+                    level = JsonConvert.DeserializeObject<PyruxLevel>(levelJson);
 
-            }
-            catch (JsonException)
-            {
-                throw new InvalidLevelJsonException($"The JSON retrieved from the level file was invalid and could not be deserialized properly.");
+                }
+                catch (JsonException)
+                {
+                    throw new InvalidLevelJsonException($"The JSON retrieved from the level file was invalid and could not be deserialized properly.");
+                }
             }
 
         }
@@ -111,15 +119,19 @@ internal static class LevelLoading
 
         if (File.Exists(Path.Combine(levelFolder.Path, "LevelScript.py")))
         {
-            using StreamReader sr = new(Path.Combine(levelFolder.Path, "LevelScript.py"));
-            string levelScript = sr.ReadToEnd();
-            level.Script = levelScript;
+            using (StreamReader sr = new(Path.Combine(levelFolder.Path, "LevelScript.py")))
+            {
+                string levelScript = sr.ReadToEnd();
+                level.Script = levelScript;
+            }
         }
         else
         {
             await levelFolder.CreateFileAsync("LevelScript.py");
-            using StreamWriter sw = new(Path.Combine(levelFolder.Path, "LevelScript.py"));
-            sw.Write(level.Script);
+            using (StreamWriter sw = new(Path.Combine(levelFolder.Path, "LevelScript.py")))
+            {
+                sw.Write(level.Script);
+            }
         }
         return level;
 

@@ -31,9 +31,9 @@ public sealed partial class ExercisePage
     /// </summary>
     private async void LevelCreationDialogueFinished()
     {
-        if (!((LevelCreationDialogue.LevelName == String.Empty) ||
-            (LevelCreationDialogue.LevelName.Trim().Length == 0) ||
-            StaticDataStore.UserCreatedLevels.Any<PyruxLevel>((x) => x.LevelName == LevelCreationDialogue.LevelName.Trim()) ||
+        if (!((LevelCreationDialogue.LevelName == String.Empty) || 
+            (LevelCreationDialogue.LevelName.Trim().Length == 0) || 
+            StaticDataStore.UserCreatedLevels.Any<PyruxLevel>((x) => x.LevelName == LevelCreationDialogue.LevelName.Trim()) || 
             StaticDataStore.BuiltInLevels.Any<PyruxLevel>((x) => x.LevelName == LevelCreationDialogue.LevelName.Trim())))
         {
             ActiveLevel = new PyruxLevel(

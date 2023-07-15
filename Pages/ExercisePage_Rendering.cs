@@ -225,7 +225,7 @@ public sealed partial class ExercisePage
     /// </summary>
     public void NavigationLayoutReset()
     {
-        if (ActiveLevel != null && StaticDataStore.OriginalActiveLevelMapLayout != null)
+        if(ActiveLevel != null && StaticDataStore.OriginalActiveLevelMapLayout != null)
         {
             ActiveLevel.MapLayout = StaticDataStore.OriginalActiveLevelMapLayout.Copy();
         }
@@ -245,7 +245,7 @@ public sealed partial class ExercisePage
         btnStart.IsEnabled = true;
         btnSave.IsEnabled = true;
 
-        if (StaticDataStore.ActiveLevel.GoalMapLayout == null)
+        if(StaticDataStore.ActiveLevel.GoalMapLayout == null)
         {
             StaticDataStore.ActiveLevel.GoalMapLayout = StaticDataStore.ActiveLevel.MapLayout.Copy();
         }
