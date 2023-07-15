@@ -16,14 +16,16 @@
             <Grid Margin="10">
                 <NavigationView
                     x:Name="ngvSettings"
-                    x:Name="ngvDocs"
                     PaneDisplayMode="Top"
                     IsBackButtonVisible="Collapsed"
                     Background="Transparent"
                     IsSettingsVisible="False"
                     Loaded="ngvSettings_Loaded"
                     ItemInvoked="ngvSettings_ItemInvoked">
-                    
+                    <NavigationView.MenuItems>
+                        <NavigationViewItem Tag="execution" Content="Execution"/>
+                        <Frame x:Name="ctfSettings" IsTabStop="True" Padding="0" Background="{ThemeResource SystemChromeLowColor}"/>
+                    </NavigationView.MenuItems>
                 </NavigationView>
             </Grid>
         </Border>

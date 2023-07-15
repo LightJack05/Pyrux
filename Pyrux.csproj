@@ -45,6 +45,7 @@
     <None Remove="Pages\HintPage.xaml" />
     <None Remove="Pages\LevelSelectPage.xaml" />
     <None Remove="Pages\SettingsPage.xaml" />
+    <None Remove="Pages\SettingsPages\ExecutionSettings.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -178,7 +179,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\DocsPages\MarkDown\" />
-    <Folder Include="Pages\SettingsPages\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\SettingsPages\ExecutionSettings.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\ContentDialogs\LevelExportDialogue.xaml">
