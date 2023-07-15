@@ -44,7 +44,7 @@ namespace Pyrux.DataManagement
                 try
                 {
                     // Create file if it doesn't exist yet
-                    if (File.Exists(Path.Combine(appdataFolder.Path, "settings.json")))
+                    if (!File.Exists(Path.Combine(appdataFolder.Path, "settings.json")))
                     {
                         await appdataFolder.CreateFileAsync("settings.json");
                     }
