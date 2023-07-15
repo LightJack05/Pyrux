@@ -240,7 +240,7 @@ public sealed partial class ExercisePage
     {
         StaticDataStore.OriginalActiveLevelMapLayout = ActiveLevel.MapLayout.Copy();
 
-        expTaskExpander.Header = ActiveLevel.LevelName;
+        expTaskExpander.Header = new TextBlock { Text = ActiveLevel.LevelName, FontSize = 20, Margin = new(0,-3,0,0) };
         txtLevelTask.Text = ActiveLevel.Task;
         txtCodeEditor.Text = ActiveLevel.Script;
 

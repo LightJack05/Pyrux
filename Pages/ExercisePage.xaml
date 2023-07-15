@@ -25,7 +25,6 @@
                 VerticalAlignment="Top"
                 HorizontalAlignment="Stretch"
                 HorizontalContentAlignment="Stretch"
-                Header=""
                 Margin="20,10,10,10"
                 CornerRadius="10"
                 x:Name="expTaskExpander">
