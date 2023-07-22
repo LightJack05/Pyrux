@@ -9,7 +9,7 @@
   <Identity
     Name="0b030248-8714-4353-9943-c22ef306e84b"
     Publisher="CN=LightJack05"
-    Version="0.0.1.1" />
+    Version="0.0.2.1" />
 
   <Properties>
     <DisplayName>Pyrux</DisplayName>

@@ -80,6 +80,8 @@ namespace Pyrux.Pages
             else
             {
                 btnScrewTool.IsEnabled = false;
+                btnRotate.IsEnabled = true;
+                btnPlayerTool.IsEnabled = true;
                 SelectedToolIndex = 1;
             }
         }

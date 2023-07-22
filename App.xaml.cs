@@ -8,6 +8,7 @@
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
 using Microsoft.Windows.AppLifecycle;
+using Pyrux.LevelIO;
 using Windows.ApplicationModel.Activation;
 using Windows.Storage;
 
@@ -47,7 +48,7 @@ namespace Pyrux
                     try
                     {
                         PyruxLevel level = JsonConvert.DeserializeObject<PyruxLevel>(file);
-                        //TODO: Actually import the level.
+                        LevelSaving.Save(level);
                     }
                     catch (JsonException)
                     {
