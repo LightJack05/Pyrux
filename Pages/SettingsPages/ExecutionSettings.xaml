@@ -8,9 +8,48 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="Transparent"
-    NavigationCacheMode="Required">
+    NavigationCacheMode="Required"
+    Loaded="Page_Loaded">
 
-    <Grid>
-        <!--TODO: Implement settings pages-->
-    </Grid>
+    <StackPanel Orientation="Vertical">
+
+        <Border Background="{ThemeResource SystemChromeMediumHighColor}" CornerRadius="10" Margin="10">
+            <Grid Margin="10" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="Automatically restart on completion of execution" VerticalAlignment="Center"/>
+                <ToggleSwitch Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"  x:Name="tswAutoReset" Toggled="tswAutoReset_Toggled"/>
+            </Grid>
+        </Border>
+
+        <Border Background="{ThemeResource SystemChromeMediumHighColor}" CornerRadius="10" Margin="10">
+            <StackPanel Orientation="Vertical">
+                
+                <Grid Margin="10" HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Add a delay before resetting the layout" VerticalAlignment="Center" x:Name="txtAddDelay"/>
+                    <ToggleSwitch Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" x:Name="tswAddDelay" Toggled="tswAddDelay_Toggled"/>
+                </Grid>
+                <Line Stretch="Fill" Stroke="DarkGray" X2="1" Margin="10"/>
+
+                <Grid HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel>
+                        <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Length of delay (ms)" Margin="10" x:Name="txtDelayBeforeReset"/>
+                        <Slider Margin="10" Minimum="1" Maximum="10000" x:Name="sldDelayBeforeReset" ValueChanged="sldDelayBeforeReset_ValueChanged"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </Border>
+        
+
+    </StackPanel>
 </Page>

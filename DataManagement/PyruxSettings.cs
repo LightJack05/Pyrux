@@ -31,6 +31,12 @@ namespace Pyrux.DataManagement
         /// Storage for the execution speed in the instance variable.
         /// </summary>
         public int _executionSpeed { get; set; } = 200;
+        public static bool AutoRestartOnFinish { get => Instance._autoRestartOnFinish; set => Instance._autoRestartOnFinish = value; }
+        public bool _autoRestartOnFinish { get; set; } = false;
+        public static int DelayBeforeAutoReset { get => Instance._delayBeforeAutoReset; set => Instance._delayBeforeAutoReset = value; }
+        public int _delayBeforeAutoReset { get; set; } = 100;
+        public static bool AddDelayBeforeAutoReset { get => Instance._addDelayBeforeAutoReset; set => Instance._addDelayBeforeAutoReset = value; }
+        public bool _addDelayBeforeAutoReset { get; set; } = false;
         /// <summary>
         /// Saves the settings into the Appdata file.
         /// </summary>

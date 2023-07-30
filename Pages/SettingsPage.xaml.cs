@@ -28,7 +28,7 @@ namespace Pyrux.Pages
         private void ngvSettings_Loaded(object sender, RoutedEventArgs e)
         {
             ngvSettings.SelectedItem = ngvSettings.MenuItems[0];
-            NavViewNavigate("movement", new Microsoft.UI.Xaml.Media.Animation.EntranceNavigationTransitionInfo());
+            NavViewNavigate("execution", new Microsoft.UI.Xaml.Media.Animation.EntranceNavigationTransitionInfo());
         }
 
         private void ngvSettings_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)

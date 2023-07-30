@@ -12,6 +12,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -25,7 +26,40 @@ namespace Pyrux.Pages.SettingsPages
     {
         public ExecutionSettings()
         {
+            int delayBeforeAutoReset = PyruxSettings.DelayBeforeAutoReset;
             this.InitializeComponent();
+            PyruxSettings.DelayBeforeAutoReset = delayBeforeAutoReset;
+            sldDelayBeforeReset.Value = delayBeforeAutoReset;
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            UpdateSettingsDisplay();
+        }
+
+        private void tswAutoReset_Toggled(object sender, RoutedEventArgs e)
+        {
+            PyruxSettings.AutoRestartOnFinish = tswAutoReset.IsOn;
+            UpdateSettingsDisplay();
+            
+        }
+        private void UpdateSettingsDisplay()
+        {
+            tswAutoReset.IsOn = PyruxSettings.AutoRestartOnFinish;
+            tswAddDelay.IsEnabled = PyruxSettings.AutoRestartOnFinish;
+            sldDelayBeforeReset.IsEnabled = PyruxSettings.AutoRestartOnFinish && PyruxSettings.AddDelayBeforeAutoReset;
+            PyruxSettings.SaveSettings();
+        }
+
+        private void sldDelayBeforeReset_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            PyruxSettings.DelayBeforeAutoReset = (int)sldDelayBeforeReset.Value;
+        }
+
+        private void tswAddDelay_Toggled(object sender, RoutedEventArgs e)
+        {
+            PyruxSettings.AddDelayBeforeAutoReset = tswAddDelay.IsOn;
+            UpdateSettingsDisplay();
         }
     }
 }
