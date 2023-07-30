@@ -47,7 +47,7 @@ namespace Pyrux.Pages
         /// </summary>
         private void LoadLevelIntoPage()
         {
-            StaticDataStore.OriginalActiveLevelMapLayout = ActiveLevel.GoalMapLayout.Copy();
+            //ActiveLevel.GoalMapLayout = StaticDataStore.OriginalActiveLevelMapLayout.Copy();
 
             BuildPlayGrid();
             FullDisplayRedraw();
@@ -59,10 +59,9 @@ namespace Pyrux.Pages
             {
                 if (ActiveLevel.GoalMapLayout == null)
                 {
-                    ActiveLevel.GoalMapLayout = ActiveLevel.MapLayout.Copy();
+                    ActiveLevel.GoalMapLayout = StaticDataStore.OriginalActiveLevelMapLayout.Copy();
                 }
                 LoadLevelIntoPage();
-                StaticDataStore.OriginalActiveLevelMapLayout = ActiveLevel.MapLayout.Copy();
                 FullDisplayRedraw();
                 PrepareToolSelection();
             }
@@ -294,20 +293,20 @@ namespace Pyrux.Pages
                 ActiveLevel.GoalMapLayout.CurrentPlayerPosition = position.Copy();
             }
             UpdateDisplay();
-            SaveNewLayout();
+            //SaveNewLayout();
         }
 
         private void TurnPlayer()
         {
             ActiveLevel.GoalMapLayout.CurrentPlayerDirection++;
             UpdateDisplay();
-            SaveNewLayout();
+            //SaveNewLayout();
         }
 
-        private void SaveNewLayout()
-        {
-            StaticDataStore.OriginalActiveLevelMapLayout = ActiveLevel.GoalMapLayout.Copy();
-        }
+        //private void SaveNewLayout()
+        //{
+        //    StaticDataStore.OriginalActiveLevelMapLayout = ActiveLevel.GoalMapLayout.Copy();
+        //}
 
 
         private void ChangeScrewsTool(PositionVector2 position)
@@ -345,7 +344,7 @@ namespace Pyrux.Pages
         private void UpdateScrewCount(PositionVector2 position, int count)
         {
             ActiveLevel.GoalMapLayout.SetScrewNumberAtPosition(position, count);
-            SaveNewLayout();
+            //SaveNewLayout();
             UpdateDisplay();
         }
     }

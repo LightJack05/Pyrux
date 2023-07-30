@@ -22,7 +22,14 @@ namespace Pyrux.Pages.ContentDialogs
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            ScrewNumber = StaticDataStore.ActiveLevel.MapLayout.GetScrewNumberAtPosition(Position);
+            if(MainWindow.Instance.NavViewSelectedIndex == 2)
+            {
+                ScrewNumber = StaticDataStore.ActiveLevel.GoalMapLayout.GetScrewNumberAtPosition(Position);
+            }
+            else
+            {
+                ScrewNumber = StaticDataStore.ActiveLevel.MapLayout.GetScrewNumberAtPosition(Position);
+            }
             nbxScrewAmount.Value = ScrewNumber;
         }
 

@@ -19,6 +19,7 @@ namespace Pyrux
         }
 
         public static MainWindow Instance;
+        public int NavViewSelectedIndex { get; private set; } = -1;
         /// <summary>
         /// List of pages in the navigation menu.
         /// </summary>
@@ -97,6 +98,8 @@ namespace Pyrux
             {
                 (string Tag, Type Page) item = contentDictionary.FirstOrDefault(p => p.Tag.Equals(navItemTag));
                 page = item.Page;
+                NavViewSelectedIndex = contentDictionary.IndexOf(item);
+
             }
 
             Type preNavPageType = ctfMain.CurrentSourcePageType;
