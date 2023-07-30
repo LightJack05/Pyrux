@@ -17,7 +17,7 @@ namespace Pyrux.Pages
         /// </summary>
         public string Version
         {
-            get => System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            get => StaticDataStore.VersionNumber;
         }
         /// <summary>
         /// The text displayed on the about page.

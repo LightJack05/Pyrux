@@ -15,7 +15,7 @@ namespace Pyrux
     {
         public string TitleText
         {
-            get => "[PRE-ALPHA] Pyrux v" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            get => "[PRE-ALPHA] Pyrux v" + StaticDataStore.VersionNumber;
         }
 
         public static MainWindow Instance;

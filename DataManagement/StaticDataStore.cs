@@ -1,4 +1,6 @@
-﻿namespace Pyrux.DataManagement
+﻿using System.Reflection;
+
+namespace Pyrux.DataManagement
 {
     internal static class StaticDataStore
     {
@@ -18,5 +20,21 @@
         /// List of user created levels.
         /// </summary>
         public static List<PyruxLevel> UserCreatedLevels { get; set; }
+
+        public static string VersionNumber 
+        {
+            get => GetApplicationVersion();
+        }
+
+        private static string GetApplicationVersion()
+        {
+            var version = Windows.ApplicationModel.Package.Current.Id.Version;
+            string applicationVersion = string.Format("{0}.{1}.{2}.{3}",
+                version.Major,
+                version.Minor,
+                version.Build,
+                version.Revision);
+            return applicationVersion;
+        }
     }
 }
