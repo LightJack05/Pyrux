@@ -30,6 +30,7 @@ namespace Pyrux.Pages.SettingsPages
             this.InitializeComponent();
             PyruxSettings.DelayBeforeAutoReset = delayBeforeAutoReset;
             sldDelayBeforeReset.Value = delayBeforeAutoReset;
+            UpdateSettingsDisplay();
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -54,6 +55,7 @@ namespace Pyrux.Pages.SettingsPages
         private void sldDelayBeforeReset_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
             PyruxSettings.DelayBeforeAutoReset = (int)sldDelayBeforeReset.Value;
+            UpdateSettingsDisplay();
         }
 
         private void tswAddDelay_Toggled(object sender, RoutedEventArgs e)

@@ -144,6 +144,30 @@ public sealed partial class ExercisePage
             btnStart.IsEnabled = false;
             btnStep.IsEnabled = false;
             IsStepModeEnabled = false;
+
+            if(PyruxSettings.AutoRestartOnFinish)
+            {
+                if(PyruxSettings.AddDelayBeforeAutoReset)
+                {
+                    await Task.Run(() => {
+                        Thread.Sleep(PyruxSettings.DelayBeforeAutoReset);
+                        
+                    });
+                    if(!PythonScriptRunning && !btnStart.IsEnabled && !btnStep.IsEnabled)
+                    {
+                        ExecutionRanState = false;
+                        PrepareToolSelection();
+                        ResetLayoutToStart();
+                    }
+                }
+                else
+                {
+                    ExecutionRanState = false;
+                    PrepareToolSelection();
+                    ResetLayoutToStart();
+                }
+            }
+            
             
 
         }

@@ -71,12 +71,12 @@ namespace Pyrux
                 }
                 catch
                 {
-                    DataManagement.PyruxSettings.Instance = new PyruxSettings(200);
+                    DataManagement.PyruxSettings.Instance = new PyruxSettings(200,1000,false,false);
                 }
             }
             else
             {
-                DataManagement.PyruxSettings.Instance = new PyruxSettings(200);
+                DataManagement.PyruxSettings.Instance = new PyruxSettings(200, 1000, false, false);
             }
 
 

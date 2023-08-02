@@ -10,9 +10,12 @@ namespace Pyrux.DataManagement
         /// </summary>
         /// <param name="executionSpeed">Speed of execution between instructions.</param>
         [JsonConstructor]
-        public PyruxSettings(int executionSpeed)
+        public PyruxSettings(int executionSpeed,int resetDelayInMilliseconds, bool autoRestartOnFinish, bool addDelayToReset)
         {
             _executionSpeed = executionSpeed;
+            _delayBeforeAutoReset = resetDelayInMilliseconds;
+            _autoRestartOnFinish = autoRestartOnFinish;
+            _addDelayBeforeAutoReset = addDelayToReset;
         }
         /// <summary>
         /// The current instance of the settings. This saves the actual data.
