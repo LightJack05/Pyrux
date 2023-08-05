@@ -47,6 +47,7 @@ namespace Pyrux.Pages.SettingsPages
         private void UpdateSettingsDisplay()
         {
             tswAutoReset.IsOn = PyruxSettings.AutoRestartOnFinish;
+            tswAddDelay.IsOn = PyruxSettings.AddDelayBeforeAutoReset;
             tswAddDelay.IsEnabled = PyruxSettings.AutoRestartOnFinish;
             sldDelayBeforeReset.IsEnabled = PyruxSettings.AutoRestartOnFinish && PyruxSettings.AddDelayBeforeAutoReset;
             PyruxSettings.SaveSettings();
