@@ -158,10 +158,10 @@ namespace Pyrux.LevelIO
                 throw new AppdataFolderNotFoundException();
             }
 
-            IReadOnlyList<StorageFolder> storageFolders = await appdataFolder.GetFoldersAsync();
-            foreach (StorageFolder folder in storageFolders)
+            IReadOnlyList<IStorageItem> storageItems = await appdataFolder.GetItemsAsync();
+            foreach (IStorageItem item in storageItems)
             {
-                await folder.DeleteAsync();
+                await item.DeleteAsync();
             }
 
         }
