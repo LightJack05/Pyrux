@@ -167,9 +167,6 @@ public sealed partial class ExercisePage
                     ResetLayoutToStart();
                 }
             }
-            
-            
-
         }
         if (thrownException != null)
         {
@@ -177,7 +174,7 @@ public sealed partial class ExercisePage
         }
         else
         {
-            if (ActiveLevel.MapLayout.Equals(ActiveLevel.GoalMapLayout))
+            if (StaticDataStore.ActiveLevel.MapLayout.MatchGoalLayout(ActiveLevel.GoalMapLayout))
             {
                 ActiveLevel.Completed = true;
                 ShowLevelCompletedDialogue();

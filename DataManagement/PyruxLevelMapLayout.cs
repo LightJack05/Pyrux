@@ -168,5 +168,49 @@
 
             return true;
         }
+
+        public bool MatchGoalLayout( PyruxLevelMapLayout GoalLayout)
+        {
+            if (GoalLayout == null) return false;
+
+            if (GoalLayout.SizeX != this.SizeX || GoalLayout.SizeY != this.SizeY)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < CollectablesLayout.GetLength(0); i++)
+            {
+                for (int j = 0; j < CollectablesLayout.GetLength(1); j++)
+                {
+                    if (StaticDataStore.ActiveLevel.MapLayout.CollectablesLayout[i, j] != GoalLayout.CollectablesLayout[i, j])
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            for (int i = 0; i < WallLayout.GetLength(0); i++)
+            {
+                for (int j = 0; j < WallLayout.GetLength(1); j++)
+                {
+                    if (this.CollectablesLayout[i, j] != GoalLayout.CollectablesLayout[i, j])
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (CurrentPlayerDirection * 90 % 360 != GoalLayout.CurrentPlayerDirection * 90 % 360)
+            {
+                return false;
+            }
+
+            if (!CurrentPlayerPosition.Equals(GoalLayout.CurrentPlayerPosition))
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }
