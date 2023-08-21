@@ -3,6 +3,8 @@ using Windows.Storage;
 
 namespace Pyrux.LevelIO
 {
+    // Check this:
+    // localFolder = Task.Run(async () => await StorageFolder.GetFolderFromPathAsync(System.AppContext.BaseDirectory)).Result;
     internal class AppdataManagement
     {
         /// <summary>
