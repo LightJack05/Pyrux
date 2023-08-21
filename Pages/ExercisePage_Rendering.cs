@@ -38,6 +38,7 @@ public sealed partial class ExercisePage
                 Border border = new();
                 Image image = new();
                 image.PointerPressed += Tile_Clicked;
+                image.PointerEntered += Tile_Entered;
                 border.Child = image;
                 border.Background = new SolidColorBrush(Colors.Black);
                 image.Margin = new(3);

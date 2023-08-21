@@ -1,9 +1,11 @@
-﻿using Pyrux.Pages.ContentDialogs;
+﻿using Microsoft.UI.Xaml.Input;
+using Pyrux.Pages.ContentDialogs;
 
 namespace Pyrux.Pages;
 
 public sealed partial class ExercisePage
 {
+    private bool? _dragStartedWithAdding = null;
 
     /// <summary>
     /// On clicking a tile, apply the selected tool to the tile that was clicked.
@@ -34,6 +36,31 @@ public sealed partial class ExercisePage
                 break;
         }
 
+    }
+
+    private void Tile_Entered(object sender, PointerRoutedEventArgs e)
+    {
+        if (e.GetCurrentPoint(null).Properties.IsLeftButtonPressed && SelectedToolIndex == 0)
+        {
+            Border clickedBorder = VisualTreeHelper.GetParent((Image)sender) as Border;
+            PositionVector2 position = new(Grid.GetColumn(clickedBorder), Grid.GetRow(clickedBorder));
+
+            if(_dragStartedWithAdding is null)
+            {
+                _dragStartedWithAdding = !ActiveLevel.MapLayout.IsWallAtPosition(position);
+            }
+
+            if(_dragStartedWithAdding == ActiveLevel.MapLayout.IsWallAtPosition(position))
+            {
+                SwitchWall(position);
+            }
+
+            Tile_Clicked(sender, e);
+        }
+    }
+    private void Page_PointerReleased(object sender, Microsoft.UI.Xaml.Input.PointerRoutedEventArgs e)
+    {
+        _dragStartedWithAdding = null;
     }
 
     private void btnWallTool_Click(object sender, RoutedEventArgs e)
