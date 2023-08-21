@@ -46,6 +46,7 @@
     <None Remove="Pages\LevelSelectPage.xaml" />
     <None Remove="Pages\SettingsPage.xaml" />
     <None Remove="Pages\SettingsPages\ExecutionSettings.xaml" />
+    <None Remove="ApplicationWindows\DocumentationWindow.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -179,6 +180,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\DocsPages\MarkDown\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Windows\DocumentationWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\SettingsPages\ExecutionSettings.xaml">

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    xmlns:pages="using:Pyrux.Pages"
+    x:Class="Pyrux.ApplicationWindows.DocumentationWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Pyrux.ApplicationWindows"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Activated="Window_Activated">
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid x:Name="AppTitleBar">
+            <TextBlock x:Name="TitleTextBlock" 
+            Text="{x:Bind TitleText}" 
+            Grid.Column="2"
+            TextWrapping="NoWrap"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Margin="28,0,0,0"/>
+        </Grid>
+        <Frame Grid.Row="1" SourcePageType="pages:DocsPage"/>
+    </Grid>
+    
+</Window>

@@ -15,8 +15,15 @@
     <Grid>
         <Border Background="{ThemeResource SystemChromeLowColor}" CornerRadius="10" Margin="10">
             <Grid Margin="10">
-                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Button Grid.Row="0" x:Name="btnPopoutDocs" Content="Popout" Click="btnPopoutDocs_Click">
+                    
+                </Button>
                 <NavigationView
+                    Grid.Row="1"
                     x:Name="ngvDocs"
                     PaneDisplayMode="Top"
                     IsBackButtonVisible="Collapsed"

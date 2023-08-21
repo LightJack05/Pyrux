@@ -61,5 +61,11 @@ namespace Pyrux.Pages
                 ctfDocs.Navigate(page, null, transitionInfo);
             }
         }
+
+        private void btnPopoutDocs_Click(object sender, RoutedEventArgs e)
+        {
+            Window docsWindow = new ApplicationWindows.DocumentationWindow();
+            docsWindow.Activate();
+        }
     }
 }
