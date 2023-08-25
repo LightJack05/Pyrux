@@ -144,7 +144,7 @@
             {
                 for (int j = 0; j < WallLayout.GetLength(1); j++)
                 {
-                    if (this.CollectablesLayout[i, j] != other.CollectablesLayout[i, j])
+                    if (this.WallLayout[i, j] != other.WallLayout[i, j])
                     {
                         return false;
                     }
@@ -182,7 +182,7 @@
             {
                 for (int j = 0; j < CollectablesLayout.GetLength(1); j++)
                 {
-                    if (StaticDataStore.ActiveLevel.MapLayout.CollectablesLayout[i, j] != GoalLayout.CollectablesLayout[i, j])
+                    if (this.CollectablesLayout[i, j] != GoalLayout.CollectablesLayout[i, j])
                     {
                         return false;
                     }
@@ -193,7 +193,7 @@
             {
                 for (int j = 0; j < WallLayout.GetLength(1); j++)
                 {
-                    if (this.CollectablesLayout[i, j] != GoalLayout.CollectablesLayout[i, j])
+                    if (this.WallLayout[i, j] != GoalLayout.WallLayout[i, j])
                     {
                         return false;
                     }
