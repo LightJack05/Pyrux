@@ -1,5 +1,6 @@
 ﻿using Microsoft.UI.Xaml.Input;
 using Pyrux.Pages.ContentDialogs;
+using Windows.ApplicationModel.UserDataTasks;
 
 namespace Pyrux.Pages;
 
@@ -109,6 +110,7 @@ public sealed partial class ExercisePage
         ActiveLevel.GoalMapLayout.WallLayout = ActiveLevel.MapLayout.Copy().WallLayout;
         UpdateDisplay();
         SaveNewLayout();
+        StaticDataStore.UnsavedChangesPresent = true;
     }
     /// <summary>
     /// Move the player to the given position.
@@ -122,6 +124,7 @@ public sealed partial class ExercisePage
         }
         UpdateDisplay();
         SaveNewLayout();
+        StaticDataStore.UnsavedChangesPresent = true;
     }
     /// <summary>
     /// Turn the player around.
@@ -131,6 +134,7 @@ public sealed partial class ExercisePage
         ActiveLevel.MapLayout.CurrentPlayerDirection++;
         UpdateDisplay();
         SaveNewLayout();
+        StaticDataStore.UnsavedChangesPresent = true;
     }
     /// <summary>
     /// Save the new layout to the static data store.
@@ -178,6 +182,7 @@ public sealed partial class ExercisePage
     {
         ActiveLevel.Task = text;
         txtLevelTask.Text = ActiveLevel.Task;
+        StaticDataStore.UnsavedChangesPresent = true;
     }
     /// <summary>
     /// Change the screws on the given position.
@@ -229,6 +234,7 @@ public sealed partial class ExercisePage
         ActiveLevel.MapLayout.SetScrewNumberAtPosition(position, count);
         SaveNewLayout();
         UpdateDisplay();
+        StaticDataStore.UnsavedChangesPresent = true;
     }
 
 }

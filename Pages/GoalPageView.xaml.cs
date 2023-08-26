@@ -294,6 +294,7 @@ namespace Pyrux.Pages
             }
             UpdateDisplay();
             //SaveNewLayout();
+            StaticDataStore.UnsavedChangesPresent = true;
         }
 
         private void TurnPlayer()
@@ -301,6 +302,7 @@ namespace Pyrux.Pages
             ActiveLevel.GoalMapLayout.CurrentPlayerDirection++;
             UpdateDisplay();
             //SaveNewLayout();
+            StaticDataStore.UnsavedChangesPresent = true;
         }
 
         //private void SaveNewLayout()
@@ -346,6 +348,7 @@ namespace Pyrux.Pages
             ActiveLevel.GoalMapLayout.SetScrewNumberAtPosition(position, count);
             //SaveNewLayout();
             UpdateDisplay();
+            StaticDataStore.UnsavedChangesPresent = true;
         }
     }
 }
