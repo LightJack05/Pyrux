@@ -37,6 +37,8 @@
     <None Remove="Pages\ContentDialogs\PlaceScrewsDialog.xaml" />
     <None Remove="Pages\DevToolsPage.xaml" />
     <None Remove="Pages\DocsPage.xaml" />
+    <None Remove="Pages\DocsPages\BlankPage1.xaml" />
+    <None Remove="Pages\DocsPages\DocsPageWrapper.xaml" />
     <None Remove="Pages\DocsPages\MovementDocsPage.xaml" />
     <None Remove="Pages\DocsPages\PythonDocsPage.xaml" />
     <None Remove="Pages\DocsPages\ScrewsDocsPage.xaml" />
@@ -180,6 +182,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\DocsPages\MarkDown\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\DocsPages\DocsPageWrapper.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\DocsPages\BlankPage1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Windows\DocumentationWindow.xaml">

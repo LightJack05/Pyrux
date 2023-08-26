@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Pyrux.Pages.DocsPages.DocsPageWrapper"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Pyrux.Pages.DocsPages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Background="{ThemeResource SystemChromeLowColor}">
+        <NavigationView
+                    Grid.Row="1"
+                    x:Name="ngvDocs"
+                    PaneDisplayMode="Top"
+                    IsBackButtonVisible="Collapsed"
+                    IsSettingsVisible="False"
+                    Loaded="ngvDocs_Loaded"
+                    ItemInvoked="ngvDocs_ItemInvoked"
+                    Background="{ThemeResource SystemChromeLowColor}">
+            <NavigationView.MenuItems >
+                <NavigationViewItem Tag="movement" Content="Movement"/>
+                <NavigationViewItem Tag="screws" Content="Screw Management"/>
+                <NavigationViewItem Tag="python" Content="Python Logic"/>
+            </NavigationView.MenuItems>
+            <StackPanel Background="{ThemeResource SystemChromeLowColor}">
+                <Border Height=".5" CornerRadius=".5" Background="{ThemeResource SystemChromeHighColor}"/>
+                <Frame x:Name="ctfDocs" IsTabStop="True" Padding="0" Background="{ThemeResource SystemChromeLowColor}"/>
+            </StackPanel>
+        </NavigationView>
+    </Grid>
+</Page>

@@ -2,6 +2,7 @@
 <!-- Licensed under the MIT License. -->
 
 <Page
+    xmlns:docsPages="using:Pyrux.Pages.DocsPages"
     x:Class="Pyrux.Pages.DocsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -19,25 +20,8 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Button Grid.Row="0" x:Name="btnPopoutDocs" Content="Popout" Click="btnPopoutDocs_Click">
-                    
-                </Button>
-                <NavigationView
-                    Grid.Row="1"
-                    x:Name="ngvDocs"
-                    PaneDisplayMode="Top"
-                    IsBackButtonVisible="Collapsed"
-                    Background="Transparent"
-                    IsSettingsVisible="False"
-                    Loaded="ngvDocs_Loaded"
-                    ItemInvoked="ngvDocs_ItemInvoked">
-                    <NavigationView.MenuItems>
-                        <NavigationViewItem Tag="movement" Content="Movement"/>
-                        <NavigationViewItem Tag="screws" Content="Screw Management"/>
-                        <NavigationViewItem Tag="python" Content="Python Logic"/>
-                    </NavigationView.MenuItems>
-                    <Frame x:Name="ctfDocs" IsTabStop="True" Padding="0" Background="{ThemeResource SystemChromeLowColor}"/>
-                </NavigationView>
+                <Button Grid.Row="0" x:Name="btnPopoutDocs" Content="Popout" Click="btnPopoutDocs_Click"/>
+                <Frame Grid.Row="1" SourcePageType="docsPages:DocsPageWrapper"/>
             </Grid>
         </Border>
     </Grid>
