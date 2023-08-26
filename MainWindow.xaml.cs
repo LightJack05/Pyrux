@@ -164,5 +164,12 @@ namespace Pyrux
             }
         }
 
+        private void wndMain_Closed(object sender, WindowEventArgs args)
+        {
+            if (ApplicationWindows.DocumentationWindow.Instance != null)
+            {
+                ApplicationWindows.DocumentationWindow.Instance.Close();
+            }
+        }
     }
 }

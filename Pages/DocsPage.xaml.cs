@@ -23,6 +23,10 @@ namespace Pyrux.Pages
 
         private void btnPopoutDocs_Click(object sender, RoutedEventArgs e)
         {
+            if(ApplicationWindows.DocumentationWindow.Instance != null)
+            {
+                ApplicationWindows.DocumentationWindow.Instance.Close();
+            }
             Window docsWindow = new ApplicationWindows.DocumentationWindow();
             docsWindow.Activate();
         }

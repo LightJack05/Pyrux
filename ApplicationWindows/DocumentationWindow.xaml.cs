@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.DataTransfer;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
@@ -24,6 +25,7 @@ namespace Pyrux.ApplicationWindows
     /// </summary>
     public sealed partial class DocumentationWindow : Window
     {
+        public static DocumentationWindow  Instance { get; private set; }
         public string TitleText
         {
             get => "[PRE-ALPHA] Pyrux v" + StaticDataStore.VersionNumber + " - Documentation";
@@ -34,6 +36,7 @@ namespace Pyrux.ApplicationWindows
             this.InitializeComponent();
             ExtendsContentIntoTitleBar = true;
             SetTitleBar(AppTitleBar);
+            Instance = this;
         }
 
         private void Window_Activated(object sender, WindowActivatedEventArgs args)

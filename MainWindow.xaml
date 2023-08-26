@@ -10,6 +10,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Activated="Window_Activated"
+    Closed="wndMain_Closed"
     x:Name="wndMain">
 
     <Grid Background="{ThemeResource SystemChromeLowColor}">
