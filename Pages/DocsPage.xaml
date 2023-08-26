@@ -15,14 +15,13 @@
 
     <Grid>
         <Border Background="{ThemeResource SystemChromeLowColor}" CornerRadius="10" Margin="10">
-            <Grid Margin="10">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Button Grid.Row="0" x:Name="btnPopoutDocs" Content="Popout" Click="btnPopoutDocs_Click"/>
+            <Grid>
                 <Frame Grid.Row="1" SourcePageType="docsPages:DocsPageWrapper"/>
+                <Button Grid.Row="0" x:Name="btnPopoutDocs" Click="btnPopoutDocs_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8" CornerRadius="10" ToolTipService.ToolTip="Popout">
+                    <SymbolIcon Symbol="NewWindow"/>
+                </Button>
             </Grid>
+            
         </Border>
     </Grid>
 </Page>

@@ -24,9 +24,14 @@
                 <NavigationViewItem Tag="screws" Content="Screw Management"/>
                 <NavigationViewItem Tag="python" Content="Python Logic"/>
             </NavigationView.MenuItems>
+
             <StackPanel Background="{ThemeResource SystemChromeLowColor}">
                 <Border Height=".5" CornerRadius=".5" Background="{ThemeResource SystemChromeHighColor}"/>
-                <Frame x:Name="ctfDocs" IsTabStop="True" Padding="0" Background="{ThemeResource SystemChromeLowColor}"/>
+                <StackPanel VerticalAlignment="Stretch" >
+                    <ScrollViewer>
+                        <Frame x:Name="ctfDocs" IsTabStop="True" Padding="0" Background="{ThemeResource SystemChromeLowColor}"/>
+                    </ScrollViewer>
+                </StackPanel>
             </StackPanel>
         </NavigationView>
     </Grid>
