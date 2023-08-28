@@ -14,6 +14,16 @@
     NavigationCacheMode="Required">
 
     <ScrollViewer>
-        <controls:MarkdownTextBlock Text="{x:Bind DocMarkDown}" LinkClicked="MarkdownText_LinkClicked" Margin="10" Background="Transparent" CodeFontFamily="Consolas" Width="Auto" HorizontalAlignment="Left" FontSize="16" Header1FontSize="30" Header2FontSize="25" Header2FontWeight="Bold"/>
+        <controls:MarkdownTextBlock Text="{x:Bind DocMarkDown}" 
+                                    LinkClicked="MarkdownText_LinkClicked" 
+                                    Margin="10" Background="Transparent" 
+                                    CodeFontFamily="Consolas" 
+                                    Width="Auto" 
+                                    MaxWidth="800"
+                                    HorizontalAlignment="Left" 
+                                    FontSize="16" 
+                                    Header1FontSize="30" 
+                                    Header2FontSize="25" 
+                                    Header2FontWeight="Bold"/>
     </ScrollViewer>
 </Page>

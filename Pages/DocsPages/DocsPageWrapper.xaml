@@ -18,6 +18,7 @@
                     IsSettingsVisible="False"
                     Loaded="ngvDocs_Loaded"
                     ItemInvoked="ngvDocs_ItemInvoked"
+                    Margin="15"
                     Background="{ThemeResource SystemChromeLowColor}">
             <NavigationView.MenuItems >
                 <NavigationViewItem Tag="movement" Content="Movement"/>
@@ -25,14 +26,12 @@
                 <NavigationViewItem Tag="python" Content="Python Logic"/>
             </NavigationView.MenuItems>
 
-            <StackPanel Background="{ThemeResource SystemChromeLowColor}">
-                <Border Height=".5" CornerRadius=".5" Background="{ThemeResource SystemChromeHighColor}"/>
-                <StackPanel VerticalAlignment="Stretch" >
-                    <ScrollViewer>
-                        <Frame x:Name="ctfDocs" IsTabStop="True" Padding="0" Background="{ThemeResource SystemChromeLowColor}"/>
-                    </ScrollViewer>
-                </StackPanel>
-            </StackPanel>
+            <Grid>
+                <ScrollViewer Height="Auto">
+                    <Frame x:Name="ctfDocs" IsTabStop="True" Padding="0" Background="{ThemeResource SystemChromeLowColor}"/>
+                </ScrollViewer>
+                <Border Height=".5" CornerRadius=".5" Background="{ThemeResource SystemChromeHighColor}" VerticalAlignment="Top"/>
+            </Grid>
         </NavigationView>
     </Grid>
 </Page>

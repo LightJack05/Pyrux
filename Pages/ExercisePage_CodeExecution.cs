@@ -3,8 +3,10 @@ using Microsoft.Scripting.Hosting;
 using Pyrux.Pages.ContentDialogs;
 using Pyrux.Pages.ContentDialogs.ExceptionPages;
 using Pyrux.UserEndExceptions;
+using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
+using Windows.Storage.Streams;
 
 namespace Pyrux.Pages;
 
@@ -100,6 +102,7 @@ public sealed partial class ExercisePage
 
             string pythonCode = BuildPythonCode();
             ScriptEngine scriptEngine = Python.CreateEngine();
+            SetupPythonConsoleOutput(scriptEngine);
 
             ScriptScope scriptScope = scriptEngine.CreateScope();
             scriptScope.SetVariable("TurnLeft", () => this.ActiveLevel.TurnLeft());
@@ -180,6 +183,11 @@ public sealed partial class ExercisePage
                 ShowLevelCompletedDialogue();
             }
         }
+    }
+
+    public void SetupPythonConsoleOutput(ScriptEngine scriptEngine)
+    {
+        ConcurrentQueue<string> queue = new ConcurrentQueue<string>();
     }
 
     public void CancelScriptExecution()
