@@ -16,30 +16,30 @@ internal class WallAheadException : Exception
 }
 
 /// <summary>
-/// Thrown if the player tries to take a screw from an empty tile.
+/// Thrown if the player tries to take a chip from an empty tile.
 /// </summary>
-internal class NoScrewOnTileException : Exception
+internal class NoChipOnTileException : Exception
 {
-    public NoScrewOnTileException()
+    public NoChipOnTileException()
     {
 
     }
-    public NoScrewOnTileException(string message) : base(message)
+    public NoChipOnTileException(string message) : base(message)
     {
 
     }
 }
 
 /// <summary>
-/// Thrown if the player tries to place a screw with an empty inventory.
+/// Thrown if the player tries to place a chip with an empty inventory.
 /// </summary>
-internal class NoScrewInInventoryException : Exception
+internal class NoChipInInventoryException : Exception
 {
-    public NoScrewInInventoryException()
+    public NoChipInInventoryException()
     {
 
     }
-    public NoScrewInInventoryException(string message) : base(message)
+    public NoChipInInventoryException(string message) : base(message)
     {
 
     }

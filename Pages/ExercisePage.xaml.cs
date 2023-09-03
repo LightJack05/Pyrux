@@ -22,7 +22,7 @@ namespace Pyrux.Pages
         /// <summary>
         /// The index of the selected tool.
         /// 0 - Walls
-        /// 1 - Screws
+        /// 1 - Chips
         /// 2 - Player Movement
         /// </summary>
         private static int SelectedToolIndex { get; set; }

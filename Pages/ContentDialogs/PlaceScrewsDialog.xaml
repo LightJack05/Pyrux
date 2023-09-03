@@ -2,7 +2,7 @@
 <!-- Licensed under the MIT License. -->
 
 <Page
-    x:Class="Pyrux.Pages.ContentDialogs.PlaceScrewsDialog"
+    x:Class="Pyrux.Pages.ContentDialogs.PlaceChipsDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Pyrux.Pages.ContentDialogs"
@@ -14,6 +14,6 @@
     NavigationCacheMode="Required">
 
     <StackPanel Orientation="Vertical" Background="Transparent">
-        <NumberBox x:Name="nbxScrewAmount" PlaceholderText="0" ValueChanged="nbxScrewAmount_ValueChanged" Background="Transparent"/>
+        <NumberBox x:Name="nbxChipAmount" PlaceholderText="0" ValueChanged="nbxChipAmount_ValueChanged" Background="Transparent"/>
     </StackPanel>
 </Page>

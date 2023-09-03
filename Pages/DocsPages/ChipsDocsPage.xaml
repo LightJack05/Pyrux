@@ -2,7 +2,7 @@
 <!-- Licensed under the MIT License. -->
 
 <Page
-    x:Class="Pyrux.Pages.DocsPages.ScrewsDocsPage"
+    x:Class="Pyrux.Pages.DocsPages.ChipsDocsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"

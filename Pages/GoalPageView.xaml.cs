@@ -71,14 +71,14 @@ namespace Pyrux.Pages
         {
             if (ActiveLevel.IsBuiltIn)
             {
-                btnScrewTool.IsEnabled = false;
+                btnChipTool.IsEnabled = false;
                 btnRotate.IsEnabled = false;
                 btnPlayerTool.IsEnabled = false;
                 SelectedToolIndex = -1;
             }
             else
             {
-                btnScrewTool.IsEnabled = false;
+                btnChipTool.IsEnabled = false;
                 btnRotate.IsEnabled = true;
                 btnPlayerTool.IsEnabled = true;
                 SelectedToolIndex = 1;
@@ -251,7 +251,7 @@ namespace Pyrux.Pages
             switch (SelectedToolIndex)
             {
                 case 1:
-                    ChangeScrewsTool(new PositionVector2(Grid.GetColumn(clickedBorder), Grid.GetRow(clickedBorder)));
+                    ChangeChipsTool(new PositionVector2(Grid.GetColumn(clickedBorder), Grid.GetRow(clickedBorder)));
                     break;
                 case 2:
                     PositionVector2 newPlayerPosition = new(Grid.GetColumn(clickedBorder), Grid.GetRow(clickedBorder));
@@ -263,10 +263,10 @@ namespace Pyrux.Pages
 
         }
 
-        private void btnScrewTool_Click(object sender, RoutedEventArgs e)
+        private void btnChipTool_Click(object sender, RoutedEventArgs e)
         {
             SelectedToolIndex = 1;
-            btnScrewTool.IsEnabled = false;
+            btnChipTool.IsEnabled = false;
 
             btnPlayerTool.IsEnabled = true;
         }
@@ -276,7 +276,7 @@ namespace Pyrux.Pages
             SelectedToolIndex = 2;
             btnPlayerTool.IsEnabled = false;
 
-            btnScrewTool.IsEnabled = true;
+            btnChipTool.IsEnabled = true;
         }
 
         private void btnRotate_Click(object sender, RoutedEventArgs e)
@@ -311,41 +311,41 @@ namespace Pyrux.Pages
         //}
 
 
-        private void ChangeScrewsTool(PositionVector2 position)
+        private void ChangeChipsTool(PositionVector2 position)
         {
             if (!ActiveLevel.GoalMapLayout.WallLayout[position.Y, position.X])
             {
-                PlaceScrewsDialog.Position = position;
-                ShowScrewNumberChangeDialog();
+                PlaceChipsDialog.Position = position;
+                ShowChipNumberChangeDialog();
             }
         }
 
-        private async void ShowScrewNumberChangeDialog()
+        private async void ShowChipNumberChangeDialog()
         {
-            ContentDialog screwNumberChangeDialog = new();
-            screwNumberChangeDialog.XamlRoot = this.Content.XamlRoot;
-            screwNumberChangeDialog.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-            screwNumberChangeDialog.Title = "Screws";
-            screwNumberChangeDialog.PrimaryButtonText = "Save";
-            screwNumberChangeDialog.SecondaryButtonText = "Cancel";
-            screwNumberChangeDialog.DefaultButton = ContentDialogButton.Primary;
-            screwNumberChangeDialog.Content = new PlaceScrewsDialog();
+            ContentDialog chipNumberChangeDialog = new();
+            chipNumberChangeDialog.XamlRoot = this.Content.XamlRoot;
+            chipNumberChangeDialog.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
+            chipNumberChangeDialog.Title = "Chips";
+            chipNumberChangeDialog.PrimaryButtonText = "Save";
+            chipNumberChangeDialog.SecondaryButtonText = "Cancel";
+            chipNumberChangeDialog.DefaultButton = ContentDialogButton.Primary;
+            chipNumberChangeDialog.Content = new PlaceChipsDialog();
 
-            ContentDialogResult result = await screwNumberChangeDialog.ShowAsync();
+            ContentDialogResult result = await chipNumberChangeDialog.ShowAsync();
             if (result == ContentDialogResult.Primary)
             {
-                ScrewNumberChangeDialogFinished();
+                ChipNumberChangeDialogFinished();
             }
 
         }
-        private void ScrewNumberChangeDialogFinished()
+        private void ChipNumberChangeDialogFinished()
         {
-            UpdateScrewCount(PlaceScrewsDialog.Position, PlaceScrewsDialog.ScrewNumber);
+            UpdateChipCount(PlaceChipsDialog.Position, PlaceChipsDialog.ChipNumber);
         }
 
-        private void UpdateScrewCount(PositionVector2 position, int count)
+        private void UpdateChipCount(PositionVector2 position, int count)
         {
-            ActiveLevel.GoalMapLayout.SetScrewNumberAtPosition(position, count);
+            ActiveLevel.GoalMapLayout.SetChipNumberAtPosition(position, count);
             //SaveNewLayout();
             UpdateDisplay();
             StaticDataStore.UnsavedChangesPresent = true;

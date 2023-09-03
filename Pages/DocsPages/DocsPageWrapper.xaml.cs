@@ -30,7 +30,7 @@ namespace Pyrux.Pages.DocsPages
         public List<(string Tag, Type Page)> contentDictionary = new()
         {
             ("movement",typeof(MovementDocsPage)),
-            ("screws",typeof(ScrewsDocsPage)),
+            ("chips",typeof(ChipsDocsPage)),
             ("python",typeof(PythonDocsPage)),
         };
 

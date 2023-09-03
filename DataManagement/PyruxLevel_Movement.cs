@@ -62,39 +62,39 @@ internal partial class PyruxLevel
         WaitAndCheckIfCancelled();
     }
     /// <summary>
-    /// Take one screw from the tile and place it into the inventory.
+    /// Take one chip from the tile and place it into the inventory.
     /// </summary>
-    /// <exception cref="Pyrux.UserEndExceptions.NoScrewOnTileException">Thrown if there is no screw on the tile.</exception>
-    public void TakeScrew()
+    /// <exception cref="Pyrux.UserEndExceptions.NoChipOnTileException">Thrown if there is no chip on the tile.</exception>
+    public void TakeChip()
     {
 
-        if (MapLayout.GetScrewNumberAtPosition(MapLayout.CurrentPlayerPosition) > 0)
+        if (MapLayout.GetChipNumberAtPosition(MapLayout.CurrentPlayerPosition) > 0)
         {
-            MapLayout.SetScrewNumberAtPosition(MapLayout.CurrentPlayerPosition, MapLayout.GetScrewNumberAtPosition(MapLayout.CurrentPlayerPosition) - 1);
-            MapLayout.PlayerScrewInventory++;
+            MapLayout.SetChipNumberAtPosition(MapLayout.CurrentPlayerPosition, MapLayout.GetChipNumberAtPosition(MapLayout.CurrentPlayerPosition) - 1);
+            MapLayout.PlayerChipInventory++;
         }
         else
         {
-            throw new Pyrux.UserEndExceptions.NoScrewOnTileException("There was no screw to pick up on the tile.");
+            throw new Pyrux.UserEndExceptions.NoChipOnTileException("There was no chip to pick up on the tile.");
         }
 
         QueueUpdate();
         WaitAndCheckIfCancelled();
     }
     /// <summary>
-    /// Take a screw from the inventory and place it on the tile below the player.
+    /// Take a chip from the inventory and place it on the tile below the player.
     /// </summary>
-    /// <exception cref="Pyrux.UserEndExceptions.NoScrewInInventoryException">Thrown when there is no screw in the inventory.</exception>
-    public void PlaceScrew()
+    /// <exception cref="Pyrux.UserEndExceptions.NoChipInInventoryException">Thrown when there is no chip in the inventory.</exception>
+    public void PlaceChip()
     {
-        if (MapLayout.PlayerScrewInventory > 0)
+        if (MapLayout.PlayerChipInventory > 0)
         {
-            MapLayout.SetScrewNumberAtPosition(MapLayout.CurrentPlayerPosition, MapLayout.GetScrewNumberAtPosition(MapLayout.CurrentPlayerPosition) + 1);
-            MapLayout.PlayerScrewInventory--;
+            MapLayout.SetChipNumberAtPosition(MapLayout.CurrentPlayerPosition, MapLayout.GetChipNumberAtPosition(MapLayout.CurrentPlayerPosition) + 1);
+            MapLayout.PlayerChipInventory--;
         }
         else
         {
-            throw new Pyrux.UserEndExceptions.NoScrewInInventoryException("There was no screw to place in the inventory.");
+            throw new Pyrux.UserEndExceptions.NoChipInInventoryException("There was no chip to place in the inventory.");
         }
 
         QueueUpdate();
@@ -141,12 +141,12 @@ internal partial class PyruxLevel
         }
     }
     /// <summary>
-    /// Check if there is a screw inside the players inventory.
+    /// Check if there is a chip inside the players inventory.
     /// </summary>
-    /// <returns>True if there is a screw in the inventory, otherwise false.</returns>
-    public bool ScrewThere()
+    /// <returns>True if there is a chip in the inventory, otherwise false.</returns>
+    public bool ChipThere()
     {
-        if (MapLayout.GetScrewNumberAtPosition(MapLayout.CurrentPlayerPosition) > 0)
+        if (MapLayout.GetChipNumberAtPosition(MapLayout.CurrentPlayerPosition) > 0)
         {
             return true;
         }

@@ -52,8 +52,8 @@ namespace Pyrux.Pages.DocsPages
                 ```
                 if WallThere():
                     TurnLeft()
-                elif ScrewThere():
-                    TakeScrew()
+                elif ChipThere():
+                    TakeChip()
                 else:
                     GoForward()
                 ```
@@ -67,11 +67,11 @@ namespace Pyrux.Pages.DocsPages
                 While loops are similar to if statements, but they execute their contents as long as the condition is True:
 
                 ```
-                while ScrewThere():
-                    TakeScrew()
+                while ChipThere():
+                    TakeChip()
                 ```
 
-                The robot will take all screws from the tile it is on.
+                The robot will take all chips from the tile it is on.
                 
                 Take a look at the python documentation for while loops: https://docs.python.org/release/3.4.0/reference/compound_stmts.html#while
 

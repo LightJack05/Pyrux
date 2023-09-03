@@ -22,7 +22,7 @@
                     Background="{ThemeResource SystemChromeLowColor}">
             <NavigationView.MenuItems >
                 <NavigationViewItem Tag="movement" Content="Movement"/>
-                <NavigationViewItem Tag="screws" Content="Screw Management"/>
+                <NavigationViewItem Tag="chips" Content="Chip Management"/>
                 <NavigationViewItem Tag="python" Content="Python Logic"/>
             </NavigationView.MenuItems>
 

@@ -31,8 +31,8 @@ You may also structure your if blocks using `elif` and `else`:
 ```
 if WallThere():
     TurnLeft()
-elif ScrewThere():
-    TakeScrew()
+elif ChipThere():
+    TakeChip()
 else:
     GoForward()
 ```
@@ -44,11 +44,11 @@ There are 2 types of loops in Python, `for` and `while` loops.
 While loops are similar to if statements, but they execute their contents as long as the condition is True:
 
 ```
-while ScrewThere():
-    TakeScrew()
+while ChipThere():
+    TakeChip()
 ```
 
-The robot will take all screws from the tile it is on.
+The robot will take all chips from the tile it is on.
 
 ### For loops
 A for loop can be used in multiple ways, but we will focus on running it's contents a certain number of times:

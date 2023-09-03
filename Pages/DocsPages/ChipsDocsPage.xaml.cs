@@ -12,43 +12,43 @@ namespace Pyrux.Pages.DocsPages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class ScrewsDocsPage : Page
+    public sealed partial class ChipsDocsPage : Page
     {
         /// <summary>
         /// String that is used as page content.
         /// </summary>
         public string DocMarkDown { get => """
-                # __Screw management documentation__
-                ## __Taking Screws__
-                To take a screw from the tile the robot is standing on, you can use the `TakeScrew` method.
+                # __Chip management documentation__
+                ## __Taking Chips__
+                To take a chip from the tile the robot is standing on, you can use the `TakeChip` method.
 
                 ```
-                TakeScrew()
+                TakeChip()
                 ```
 
-                ## __Placing Screws__
-                To Place a screw on the tile the robot is standing on, you can use the `PlaceScrew` method:
+                ## __Placing Chips__
+                To Place a chip on the tile the robot is standing on, you can use the `PlaceChip` method:
 
                 ```
-                PlaceScrew()
+                PlaceChip()
                 ```
 
                 ## __Checks__
-                You may check whether a screw is on the current tile with the `ScrewThere` method:
+                You may check whether a chip is on the current tile with the `ChipThere` method:
 
                 ```
-                ScrewThere()
+                ChipThere()
                 ```
 
                 This method returns True or False, and should be used in other statements like so:
 
                 ```
-                if ScrewThere():
+                if ChipThere():
                     GoForward()
                 ```
                 
                 """; }
-        public ScrewsDocsPage()
+        public ChipsDocsPage()
         {
             this.InitializeComponent();
         }

@@ -27,7 +27,7 @@ public sealed partial class ExercisePage
                 SwitchWall(new PositionVector2(Grid.GetColumn(clickedBorder), Grid.GetRow(clickedBorder)));
                 break;
             case 1:
-                ChangeScrewsTool(new PositionVector2(Grid.GetColumn(clickedBorder), Grid.GetRow(clickedBorder)));
+                ChangeChipsTool(new PositionVector2(Grid.GetColumn(clickedBorder), Grid.GetRow(clickedBorder)));
                 break;
             case 2:
                 PositionVector2 newPlayerPosition = new(Grid.GetColumn(clickedBorder), Grid.GetRow(clickedBorder));
@@ -69,14 +69,14 @@ public sealed partial class ExercisePage
         SelectedToolIndex = 0;
         btnWallTool.IsEnabled = false;
 
-        btnScrewTool.IsEnabled = true;
+        btnChipTool.IsEnabled = true;
         btnPlayerTool.IsEnabled = true;
     }
 
-    private void btnScrewTool_Click(object sender, RoutedEventArgs e)
+    private void btnChipTool_Click(object sender, RoutedEventArgs e)
     {
         SelectedToolIndex = 1;
-        btnScrewTool.IsEnabled = false;
+        btnChipTool.IsEnabled = false;
 
         btnWallTool.IsEnabled = true;
         btnPlayerTool.IsEnabled = true;
@@ -88,7 +88,7 @@ public sealed partial class ExercisePage
         btnPlayerTool.IsEnabled = false;
 
         btnWallTool.IsEnabled = true;
-        btnScrewTool.IsEnabled = true;
+        btnChipTool.IsEnabled = true;
     }
 
     private void btnRotate_Click(object sender, RoutedEventArgs e)
@@ -98,12 +98,12 @@ public sealed partial class ExercisePage
 
     /// <summary>
     /// On the given position, switch between placed wall and empty square.
-    /// Refuse if there are screws on the tile or the player is on it.
+    /// Refuse if there are chips on the tile or the player is on it.
     /// </summary>
     /// <param name="position">Position of the tile that should be changed.</param>
     private void SwitchWall(PositionVector2 position)
     {
-        if (position != ActiveLevel.MapLayout.CurrentPlayerPosition && ActiveLevel.MapLayout.GetScrewNumberAtPosition(position) == 0)
+        if (position != ActiveLevel.MapLayout.CurrentPlayerPosition && ActiveLevel.MapLayout.GetChipNumberAtPosition(position) == 0)
         {
             ActiveLevel.MapLayout.WallLayout[position.Y, position.X] = !ActiveLevel.MapLayout.WallLayout[position.Y, position.X];
         }
@@ -185,53 +185,53 @@ public sealed partial class ExercisePage
         StaticDataStore.UnsavedChangesPresent = true;
     }
     /// <summary>
-    /// Change the screws on the given position.
+    /// Change the chips on the given position.
     /// </summary>
-    /// <param name="position">The position to change the screws at.</param>
-    private void ChangeScrewsTool(PositionVector2 position)
+    /// <param name="position">The position to change the chips at.</param>
+    private void ChangeChipsTool(PositionVector2 position)
     {
         if (!ActiveLevel.MapLayout.WallLayout[position.Y, position.X])
         {
-            PlaceScrewsDialog.Position = position;
-            ShowScrewNumberChangeDialog();
+            PlaceChipsDialog.Position = position;
+            ShowChipNumberChangeDialog();
         }
     }
     /// <summary>
-    /// Provides a dialogue for changing the number of screws on a tile.
+    /// Provides a dialogue for changing the number of chips on a tile.
     /// </summary>
-    private async void ShowScrewNumberChangeDialog()
+    private async void ShowChipNumberChangeDialog()
     {
-        ContentDialog screwNumberChangeDialog = new();
-        screwNumberChangeDialog.XamlRoot = this.Content.XamlRoot;
-        screwNumberChangeDialog.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-        screwNumberChangeDialog.Title = "Screws";
-        screwNumberChangeDialog.PrimaryButtonText = "Save";
-        screwNumberChangeDialog.SecondaryButtonText = "Cancel";
-        screwNumberChangeDialog.DefaultButton = ContentDialogButton.Primary;
-        screwNumberChangeDialog.Content = new PlaceScrewsDialog();
+        ContentDialog chipNumberChangeDialog = new();
+        chipNumberChangeDialog.XamlRoot = this.Content.XamlRoot;
+        chipNumberChangeDialog.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
+        chipNumberChangeDialog.Title = "Chips";
+        chipNumberChangeDialog.PrimaryButtonText = "Save";
+        chipNumberChangeDialog.SecondaryButtonText = "Cancel";
+        chipNumberChangeDialog.DefaultButton = ContentDialogButton.Primary;
+        chipNumberChangeDialog.Content = new PlaceChipsDialog();
 
-        ContentDialogResult result = await screwNumberChangeDialog.ShowAsync();
+        ContentDialogResult result = await chipNumberChangeDialog.ShowAsync();
         if (result == ContentDialogResult.Primary)
         {
-            ScrewNumberChangeDialogFinished();
+            ChipNumberChangeDialogFinished();
         }
 
     }
     /// <summary>
-    /// Updates the screw count on a tile with the position and screw number from the last PlaceScrewsDialogue.
+    /// Updates the chip count on a tile with the position and chip number from the last PlaceChipsDialogue.
     /// </summary>
-    private void ScrewNumberChangeDialogFinished()
+    private void ChipNumberChangeDialogFinished()
     {
-        UpdateScrewCount(PlaceScrewsDialog.Position, PlaceScrewsDialog.ScrewNumber);
+        UpdateChipCount(PlaceChipsDialog.Position, PlaceChipsDialog.ChipNumber);
     }
     /// <summary>
-    /// Update the screw count at a position.
+    /// Update the chip count at a position.
     /// </summary>
     /// <param name="position">The position to update.</param>
     /// <param name="count">The new count.</param>
-    private void UpdateScrewCount(PositionVector2 position, int count)
+    private void UpdateChipCount(PositionVector2 position, int count)
     {
-        ActiveLevel.MapLayout.SetScrewNumberAtPosition(position, count);
+        ActiveLevel.MapLayout.SetChipNumberAtPosition(position, count);
         SaveNewLayout();
         UpdateDisplay();
         StaticDataStore.UnsavedChangesPresent = true;

@@ -36,7 +36,7 @@ public sealed partial class ExercisePage
             btnWallTool.IsEnabled = false;
             btnRotate.IsEnabled = false;
             btnPlayerTool.IsEnabled = false;
-            btnScrewTool.IsEnabled = false;
+            btnChipTool.IsEnabled = false;
             ArbitraryCodeExecution();
         }
         else
@@ -73,7 +73,7 @@ public sealed partial class ExercisePage
             btnWallTool.IsEnabled = false;
             btnRotate.IsEnabled = false;
             btnPlayerTool.IsEnabled = false;
-            btnScrewTool.IsEnabled = false;
+            btnChipTool.IsEnabled = false;
             ArbitraryCodeExecution();
         }
         else
@@ -108,10 +108,10 @@ public sealed partial class ExercisePage
             scriptScope.SetVariable("TurnLeft", () => this.ActiveLevel.TurnLeft());
             scriptScope.SetVariable("TurnRight", () => this.ActiveLevel.TurnRight());
             scriptScope.SetVariable("GoForward", () => this.ActiveLevel.GoForward());
-            scriptScope.SetVariable("TakeScrew", () => this.ActiveLevel.TakeScrew());
-            scriptScope.SetVariable("PlaceScrew", () => this.ActiveLevel.PlaceScrew());
+            scriptScope.SetVariable("TakeChip", () => this.ActiveLevel.TakeChip());
+            scriptScope.SetVariable("PlaceChip", () => this.ActiveLevel.PlaceChip());
             scriptScope.SetVariable("WallAhead", () => this.ActiveLevel.WallAhead());
-            scriptScope.SetVariable("ScrewThere", () => this.ActiveLevel.ScrewThere());
+            scriptScope.SetVariable("ChipThere", () => this.ActiveLevel.ChipThere());
             scriptScope.SetVariable("stackTrace", errorStackTrace);
             scriptScope.SetVariable("scriptCode", ActiveLevel.Script.ReplaceLineEndings().Split(Environment.NewLine));
 

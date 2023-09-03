@@ -32,7 +32,7 @@
     <None Remove="Pages\ContentDialogs\ExceptionPages\UserEndExceptionDialogue.xaml" />
     <None Remove="Pages\ContentDialogs\LevelCompletedDialogue.xaml" />
     <None Remove="Pages\ContentDialogs\LevelCreationDialogue.xaml" />
-    <None Remove="Pages\ContentDialogs\PlaceScrewsDialog.xaml" />
+    <None Remove="Pages\ContentDialogs\PlaceChipsDialog.xaml" />
     <None Remove="Pages\DocsPage.xaml" />
     <None Remove="Pages\ExercisePage.xaml" />
     <None Remove="Pages\GoalPageView.xaml" />
@@ -106,7 +106,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Pages\ContentDialogs\PlaceScrewsDialog.xaml">
+    <Page Update="Pages\ContentDialogs\PlaceChipsDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

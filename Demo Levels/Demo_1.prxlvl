@@ -216,7 +216,7 @@
         },
         "StartPlayerDirection": 0,
         "CurrentPlayerDirection": 9,
-        "PlayerScrewInventory": 0,
+        "PlayerChipInventory": 0,
         "SizeX": 9,
         "SizeY": 9
     },
@@ -433,7 +433,7 @@
         },
         "StartPlayerDirection": 0,
         "CurrentPlayerDirection": 8,
-        "PlayerScrewInventory": 0,
+        "PlayerChipInventory": 0,
         "SizeX": 9,
         "SizeY": 9
     },

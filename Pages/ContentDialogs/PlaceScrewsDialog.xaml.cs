@@ -9,13 +9,13 @@ namespace Pyrux.Pages.ContentDialogs
 {
 
     /// <summary>
-    /// Provides the dialogue for placing screws.
+    /// Provides the dialogue for placing chips.
     /// </summary>
-    public sealed partial class PlaceScrewsDialog : Page
+    public sealed partial class PlaceChipsDialog : Page
     {
-        public static int ScrewNumber = 0;
+        public static int ChipNumber = 0;
         internal static PositionVector2 Position;
-        public PlaceScrewsDialog()
+        public PlaceChipsDialog()
         {
             this.InitializeComponent();
         }
@@ -24,18 +24,18 @@ namespace Pyrux.Pages.ContentDialogs
         {
             if(MainWindow.Instance.NavViewSelectedIndex == 2)
             {
-                ScrewNumber = StaticDataStore.ActiveLevel.GoalMapLayout.GetScrewNumberAtPosition(Position);
+                ChipNumber = StaticDataStore.ActiveLevel.GoalMapLayout.GetChipNumberAtPosition(Position);
             }
             else
             {
-                ScrewNumber = StaticDataStore.ActiveLevel.MapLayout.GetScrewNumberAtPosition(Position);
+                ChipNumber = StaticDataStore.ActiveLevel.MapLayout.GetChipNumberAtPosition(Position);
             }
-            nbxScrewAmount.Value = ScrewNumber;
+            nbxChipAmount.Value = ChipNumber;
         }
 
-        private void nbxScrewAmount_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args)
+        private void nbxChipAmount_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args)
         {
-            ScrewNumber = (int)nbxScrewAmount.Value;
+            ChipNumber = (int)nbxChipAmount.Value;
         }
     }
 }

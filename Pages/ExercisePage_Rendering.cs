@@ -181,7 +181,7 @@ public sealed partial class ExercisePage
     {
         if (ActiveLevel.IsBuiltIn)
         {
-            btnScrewTool.IsEnabled = false;
+            btnChipTool.IsEnabled = false;
             btnRotate.IsEnabled = false;
             btnWallTool.IsEnabled = false;
             btnPlayerTool.IsEnabled = false;
@@ -190,7 +190,7 @@ public sealed partial class ExercisePage
         else
         {
             btnWallTool.IsEnabled = false;
-            btnScrewTool.IsEnabled = true;
+            btnChipTool.IsEnabled = true;
             btnRotate.IsEnabled = true;
             btnPlayerTool.IsEnabled = true;
             SelectedToolIndex = 0;

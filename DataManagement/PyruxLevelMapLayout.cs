@@ -35,9 +35,9 @@
         /// </summary>
         public byte CurrentPlayerDirection { get; set; }
         /// <summary>
-        /// Number of screws in the players inventory.
+        /// Number of chips in the players inventory.
         /// </summary>
-        public int PlayerScrewInventory { get; set; }
+        public int PlayerChipInventory { get; set; }
         /// <summary>
         /// Size of the Map in X-direction.
         /// </summary>
@@ -63,20 +63,20 @@
             CurrentPlayerDirection = startPlayerDirection;
         }
         /// <summary>
-        /// Get the number of screws at a specific position.
+        /// Get the number of chips at a specific position.
         /// </summary>
         /// <param name="position">The position to check.</param>
-        /// <returns>Number of screws at the given position.</returns>
-        public int GetScrewNumberAtPosition(PositionVector2 position)
+        /// <returns>Number of chips at the given position.</returns>
+        public int GetChipNumberAtPosition(PositionVector2 position)
         {
             return CollectablesLayout[position.Y, position.X];
         }
         /// <summary>
-        /// Set the screw number at a given position.
+        /// Set the chip number at a given position.
         /// </summary>
         /// <param name="position">The position to set.</param>
         /// <param name="number">The value to set the position to.</param>
-        public void SetScrewNumberAtPosition(PositionVector2 position, int number)
+        public void SetChipNumberAtPosition(PositionVector2 position, int number)
         {
             CollectablesLayout[position.Y, position.X] = number;
         }
@@ -151,7 +151,7 @@
                 }
             }
 
-            if (PlayerScrewInventory != other.PlayerScrewInventory)
+            if (PlayerChipInventory != other.PlayerChipInventory)
             {
                 return false;
             }
