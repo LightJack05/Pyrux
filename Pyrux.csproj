@@ -41,7 +41,6 @@
     <None Remove="Pages\DocsPages\DocsPageWrapper.xaml" />
     <None Remove="Pages\DocsPages\MovementDocsPage.xaml" />
     <None Remove="Pages\DocsPages\PythonDocsPage.xaml" />
-    <None Remove="Pages\DocsPages\ChipsDocsPage.xaml" />
     <None Remove="Pages\ExercisePage.xaml" />
     <None Remove="Pages\GoalPageView.xaml" />
     <None Remove="Pages\HintPage.xaml" />
@@ -179,9 +178,6 @@
     <Page Update="Pages\DocsPages\MovementDocsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Pages\DocsPages\MarkDown\" />
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\DocsPages\DocsPageWrapper.xaml">
