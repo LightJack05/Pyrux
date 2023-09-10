@@ -47,7 +47,7 @@ public sealed partial class ExercisePage
                 0),
             "");
             LoadLevelIntoPage();
-            StaticDataStore.ActiveLevel = ActiveLevel;
+            //StaticDataStore.ActiveLevel = ActiveLevel;
             PrepareToolSelection();
         }
         else

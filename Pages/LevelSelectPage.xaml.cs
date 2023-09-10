@@ -186,6 +186,7 @@ namespace Pyrux.Pages
         /// </summary>
         private static void CreateNewLevel()
         {
+            StaticDataStore.ActiveLevel = null;
             MainWindow.Instance.NavViewNavigate("exerciseView", new Microsoft.UI.Xaml.Media.Animation.CommonNavigationTransitionInfo());
             MainWindow.Instance.NavViewSetSelection(1);
         }

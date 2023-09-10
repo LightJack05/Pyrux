@@ -71,6 +71,7 @@ namespace Pyrux.Pages
             sldExecutionSpeed.Value = PyruxSettings.ExecutionSpeed;
             if (StaticDataStore.ActiveLevel == null)
             {
+                ClearDisplay();
                 CreateNewLevel();
             }
             else
@@ -82,6 +83,24 @@ namespace Pyrux.Pages
             }
         }
 
+
+        private void ClearDisplay()
+        {
+            txtCodeEditor.Text = string.Empty;
+            txtLevelTask.Text = string.Empty;
+            txtConsole.Text = string.Empty;
+            expTaskExpander.Header = string.Empty;
+            grdPlayField.Children.Clear();
+            grdPlayField.RowDefinitions.Clear();
+            grdPlayField.ColumnDefinitions.Clear();
+            PrepareToolSelection();
+            btnStart.IsEnabled = false;
+            btnStep.IsEnabled = false;
+            btnReset.IsEnabled = false;
+            btnSave.IsEnabled = false;
+            btnExport.IsEnabled = false;
+            btnEditTask.IsEnabled = false;
+        }
 
 
         private async void btnExport_Click(object sender, RoutedEventArgs e)
@@ -121,7 +140,10 @@ namespace Pyrux.Pages
         /// <param name="e"></param>
         private void txtCodeEditor_TextChanged(object sender, TextChangedEventArgs e)
         {
-            ActiveLevel.Script = txtCodeEditor.Text;
+            if(ActiveLevel != null)
+            {
+                ActiveLevel.Script = txtCodeEditor.Text;
+            }
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)

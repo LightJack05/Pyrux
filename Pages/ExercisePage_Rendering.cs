@@ -179,7 +179,26 @@ public sealed partial class ExercisePage
     /// </summary>
     private void PrepareToolSelection()
     {
-        if (ActiveLevel.IsBuiltIn)
+        if(ActiveLevel != null)
+        {
+            if (ActiveLevel.IsBuiltIn)
+            {
+                btnChipTool.IsEnabled = false;
+                btnRotate.IsEnabled = false;
+                btnWallTool.IsEnabled = false;
+                btnPlayerTool.IsEnabled = false;
+                SelectedToolIndex = -1;
+            }
+            else
+            {
+                btnWallTool.IsEnabled = false;
+                btnChipTool.IsEnabled = true;
+                btnRotate.IsEnabled = true;
+                btnPlayerTool.IsEnabled = true;
+                SelectedToolIndex = 0;
+            }
+        }
+        else
         {
             btnChipTool.IsEnabled = false;
             btnRotate.IsEnabled = false;
@@ -187,14 +206,7 @@ public sealed partial class ExercisePage
             btnPlayerTool.IsEnabled = false;
             SelectedToolIndex = -1;
         }
-        else
-        {
-            btnWallTool.IsEnabled = false;
-            btnChipTool.IsEnabled = true;
-            btnRotate.IsEnabled = true;
-            btnPlayerTool.IsEnabled = true;
-            SelectedToolIndex = 0;
-        }
+        
     }
 
     private void btnReset_Click(object sender, RoutedEventArgs e)
@@ -250,6 +262,7 @@ public sealed partial class ExercisePage
         btnReset.IsEnabled = true;
         btnSave.IsEnabled = true;
         btnExport.IsEnabled = true;
+        btnEditTask.IsEnabled = true;
 
         if (StaticDataStore.ActiveLevel.GoalMapLayout == null)
         {
