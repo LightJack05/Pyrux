@@ -70,11 +70,11 @@ namespace Pyrux.DataManagement
                 }
             }
         }
-        public async static void LoadSettings()
+        public static void LoadSettings()
         {
             string appdataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Pyrux");
 
-            if (Directory.Exists(appdataFolder))
+            if (File.Exists(Path.Combine(appdataFolder, "settings.json")))
             {
                 try
                 {
@@ -83,17 +83,23 @@ namespace Pyrux.DataManagement
                     {
                         string fileContent = sr.ReadToEnd();
                         DataManagement.PyruxSettings.Instance = JsonConvert.DeserializeObject<PyruxSettings>(fileContent);
+                        sr.Close();
+                    }
+                    if(Instance == null)
+                    {
+                        Instance = new PyruxSettings(200, 1000, false, false);
                     }
                 }
                 catch
                 {
-                    DataManagement.PyruxSettings.Instance = new PyruxSettings(200, 1000, false, false);
+                    Instance = new PyruxSettings(200, 1000, false, false);
                 }
             }
             else
             {
-                DataManagement.PyruxSettings.Instance = new PyruxSettings(200, 1000, false, false);
+                Instance = new PyruxSettings(200, 1000, false, false);
             }
+            SaveSettings();
         }
     }
 }

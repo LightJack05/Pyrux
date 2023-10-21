@@ -22,15 +22,30 @@ namespace Pyrux.Pages
 
         private void btnOpenAppdata_Click(object sender, RoutedEventArgs e)
         {
-            string appdataFolderPath = ApplicationData.Current.LocalFolder.Path;
-            System.Diagnostics.Process.Start("explorer.exe", appdataFolderPath);
+            
+            if (Windows.ApplicationModel.Package.Current.IsBundle)
+            {
+                string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                string packageFamilyName = Windows.ApplicationModel.Package.Current.Id.FamilyName;
+                string packagePath = Path.Combine(appDataPath, "Packages", packageFamilyName, "LocalCache");
+                System.Diagnostics.Process.Start("explorer.exe", packagePath);
+            }
+            else
+            {
+                string appdataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Pyrux");
+
+                System.Diagnostics.Process.Start("explorer.exe", appdataFolder);
+            }
+
+            
         }
 
         private void btnCopyAppdataPath_Click(object sender, RoutedEventArgs e)
         {
-            string appdataFolderPath = ApplicationData.Current.LocalFolder.Path;
+            string appdataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Pyrux");
+
             DataPackage datapackage = new();
-            datapackage.SetText(appdataFolderPath);
+            datapackage.SetText(appdataFolder);
             Clipboard.SetContent(datapackage);
 
         }

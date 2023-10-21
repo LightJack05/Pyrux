@@ -46,6 +46,10 @@ namespace Pyrux.LevelIO
         public static async Task<bool> IsAppdataEmpty()
         {
             string appdataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),"Pyrux");
+            if (!Directory.Exists(appdataFolder))
+            {
+                Directory.CreateDirectory(appdataFolder);
+            }
             if ((Directory.GetFileSystemEntries(appdataFolder)).Count() == 0)
             {
                 return true;
@@ -113,7 +117,7 @@ namespace Pyrux.LevelIO
                 string builtInLevelsFolder = Path.Combine(levelsFolder, "Builtins");
                 string userCreatedLevelsFolder = Path.Combine(levelsFolder, "UserCreated");
 
-                if (Directory.Exists(appdataFolder))
+                if (!Directory.Exists(appdataFolder))
                 {
                     return false;
                 }
@@ -123,12 +127,12 @@ namespace Pyrux.LevelIO
                     return false;
                 }
 
-                if (Directory.Exists(builtInLevelsFolder))
+                if (!Directory.Exists(builtInLevelsFolder))
                 {
                     return false;
                 }
 
-                if (Directory.Exists(userCreatedLevelsFolder))
+                if (!Directory.Exists(userCreatedLevelsFolder))
                 {
                     return false;
                 }
@@ -147,7 +151,7 @@ namespace Pyrux.LevelIO
 
             string appdataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Pyrux");
 
-            if (Directory.Exists(appdataFolder))
+            if (!Directory.Exists(appdataFolder))
             {
                 throw new AppdataFolderNotFoundException();
             }
