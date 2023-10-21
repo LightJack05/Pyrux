@@ -47,19 +47,19 @@ namespace Pyrux.DataManagement
         {
             string settingsJson = JsonConvert.SerializeObject(Instance);
 
-            StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
-            if (appdataFolder != null)
+            string appdataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Pyrux");
+
+            if (Directory.Exists(appdataFolder))
             {
                 try
                 {
+                    string settingsFile = Path.Combine(appdataFolder, "settings.json");
                     // Create file if it doesn't exist yet
-                    if (!File.Exists(Path.Combine(appdataFolder.Path, "settings.json")))
+                    if (!File.Exists(settingsFile))
                     {
-                        await appdataFolder.CreateFileAsync("settings.json");
+                        File.Create(settingsFile);
                     }
-                    // Write the settings to the storage file
-                    StorageFile settingsFile = await appdataFolder.GetFileAsync("settings.json");
-                    using (StreamWriter sw = new(settingsFile.Path))
+                    using (StreamWriter sw = new(settingsFile))
                     {
                         sw.Write(settingsJson);
                     }
