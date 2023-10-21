@@ -9,8 +9,8 @@ public static class LevelImporting
     /// </summary>
     public static async Task ImportLevel()
     {
-        Windows.Storage.StorageFile storageFile = await GetFilePathAsync();
-        if (storageFile == null)
+        string storageFile = await GetFilePathAsync();
+        if (!File.Exists(storageFile))
         {
             return;
         }
@@ -44,11 +44,11 @@ public static class LevelImporting
     /// </summary>
     /// <param name="storageFile">File to read data from.</param>
     /// <returns>The level data as JSON</returns>
-    private static string ReadLevelData(Windows.Storage.StorageFile storageFile)
+    private static string ReadLevelData(string storageFile)
     {
         try
         {
-            using (StreamReader sr = new(storageFile.Path))
+            using (StreamReader sr = new(storageFile))
             {
                 string levelJson = sr.ReadToEnd();
                 return levelJson;
@@ -65,9 +65,8 @@ public static class LevelImporting
     /// <summary>
     /// Get the file to read data from.
     /// </summary>
-    private static async Task<Windows.Storage.StorageFile> GetFilePathAsync()
+    private static async Task<string> GetFilePathAsync()
     {
-
         Windows.Storage.Pickers.FileOpenPicker fileOpenPicker = new();
         fileOpenPicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
         fileOpenPicker.FileTypeFilter.Add(".prxlvl");
@@ -78,10 +77,9 @@ public static class LevelImporting
         // Associate the HWND with the file picker
         WinRT.Interop.InitializeWithWindow.Initialize(fileOpenPicker, hwnd);
 
-        Windows.Storage.StorageFile saveFile = await fileOpenPicker.PickSingleFileAsync();
-        if (saveFile != null)
+        string saveFile = (await fileOpenPicker.PickSingleFileAsync()).Path;
+        if (File.Exists(saveFile))
         {
-
             return saveFile;
         }
         else

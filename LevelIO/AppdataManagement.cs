@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Windows.Storage;
+using System.IO;
+using Windows.Security.Cryptography.Core;
 
 namespace Pyrux.LevelIO
 {
@@ -43,8 +45,12 @@ namespace Pyrux.LevelIO
         /// <returns>True if the appdata folder is empty.</returns>
         public static async Task<bool> IsAppdataEmpty()
         {
-            StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
-            if ((await appdataFolder.GetFoldersAsync()).Count == 0)
+            string appdataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),"Pyrux");
+            if (!Directory.Exists(appdataFolder))
+            {
+                Directory.CreateDirectory(appdataFolder);
+            }
+            if ((Directory.GetFileSystemEntries(appdataFolder)).Count() == 0)
             {
                 return true;
             }
@@ -70,40 +76,26 @@ namespace Pyrux.LevelIO
         /// <exception cref="AppdataFolderNotFoundException">Thrown when the top level appdata folder could not be found.</exception>
         public static async Task ConstructAppdataAsync()
         {
-            StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
-            System.Diagnostics.Debug.WriteLine(appdataFolder.Path.ToString());
-            if (appdataFolder != null)
+            string appdataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Pyrux");
+            if (Directory.Exists(appdataFolder))
             {
-                StorageFolder levelsFolder = (StorageFolder)await appdataFolder.TryGetItemAsync("Levels");
+                string levelsFolder = Path.Combine(appdataFolder, "Levels");
 
-                if (await appdataFolder.TryGetItemAsync("Levels") == null)
+                if (!Directory.Exists(levelsFolder))
                 {
-                    levelsFolder = await appdataFolder.CreateFolderAsync("Levels");
-                }
-                else
-                {
-                    levelsFolder = (StorageFolder)await appdataFolder.TryGetItemAsync("Levels");
+                    Directory.CreateDirectory(levelsFolder);
                 }
 
-                if (await levelsFolder.TryGetItemAsync("Builtins") == null)
+                string builtInLevelsFolder = Path.Combine(levelsFolder, "Builtins");
+                if (!Directory.Exists(builtInLevelsFolder))
                 {
-                    StorageFolder builtinsFolder = await levelsFolder.CreateFolderAsync("Builtins");
+                    Directory.CreateDirectory(builtInLevelsFolder);
                 }
-                else
+                string userCreatedLevelsFolder = Path.Combine(levelsFolder, "UserCreated");
+                if (!Directory.Exists(userCreatedLevelsFolder))
                 {
-                    StorageFolder builtinsFolder = (StorageFolder)await levelsFolder.TryGetItemAsync("Builtins");
+                    Directory.CreateDirectory(userCreatedLevelsFolder);
                 }
-
-                if (await levelsFolder.TryGetItemAsync("UserCreated") == null)
-                {
-                    StorageFolder userCreatedFolder = await levelsFolder.CreateFolderAsync("UserCreated");
-                }
-                else
-                {
-                    StorageFolder userCreatedFolder = (StorageFolder)await levelsFolder.TryGetItemAsync("UserCreated");
-                }
-
-
             }
             else
             {
@@ -119,25 +111,28 @@ namespace Pyrux.LevelIO
         {
             try
             {
-                StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
-                StorageFolder levelsFolder = (StorageFolder)await appdataFolder.TryGetItemAsync("Levels");
+                string appdataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Pyrux");
 
-                if (appdataFolder == null)
+                string levelsFolder = Path.Combine(appdataFolder, "Levels");
+                string builtInLevelsFolder = Path.Combine(levelsFolder, "Builtins");
+                string userCreatedLevelsFolder = Path.Combine(levelsFolder, "UserCreated");
+
+                if (!Directory.Exists(appdataFolder))
                 {
                     return false;
                 }
 
-                if (await appdataFolder.TryGetItemAsync("Levels") == null)
+                if (!Directory.Exists(levelsFolder))
                 {
                     return false;
                 }
 
-                if (await levelsFolder.TryGetItemAsync("Builtins") == null)
+                if (!Directory.Exists(builtInLevelsFolder))
                 {
                     return false;
                 }
 
-                if (await levelsFolder.TryGetItemAsync("UserCreated") == null)
+                if (!Directory.Exists(userCreatedLevelsFolder))
                 {
                     return false;
                 }
@@ -154,17 +149,15 @@ namespace Pyrux.LevelIO
         public static async Task ClearAppdataAsync()
         {
 
-            StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
-            if (appdataFolder == null)
+            string appdataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Pyrux");
+
+            if (!Directory.Exists(appdataFolder))
             {
                 throw new AppdataFolderNotFoundException();
             }
 
-            IReadOnlyList<IStorageItem> storageItems = await appdataFolder.GetItemsAsync();
-            foreach (IStorageItem item in storageItems)
-            {
-                await item.DeleteAsync();
-            }
+            Directory.Delete(appdataFolder, true);
+            Directory.CreateDirectory(appdataFolder);
 
         }
     }

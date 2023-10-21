@@ -1,4 +1,5 @@
-﻿using Windows.Storage;
+﻿using IronPython.Modules;
+using Windows.Storage;
 
 namespace Pyrux.LevelIO
 {
@@ -12,30 +13,30 @@ namespace Pyrux.LevelIO
         public static async void Save(PyruxLevel activeLevel)
         {
             await AppdataManagement.CheckAppdata();
-            StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
+            string appdataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Pyrux");
             string levelJson = JsonConvert.SerializeObject(activeLevel);
             string levelName = activeLevel.LevelName;
 
-            if (appdataFolder != null)
+            if (Directory.Exists(appdataFolder))
             {
-                StorageFolder levelsFolder = (StorageFolder)await appdataFolder.TryGetItemAsync("Levels");
-                if (levelsFolder != null)
+                string levelsFolder = Path.Combine(appdataFolder, "Levels");
+                if (Directory.Exists(levelsFolder))
                 {
-                    StorageFolder levelsFolderOrganization = null;
+                    string levelsFolderOrganization;
 
                     if (activeLevel.IsBuiltIn)
                     {
-                        levelsFolderOrganization = (StorageFolder)await levelsFolder.TryGetItemAsync("Builtins");
+                        levelsFolderOrganization = Path.Combine(levelsFolder, "Builtins");
                     }
                     else
                     {
-                        levelsFolderOrganization = (StorageFolder)await levelsFolder.TryGetItemAsync("UserCreated");
+                        levelsFolderOrganization = Path.Combine(levelsFolder, "UserCreated");
                     }
-                    StorageFolder levelFolder = (StorageFolder)await levelsFolderOrganization.TryGetItemAsync(levelName);
+                    string levelFolder = Path.Combine(levelsFolderOrganization, levelName);
 
-                    if (levelFolder == null)
+                    if (!Directory.Exists(levelFolder))
                     {
-                        levelFolder = await levelsFolderOrganization.CreateFolderAsync(levelName);
+                        Directory.CreateDirectory(levelFolder);
                     }
 
                     WriteFilesToStorage(activeLevel, levelFolder);
@@ -56,11 +57,11 @@ namespace Pyrux.LevelIO
         /// </summary>
         /// <param name="activeLevel">The level to save.</param>
         /// <param name="levelFolder">The StorageFolder to save the level to. Determined by the "Save" method.</param>
-        private static void WriteFilesToStorage(PyruxLevel activeLevel, StorageFolder levelFolder)
+        private static void WriteFilesToStorage(PyruxLevel activeLevel, string levelFolder)
         {
             string levelJson = JsonConvert.SerializeObject(activeLevel);
-            string levelDataPath = Path.Combine(levelFolder.Path, "LevelData.json");
-            string levelScriptPath = Path.Combine(levelFolder.Path, "LevelScript.py");
+            string levelDataPath = Path.Combine(levelFolder, "LevelData.json");
+            string levelScriptPath = Path.Combine(levelFolder, "LevelScript.py");
 
             if (!activeLevel.IsBuiltIn)
             {

@@ -14,11 +14,10 @@ namespace Pyrux.LevelIO
         /// <param name="exportingLevel">Level to export</param>
         public static async void ExportProcess(PyruxLevel exportingLevel)
         {
-            Windows.Storage.StorageFile saveFile = await GetSavePathAsync(exportingLevel.LevelName);
-            if (saveFile != null)
-            {
-                SaveData(JsonConvert.SerializeObject(exportingLevel), saveFile);
-            }
+            string saveFile = await GetSavePathAsync(exportingLevel.LevelName);
+            
+            SaveData(JsonConvert.SerializeObject(exportingLevel), saveFile);
+            
 
         }
         /// <summary>
@@ -26,13 +25,13 @@ namespace Pyrux.LevelIO
         /// </summary>
         /// <param name="levelJson">The JSON representation of a pyrux level that should be saved.</param>
         /// <param name="storageFile">The storage file to write the file to.</param>
-        public static void SaveData(string levelJson, StorageFile storageFile)
+        public static void SaveData(string levelJson, string storageFile)
         {
-            if (File.Exists(storageFile.Path))
+            if (File.Exists(storageFile))
             {
-                File.Delete(storageFile.Path);
+                File.Delete(storageFile);
             }
-            using (StreamWriter sw = new(storageFile.Path))
+            using (StreamWriter sw = new(storageFile))
             {
                 sw.Write(levelJson);
             }
@@ -43,7 +42,7 @@ namespace Pyrux.LevelIO
         /// </summary>
         /// <param name="levelName">The name of the saved level. This is the default filename.</param>
         /// <returns>A storage file to save the data to.</returns>
-        private static async Task<Windows.Storage.StorageFile> GetSavePathAsync(string levelName)
+        private static async Task<string> GetSavePathAsync(string levelName)
         {
             Windows.Storage.Pickers.FileSavePicker fileSavePicker = new();
             fileSavePicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
@@ -56,7 +55,7 @@ namespace Pyrux.LevelIO
             // Associate the HWND with the file picker
             WinRT.Interop.InitializeWithWindow.Initialize(fileSavePicker, windowHandle);
 
-            Windows.Storage.StorageFile saveFile = await fileSavePicker.PickSaveFileAsync();
+            string saveFile = (await fileSavePicker.PickSaveFileAsync()).Path;
             return saveFile;
         }
     }

@@ -30,7 +30,7 @@ namespace Pyrux.DataManagement
 
         private static string GetApplicationVersion()
         {
-            var version = Windows.ApplicationModel.Package.Current.Id.Version;
+            var version = Assembly.GetEntryAssembly().GetName().Version;
             string applicationVersion = string.Format("{0}.{1}.{2}.{3}",
                 version.Major,
                 version.Minor,

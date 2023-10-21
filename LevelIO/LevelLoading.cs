@@ -17,26 +17,26 @@ internal static class LevelLoading
     {
         await AppdataManagement.CheckAppdata();
 
-        StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
-        StorageFolder levelsFolder = (StorageFolder)await appdataFolder.TryGetItemAsync("Levels");
+        string appdataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Pyrux");
+        string levelsFolder = Path.Combine(appdataFolder, "Levels");
 
-        StorageFolder levelsFolderOrganization;
+        string levelsFolderOrganization;
         if (isBuiltIn)
         {
-            levelsFolderOrganization = (StorageFolder)await levelsFolder.TryGetItemAsync("Builtins");
+            levelsFolderOrganization = Path.Combine(levelsFolder,"Builtins");
         }
         else
         {
-            levelsFolderOrganization = (StorageFolder)await levelsFolder.TryGetItemAsync("UserCreated");
+            levelsFolderOrganization = Path.Combine(levelsFolder, "UserCreated");
         }
-        StorageFolder levelFolder = (StorageFolder)await levelsFolderOrganization.TryGetItemAsync(levelName);
-        if (levelFolder != null)
+        string levelFolder = Path.Combine(levelsFolderOrganization,levelName);
+        if (Directory.Exists(levelFolder))
         {
             PyruxLevel level;
-            if (File.Exists(Path.Combine(levelFolder.Path, "LevelData.json")))
+            if (File.Exists(Path.Combine(levelFolder, "LevelData.json")))
             {
 
-                using (StreamReader sr = new(Path.Combine(levelFolder.Path, "LevelData.json")))
+                using (StreamReader sr = new(Path.Combine(levelFolder, "LevelData.json")))
                 {
                     string levelJson = sr.ReadToEnd();
                     try
@@ -54,13 +54,13 @@ internal static class LevelLoading
             }
             else
             {
-                string path = Path.Combine(levelFolder.Path, "LevelData.json");
+                string path = Path.Combine(levelFolder, "LevelData.json");
                 throw new LevelJsonNotFoundException($"The path {path} could not be found.");
             }
 
-            if (File.Exists(Path.Combine(levelFolder.Path, "LevelScript.py")))
+            if (File.Exists(Path.Combine(levelFolder, "LevelScript.py")))
             {
-                using (StreamReader sr = new(Path.Combine(levelFolder.Path, "LevelScript.py")))
+                using (StreamReader sr = new(Path.Combine(levelFolder, "LevelScript.py")))
                 {
                     string levelScript = sr.ReadToEnd();
                     level.Script = levelScript;
@@ -68,8 +68,8 @@ internal static class LevelLoading
             }
             else
             {
-                await levelFolder.CreateFileAsync("LevelScript.py");
-                using (StreamWriter sw = new(Path.Combine(levelFolder.Path, "LevelScript.py")))
+                File.Create(Path.Combine(levelFolder,"LevelScript.py"));
+                using (StreamWriter sw = new(Path.Combine(levelFolder, "LevelScript.py")))
                 {
                     sw.Write(level.Script);
                 }
@@ -78,7 +78,7 @@ internal static class LevelLoading
         }
         else
         {
-            throw new LevelNotFoundException($"The folder {levelName} could not be found in {levelsFolderOrganization.Path}.");
+            throw new LevelNotFoundException($"The folder {levelName} could not be found in {levelsFolderOrganization}.");
         }
     }
     /// <summary>
@@ -88,14 +88,14 @@ internal static class LevelLoading
     /// <returns>An instance of the pyrux level.</returns>
     /// <exception cref="InvalidLevelJsonException">Thrown if the level JSON read is invalid.</exception>
     /// <exception cref="LevelJsonNotFoundException">Thrown if no json file was found.</exception>
-    public static async Task<PyruxLevel> LoadLevel(StorageFolder levelFolder)
+    public static async Task<PyruxLevel> LoadLevel(string levelFolder)
     {
 
         PyruxLevel level;
 
-        if (File.Exists(Path.Combine(levelFolder.Path, "LevelData.json")))
+        if (File.Exists(Path.Combine(levelFolder, "LevelData.json")))
         {
-            using (StreamReader sr = new(Path.Combine(levelFolder.Path, "LevelData.json")))
+            using (StreamReader sr = new(Path.Combine(levelFolder, "LevelData.json")))
             {
                 string levelJson = sr.ReadToEnd();
                 try
@@ -113,13 +113,13 @@ internal static class LevelLoading
         }
         else
         {
-            string path = Path.Combine(levelFolder.Path, "LevelData.json");
+            string path = Path.Combine(levelFolder, "LevelData.json");
             throw new LevelJsonNotFoundException($"The path {path} could not be found.");
         }
 
-        if (File.Exists(Path.Combine(levelFolder.Path, "LevelScript.py")))
+        if (File.Exists(Path.Combine(levelFolder, "LevelScript.py")))
         {
-            using (StreamReader sr = new(Path.Combine(levelFolder.Path, "LevelScript.py")))
+            using (StreamReader sr = new(Path.Combine(levelFolder, "LevelScript.py")))
             {
                 string levelScript = sr.ReadToEnd();
                 level.Script = levelScript;
@@ -127,8 +127,8 @@ internal static class LevelLoading
         }
         else
         {
-            await levelFolder.CreateFileAsync("LevelScript.py");
-            using (StreamWriter sw = new(Path.Combine(levelFolder.Path, "LevelScript.py")))
+            File.Create(Path.Combine(levelFolder,"LevelScript.py"));
+            using (StreamWriter sw = new(Path.Combine(levelFolder, "LevelScript.py")))
             {
                 sw.Write(level.Script);
             }
@@ -147,9 +147,10 @@ internal static class LevelLoading
     {
         List<PyruxLevel> levels = new();
         await AppdataManagement.CheckAppdata();
-        StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
-        StorageFolder levelsFolder = (StorageFolder)await appdataFolder.TryGetItemAsync("Levels");
-        StorageFolder builtInsFolder = (StorageFolder)await levelsFolder.TryGetItemAsync("Builtins");
+        string appdataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Pyrux");
+
+        string levelsFolder = Path.Combine(appdataFolder, "Levels");
+        string builtInsFolder = Path.Combine(levelsFolder, "Builtins");
 
         levels = await FindLevelsIn(builtInsFolder);
         return levels;
@@ -163,9 +164,9 @@ internal static class LevelLoading
     {
         List<PyruxLevel> levels = new();
         await AppdataManagement.CheckAppdata();
-        StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
-        StorageFolder levelsFolder = (StorageFolder)await appdataFolder.TryGetItemAsync("Levels");
-        StorageFolder userCreatedFolder = (StorageFolder)await levelsFolder.TryGetItemAsync("UserCreated");
+        string appdataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Pyrux");
+        string levelsFolder = Path.Combine(appdataFolder, "Levels");
+        string userCreatedFolder = Path.Combine(levelsFolder, "UserCreated");
 
         levels = await FindLevelsIn(userCreatedFolder);
         return levels;
@@ -176,14 +177,14 @@ internal static class LevelLoading
     /// </summary>
     /// <param name="levelOrganizationFolder">The folder to search.</param>
     /// <returns>A list of levels in the given folder.</returns>
-    public static async Task<List<PyruxLevel>> FindLevelsIn(StorageFolder levelOrganizationFolder)
+    public static async Task<List<PyruxLevel>> FindLevelsIn(string levelOrganizationFolder)
     {
         List<PyruxLevel> levels = new();
         await AppdataManagement.CheckAppdata();
 
-        IReadOnlyList<StorageFolder> levelFolders = await levelOrganizationFolder.GetFoldersAsync();
+        string[] levelFolders = Directory.GetFileSystemEntries(levelOrganizationFolder);
 
-        foreach (StorageFolder levelFolder in levelFolders)
+        foreach (string levelFolder in levelFolders)
         {
             PyruxLevel level;
             try
