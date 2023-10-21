@@ -57,27 +57,7 @@ namespace Pyrux
                 }
             }
             //Load the current settings from the appdata folder.
-            StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
-            if (appdataFolder != null)
-            {
-                try
-                {
-                    StorageFile settingsFile = await appdataFolder.GetFileAsync("settings.json");
-                    using (StreamReader sr = new(settingsFile.Path))
-                    {
-                        string fileContent = sr.ReadToEnd();
-                        DataManagement.PyruxSettings.Instance = JsonConvert.DeserializeObject<PyruxSettings>(fileContent);
-                    }
-                }
-                catch
-                {
-                    DataManagement.PyruxSettings.Instance = new PyruxSettings(200,1000,false,false);
-                }
-            }
-            else
-            {
-                DataManagement.PyruxSettings.Instance = new PyruxSettings(200, 1000, false, false);
-            }
+            PyruxSettings.LoadSettings();
 
 
             m_window = new MainWindow();
