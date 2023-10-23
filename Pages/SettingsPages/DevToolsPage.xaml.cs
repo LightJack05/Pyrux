@@ -22,19 +22,27 @@ namespace Pyrux.Pages
 
         private void btnOpenAppdata_Click(object sender, RoutedEventArgs e)
         {
-            
-            if (Windows.ApplicationModel.Package.Current.IsBundle)
+            try
             {
-                string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-                string packageFamilyName = Windows.ApplicationModel.Package.Current.Id.FamilyName;
-                string packagePath = Path.Combine(appDataPath, "Packages", packageFamilyName, "LocalCache");
-                System.Diagnostics.Process.Start("explorer.exe", packagePath);
+                if (Windows.ApplicationModel.Package.Current != null)
+                {
+                    string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                    string packageFamilyName = Windows.ApplicationModel.Package.Current.Id.FamilyName;
+                    string packagePath = Path.Combine(appDataPath, "Packages", packageFamilyName, "LocalCache", "Roaming", "Pyrux");
+                    System.Diagnostics.Process.Start("explorer.exe", packagePath);
+                }
+                else
+                {
+                    throw new Exception("Application package could not be determined.");       
+                }
+
             }
-            else
+            catch (Exception)
             {
                 string appdataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Pyrux");
 
                 System.Diagnostics.Process.Start("explorer.exe", appdataFolder);
+                
             }
 
             
@@ -42,8 +50,26 @@ namespace Pyrux.Pages
 
         private void btnCopyAppdataPath_Click(object sender, RoutedEventArgs e)
         {
-            string appdataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Pyrux");
+            string appdataFolder;
+            try
+            {
+                if (Windows.ApplicationModel.Package.Current != null)
+                {
+                    string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                    string packageFamilyName = Windows.ApplicationModel.Package.Current.Id.FamilyName;
+                    string packagePath = Path.Combine(appDataPath, "Packages", packageFamilyName, "LocalCache", "Roaming", "Pyrux");
+                    appdataFolder = packagePath;
+                }
+                else
+                {
+                    throw new Exception("Application package could not be determined.");
+                }
 
+            }
+            catch (Exception)
+            {
+                appdataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Pyrux");
+            }
             DataPackage datapackage = new();
             datapackage.SetText(appdataFolder);
             Clipboard.SetContent(datapackage);
