@@ -26,6 +26,8 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Pages\AboutPage.xaml" />
+    <None Remove="Pages\AboutPages\AboutText.xaml" />
+    <None Remove="Pages\AboutPages\LicensePage.xaml" />
     <None Remove="Pages\ContentDialogs\ConfirmLevelCreationWithOpenLevel.xaml" />
     <None Remove="Pages\ContentDialogs\ConfirmRepairAppdataFolderDialogue.xaml" />
     <None Remove="Pages\ContentDialogs\EditHintDialogue.xaml" />
@@ -120,6 +122,19 @@
     <Content Update="Assets\Textures\Wall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Open Source Licenses\IronPython.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Open Source Licenses\Newtonsoft.JSON.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\AboutPages\LicensePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\DevToolsPage.xaml">
@@ -243,6 +258,11 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\ContentDialogs\LevelCreationFailed.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\AboutPages\AboutText.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
