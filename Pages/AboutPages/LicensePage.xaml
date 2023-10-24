@@ -4,11 +4,13 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Pyrux.Pages.AboutPages"
+    xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    NavigationCacheMode="Required">
+    NavigationCacheMode="Required"
+    Loaded="Page_Loaded">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -17,9 +19,24 @@
         </Grid.ColumnDefinitions>
 
         <Border Grid.Column="0" CornerRadius="10" Margin="10,10,5,10" Background="{ThemeResource SystemChromeLowColor}">
-            
+            <controls:MarkdownTextBlock Margin="20" FontSize="15" Text="{x:Bind LicensesDisplayString}" Background="Transparent"/>
         </Border>
         <Border Grid.Column="1" CornerRadius="10" Margin="5,10,10,10" Background="{ThemeResource SystemChromeLowColor}">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <ComboBox Grid.Row="0" MaxWidth="400" Margin="20" SelectedItem="IronPython" SelectionChanged="ComboBox_SelectionChanged">
+                    <x:String>IronPython</x:String>
+                    <x:String>Newtonsoft.JSON</x:String>
+                </ComboBox>
+                <ScrollViewer  Grid.Row="1">
+                    <TextBlock x:Name="txtLicense" Text="Test" Margin="20" IsTextSelectionEnabled="True" TextWrapping="WrapWholeWords"/>
+                </ScrollViewer>
+            </Grid>
+            
 
         </Border>
     </Grid>

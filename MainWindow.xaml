@@ -18,8 +18,9 @@
             <RowDefinition Height="32"/>
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Grid x:Name="AppTitleBar">
-            <TextBlock x:Name="TitleTextBlock" 
+        <Grid x:Name="AppTitleBar"
+              Background="Transparent">
+            <TextBlock x:Name="TitleTextBlock"
                 Text="{x:Bind TitleText}" 
                 Grid.Column="2"
                 TextWrapping="NoWrap"
