@@ -10,12 +10,13 @@ namespace Pyrux.DataManagement
         /// </summary>
         /// <param name="executionSpeed">Speed of execution between instructions.</param>
         [JsonConstructor]
-        public PyruxSettings(int executionSpeed,int resetDelayInMilliseconds, bool autoRestartOnFinish, bool addDelayToReset)
+        public PyruxSettings(int executionSpeed,int resetDelayInMilliseconds, bool autoRestartOnFinish, bool addDelayToReset, bool skipTutorialEnabled)
         {
             _executionSpeed = executionSpeed;
             _delayBeforeAutoReset = resetDelayInMilliseconds;
             _autoRestartOnFinish = autoRestartOnFinish;
             _addDelayBeforeAutoReset = addDelayToReset;
+            _skipTutorialEnabed = skipTutorialEnabled;
         }
         /// <summary>
         /// The current instance of the settings. This saves the actual data.
@@ -40,6 +41,8 @@ namespace Pyrux.DataManagement
         public int _delayBeforeAutoReset { get; set; } = 100;
         public static bool AddDelayBeforeAutoReset { get => Instance._addDelayBeforeAutoReset; set => Instance._addDelayBeforeAutoReset = value; }
         public bool _addDelayBeforeAutoReset { get; set; } = false;
+        public bool _skipTutorialEnabed { get; set; } = false;
+        public static bool SkipTutorialEnabled { get => Instance._skipTutorialEnabed; set => Instance._skipTutorialEnabed = value; }
         /// <summary>
         /// Saves the settings into the Appdata file.
         /// </summary>
@@ -87,17 +90,17 @@ namespace Pyrux.DataManagement
                     }
                     if(Instance == null)
                     {
-                        Instance = new PyruxSettings(200, 1000, false, false);
+                        Instance = new PyruxSettings(200, 1000, false, false, false);
                     }
                 }
                 catch
                 {
-                    Instance = new PyruxSettings(200, 1000, false, false);
+                    Instance = new PyruxSettings(200, 1000, false, false, false);
                 }
             }
             else
             {
-                Instance = new PyruxSettings(200, 1000, false, false);
+                Instance = new PyruxSettings(200, 1000, false, false, false);
             }
             SaveSettings();
         }

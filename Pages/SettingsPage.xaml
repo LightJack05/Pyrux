@@ -30,6 +30,12 @@
                                 <TextBlock>Execution</TextBlock>
                             </StackPanel>
                         </NavigationViewItem>
+                        <NavigationViewItem Tag="tutorial">
+                            <StackPanel Orientation="Horizontal">
+                                <SymbolIcon Symbol="Help" Margin="5,0,5,0"/>
+                                <TextBlock>Tutorial</TextBlock>
+                            </StackPanel>
+                        </NavigationViewItem>
                         <NavigationViewItem Tag="devtools">
                             <StackPanel Orientation="Horizontal">
                                 <SymbolIcon Symbol="ReportHacked" Margin="5,0,5,0"/>

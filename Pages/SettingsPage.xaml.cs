@@ -17,6 +17,7 @@ namespace Pyrux.Pages
         public List<(string Tag, Type Page)> contentDictionary = new()
         {
             ("execution",typeof(ExecutionSettings)),
+            ("tutorial", typeof(TutorialSettings)),
             ("devtools",typeof(DevToolsPage))
         };
 
