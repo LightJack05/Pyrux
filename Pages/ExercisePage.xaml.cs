@@ -14,6 +14,11 @@ namespace Pyrux.Pages
     /// </summary>
     public sealed partial class ExercisePage : Page
     {
+        Dictionary<int, TeachingTip> PageTeachingTips = new()
+        {
+
+        };
+
         /// <summary>
         /// Current instance of the Page.
         /// </summary>
@@ -161,7 +166,58 @@ namespace Pyrux.Pages
             PyruxSettings.SaveSettings();
         }
 
-        
+        private void InitTutorial()
+        {
+            PageTeachingTips.Clear();
+            PageTeachingTips.Add(5, tctLevelPageIntro);
+            PageTeachingTips.Add(6, tctNameTask);
+            PageTeachingTips.Add(7, tctCodeEditor);
+            PageTeachingTips.Add(8, tctLevelEnvironment);
+            PageTeachingTips.Add(9, tctPlayButton);
+            PageTeachingTips.Add(10, tctStepButton);
+            PageTeachingTips.Add(11, tctExecutionSpeed);
+            PageTeachingTips.Add(12, tctResetButton);
+            PageTeachingTips.Add(13, tctWallTool);
+            PageTeachingTips.Add(14, tctChipTool);
+            PageTeachingTips.Add(15, tctMovePlayer);
+            PageTeachingTips.Add(16, tctRotateTool);
+            PageTeachingTips.Add(17, tctSave);
+            PageTeachingTips.Add(18, tctExport);
+
+            if (!PyruxSettings.SkipTutorialEnabled)
+            {
+                try
+                {
+                    PageTeachingTips[PyruxSettings.TutorialStateId].IsOpen = true;
+                }
+                catch
+                {
+
+                }
+            }
+        }
+
+        private void TeachingTipNext_Click(object sender, RoutedEventArgs e)
+        {
+            PageTeachingTips[PyruxSettings.TutorialStateId].IsOpen = false;
+            PyruxSettings.TutorialStateId++;
+            if (PageTeachingTips.Count + 5 <= PyruxSettings.TutorialStateId)
+            {
+                
+            }
+            else
+            {
+                PageTeachingTips[PyruxSettings.TutorialStateId].IsOpen = true;
+            }
+        }
+
+        private void TeachingTipCloseButtonClick(TeachingTip sender, object args)
+        {
+            PyruxSettings.SkipTutorialEnabled = true;
+            PyruxSettings.TutorialStateId = 0;
+        }
+
+
     }
 
 
