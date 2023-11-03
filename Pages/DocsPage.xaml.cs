@@ -71,12 +71,14 @@ namespace Pyrux.Pages
             {
                 PageTeachingTips[PyruxSettings.TutorialStateId].IsOpen = true;
             }
+            PyruxSettings.SaveSettings();
         }
 
         private void TeachingTipCloseButtonClick(TeachingTip sender, object args)
         {
             PyruxSettings.SkipTutorialEnabled = true;
             PyruxSettings.TutorialStateId = 0;
+            PyruxSettings.SaveSettings();
         }
 
         private void TeachingTipLastButtonClick(Object sender, object args)
