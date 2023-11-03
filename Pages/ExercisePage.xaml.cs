@@ -203,7 +203,8 @@ namespace Pyrux.Pages
             PyruxSettings.TutorialStateId++;
             if (PageTeachingTips.Count + 5 <= PyruxSettings.TutorialStateId)
             {
-                
+                MainWindow.Instance.NavViewSetSelection(2);
+                MainWindow.Instance.NavViewNavigate("goalView", new Microsoft.UI.Xaml.Media.Animation.CommonNavigationTransitionInfo());
             }
             else
             {
