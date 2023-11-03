@@ -11,7 +11,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    NavigationCacheMode="Required">
+    NavigationCacheMode="Required"
+    Loaded="Page_Loaded">
 
     <Grid>
         <Border Background="{ThemeResource SystemChromeLowColor}" CornerRadius="10" Margin="10">
@@ -23,5 +24,66 @@
             </Grid>
             
         </Border>
+
+        <TeachingTip
+            x:Name="tctDocsPageIntro"
+            PreferredPlacement="Center"
+            Title="API Documentation"
+            Subtitle="This page includes information about the Pyrux API. It explains how you move your character, rotate it, pick up chips and much more. Give it a read."
+            CloseButtonClick="TeachingTipCloseButtonClick">
+
+            <StackPanel Orientation="Vertical">
+                <Grid Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="1" Margin="5,0,0,0" Click="TeachingTipNext_Click">
+                        Next
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </TeachingTip>
+
+        <TeachingTip
+            x:Name="tctPopout"
+            PreferredPlacement="Center"
+            Title="Popout Button"
+            Subtitle="Over here you can open the documentation in a second Window, in case you want to see it while programming."
+            CloseButtonClick="TeachingTipCloseButtonClick"
+            Target="{x:Bind btnPopoutDocs}">
+
+            <StackPanel Orientation="Vertical">
+                <Grid Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="1" Margin="5,0,0,0" Click="TeachingTipNext_Click">
+                        Next
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </TeachingTip>
+
+        <TeachingTip
+            x:Name="tctTutorialEnd"
+            PreferredPlacement="Center"
+            Title="End of Tutorial"
+            Subtitle="This is it for the UI Tutorial. To learn how to get started with Programming in Pyrux, check out the Demo Levels!"
+            CloseButtonClick="TeachingTipCloseButtonClick">
+
+            <StackPanel Orientation="Vertical">
+                <Grid Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="1" Margin="5,0,0,0" Click="TeachingTipLastButtonClick">
+                        Next
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </TeachingTip>
     </Grid>
 </Page>

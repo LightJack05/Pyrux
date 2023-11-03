@@ -163,10 +163,292 @@
                 </Border>
             </Grid>
         </Grid>
+    <!--Popups/Teachingtips-->
+        <TeachingTip 
+        x:Name="tctLevelPageIntro"
+        PreferredPlacement="Center"
+        Title="Level page"
+        Subtitle="This page is the main page of the application."
+        CloseButtonClick="TeachingTipCloseButtonClick">
+
+            <StackPanel Orientation="Vertical">
+                <Grid Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="1" Margin="5,0,0,0" Click="TeachingTipNext_Click">
+                        Next
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </TeachingTip>
+
+        <TeachingTip 
+        x:Name="tctNameTask"
+        Target="{x:Bind expTaskExpander}"
+        Title="Name and task"
+        Subtitle="Here you can see the level's name and the task."
+        CloseButtonClick="TeachingTipCloseButtonClick">
+
+            <StackPanel Orientation="Vertical">
+                <Grid Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="1" Margin="5,0,0,0" Click="TeachingTipNext_Click">
+                        Next
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </TeachingTip>
+
+
+        <TeachingTip 
+        x:Name="tctCodeEditor"
+        Target="{x:Bind txtCodeEditor}"
+        Title="Code Editor"
+        Subtitle="This control allows you to edit the script of your level. It makes the character move through the level environment!"
+        CloseButtonClick="TeachingTipCloseButtonClick">
+
+            <StackPanel Orientation="Vertical">
+                <Grid Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="1" Margin="5,0,0,0" Click="TeachingTipNext_Click">
+                        Next
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </TeachingTip>
+
+        <TeachingTip 
+        x:Name="tctLevelEnvironment"
+        Target="{x:Bind grdPlayField}"
+        Title="Level Environment"
+        Subtitle="This grid shows the level environment with your character."
+        CloseButtonClick="TeachingTipCloseButtonClick">
+
+            <StackPanel Orientation="Vertical">
+                <Grid Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="1" Margin="5,0,0,0" Click="TeachingTipNext_Click">
+                        Next
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </TeachingTip>
+
+        <TeachingTip 
+        x:Name="tctWallTool"
+        Target="{x:Bind btnWallTool}"
+        Title="Walls"
+        Subtitle="This tools allows you to place walls, which can't be passed through."
+        CloseButtonClick="TeachingTipCloseButtonClick">
+
+            <StackPanel Orientation="Vertical">
+                <Grid Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="1" Margin="5,0,0,0" Click="TeachingTipNext_Click">
+                        Next
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </TeachingTip>
+
+        <TeachingTip 
+        x:Name="tctChipTool"
+        Target="{x:Bind btnChipTool}"
+        Title="Chip Tool"
+        Subtitle="This tool allows you to place or remove chips, which can be collected."
+        CloseButtonClick="TeachingTipCloseButtonClick">
+
+            <StackPanel Orientation="Vertical">
+                <Grid Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="1" Margin="5,0,0,0" Click="TeachingTipNext_Click">
+                        Next
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </TeachingTip>
+
+        <TeachingTip 
+        x:Name="tctMovePlayer"
+        Target="{x:Bind btnPlayerTool}"
+        Title="Player Placement"
+        Subtitle="This tool allows you to move your character."
+        CloseButtonClick="TeachingTipCloseButtonClick">
+
+            <StackPanel Orientation="Vertical">
+                <Grid Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="1" Margin="5,0,0,0" Click="TeachingTipNext_Click">
+                        Next
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </TeachingTip>
+
+        <TeachingTip 
+        x:Name="tctRotateTool"
+        Target="{x:Bind btnRotate}"
+        Title="Rotate Tool"
+        Subtitle="This tool allows you to rotate your character."
+        CloseButtonClick="TeachingTipCloseButtonClick">
+
+            <StackPanel Orientation="Vertical">
+                <Grid Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="1" Margin="5,0,0,0" Click="TeachingTipNext_Click">
+                        Next
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </TeachingTip>
+        
+        <TeachingTip 
+        x:Name="tctPlayButton"
+        Target="{x:Bind btnStart}"
+        Title="Play button"
+        Subtitle="Execute your code using this button. Clicking it again when your code is running will pause execution."
+        CloseButtonClick="TeachingTipCloseButtonClick">
+
+            <StackPanel Orientation="Vertical">
+                <Grid Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="1" Margin="5,0,0,0" Click="TeachingTipNext_Click">
+                        Next
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </TeachingTip>
+
+        <TeachingTip 
+        x:Name="tctStepButton"
+        Target="{x:Bind btnStep}"
+        Title="Step Through"
+        Subtitle="Step through your code using this button. It will pause after every instruction to Pyrux."
+        CloseButtonClick="TeachingTipCloseButtonClick">
+
+            <StackPanel Orientation="Vertical">
+                <Grid Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="1" Margin="5,0,0,0" Click="TeachingTipNext_Click">
+                        Next
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </TeachingTip>
+
+        <TeachingTip 
+        x:Name="tctResetButton"
+        Target="{x:Bind btnReset}"
+        Title="Reset Button"
+        Subtitle="This button will reset your layout to the way it was before you ran your code. Also, while your code is running, it will stop the execution of your code."
+        CloseButtonClick="TeachingTipCloseButtonClick">
+
+            <StackPanel Orientation="Vertical">
+                <Grid Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="1" Margin="5,0,0,0" Click="TeachingTipNext_Click">
+                        Next
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </TeachingTip>
+
+        <TeachingTip 
+        x:Name="tctExecutionSpeed"
+        Target="{x:Bind sldExecutionSpeed}"
+        Title="Execution Speed"
+        Subtitle="This slider allows you to change your execution speed, and make your code run faster."
+        CloseButtonClick="TeachingTipCloseButtonClick">
+
+            <StackPanel Orientation="Vertical">
+                <Grid Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="1" Margin="5,0,0,0" Click="TeachingTipNext_Click">
+                        Next
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </TeachingTip>
+
+        <TeachingTip 
+        x:Name="tctSave"
+        Target="{x:Bind btnSave}"
+        Title="Save!"
+        Subtitle="Don't forget to regularly save your level. If you close, create a new level, or open another level without saving, your changes will be lost."
+        CloseButtonClick="TeachingTipCloseButtonClick">
+
+            <StackPanel Orientation="Vertical">
+                <Grid Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="1" Margin="5,0,0,0" Click="TeachingTipNext_Click">
+                        Next
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </TeachingTip>
+
+        <TeachingTip 
+        x:Name="tctExport"
+        Target="{x:Bind btnExport}"
+        Title="Export"
+        Subtitle="Export your level to share it with other people, or back it up!"
+        CloseButtonClick="TeachingTipCloseButtonClick">
+
+            <StackPanel Orientation="Vertical">
+                <Grid Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="1" Margin="5,0,0,0" Click="TeachingTipNext_Click">
+                        Next
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </TeachingTip>
+
     </Grid>
 
 
-    <!--Popups/Teachingtips-->
 
+    
 
 </Page>

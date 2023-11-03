@@ -13,6 +13,10 @@ namespace Pyrux.Pages
     /// </summary>
     public sealed partial class GoalPageView : Page
     {
+        Dictionary<int, TeachingTip> PageTeachingTips = new()
+        {
+
+        };
         /// <summary>
         /// The image of the character.
         /// </summary>
@@ -65,6 +69,7 @@ namespace Pyrux.Pages
                 FullDisplayRedraw();
                 PrepareToolSelection();
             }
+            InitTutorial();
         }
 
         private void PrepareToolSelection()
@@ -349,6 +354,49 @@ namespace Pyrux.Pages
             //SaveNewLayout();
             UpdateDisplay();
             StaticDataStore.UnsavedChangesPresent = true;
+        }
+
+        private void InitTutorial()
+        {
+            PageTeachingTips.Clear();
+            PageTeachingTips.Add(19, tctGoalPageIntro);
+            PageTeachingTips.Add(20, tctToolsGoalLayout);
+
+            if (!PyruxSettings.SkipTutorialEnabled)
+            {
+                try
+                {
+                    PageTeachingTips[PyruxSettings.TutorialStateId].IsOpen = true;
+                }
+                catch
+                {
+
+                }
+            }
+        }
+
+        private void TeachingTipNext_Click(object sender, RoutedEventArgs e)
+        {
+            PageTeachingTips[PyruxSettings.TutorialStateId].IsOpen = false;
+            PyruxSettings.TutorialStateId++;
+            if (PageTeachingTips.Count + 19 <= PyruxSettings.TutorialStateId)
+            {
+                MainWindow.Instance.NavViewSetSelection(4);
+                MainWindow.Instance.NavViewNavigate("docs", new Microsoft.UI.Xaml.Media.Animation.CommonNavigationTransitionInfo());
+
+            }
+            else
+            {
+                PageTeachingTips[PyruxSettings.TutorialStateId].IsOpen = true;
+            }
+            PyruxSettings.SaveSettings();
+        }
+
+        private void TeachingTipCloseButtonClick(TeachingTip sender, object args)
+        {
+            PyruxSettings.SkipTutorialEnabled = true;
+            PyruxSettings.TutorialStateId = 0;
+            PyruxSettings.SaveSettings();
         }
     }
 }
