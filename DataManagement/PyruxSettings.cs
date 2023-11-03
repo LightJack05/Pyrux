@@ -4,6 +4,10 @@ namespace Pyrux.DataManagement
 {
     public class PyruxSettings
     {
+        public PyruxSettings() 
+        { 
+        
+        }
         /// <summary>
         /// Constructor for importing a json file into the settings.
         /// Creates a new instance for the PyruxSettings class, that should be set as the Instance variable.
@@ -41,8 +45,11 @@ namespace Pyrux.DataManagement
         public int _delayBeforeAutoReset { get; set; } = 100;
         public static bool AddDelayBeforeAutoReset { get => Instance._addDelayBeforeAutoReset; set => Instance._addDelayBeforeAutoReset = value; }
         public bool _addDelayBeforeAutoReset { get; set; } = false;
-        public bool _skipTutorialEnabed { get; set; } = false;
         public static bool SkipTutorialEnabled { get => Instance._skipTutorialEnabed; set => Instance._skipTutorialEnabed = value; }
+        public bool _skipTutorialEnabed { get; set; } = false;
+        public static int TutorialStateId { get => Instance._tutorialStateId; set => Instance._tutorialStateId = value; }
+        public int _tutorialStateId { get; set; } = 0;
+
         /// <summary>
         /// Saves the settings into the Appdata file.
         /// </summary>
@@ -90,17 +97,17 @@ namespace Pyrux.DataManagement
                     }
                     if(Instance == null)
                     {
-                        Instance = new PyruxSettings(200, 1000, false, false, false);
+                        Instance = new PyruxSettings();
                     }
                 }
                 catch
                 {
-                    Instance = new PyruxSettings(200, 1000, false, false, false);
+                    Instance = new PyruxSettings();
                 }
             }
             else
             {
-                Instance = new PyruxSettings(200, 1000, false, false, false);
+                Instance = new PyruxSettings();
             }
             SaveSettings();
         }

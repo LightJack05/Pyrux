@@ -12,14 +12,22 @@ namespace Pyrux.Pages
     /// </summary>
     public sealed partial class DocsPage : Page
     {
-        
+        Dictionary<int, TeachingTip> PageTeachingTips = new()
+        {
+
+        };
+
 
         public DocsPage()
         {
             this.InitializeComponent();
         }
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            InitTutorial();
+        }
 
-        
+
 
         private void btnPopoutDocs_Click(object sender, RoutedEventArgs e)
         {
@@ -30,5 +38,55 @@ namespace Pyrux.Pages
             Window docsWindow = new ApplicationWindows.DocumentationWindow();
             docsWindow.Activate();
         }
+
+        private void InitTutorial()
+        {
+            PageTeachingTips.Clear();
+            PageTeachingTips.Add(21, tctDocsPageIntro);
+            PageTeachingTips.Add(22, tctPopout);
+            PageTeachingTips.Add(23, tctTutorialEnd);
+
+            if (!PyruxSettings.SkipTutorialEnabled)
+            {
+                try
+                {
+                    PageTeachingTips[PyruxSettings.TutorialStateId].IsOpen = true;
+                }
+                catch
+                {
+
+                }
+            }
+        }
+
+        private void TeachingTipNext_Click(object sender, RoutedEventArgs e)
+        {
+            PageTeachingTips[PyruxSettings.TutorialStateId].IsOpen = false;
+            PyruxSettings.TutorialStateId++;
+            if (PageTeachingTips.Count + 21 <= PyruxSettings.TutorialStateId)
+            {
+
+            }
+            else
+            {
+                PageTeachingTips[PyruxSettings.TutorialStateId].IsOpen = true;
+            }
+            PyruxSettings.SaveSettings();
+        }
+
+        private void TeachingTipCloseButtonClick(TeachingTip sender, object args)
+        {
+            PyruxSettings.SkipTutorialEnabled = true;
+            PyruxSettings.TutorialStateId = 0;
+            PyruxSettings.SaveSettings();
+        }
+
+        private void TeachingTipLastButtonClick(Object sender, object args)
+        {
+            tctTutorialEnd.IsOpen = false;
+            PyruxSettings.SkipTutorialEnabled = true;
+            PyruxSettings.TutorialStateId = 0;
+        }
+
     }
 }

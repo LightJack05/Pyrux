@@ -271,6 +271,7 @@ public sealed partial class ExercisePage
 
         BuildPlayGrid();
         FullDisplayRedraw();
+        InitTutorial();
     }
 
 }

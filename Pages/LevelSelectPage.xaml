@@ -42,7 +42,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Border Grid.Column="0" Background="{ThemeResource SystemChromeLowColor}" CornerRadius="10" Margin="20">
+                <Border Grid.Column="0" Background="{ThemeResource SystemChromeLowColor}" CornerRadius="10" Margin="20" x:Name="bdrBuiltInLevels">
                     <Grid Margin="20">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -56,7 +56,7 @@
                     </Grid>
                 </Border>
 
-                <Border Grid.Column="1" Background="{ThemeResource SystemChromeLowColor}" CornerRadius="10" Margin="20">
+                <Border Grid.Column="1" Background="{ThemeResource SystemChromeLowColor}" CornerRadius="10" Margin="20" x:Name="bdrUserCreatedLevels">
                     <Grid Margin="20">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -72,6 +72,108 @@
             </Grid>
             
         </Grid>
+
+        <TeachingTip 
+        x:Name="tctTutorialIntro"
+        PreferredPlacement="Center"
+        Title="Welcome!"
+        Subtitle="Thank you for using Pyrux! This tutorial will help you get to know the UI and functions of Pyrux. If you don't want a tutorial, simply close any of these teaching tips with the x button!"
+        CloseButtonClick="TeachingTipCloseButtonClick">
+
+            <StackPanel Orientation="Vertical">
+                <Grid Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="1" Margin="5,0,0,0" Click="TeachingTipNext_Click">
+                        Next
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </TeachingTip>
+        
+        <TeachingTip 
+            x:Name="tctBuiltInLevels"
+            Target="{x:Bind bdrBuiltInLevels}"
+            Title="Built in levels"
+            Subtitle="These levels are built in to Pyrux. They cannot be edited."
+            CloseButtonClick="TeachingTipCloseButtonClick">
+
+            <StackPanel Orientation="Vertical">
+                <Grid Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="1" Margin="5,0,0,0" Click="TeachingTipNext_Click">
+                        Next
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </TeachingTip>
+
+        <TeachingTip 
+        x:Name="tctUserCreatedLevels"
+        Target="{x:Bind bdrUserCreatedLevels}"
+        Title="User created levels"
+        Subtitle="Here we'll show levels either created or imported by you. You may edit, import, export and share these."
+        CloseButtonClick="TeachingTipCloseButtonClick">
+
+            <StackPanel Orientation="Vertical">
+                <Grid Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="1" Margin="5,0,0,0" Click="TeachingTipNext_Click">
+                        Next
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </TeachingTip>
+
+        <TeachingTip 
+        x:Name="tctNewLevel"
+        Target="{x:Bind btnNewLevel}"
+        Title="Create a new level"
+        Subtitle="You can use this button to create a new level. Create one to continue with the tutorial!"
+        CloseButtonClick="TeachingTipCloseButtonClick">
+
+            <StackPanel Orientation="Vertical">
+                <Grid Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="1" Margin="5,0,0,0" Click="TeachingTipNext_Click">
+                        Next
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </TeachingTip>
+
+        <TeachingTip 
+        x:Name="tctImport"
+        Target="{x:Bind btnImport}"
+        Title="Import a level"
+        Subtitle="Clicking this button will allow you to import a level, distributed as a .prxlvl file."
+        CloseButtonClick="TeachingTipCloseButtonClick">
+
+            <StackPanel Orientation="Vertical">
+                <Grid Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="1" Margin="5,0,0,0" Click="TeachingTipNext_Click">
+                        Next
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </TeachingTip>
+
+
 
     </Grid>
 </Page>

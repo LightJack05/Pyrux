@@ -14,6 +14,10 @@ namespace Pyrux.Pages
     /// </summary>
     public sealed partial class LevelSelectPage : Page
     {
+        Dictionary<int, TeachingTip> PageTeachingTips = new()
+        {
+            
+        };
         public LevelSelectPage()
         {
             this.InitializeComponent();
@@ -25,7 +29,6 @@ namespace Pyrux.Pages
             {
                 try
                 {
-
                     LoadBuiltinLevelsIntoMenu();
                     LoadCustomLevelsIntoMenu();
                 }
@@ -35,6 +38,50 @@ namespace Pyrux.Pages
                     DisplayAppdataError();
                 }
             }
+            InitTutorial();
+
+        }
+
+        private void InitTutorial()
+        {
+            PageTeachingTips.Clear();
+            PageTeachingTips.Add(0, tctTutorialIntro);
+            PageTeachingTips.Add(1, tctBuiltInLevels);
+            PageTeachingTips.Add(2, tctUserCreatedLevels);
+            PageTeachingTips.Add(3, tctImport);
+            PageTeachingTips.Add(4, tctNewLevel);
+
+            if(!PyruxSettings.SkipTutorialEnabled)
+            {
+                try
+                {
+                    PageTeachingTips[PyruxSettings.TutorialStateId].IsOpen = true;
+                }
+                catch 
+                { 
+                
+                }
+            }
+        }
+
+        private void TeachingTipNext_Click(object sender, RoutedEventArgs e)
+        {
+            PageTeachingTips[PyruxSettings.TutorialStateId].IsOpen = false;
+            PyruxSettings.TutorialStateId++;
+            if(PageTeachingTips.Count <= PyruxSettings.TutorialStateId)
+            {
+                btnNewLevel_Click(null,null);
+            }
+            else
+            {
+                PageTeachingTips[PyruxSettings.TutorialStateId].IsOpen = true;
+            }
+        }
+
+        private void TeachingTipCloseButtonClick(TeachingTip sender, object args)
+        {
+            PyruxSettings.SkipTutorialEnabled = true;
+            PyruxSettings.TutorialStateId = 0;
         }
         /// <summary>
         /// Display an appdata error should the appdata be corrupted. Otherwise do nothing.
@@ -205,6 +252,6 @@ namespace Pyrux.Pages
 
         }
 
-
+        
     }
 }
