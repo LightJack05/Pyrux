@@ -137,8 +137,8 @@ public sealed partial class ExercisePage
                 }, PythonCancellationToken);
                 await _pythonThread.WaitAsync(PythonCancellationToken);
             }
-            catch (TaskCanceledException) { }
-            catch (ExecutionCancelledException) { }
+            catch (TaskCanceledException) { ResetLayoutToStart(); }
+            catch (ExecutionCancelledException) { ResetLayoutToStart(); }
             ExercisePage.Instance.PythonScriptRunning = false;
             btnReset.Content = new SymbolIcon(Symbol.Refresh);
             ToolTipService.SetToolTip(btnReset, "Reset layout");
@@ -148,7 +148,20 @@ public sealed partial class ExercisePage
             btnStep.IsEnabled = false;
             IsStepModeEnabled = false;
 
-            if(PyruxSettings.AutoRestartOnFinish)
+            if (thrownException != null)
+            {
+                ShowUserEndExceptionDialogue(thrownException, errorStackTrace);
+            }
+            else
+            {
+                if (StaticDataStore.ActiveLevel.MapLayout.MatchGoalLayout(ActiveLevel.GoalMapLayout))
+                {
+                    ActiveLevel.Completed = true;
+                    ShowLevelCompletedDialogue();
+                }
+            }
+
+            if (PyruxSettings.AutoRestartOnFinish && !ActiveLevel.Completed)
             {
                 if(PyruxSettings.AddDelayBeforeAutoReset)
                 {
@@ -171,18 +184,7 @@ public sealed partial class ExercisePage
                 }
             }
         }
-        if (thrownException != null)
-        {
-            ShowUserEndExceptionDialogue(thrownException, errorStackTrace);
-        }
-        else
-        {
-            if (StaticDataStore.ActiveLevel.MapLayout.MatchGoalLayout(ActiveLevel.GoalMapLayout))
-            {
-                ActiveLevel.Completed = true;
-                ShowLevelCompletedDialogue();
-            }
-        }
+        
     }
 
     public void SetupPythonConsoleOutput(ScriptEngine scriptEngine)
