@@ -96,6 +96,8 @@ namespace Pyrux.LevelIO
                 {
                     Directory.CreateDirectory(userCreatedLevelsFolder);
                 }
+
+                BuiltInLevels.ConstructLevels();
             }
             else
             {

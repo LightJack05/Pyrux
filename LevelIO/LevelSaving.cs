@@ -52,6 +52,14 @@ namespace Pyrux.LevelIO
                 throw new AppdataFolderNotFoundException();
             }
         }
+
+        public static async void Save(List<PyruxLevel> pyruxLevels)
+        {
+            foreach (PyruxLevel level in pyruxLevels)
+            {
+                Save(level);
+            }
+        }
         /// <summary>
         /// Write the required files for saving to the disk.
         /// </summary>
