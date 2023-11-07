@@ -73,6 +73,8 @@ namespace Pyrux.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            isGoalLayoutOverlayEnabled = false;
+            tswGoalLayoutOverlay.IsOn = false;
             sldExecutionSpeed.Value = PyruxSettings.ExecutionSpeed;
             if (StaticDataStore.ActiveLevel == null)
             {
@@ -219,7 +221,6 @@ namespace Pyrux.Pages
             PyruxSettings.TutorialStateId = 0;
             PyruxSettings.SaveSettings();
         }
-
 
     }
 

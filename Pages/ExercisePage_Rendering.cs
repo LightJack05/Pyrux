@@ -1,6 +1,7 @@
 ﻿namespace Pyrux.Pages;
 public sealed partial class ExercisePage
 {
+    
     /// <summary>
     /// On resize, change the size of the grid to keep every tile square.
     /// </summary>
@@ -63,11 +64,12 @@ public sealed partial class ExercisePage
     /// </summary>
     public void FullDisplayRedraw()
     {
-        PyruxLevelMapLayout mapLayout = ActiveLevel.MapLayout;
+
+        PyruxLevelMapLayout mapLayout = isGoalLayoutOverlayEnabled ? ActiveLevel.GoalMapLayout : ActiveLevel.MapLayout;
         Image charImage = (Image)grdPlayField.Children.Last();
-        charImage.RenderTransform = new RotateTransform { Angle = 90 * ActiveLevel.MapLayout.CurrentPlayerDirection };
-        Grid.SetColumn(charImage, ActiveLevel.MapLayout.CurrentPlayerPosition.X);
-        Grid.SetRow(charImage, ActiveLevel.MapLayout.CurrentPlayerPosition.Y);
+        charImage.RenderTransform = new RotateTransform { Angle = 90 * mapLayout.CurrentPlayerDirection };
+        Grid.SetColumn(charImage, mapLayout.CurrentPlayerPosition.X);
+        Grid.SetRow(charImage, mapLayout.CurrentPlayerPosition.Y);
 
 
         for (int i = 0; i < mapLayout.WallLayout.GetLength(0); i++)
@@ -118,11 +120,11 @@ public sealed partial class ExercisePage
             return;
         }
 
-        PyruxLevelMapLayout mapLayout = ActiveLevel.MapLayout;
+        PyruxLevelMapLayout mapLayout = isGoalLayoutOverlayEnabled ? ActiveLevel.GoalMapLayout : ActiveLevel.MapLayout;
         Image charImage = (Image)grdPlayField.Children.Last();
-        charImage.RenderTransform = new RotateTransform { Angle = 90 * ActiveLevel.MapLayout.CurrentPlayerDirection };
-        Grid.SetColumn(charImage, ActiveLevel.MapLayout.CurrentPlayerPosition.X);
-        Grid.SetRow(charImage, ActiveLevel.MapLayout.CurrentPlayerPosition.Y);
+        charImage.RenderTransform = new RotateTransform { Angle = 90 * mapLayout.CurrentPlayerDirection };
+        Grid.SetColumn(charImage, mapLayout.CurrentPlayerPosition.X);
+        Grid.SetRow(charImage, mapLayout.CurrentPlayerPosition.Y);
 
 
         for (int i = 0; i < mapLayout.WallLayout.GetLength(0); i++)
@@ -181,7 +183,7 @@ public sealed partial class ExercisePage
     {
         if(ActiveLevel != null)
         {
-            if (ActiveLevel.IsBuiltIn)
+            if (ActiveLevel.IsBuiltIn || isGoalLayoutOverlayEnabled)
             {
                 btnChipTool.IsEnabled = false;
                 btnRotate.IsEnabled = false;
