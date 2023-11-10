@@ -135,10 +135,15 @@
                             <Button Grid.Column="3" x:Name="btnRotate" IsEnabled="False" Margin="10" Click="btnRotate_Click" ToolTipService.ToolTip="Rotate player">
                                 <SymbolIcon Symbol="Rotate"/>
                             </Button>
-                            <StackPanel Grid.Column="4" Orientation="Horizontal">
-                                <TextBlock Text="Glance Goal Layout" VerticalAlignment="Center"/>
-                                <ToggleSwitch x:Name="tswGoalLayoutOverlay" OffContent="" OnContent="" IsOn="False" Toggled="tswGoalLayoutOverlay_Toggled"/>
-                            </StackPanel>
+                            <ToggleSwitch Grid.Column="4" x:Name="tswGoalLayoutOverlay" HorizontalAlignment="Left" Margin="10,0,0,0" OffContent="Game Layout" OnContent="Goal Layout" IsOn="False" Toggled="tswGoalLayoutOverlay_Toggled" ToolTipService.ToolTip="Peak at the goal layout (Space)">
+                                
+                                <ToggleSwitch.KeyboardAccelerators>
+                                    <KeyboardAccelerator
+                                        Modifiers="None"
+                                        Key="Space"
+                                        />
+                                </ToggleSwitch.KeyboardAccelerators>
+                            </ToggleSwitch>
                             <Button Grid.Column="5" x:Name="btnSave" Margin="10" Click="btnSave_Click" IsEnabled="False" ToolTipService.ToolTip="Save">
                                 <SymbolIcon Symbol="Save"/>
                             </Button>
@@ -448,6 +453,7 @@
                 </Grid>
             </StackPanel>
         </TeachingTip>
+        <!--Keyboard events-->
 
     </Grid>
 
