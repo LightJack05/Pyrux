@@ -76,6 +76,12 @@
                         </Grid.ColumnDefinitions>
                         <Button Grid.Column="0" x:Name="btnStart" Margin="0,10,10,10" Click="btnStart_Click" IsEnabled="False" ToolTipService.ToolTip="Execute">
                             <SymbolIcon Symbol="Play"/>
+                            <Button.KeyboardAccelerators>
+                                <KeyboardAccelerator
+                                    Modifiers="{x:Bind _pyruxSettings._keybinds.StartShortcut.Modifier}"
+                                    Key="{x:Bind _pyruxSettings._keybinds.StartShortcut.Key}"
+                                    />
+                            </Button.KeyboardAccelerators>
                         </Button>
                         <Grid Grid.Column="1" HorizontalAlignment="Stretch">
                             <Grid.ColumnDefinitions>
@@ -134,6 +140,7 @@
                             </Button>
                             <Button Grid.Column="3" x:Name="btnRotate" IsEnabled="False" Margin="10" Click="btnRotate_Click" ToolTipService.ToolTip="Rotate player">
                                 <SymbolIcon Symbol="Rotate"/>
+                                
                             </Button>
                             <ToggleSwitch Grid.Column="4" x:Name="tswGoalLayoutOverlay" HorizontalAlignment="Left" Margin="10,0,0,0" OffContent="Game Layout" OnContent="Goal Layout" IsOn="False" Toggled="tswGoalLayoutOverlay_Toggled" ToolTipService.ToolTip="Peak at the goal layout (Space)">
                                 

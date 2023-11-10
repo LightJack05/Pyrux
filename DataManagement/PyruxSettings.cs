@@ -14,13 +14,14 @@ namespace Pyrux.DataManagement
         /// </summary>
         /// <param name="executionSpeed">Speed of execution between instructions.</param>
         [JsonConstructor]
-        public PyruxSettings(int executionSpeed,int resetDelayInMilliseconds, bool autoRestartOnFinish, bool addDelayToReset, bool skipTutorialEnabled)
+        public PyruxSettings(int executionSpeed,int resetDelayInMilliseconds, bool autoRestartOnFinish, bool addDelayToReset, bool skipTutorialEnabled, Keybinds keybinds)
         {
             _executionSpeed = executionSpeed;
             _delayBeforeAutoReset = resetDelayInMilliseconds;
             _autoRestartOnFinish = autoRestartOnFinish;
             _addDelayBeforeAutoReset = addDelayToReset;
             _skipTutorialEnabed = skipTutorialEnabled;
+            _keybinds = keybinds;
         }
         /// <summary>
         /// The current instance of the settings. This saves the actual data.
@@ -49,6 +50,8 @@ namespace Pyrux.DataManagement
         public bool _skipTutorialEnabed { get; set; } = false;
         public static int TutorialStateId { get => Instance._tutorialStateId; set => Instance._tutorialStateId = value; }
         public int _tutorialStateId { get; set; } = 0;
+        public static Keybinds Keybinds { get => Instance._keybinds; set => Instance._keybinds = value; }
+        public Keybinds _keybinds { get; set; } = new();
 
         /// <summary>
         /// Saves the settings into the Appdata file.
