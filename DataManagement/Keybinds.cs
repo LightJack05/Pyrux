@@ -18,14 +18,20 @@ namespace Pyrux.DataManagement
         public KeyboardShortcut RotatePlayerShortcut { get; set; }
         public KeyboardShortcut ImportLevelShortcut { get; set; }
         public KeyboardShortcut NewLevelShortcut { get; set; }
-        public Keybinds() 
-        { 
+        public Keybinds()
+        {
             StartShortcut = new() { Modifier = VirtualKeyModifiers.None, Key = VirtualKey.F5 };
             StepShortcut = new() { Modifier = VirtualKeyModifiers.Control, Key = VirtualKey.F5 };
             ResetShortcut = new() { Modifier = VirtualKeyModifiers.Control, Key = VirtualKey.R };
             PeakGoalLayoutShortcut = new() { Key = VirtualKey.Space };
             SaveShortcut = new() { Modifier = VirtualKeyModifiers.Control, Key = VirtualKey.S };
             ExportShortcut = new() { Modifier = (VirtualKeyModifiers)5, Key = VirtualKey.S };
+            WallToolShortcut = new() { Modifier = VirtualKeyModifiers.Menu, Key = VirtualKey.Number1 };
+            ChipToolShortcut = new() { Modifier = VirtualKeyModifiers.Menu, Key = VirtualKey.Number2 };
+            PlayerToolShortcut = new() { Modifier = VirtualKeyModifiers.Menu, Key = VirtualKey.Number3 };
+            RotatePlayerShortcut = new() { Modifier = VirtualKeyModifiers.Menu, Key= VirtualKey.Number4 };
+            ImportLevelShortcut = new() { Modifier= VirtualKeyModifiers.Control, Key= VirtualKey.O };
+            NewLevelShortcut = new() { Modifier = VirtualKeyModifiers.Control, Key = VirtualKey.N }; 
         }
     }
 }
