@@ -18,6 +18,7 @@ namespace Pyrux.Pages
         {
             ("execution",typeof(ExecutionSettings)),
             ("tutorial", typeof(TutorialSettings)),
+            ("shortcuts", typeof(ShortcutSettings)),
             ("devtools",typeof(DevToolsPage))
         };
 

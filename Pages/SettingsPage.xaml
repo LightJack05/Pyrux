@@ -30,6 +30,12 @@
                                 <TextBlock>Execution</TextBlock>
                             </StackPanel>
                         </NavigationViewItem>
+                        <NavigationViewItem Tag="shortcuts">
+                            <StackPanel Orientation="Horizontal">
+                                <SymbolIcon Symbol="Keyboard" Margin="5,0,5,0"/>
+                                <TextBlock>Keyboard Shortcuts</TextBlock>
+                            </StackPanel>
+                        </NavigationViewItem>
                         <NavigationViewItem Tag="tutorial">
                             <StackPanel Orientation="Horizontal">
                                 <SymbolIcon Symbol="Help" Margin="5,0,5,0"/>
