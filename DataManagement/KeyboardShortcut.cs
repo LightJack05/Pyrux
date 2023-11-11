@@ -27,5 +27,10 @@ namespace Pyrux.DataManagement
             Modifier = modifier;
         }
 
+        public override string ToString()
+        {
+            return $"({Modifier} + {Key})";
+        }
+
     }
 }

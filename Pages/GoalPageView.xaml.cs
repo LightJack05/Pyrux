@@ -13,6 +13,7 @@ namespace Pyrux.Pages
     /// </summary>
     public sealed partial class GoalPageView : Page
     {
+        private PyruxSettings _pyruxSettings { get => PyruxSettings.Instance; }
         Dictionary<int, TeachingTip> PageTeachingTips = new()
         {
 

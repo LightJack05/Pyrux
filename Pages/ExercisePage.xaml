@@ -90,6 +90,12 @@
                             </Grid.ColumnDefinitions>
                             <Button x:Name="btnStep" IsEnabled="False" Grid.Column="0" Margin="0,10,10,10" ToolTipService.ToolTip="Step through" Click="btnStep_Click">
                                 <SymbolIcon Symbol="Next"/>
+                                <Button.KeyboardAccelerators>
+                                    <KeyboardAccelerator
+                                        Modifiers="{x:Bind _pyruxSettings._keybinds.StepShortcut.Modifier}"
+                                        Key="{x:Bind _pyruxSettings._keybinds.StepShortcut.Key}"
+                                        />
+                                </Button.KeyboardAccelerators>
                             </Button>
                             <Slider Grid.Column="1" MinWidth="100" Margin="5,10,100,0" x:Name="sldExecutionSpeed" Maximum="1000" Minimum="1" ValueChanged="sldExecutionSpeed_ValueChanged" PointerCaptureLost="sldExecutionSpeed_PointerReleased" ToolTipService.ToolTip="Change the execution speed"/>
                         </Grid>
@@ -130,32 +136,68 @@
                             </Grid.ColumnDefinitions>
 
                             <Button Grid.Column="0" x:Name="btnWallTool" IsEnabled="False" Margin="10" Click="btnWallTool_Click" ToolTipService.ToolTip="Walls">
+                                
                                 <SymbolIcon Symbol="Placeholder"/>
+                                <Button.KeyboardAccelerators>
+                                    <KeyboardAccelerator
+                                        Modifiers="{x:Bind _pyruxSettings._keybinds.WallToolShortcut.Modifier}"
+                                        Key="{x:Bind _pyruxSettings._keybinds.WallToolShortcut.Key}"
+                                        />
+                                </Button.KeyboardAccelerators>
                             </Button>
                             <Button Grid.Column="1" x:Name="btnChipTool" IsEnabled="False" Margin="10" Click="btnChipTool_Click" ToolTipService.ToolTip="Chips">
                                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE950;"/>
+                                <Button.KeyboardAccelerators>
+                                    <KeyboardAccelerator
+                                        Modifiers="{x:Bind _pyruxSettings._keybinds.ChipToolShortcut.Modifier}"
+                                        Key="{x:Bind _pyruxSettings._keybinds.ChipToolShortcut.Key}"
+                                        />
+                                </Button.KeyboardAccelerators>
                             </Button>
                             <Button Grid.Column="2" x:Name="btnPlayerTool" IsEnabled="False" Margin="10" Click="btnPlayerTool_Click" ToolTipService.ToolTip="Move player">
                                 <SymbolIcon Symbol="Contact"/>
+                                <Button.KeyboardAccelerators>
+                                    <KeyboardAccelerator
+                                        Modifiers="{x:Bind _pyruxSettings._keybinds.PlayerToolShortcut.Modifier}"
+                                        Key="{x:Bind _pyruxSettings._keybinds.PlayerToolShortcut.Key}"
+                                        />
+                                </Button.KeyboardAccelerators>
                             </Button>
                             <Button Grid.Column="3" x:Name="btnRotate" IsEnabled="False" Margin="10" Click="btnRotate_Click" ToolTipService.ToolTip="Rotate player">
                                 <SymbolIcon Symbol="Rotate"/>
-                                
+                                <Button.KeyboardAccelerators>
+                                    <KeyboardAccelerator
+                                        Modifiers="{x:Bind _pyruxSettings._keybinds.RotatePlayerShortcut.Modifier}"
+                                        Key="{x:Bind _pyruxSettings._keybinds.RotatePlayerShortcut.Key}"
+                                        />
+                                </Button.KeyboardAccelerators>
                             </Button>
                             <ToggleSwitch Grid.Column="4" x:Name="tswGoalLayoutOverlay" HorizontalAlignment="Left" Margin="10,0,0,0" OffContent="Game Layout" OnContent="Goal Layout" IsOn="False" Toggled="tswGoalLayoutOverlay_Toggled" ToolTipService.ToolTip="Peak at the goal layout (Space)">
-                                
+
                                 <ToggleSwitch.KeyboardAccelerators>
                                     <KeyboardAccelerator
-                                        Modifiers="None"
-                                        Key="Space"
+                                        Modifiers="{x:Bind _pyruxSettings._keybinds.PeakGoalLayoutShortcut.Modifier}"
+                                        Key="{x:Bind _pyruxSettings._keybinds.PeakGoalLayoutShortcut.Key}"
                                         />
                                 </ToggleSwitch.KeyboardAccelerators>
                             </ToggleSwitch>
                             <Button Grid.Column="5" x:Name="btnSave" Margin="10" Click="btnSave_Click" IsEnabled="False" ToolTipService.ToolTip="Save">
                                 <SymbolIcon Symbol="Save"/>
+                                <Button.KeyboardAccelerators>
+                                    <KeyboardAccelerator
+                                        Modifiers="{x:Bind _pyruxSettings._keybinds.SaveShortcut.Modifier}"
+                                        Key="{x:Bind _pyruxSettings._keybinds.SaveShortcut.Key}"
+                                        />
+                                </Button.KeyboardAccelerators>
                             </Button>
                             <Button Grid.Column="6" x:Name="btnExport" IsEnabled="False" Margin="10" Click="btnExport_Click" ToolTipService.ToolTip="Export">
                                 <SymbolIcon Symbol="SaveLocal"/>
+                                <Button.KeyboardAccelerators>
+                                    <KeyboardAccelerator
+                                        Modifiers="{x:Bind _pyruxSettings._keybinds.ExportShortcut.Modifier}"
+                                        Key="{x:Bind _pyruxSettings._keybinds.ExportShortcut.Key}"
+                                        />
+                                </Button.KeyboardAccelerators>
                             </Button>
                         </Grid>
 
@@ -173,13 +215,13 @@
                 <Border Visibility="Collapsed" Grid.Row="1" MaxHeight="500" Background="{ThemeResource SystemChromeLowColor}" CornerRadius="10" Margin="10">
                     <Expander MaxHeight="300" Header="Console" HorizontalContentAlignment="Left" ExpandDirection="Up" HorizontalAlignment="Stretch" Margin="10" CornerRadius="10">
                         <TextBlock x:Name="txtConsole" FontSize="16" HorizontalAlignment="Left">
-                            
+
                         </TextBlock>
                     </Expander>
                 </Border>
             </Grid>
         </Grid>
-    <!--Popups/Teachingtips-->
+        <!--Popups/Teachingtips-->
         <TeachingTip 
         x:Name="tctLevelPageIntro"
         PreferredPlacement="Center"
@@ -340,7 +382,7 @@
                 </Grid>
             </StackPanel>
         </TeachingTip>
-        
+
         <TeachingTip 
         x:Name="tctPlayButton"
         Target="{x:Bind btnStart}"
@@ -466,6 +508,6 @@
 
 
 
-    
+
 
 </Page>
