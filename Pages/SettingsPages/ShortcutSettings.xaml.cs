@@ -30,6 +30,9 @@ namespace Pyrux.Pages.SettingsPages
     /// </summary>
     public sealed partial class ShortcutSettings : Page
     {
+        private List<ComboBox> _keyComboBoxes = new(); 
+        private List<ComboBox> _keyModifierComboBoxes = new();
+
         private Dictionary<uint, string> _virtualKeyModifierToString = new()
         {
             {0 , "None" },
@@ -87,11 +90,14 @@ namespace Pyrux.Pages.SettingsPages
         private void ComboBoxModifier_Loaded(object sender, RoutedEventArgs e)
         {
             ((ComboBox)sender).SelectedItem = _virtualKeyModifierToString[(uint)((KeyboardShortcut)((ComboBox)sender).DataContext).Modifier];
+            _keyModifierComboBoxes.Add(((ComboBox)sender));
+
         }
 
         private void ComboBoxKey_Loaded(object sender, RoutedEventArgs e)
         {
             ((ComboBox)sender).SelectedItem = ((KeyboardShortcut)((ComboBox)sender).DataContext).Key.ToString();
+            _keyComboBoxes.Add(((ComboBox)sender));
         }
 
         private void ItemsRepeater_ElementPrepared(ItemsRepeater sender, ItemsRepeaterElementPreparedEventArgs args)
@@ -102,5 +108,25 @@ namespace Pyrux.Pages.SettingsPages
             }
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            PyruxSettings.Keybinds.Reset();
+            PyruxSettings.SaveSettings();
+            foreach(ComboBox comboBox in _keyComboBoxes)
+            {
+                comboBox.SelectedItem = ((KeyboardShortcut)comboBox.DataContext).Key.ToString();
+                
+            }
+            foreach(ComboBox comboBox in _keyModifierComboBoxes)
+            {
+                comboBox.SelectedItem = _virtualKeyModifierToString[(uint)((KeyboardShortcut)comboBox.DataContext).Modifier];
+            }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            _keyComboBoxes.Clear();
+            _keyModifierComboBoxes.Clear();
+        }
     }
 }

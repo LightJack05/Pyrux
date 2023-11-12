@@ -5,6 +5,7 @@
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
+using Microsoft.UI.Xaml.Controls;
 using Pyrux.Pages.SettingsPages;
 
 namespace Pyrux.Pages
@@ -14,6 +15,7 @@ namespace Pyrux.Pages
     /// </summary>
     public sealed partial class SettingsPage : Page
     {
+        public static SettingsPage Instance { get; private set; }
         public List<(string Tag, Type Page)> contentDictionary = new()
         {
             ("execution",typeof(ExecutionSettings)),
@@ -25,6 +27,7 @@ namespace Pyrux.Pages
         public SettingsPage()
         {
             this.InitializeComponent();
+            Instance = this;
         }
 
         private void ngvSettings_Loaded(object sender, RoutedEventArgs e)
@@ -61,5 +64,13 @@ namespace Pyrux.Pages
                 ctfSettings.Navigate(page, null, transitionInfo);
             }
         }
+
+        public void RefreshPage()
+        {
+            Type preNavPageType = ctfSettings.CurrentSourcePageType;
+            
+            ctfSettings.Navigate(preNavPageType, null, new Microsoft.UI.Xaml.Media.Animation.CommonNavigationTransitionInfo());
+        }
+        
     }
 }

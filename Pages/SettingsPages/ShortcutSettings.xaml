@@ -10,31 +10,45 @@
     xmlns:dmgmt="using:Pyrux.DataManagement"
     mc:Ignorable="d"
     Background="Transparent"
-    NavigationCacheMode="Required">
+    NavigationCacheMode="Required"
+    Loaded="Page_Loaded">
 
 
 
     <Grid>
-        <StackPanel Orientation="Vertical">
-            <ItemsRepeater ItemsSource="{x:Bind _keyboardShortcuts}" ElementPrepared="ItemsRepeater_ElementPrepared">
-                <ItemsRepeater.ItemTemplate>
-                    <DataTemplate x:DataType="dmgmt:KeyboardShortcut">
-                        <Border x:Name="bdrKeyboardShortcutBorder" Background="{ThemeResource SystemChromeMediumHighColor}" CornerRadius="10" Margin="10">
-                            <Grid Margin="10" HorizontalAlignment="Stretch">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="{x:Bind Description}" VerticalAlignment="Center"/>
-                                <StackPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal">
-                                    <ComboBox Width="150" Margin="10,0,10,0" ItemsSource="{x:Bind Path=dmgmt:KeyboardShortcut.AvailableVirtualKeyModifiers}" SelectionChanged="ComboBoxModifier_SelectionChanged" Loaded="ComboBoxModifier_Loaded"/>
-                                    <ComboBox Width="150" Margin="10,0,10,0" ItemsSource="{x:Bind Path=dmgmt:KeyboardShortcut.AvailableVirtualKeyCodes}" SelectionChanged="ComboBoxKey_SelectionChanged" Loaded="ComboBoxKey_Loaded"/>
-                                </StackPanel>
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </ItemsRepeater.ItemTemplate>
-            </ItemsRepeater>
-        </StackPanel>
+        <ScrollViewer VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <StackPanel Orientation="Vertical">
+
+                <ItemsRepeater ItemsSource="{x:Bind _keyboardShortcuts, Mode=OneWay}" x:Name="irpKeyboardShortcuts" ElementPrepared="ItemsRepeater_ElementPrepared">
+                    <ItemsRepeater.ItemTemplate>
+                        <DataTemplate x:DataType="dmgmt:KeyboardShortcut">
+                            <Border x:Name="bdrKeyboardShortcutBorder" Background="{ThemeResource SystemChromeMediumHighColor}" CornerRadius="10" Margin="10">
+                                <Grid Margin="10" HorizontalAlignment="Stretch">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="{x:Bind Description}" VerticalAlignment="Center"/>
+                                    <StackPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal">
+                                        <ComboBox Width="150" Margin="10,0,10,0" ItemsSource="{x:Bind Path=dmgmt:KeyboardShortcut.AvailableVirtualKeyModifiers}" SelectionChanged="ComboBoxModifier_SelectionChanged" Loaded="ComboBoxModifier_Loaded"/>
+                                        <ComboBox Width="150" Margin="10,0,10,0" ItemsSource="{x:Bind Path=dmgmt:KeyboardShortcut.AvailableVirtualKeyCodes}" SelectionChanged="ComboBoxKey_SelectionChanged" Loaded="ComboBoxKey_Loaded"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsRepeater.ItemTemplate>
+                </ItemsRepeater>
+                <Border x:Name="bdrKeyboardShortcutBorder" Background="{ThemeResource SystemChromeMediumHighColor}" CornerRadius="10" Margin="10,30,10,20">
+                    <Grid Margin="10" HorizontalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Reset Shortcuts to defaults" VerticalAlignment="Center"/>
+                        <Button Grid.Column="1" Content="Reset" Margin="10,0,10,0" Width="100" Click="Button_Click"/>
+                    </Grid>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

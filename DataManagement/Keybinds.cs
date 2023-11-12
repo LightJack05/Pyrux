@@ -33,5 +33,21 @@ namespace Pyrux.DataManagement
             ImportLevelShortcut = new() { Modifier= VirtualKeyModifiers.Control, Key= VirtualKey.O , Description = "Import Level"};
             NewLevelShortcut = new() { Modifier = VirtualKeyModifiers.Control, Key = VirtualKey.N , Description = "Create new Level"}; 
         }
+
+        public void Reset()
+        {
+            StartShortcut.Modifier = VirtualKeyModifiers.None; StartShortcut.Key = VirtualKey.F5;
+            StepShortcut.Modifier = VirtualKeyModifiers.Control; StepShortcut.Key = VirtualKey.F5;
+            ResetShortcut.Modifier = VirtualKeyModifiers.Control; ResetShortcut.Key = VirtualKey.R;
+            PeakGoalLayoutShortcut.Key = VirtualKey.Space;
+            SaveShortcut.Modifier = VirtualKeyModifiers.Control; SaveShortcut.Key = VirtualKey.S;
+            ExportShortcut.Modifier = (VirtualKeyModifiers)5; ExportShortcut.Key = VirtualKey.S;
+            WallToolShortcut.Modifier = VirtualKeyModifiers.Menu; WallToolShortcut.Key = VirtualKey.Number1;
+            ChipToolShortcut.Modifier = VirtualKeyModifiers.Menu; ChipToolShortcut.Key = VirtualKey.Number2;
+            PlayerToolShortcut.Modifier = VirtualKeyModifiers.Menu; PlayerToolShortcut.Key = VirtualKey.Number3;
+            RotatePlayerShortcut.Modifier = VirtualKeyModifiers.Menu; RotatePlayerShortcut.Key = VirtualKey.Number4;
+            ImportLevelShortcut.Modifier = VirtualKeyModifiers.Control; ImportLevelShortcut.Key = VirtualKey.O;
+            NewLevelShortcut.Modifier = VirtualKeyModifiers.Control; NewLevelShortcut.Key = VirtualKey.N;
+        }
     }
 }
