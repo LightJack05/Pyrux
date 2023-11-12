@@ -30,9 +30,21 @@
                 <TextBlock Text="Level Selection" FontSize="25"/>
                 <Button Grid.Column="2" Margin="10,10,10,10" IsEnabled="True" x:Name="btnNewLevel" Click="btnNewLevel_Click" ToolTipService.ToolTip="New level">
                     <SymbolIcon Symbol="Add"/>
+                    <Button.KeyboardAccelerators>
+                        <KeyboardAccelerator
+                            Modifiers="{x:Bind _pyruxSettings._keybinds.NewLevelShortcut.Modifier, Mode=OneWay}"
+                            Key="{x:Bind _pyruxSettings._keybinds.NewLevelShortcut.Key, Mode=OneWay}"
+                            />
+                    </Button.KeyboardAccelerators>
                 </Button>
                 <Button x:Name="btnImport" Grid.Column="3" Margin="10,10,10,10" IsEnabled="True" Click="btnImport_Click" ToolTipService.ToolTip="Import level">
                     <SymbolIcon Symbol="Import"/>
+                    <Button.KeyboardAccelerators>
+                        <KeyboardAccelerator
+                            Modifiers="{x:Bind _pyruxSettings._keybinds.ImportLevelShortcut.Modifier, Mode=OneWay}"
+                            Key="{x:Bind _pyruxSettings._keybinds.ImportLevelShortcut.Key, Mode=OneWay}"
+                            />
+                    </Button.KeyboardAccelerators>
                 </Button>
             </Grid>
 

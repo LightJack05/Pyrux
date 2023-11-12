@@ -34,8 +34,8 @@
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE950;"/>
                         <Button.KeyboardAccelerators>
                             <KeyboardAccelerator
-                                Modifiers="{x:Bind _pyruxSettings._keybinds.ChipToolShortcut.Modifier}"
-                                Key="{x:Bind _pyruxSettings._keybinds.ChipToolShortcut.Key}"
+                                Modifiers="{x:Bind _pyruxSettings._keybinds.ChipToolShortcut.Modifier, Mode=OneWay}"
+                                Key="{x:Bind _pyruxSettings._keybinds.ChipToolShortcut.Key, Mode=OneWay}"
                                 />
                         </Button.KeyboardAccelerators>
                     </Button>
@@ -43,8 +43,8 @@
                         <SymbolIcon Symbol="Contact"/>
                         <Button.KeyboardAccelerators>
                             <KeyboardAccelerator
-                                Modifiers="{x:Bind _pyruxSettings._keybinds.PlayerToolShortcut.Modifier}"
-                                Key="{x:Bind _pyruxSettings._keybinds.PlayerToolShortcut.Key}"
+                                Modifiers="{x:Bind _pyruxSettings._keybinds.PlayerToolShortcut.Modifier, Mode=OneWay}"
+                                Key="{x:Bind _pyruxSettings._keybinds.PlayerToolShortcut.Key, Mode=OneWay}"
                                 />
                         </Button.KeyboardAccelerators>
                     </Button>
@@ -52,8 +52,8 @@
                         <SymbolIcon Symbol="Rotate"/>
                         <Button.KeyboardAccelerators>
                             <KeyboardAccelerator
-                                Modifiers="{x:Bind _pyruxSettings._keybinds.RotatePlayerShortcut.Modifier}"
-                                Key="{x:Bind _pyruxSettings._keybinds.RotatePlayerShortcut.Key}"
+                                Modifiers="{x:Bind _pyruxSettings._keybinds.RotatePlayerShortcut.Modifier, Mode=OneWay}"
+                                Key="{x:Bind _pyruxSettings._keybinds.RotatePlayerShortcut.Key, Mode=OneWay}"
                                 />
                         </Button.KeyboardAccelerators>
                     </Button>

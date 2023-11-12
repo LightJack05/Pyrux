@@ -78,8 +78,8 @@
                             <SymbolIcon Symbol="Play"/>
                             <Button.KeyboardAccelerators>
                                 <KeyboardAccelerator
-                                    Modifiers="{x:Bind _pyruxSettings._keybinds.StartShortcut.Modifier}"
-                                    Key="{x:Bind _pyruxSettings._keybinds.StartShortcut.Key}"
+                                    Modifiers="{x:Bind _pyruxSettings._keybinds.StartShortcut.Modifier, Mode=OneWay}"
+                                    Key="{x:Bind _pyruxSettings._keybinds.StartShortcut.Key, Mode=OneWay}"
                                     />
                             </Button.KeyboardAccelerators>
                         </Button>
@@ -92,8 +92,8 @@
                                 <SymbolIcon Symbol="Next"/>
                                 <Button.KeyboardAccelerators>
                                     <KeyboardAccelerator
-                                        Modifiers="{x:Bind _pyruxSettings._keybinds.StepShortcut.Modifier}"
-                                        Key="{x:Bind _pyruxSettings._keybinds.StepShortcut.Key}"
+                                        Modifiers="{x:Bind _pyruxSettings._keybinds.StepShortcut.Modifier, Mode=OneWay}"
+                                        Key="{x:Bind _pyruxSettings._keybinds.StepShortcut.Key, Mode=OneWay}"
                                         />
                                 </Button.KeyboardAccelerators>
                             </Button>
@@ -140,8 +140,8 @@
                                 <SymbolIcon Symbol="Placeholder"/>
                                 <Button.KeyboardAccelerators>
                                     <KeyboardAccelerator
-                                        Modifiers="{x:Bind _pyruxSettings._keybinds.WallToolShortcut.Modifier}"
-                                        Key="{x:Bind _pyruxSettings._keybinds.WallToolShortcut.Key}"
+                                        Modifiers="{x:Bind _pyruxSettings._keybinds.WallToolShortcut.Modifier, Mode=OneWay}"
+                                        Key="{x:Bind _pyruxSettings._keybinds.WallToolShortcut.Key, Mode=OneWay}"
                                         />
                                 </Button.KeyboardAccelerators>
                             </Button>
@@ -149,8 +149,8 @@
                                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE950;"/>
                                 <Button.KeyboardAccelerators>
                                     <KeyboardAccelerator
-                                        Modifiers="{x:Bind _pyruxSettings._keybinds.ChipToolShortcut.Modifier}"
-                                        Key="{x:Bind _pyruxSettings._keybinds.ChipToolShortcut.Key}"
+                                        Modifiers="{x:Bind _pyruxSettings._keybinds.ChipToolShortcut.Modifier, Mode=OneWay}"
+                                        Key="{x:Bind _pyruxSettings._keybinds.ChipToolShortcut.Key, Mode=OneWay}"
                                         />
                                 </Button.KeyboardAccelerators>
                             </Button>
@@ -158,8 +158,8 @@
                                 <SymbolIcon Symbol="Contact"/>
                                 <Button.KeyboardAccelerators>
                                     <KeyboardAccelerator
-                                        Modifiers="{x:Bind _pyruxSettings._keybinds.PlayerToolShortcut.Modifier}"
-                                        Key="{x:Bind _pyruxSettings._keybinds.PlayerToolShortcut.Key}"
+                                        Modifiers="{x:Bind _pyruxSettings._keybinds.PlayerToolShortcut.Modifier, Mode=OneWay}"
+                                        Key="{x:Bind _pyruxSettings._keybinds.PlayerToolShortcut.Key, Mode=OneWay}"
                                         />
                                 </Button.KeyboardAccelerators>
                             </Button>
@@ -167,8 +167,8 @@
                                 <SymbolIcon Symbol="Rotate"/>
                                 <Button.KeyboardAccelerators>
                                     <KeyboardAccelerator
-                                        Modifiers="{x:Bind _pyruxSettings._keybinds.RotatePlayerShortcut.Modifier}"
-                                        Key="{x:Bind _pyruxSettings._keybinds.RotatePlayerShortcut.Key}"
+                                        Modifiers="{x:Bind _pyruxSettings._keybinds.RotatePlayerShortcut.Modifier, Mode=OneWay}"
+                                        Key="{x:Bind _pyruxSettings._keybinds.RotatePlayerShortcut.Key, Mode=OneWay}"
                                         />
                                 </Button.KeyboardAccelerators>
                             </Button>
@@ -176,8 +176,8 @@
 
                                 <ToggleSwitch.KeyboardAccelerators>
                                     <KeyboardAccelerator
-                                        Modifiers="{x:Bind _pyruxSettings._keybinds.PeakGoalLayoutShortcut.Modifier}"
-                                        Key="{x:Bind _pyruxSettings._keybinds.PeakGoalLayoutShortcut.Key}"
+                                        Modifiers="{x:Bind _pyruxSettings._keybinds.PeakGoalLayoutShortcut.Modifier, Mode=OneWay}"
+                                        Key="{x:Bind _pyruxSettings._keybinds.PeakGoalLayoutShortcut.Key, Mode=OneWay}"
                                         />
                                 </ToggleSwitch.KeyboardAccelerators>
                             </ToggleSwitch>
@@ -185,8 +185,8 @@
                                 <SymbolIcon Symbol="Save"/>
                                 <Button.KeyboardAccelerators>
                                     <KeyboardAccelerator
-                                        Modifiers="{x:Bind _pyruxSettings._keybinds.SaveShortcut.Modifier}"
-                                        Key="{x:Bind _pyruxSettings._keybinds.SaveShortcut.Key}"
+                                        Modifiers="{x:Bind _pyruxSettings._keybinds.SaveShortcut.Modifier, Mode=OneWay}"
+                                        Key="{x:Bind _pyruxSettings._keybinds.SaveShortcut.Key, Mode=OneWay}"
                                         />
                                 </Button.KeyboardAccelerators>
                             </Button>
@@ -194,8 +194,8 @@
                                 <SymbolIcon Symbol="SaveLocal"/>
                                 <Button.KeyboardAccelerators>
                                     <KeyboardAccelerator
-                                        Modifiers="{x:Bind _pyruxSettings._keybinds.ExportShortcut.Modifier}"
-                                        Key="{x:Bind _pyruxSettings._keybinds.ExportShortcut.Key}"
+                                        Modifiers="{x:Bind _pyruxSettings._keybinds.ExportShortcut.Modifier, Mode=OneWay}"
+                                        Key="{x:Bind _pyruxSettings._keybinds.ExportShortcut.Key, Mode=OneWay}"
                                         />
                                 </Button.KeyboardAccelerators>
                             </Button>

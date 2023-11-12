@@ -14,6 +14,7 @@ namespace Pyrux.Pages
     /// </summary>
     public sealed partial class LevelSelectPage : Page
     {
+        private PyruxSettings _pyruxSettings { get => PyruxSettings.Instance; }
         Dictionary<int, TeachingTip> PageTeachingTips = new()
         {
             
