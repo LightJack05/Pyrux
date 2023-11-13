@@ -101,6 +101,12 @@
                         </Grid>
                         <Button Grid.Column="2" x:Name="btnReset" IsEnabled="False" Margin="10,10,0,10" Click="btnReset_Click" ToolTipService.ToolTip="Reset layout">
                             <SymbolIcon Symbol="Refresh"/>
+                            <Button.KeyboardAccelerators>
+                                <KeyboardAccelerator
+                                    Modifiers="{x:Bind _pyruxSettings._keybinds.ResetShortcut.Modifier, Mode=OneWay}"
+                                    Key="{x:Bind _pyruxSettings._keybinds.ResetShortcut.Key, Mode=OneWay}"
+                                    />
+                            </Button.KeyboardAccelerators>
                         </Button>
                     </Grid>
 

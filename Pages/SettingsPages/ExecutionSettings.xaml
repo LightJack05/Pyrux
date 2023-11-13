@@ -13,7 +13,7 @@
 
     <StackPanel Orientation="Vertical">
 
-        <Border Background="{ThemeResource SystemChromeMediumHighColor}" CornerRadius="10" Margin="10">
+        <Border Background="{ThemeResource SystemChromeMediumColor}" CornerRadius="10" Margin="10">
             <Grid Margin="10" HorizontalAlignment="Stretch">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -24,7 +24,7 @@
             </Grid>
         </Border>
 
-        <Border Background="{ThemeResource SystemChromeMediumHighColor}" CornerRadius="10" Margin="10">
+        <Border Background="{ThemeResource SystemChromeMediumColor}" CornerRadius="10" Margin="10">
             <StackPanel Orientation="Vertical">
                 
                 <Grid Margin="10" HorizontalAlignment="Stretch">
