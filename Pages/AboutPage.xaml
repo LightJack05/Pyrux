@@ -10,17 +10,17 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Background="{ThemeResource PageBackgroundBrush}"
     NavigationCacheMode="Required">
 
     <Grid>
-        <Border Background="{ThemeResource SystemChromeLowColor}" CornerRadius="10" Margin="10">
+        <Border Background="{ThemeResource ControlLargeAreaBackgroundBrush}" CornerRadius="10" Margin="10">
             <Grid Margin="10">
                 <NavigationView
                 x:Name="ngvAboutPage"
                 PaneDisplayMode="Top"
                 IsBackButtonVisible="Collapsed"
-                Background="{ThemeResource SystemChromeLowColor}"
+                Background="Transparent"
                 IsSettingsVisible="False"
                 Loaded="ngvAboutPage_Loaded"
                 ItemInvoked="ngvAboutPage_ItemInvoked">
@@ -38,7 +38,7 @@
                             </StackPanel>
                         </NavigationViewItem>
                     </NavigationView.MenuItems>
-                    <Frame x:Name="ctfSettings" IsTabStop="True" Padding="0" Background="{ThemeResource SystemChromeLowColor}"/>
+                    <Frame x:Name="ctfSettings" IsTabStop="True" Padding="0" Background="Transparent"/>
                 </NavigationView>
             </Grid>
         </Border>

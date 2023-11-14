@@ -6,28 +6,31 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Pyrux"
+    xmlns:media="using:Microsoft.UI.Xaml.Media"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Activated="Window_Activated"
     Closed="wndMain_Closed"
     x:Name="wndMain">
-    
-    
-    
+
+
+
 
     <Window.SystemBackdrop>
-        <MicaBackdrop/>
+        <MicaBackdrop Kind="BaseAlt"/>
     </Window.SystemBackdrop>
 
 
     <Grid>
         <Grid.Resources>
-
+            <ResourceDictionary x:Key="Default">
+                <media:AcrylicBrush x:Key="MainWindowNavigationViewBackground" TintOpacity="0.9"  TintColor="Black"/>
+            </ResourceDictionary>
         </Grid.Resources>
 
         <Grid Background="Transparent">
-        <Grid.RowDefinitions>
+            <Grid.RowDefinitions>
             <RowDefinition Height="32"/>
             <RowDefinition />
         </Grid.RowDefinitions>

@@ -8,7 +8,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Background="Transparent"
     NavigationCacheMode="Required"
     Loaded="Page_Loaded">
 
@@ -18,10 +18,10 @@
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Column="0" CornerRadius="10" Margin="10,10,5,10" Background="{ThemeResource SystemChromeLowColor}">
+        <Border Grid.Column="0" CornerRadius="10" Margin="10,10,5,10" Background="{ThemeResource ControlLargeAreaBackgroundBrush}">
             <controls:MarkdownTextBlock Margin="20" FontSize="15" Text="{x:Bind LicensesDisplayString}" Background="Transparent"/>
         </Border>
-        <Border Grid.Column="1" CornerRadius="10" Margin="5,10,10,10" Background="{ThemeResource SystemChromeLowColor}">
+        <Border Grid.Column="1" CornerRadius="10" Margin="5,10,10,10" Background="{ThemeResource ControlLargeAreaBackgroundBrush}">
 
             <Grid>
                 <Grid.RowDefinitions>

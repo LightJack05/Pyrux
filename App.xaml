@@ -12,7 +12,14 @@
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
                 <!-- Other merged dictionaries here -->
             </ResourceDictionary.MergedDictionaries>
-            <!-- Other app resources here -->
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Default">
+                    <SolidColorBrush x:Key="PageBackgroundBrush" Color="{ThemeResource ApplicationPageBackgroundThemeBrush}" Opacity="0.2"/>
+                    <SolidColorBrush x:Key="ControlLargeAreaBackgroundBrush" Color="{ThemeResource SystemChromeLowColor}" Opacity="0.6"/>
+                    <SolidColorBrush x:Key="SettingsElementBackgroundBrush" Color="{ThemeResource SystemChromeHighColor}" Opacity="0.1"/>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -10,15 +10,15 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Background="{ThemeResource PageBackgroundBrush}"
     Loaded="Page_Loaded"
     NavigationCacheMode="Required">
 
     <Grid>
-        <Border Grid.Column="1" Background="{ThemeResource SystemChromeLowColor}" CornerRadius="10" Margin="10">
+        <Border Grid.Column="1" Background="{ThemeResource ControlLargeAreaBackgroundBrush}" CornerRadius="10" Margin="10">
             <ScrollViewer Margin="10">
                 <Grid>
-                    <controls:MarkdownTextBlock UseSyntaxHighlighting="True" x:Name="mtbHintRenderer" CodeBackground="{ThemeResource SystemChromeLowColor}" Margin="20" Background="Transparent"/>
+                    <controls:MarkdownTextBlock UseSyntaxHighlighting="True" x:Name="mtbHintRenderer" CodeBackground="{ThemeResource ControlLargeAreaBackgroundBrush}" Margin="20" Background="Transparent"/>
                     <Button x:Name="btnEditHint" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20" Click="Button_Click" IsEnabled="False" ToolTipService.ToolTip="Edit">
                         <SymbolIcon Symbol="Edit"/>
                     </Button>

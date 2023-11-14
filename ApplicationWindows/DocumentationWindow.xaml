@@ -10,6 +10,9 @@
     mc:Ignorable="d"
     Activated="Window_Activated">
 
+    <Window.SystemBackdrop>
+        <MicaBackdrop Kind="BaseAlt"/>
+    </Window.SystemBackdrop>
 
     <Grid>
         <Grid.RowDefinitions>
