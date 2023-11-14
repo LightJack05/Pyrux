@@ -18,7 +18,7 @@
         <Border Background="{ThemeResource ControlLargeAreaBackgroundBrush}" CornerRadius="10" Margin="10">
             <Grid>
                 <Frame Grid.Row="1" SourcePageType="docsPages:DocsPageWrapper"/>
-                <Button Grid.Row="0" x:Name="btnPopoutDocs" Click="btnPopoutDocs_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8" CornerRadius="10" ToolTipService.ToolTip="Popout">
+                <Button Grid.Row="0" x:Name="btnPopoutDocs" Click="btnPopoutDocs_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="15" CornerRadius="10" ToolTipService.ToolTip="Popout">
                     <SymbolIcon Symbol="NewWindow"/>
                 </Button>
             </Grid>
