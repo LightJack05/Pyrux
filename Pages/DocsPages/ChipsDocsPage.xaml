@@ -10,11 +10,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="Transparent"
+    Background="{ThemeResource PageBackgroundBrush}"
     NavigationCacheMode="Required">
 
-    <ScrollViewer>
-        <controls:MarkdownTextBlock 
+    <Grid>
+        <Border Grid.Column="0" CornerRadius="10" Margin="10" Background="{ThemeResource ControlLargeAreaBackgroundBrush}">
+            <ScrollViewer>
+                <controls:MarkdownTextBlock 
             Text="{x:Bind DocMarkDown}" 
             LinkClicked="MarkdownText_LinkClicked" 
             Margin="10" 
@@ -28,5 +30,7 @@
             Header1FontSize="30" 
             Header2FontSize="25" 
             Header2FontWeight="Bold"/>
-    </ScrollViewer>
+            </ScrollViewer>
+        </Border>
+    </Grid>
 </Page>

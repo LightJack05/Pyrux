@@ -7,9 +7,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource PageBackgroundBrush}">
 
-    <Grid Background="{ThemeResource SystemChromeLowColor}">
+    <Grid Background="Transparent">
         <NavigationView
                     Grid.Row="1"
                     x:Name="ngvDocs"
@@ -19,7 +19,7 @@
                     Loaded="ngvDocs_Loaded"
                     ItemInvoked="ngvDocs_ItemInvoked"
                     Margin="15"
-                    Background="{ThemeResource SystemChromeLowColor}">
+                    Background="{ThemeResource ControlLargeAreaBackgroundBrush}">
             <NavigationView.MenuItems >
                 <NavigationViewItem Tag="movement" Content="Movement"/>
                 <NavigationViewItem Tag="chips" Content="Chip Management"/>
@@ -27,10 +27,9 @@
             </NavigationView.MenuItems>
 
             <Grid>
-                <ScrollViewer Height="Auto">
-                    <Frame x:Name="ctfDocs" IsTabStop="True" Padding="0" Background="{ThemeResource SystemChromeLowColor}"/>
+                <ScrollViewer Height="Auto" Background="Transparent">
+                    <Frame x:Name="ctfDocs" IsTabStop="True" Padding="0" Background="Transparent"/>
                 </ScrollViewer>
-                <Border Height=".5" CornerRadius=".5" Background="{ThemeResource SystemChromeHighColor}" VerticalAlignment="Top"/>
             </Grid>
         </NavigationView>
     </Grid>

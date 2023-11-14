@@ -9,7 +9,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Background="{ThemeResource PageBackgroundBrush}"
     Loaded="Page_Loaded"
     NavigationCacheMode="Required">
 
@@ -54,7 +54,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Border Grid.Column="0" Background="{ThemeResource SystemChromeLowColor}" CornerRadius="10" Margin="20" x:Name="bdrBuiltInLevels">
+                <Border Grid.Column="0" Background="{ThemeResource ControlLargeAreaBackgroundBrush}" CornerRadius="10" Margin="20" x:Name="bdrBuiltInLevels">
                     <Grid Margin="20">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -68,7 +68,7 @@
                     </Grid>
                 </Border>
 
-                <Border Grid.Column="1" Background="{ThemeResource SystemChromeLowColor}" CornerRadius="10" Margin="20" x:Name="bdrUserCreatedLevels">
+                <Border Grid.Column="1" Background="{ThemeResource ControlLargeAreaBackgroundBrush}" CornerRadius="10" Margin="20" x:Name="bdrUserCreatedLevels">
                     <Grid Margin="20">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>

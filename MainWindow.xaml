@@ -6,6 +6,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Pyrux"
+    xmlns:media="using:Microsoft.UI.Xaml.Media"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -13,8 +14,23 @@
     Closed="wndMain_Closed"
     x:Name="wndMain">
 
-    <Grid Background="{ThemeResource SystemChromeLowColor}">
-        <Grid.RowDefinitions>
+
+
+
+    <Window.SystemBackdrop>
+        <MicaBackdrop Kind="BaseAlt"/>
+    </Window.SystemBackdrop>
+
+
+    <Grid>
+        <Grid.Resources>
+            <ResourceDictionary x:Key="Default">
+                <media:AcrylicBrush x:Key="MainWindowNavigationViewBackground" TintOpacity="0.9"  TintColor="Black"/>
+            </ResourceDictionary>
+        </Grid.Resources>
+
+        <Grid Background="Transparent">
+            <Grid.RowDefinitions>
             <RowDefinition Height="32"/>
             <RowDefinition />
         </Grid.RowDefinitions>
@@ -48,5 +64,7 @@
             </NavigationView.FooterMenuItems>
             <Frame x:Name="ctfMain" Padding="0,0,0,0" IsTabStop="True"/>
         </NavigationView>
+    </Grid>
+        
     </Grid>
 </Window>
