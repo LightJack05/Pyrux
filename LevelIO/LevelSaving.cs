@@ -71,18 +71,17 @@ namespace Pyrux.LevelIO
             string levelDataPath = Path.Combine(levelFolder, "LevelData.json");
             string levelScriptPath = Path.Combine(levelFolder, "LevelScript.py");
 
-            if (!activeLevel.IsBuiltIn)
+            
+            if (File.Exists(levelDataPath))
             {
-                if (File.Exists(levelDataPath))
-                {
-                    File.Delete(levelDataPath);
-                }
-
-                using (StreamWriter sw = new(levelDataPath))
-                {
-                    sw.Write(levelJson);
-                }
+                File.Delete(levelDataPath);
             }
+
+            using (StreamWriter sw = new(levelDataPath))
+            {
+                sw.Write(levelJson);
+            }
+            
 
             if (File.Exists(levelScriptPath))
             {
