@@ -114,6 +114,7 @@ public sealed partial class ExercisePage
     /// </summary>
     public void UpdateDisplay()
     {
+        // TODO: Prevent from updating when there is already a level loaded!
         if (_displayedMapLayout == null)
         {
             FullDisplayRedraw();
