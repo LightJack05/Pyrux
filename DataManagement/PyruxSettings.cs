@@ -102,6 +102,10 @@ namespace Pyrux.DataManagement
                     {
                         Instance = new PyruxSettings();
                     }
+                    if(Instance._keybinds == null)
+                    {
+                        Instance._keybinds = new();
+                    }
                 }
                 catch
                 {
