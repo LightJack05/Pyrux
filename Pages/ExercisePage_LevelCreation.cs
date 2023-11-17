@@ -10,6 +10,7 @@ public sealed partial class ExercisePage
     /// </summary>
     private async void CreateNewLevel()
     {
+        StaticDataStore.UnsavedChangesPresent = true;
         ContentDialog createlevelDialogue = new();
         createlevelDialogue.XamlRoot = this.Content.XamlRoot;
         createlevelDialogue.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;

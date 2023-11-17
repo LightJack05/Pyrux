@@ -13,9 +13,9 @@
     Loaded="Page_Loaded"
     NavigationCacheMode="Required">
 
-    <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch" MinWidth="700">
+    <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
         <ScrollViewer MaxHeight="400" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
-            <TextBox AcceptsReturn="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="txtLevelDescription" TextChanged="txtLevelDescription_TextChanged"/>
+            <TextBox Width="400" TextWrapping="Wrap" AcceptsReturn="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="txtLevelDescription" TextChanged="txtLevelDescription_TextChanged" />
         </ScrollViewer>
     </StackPanel>
     

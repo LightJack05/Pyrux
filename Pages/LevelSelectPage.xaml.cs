@@ -83,6 +83,7 @@ namespace Pyrux.Pages
         {
             PyruxSettings.SkipTutorialEnabled = true;
             PyruxSettings.TutorialStateId = 0;
+            PyruxSettings.SaveSettings();
         }
         /// <summary>
         /// Display an appdata error should the appdata be corrupted. Otherwise do nothing.
@@ -170,23 +171,42 @@ namespace Pyrux.Pages
                 TextBlock textBlock = VisualTreeHelper.GetChild(contentPresenter, 0) as TextBlock;
                 return textBlock.Text == x.LevelName;
             });
-            LoadLevelIntoStaticStorage(level);
-            MainWindow.Instance.NavViewNavigate("exerciseView", new Microsoft.UI.Xaml.Media.Animation.CommonNavigationTransitionInfo());
-            MainWindow.Instance.NavViewSetSelection(1);
+            if (StaticDataStore.UnsavedChangesPresent)
+            {
+                ShowOpenLevelConfirmationDialog(level);
+            }
+            else
+            {
+                OpenLevel(level);
+            }
         }
 
         private void CustomLevelButton_Clicked(object sender, RoutedEventArgs e)
         {
+
             PyruxLevel level = StaticDataStore.UserCreatedLevels.Find(x =>
             {
                 ContentPresenter contentPresenter = VisualTreeHelper.GetChild((Button)sender, 0) as ContentPresenter;
                 TextBlock textBlock = VisualTreeHelper.GetChild(contentPresenter, 0) as TextBlock;
                 return textBlock.Text == x.LevelName;
             });
+            if (StaticDataStore.UnsavedChangesPresent)
+            {
+                ShowOpenLevelConfirmationDialog(level);
+            }
+            else
+            {
+                OpenLevel(level);
+            }
+        }
+
+        private void OpenLevel(PyruxLevel level)
+        {
             LoadLevelIntoStaticStorage(level);
             MainWindow.Instance.NavViewNavigate("exerciseView", new Microsoft.UI.Xaml.Media.Animation.CommonNavigationTransitionInfo());
             MainWindow.Instance.NavViewSetSelection(1);
         }
+
         /// <summary>
         /// Load the given level into the static data store, and create a copy of the layout to be used as original layout.
         /// </summary>
@@ -227,6 +247,25 @@ namespace Pyrux.Pages
             if (result == ContentDialogResult.Primary)
             {
                 CreateNewLevel();
+            }
+        }
+
+        private async void ShowOpenLevelConfirmationDialog(PyruxLevel level)
+        {
+            ContentDialog confirmationDialogue = new();
+            confirmationDialogue.XamlRoot = this.Content.XamlRoot;
+            confirmationDialogue.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
+            confirmationDialogue.Title = "Are you sure?";
+            confirmationDialogue.MinHeight = 300;
+            confirmationDialogue.PrimaryButtonText = "Continue";
+            confirmationDialogue.SecondaryButtonText = "Cancel";
+            confirmationDialogue.DefaultButton = ContentDialogButton.Primary;
+            confirmationDialogue.Content = new ConfirmLevelCreationWithOpenLevel();
+
+            ContentDialogResult result = await confirmationDialogue.ShowAsync();
+            if (result == ContentDialogResult.Primary)
+            {
+                OpenLevel(level);
             }
         }
         /// <summary>

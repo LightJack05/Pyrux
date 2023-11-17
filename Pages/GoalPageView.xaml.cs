@@ -133,6 +133,7 @@ namespace Pyrux.Pages
             grdPlayField.Children.Add(charImage);
             Grid.SetColumn(charImage, ActiveLevel.GoalMapLayout.StartPosition.X);
             Grid.SetRow(charImage, ActiveLevel.GoalMapLayout.StartPosition.Y);
+            charImage.PointerPressed += Player_Clicked;
             _charImage = charImage;
         }
         /// <summary>
@@ -265,6 +266,15 @@ namespace Pyrux.Pages
                     break;
                 default:
                     break;
+            }
+        }
+
+        private void Player_Clicked(object sender, RoutedEventArgs e)
+        {
+            
+            if (SelectedToolIndex == 1)
+            {
+                ChangeChipsTool(ActiveLevel.GoalMapLayout.CurrentPlayerPosition);
             }
 
         }

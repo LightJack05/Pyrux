@@ -57,6 +57,7 @@ public sealed partial class ExercisePage
         grdPlayField.Children.Add(charImage);
         Grid.SetColumn(charImage, ActiveLevel.MapLayout.StartPosition.X);
         Grid.SetRow(charImage, ActiveLevel.MapLayout.StartPosition.Y);
+        charImage.PointerPressed += Player_Clicked;
         _charImage = charImage;
     }
     /// <summary>
@@ -115,8 +116,9 @@ public sealed partial class ExercisePage
     public void UpdateDisplay()
     {
         // TODO: Prevent from updating when there is already a level loaded!
-        if (_displayedMapLayout == null)
+        if (_displayedMapLayout == null || (_displayedMapLayout.SizeX != ActiveLevel.MapLayout.SizeX || _displayedMapLayout.SizeY != ActiveLevel.MapLayout.SizeY))
         {
+            BuildPlayGrid();
             FullDisplayRedraw();
             return;
         }

@@ -39,6 +39,20 @@ public sealed partial class ExercisePage
 
     }
 
+
+    private void Player_Clicked(object sender, RoutedEventArgs e)
+    {
+        if (ExecutionRanState)
+        {
+            return;
+        }
+        if (SelectedToolIndex == 1 && !PythonScriptRunning)
+        {
+            ChangeChipsTool(ActiveLevel.MapLayout.CurrentPlayerPosition);
+        }
+
+    }
+
     private void Tile_Entered(object sender, PointerRoutedEventArgs e)
     {
         if (e.GetCurrentPoint(null).Properties.IsLeftButtonPressed && SelectedToolIndex == 0)
@@ -222,7 +236,7 @@ public sealed partial class ExercisePage
     /// </summary>
     private void ChipNumberChangeDialogFinished()
     {
-        UpdateChipCount(PlaceChipsDialog.Position, PlaceChipsDialog.ChipNumber);
+        UpdateChipCount(PlaceChipsDialog.Position, (PlaceChipsDialog.ChipNumber));
     }
     /// <summary>
     /// Update the chip count at a position.
