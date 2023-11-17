@@ -57,9 +57,9 @@
                 <NavigationViewItem Icon="Play" Tag="exerciseView" Content="Level"/>
                 <NavigationViewItem Icon="Target" Tag="goalView" Content="Edit Goal Layout"/>
                 <NavigationViewItem Icon="Help" Tag="hint" Content="Hint"/>
-                <NavigationViewItem Icon="Document" Tag="docs" Content="API Documentation"/>
             </NavigationView.MenuItems>
             <NavigationView.FooterMenuItems>
+                <NavigationViewItem Icon="Document" Tag="docs" Content="API Documentation"/>
                 <NavigationViewItem Icon="Help" Tag="about" Content="About"/>
             </NavigationView.FooterMenuItems>
             <Frame x:Name="ctfMain" Padding="0,0,0,0" IsTabStop="True"/>

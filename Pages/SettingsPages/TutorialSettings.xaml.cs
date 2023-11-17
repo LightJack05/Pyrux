@@ -31,6 +31,10 @@ namespace Pyrux.Pages.SettingsPages
         private void tswShowTutorial_Toggled(object sender, RoutedEventArgs e)
         {
             PyruxSettings.SkipTutorialEnabled = !tswShowTutorial.IsOn;
+            if(!PyruxSettings.SkipTutorialEnabled)
+            {
+                PyruxSettings.TutorialStateId = 0;
+            }
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

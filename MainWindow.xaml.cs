@@ -117,6 +117,15 @@ namespace Pyrux
             ngvMainWindow.SelectedItem = ngvMainWindow.MenuItems[index];
         }
 
+        /// <summary>
+        /// Set the navigation view selection to the given footer index.
+        /// </summary>
+        /// <param name="index">Index to move the selection to.</param>
+        public void NavViewSetSelectionInFooter(int index)
+        {
+            ngvMainWindow.SelectedItem = ngvMainWindow.MenuItems[index];
+        }
+
         private void Window_Activated(object sender, WindowActivatedEventArgs args)
         {
         }

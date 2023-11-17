@@ -392,7 +392,7 @@ namespace Pyrux.Pages
             PyruxSettings.TutorialStateId++;
             if (PageTeachingTips.Count + 19 <= PyruxSettings.TutorialStateId)
             {
-                MainWindow.Instance.NavViewSetSelection(4);
+                MainWindow.Instance.NavViewSetSelectionInFooter(0);
                 MainWindow.Instance.NavViewNavigate("docs", new Microsoft.UI.Xaml.Media.Animation.CommonNavigationTransitionInfo());
 
             }
