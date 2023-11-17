@@ -19,7 +19,7 @@ namespace Pyrux.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            if (StaticDataStore.ActiveLevel != null)
+            if (StaticDataStore.ActiveLevel != null && StaticDataStore.ActiveLevel.IsBuiltIn)
             {
                 mtbHintRenderer.Text = StaticDataStore.ActiveLevel.Hint;
                 if (!StaticDataStore.ActiveLevel.IsBuiltIn)
