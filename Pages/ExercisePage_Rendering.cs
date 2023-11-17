@@ -57,6 +57,7 @@ public sealed partial class ExercisePage
         grdPlayField.Children.Add(charImage);
         Grid.SetColumn(charImage, ActiveLevel.MapLayout.StartPosition.X);
         Grid.SetRow(charImage, ActiveLevel.MapLayout.StartPosition.Y);
+        charImage.PointerPressed += Player_Clicked;
         _charImage = charImage;
     }
     /// <summary>

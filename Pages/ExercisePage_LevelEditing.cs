@@ -39,6 +39,20 @@ public sealed partial class ExercisePage
 
     }
 
+
+    private void Player_Clicked(object sender, RoutedEventArgs e)
+    {
+        if (ExecutionRanState)
+        {
+            return;
+        }
+        if (SelectedToolIndex == 1 && !PythonScriptRunning)
+        {
+            ChangeChipsTool(ActiveLevel.MapLayout.CurrentPlayerPosition);
+        }
+
+    }
+
     private void Tile_Entered(object sender, PointerRoutedEventArgs e)
     {
         if (e.GetCurrentPoint(null).Properties.IsLeftButtonPressed && SelectedToolIndex == 0)
