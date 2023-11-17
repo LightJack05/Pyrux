@@ -83,6 +83,7 @@ namespace Pyrux.Pages
         {
             PyruxSettings.SkipTutorialEnabled = true;
             PyruxSettings.TutorialStateId = 0;
+            PyruxSettings.SaveSettings();
         }
         /// <summary>
         /// Display an appdata error should the appdata be corrupted. Otherwise do nothing.
