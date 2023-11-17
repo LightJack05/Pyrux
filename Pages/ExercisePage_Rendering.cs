@@ -115,8 +115,9 @@ public sealed partial class ExercisePage
     public void UpdateDisplay()
     {
         // TODO: Prevent from updating when there is already a level loaded!
-        if (_displayedMapLayout == null)
+        if (_displayedMapLayout == null || (_displayedMapLayout.SizeX != ActiveLevel.MapLayout.SizeX || _displayedMapLayout.SizeY != ActiveLevel.MapLayout.SizeY))
         {
+            BuildPlayGrid();
             FullDisplayRedraw();
             return;
         }
