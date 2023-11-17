@@ -19,12 +19,16 @@ namespace Pyrux.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            if (StaticDataStore.ActiveLevel != null && StaticDataStore.ActiveLevel.IsBuiltIn)
+            if (StaticDataStore.ActiveLevel != null)
             {
                 mtbHintRenderer.Text = StaticDataStore.ActiveLevel.Hint;
                 if (!StaticDataStore.ActiveLevel.IsBuiltIn)
                 {
                     btnEditHint.IsEnabled = true;
+                }
+                else
+                {
+                    btnEditHint.IsEnabled = false;
                 }
             }
         }
