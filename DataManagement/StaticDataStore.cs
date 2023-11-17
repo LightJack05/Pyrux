@@ -21,7 +21,7 @@ namespace Pyrux.DataManagement
         /// </summary>
         public static List<PyruxLevel> UserCreatedLevels { get; set; }
 
-        public static bool UnsavedChangesPresent = false;
+        public static bool UnsavedChangesPresent { get; set; } = false;
 
         public static string VersionNumber 
         {

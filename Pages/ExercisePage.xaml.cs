@@ -156,6 +156,7 @@ namespace Pyrux.Pages
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            StaticDataStore.UnsavedChangesPresent = false;
             Pyrux.LevelIO.LevelSaving.Save(ActiveLevel);
         }
 

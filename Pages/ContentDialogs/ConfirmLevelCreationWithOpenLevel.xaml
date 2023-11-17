@@ -13,6 +13,6 @@
     NavigationCacheMode="Required">
 
     <StackPanel>
-        <TextBlock FontSize="15" TextWrapping="WrapWholeWords" Foreground="Yellow">This will overwrite the currently open level, should it not be saved.</TextBlock>
+        <TextBlock FontSize="15" TextWrapping="WrapWholeWords" Foreground="Yellow">You currently have unsaved changes present in the open level. If you proceed, they will be overwritten.</TextBlock>
     </StackPanel>
 </Page>
