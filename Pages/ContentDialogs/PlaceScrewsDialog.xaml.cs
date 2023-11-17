@@ -35,7 +35,7 @@ namespace Pyrux.Pages.ContentDialogs
 
         private void nbxChipAmount_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args)
         {
-            ChipNumber = (int)nbxChipAmount.Value;
+            ChipNumber = (((int)nbxChipAmount.Value) >= 0) ? (int)nbxChipAmount.Value : 0;
         }
     }
 }

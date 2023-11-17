@@ -222,7 +222,7 @@ public sealed partial class ExercisePage
     /// </summary>
     private void ChipNumberChangeDialogFinished()
     {
-        UpdateChipCount(PlaceChipsDialog.Position, PlaceChipsDialog.ChipNumber);
+        UpdateChipCount(PlaceChipsDialog.Position, (PlaceChipsDialog.ChipNumber));
     }
     /// <summary>
     /// Update the chip count at a position.
