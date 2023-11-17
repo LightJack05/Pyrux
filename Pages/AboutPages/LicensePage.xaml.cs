@@ -1,18 +1,3 @@
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
@@ -23,13 +8,14 @@ namespace Pyrux.Pages.AboutPages
     /// </summary>
     public sealed partial class LicensePage : Page
     {
-        bool loaded = false;
+        private bool loaded = false;
         public LicensePage()
         {
             this.InitializeComponent();
             loaded = true;
         }
-        Dictionary<string, string> licenses = new Dictionary<string, string>()
+
+        private Dictionary<string, string> licenses = new Dictionary<string, string>()
         {
             {
                 "IronPython",
@@ -93,7 +79,7 @@ namespace Pyrux.Pages.AboutPages
 
                 9. Accepting Warranty or Additional Liability. While redistributing the Work or Derivative Works thereof, You may choose to offer, and charge a fee for, acceptance of support, warranty, indemnity, or other liability obligations and/or rights consistent with this License. However, in accepting such obligations, You may act only on Your own behalf and on Your sole responsibility, not on behalf of any other Contributor, and only if You agree to indemnify, defend, and hold each Contributor harmless for any liability incurred by, or claims asserted against, such Contributor by reason of your accepting any such warranty or additional liability. 
                 
-                """ 
+                """
             },
             {
                 "Newtonsoft.JSON",
@@ -123,7 +109,9 @@ namespace Pyrux.Pages.AboutPages
             }
         };
 
-        public string LicensesDisplayString { get => 
+        public string LicensesDisplayString
+        {
+            get =>
                 """
                 # Open Source Licenses
 
@@ -132,13 +120,14 @@ namespace Pyrux.Pages.AboutPages
                 - IronPython
                 - Newtonsoft.JSON
 
-                """; }
+                """;
+        }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (loaded)
             {
-                RenderLicense((string)(e.AddedItems[0]));
+                RenderLicense((string)e.AddedItems[0]);
             }
         }
 

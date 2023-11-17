@@ -174,7 +174,7 @@ internal partial class PyruxLevel
     /// <exception cref="Pyrux.UserEndExceptions.ExecutionCancelledException">Thrown when the execution is cancelled. (Instance of the Exercise page get's it's ExecutionCanceled property set to true.)</exception>
     private void WaitAndCheckIfCancelled()
     {
-        if(ExercisePage.Instance.IsStepModeEnabled)
+        if (ExercisePage.Instance.IsStepModeEnabled)
         {
             while (!ExercisePage.Instance.IsNextStepRequested)
             {

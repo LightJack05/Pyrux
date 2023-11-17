@@ -72,7 +72,7 @@ public static class LevelImporting
         fileOpenPicker.FileTypeFilter.Add(".prxlvl");
 
         // Get the current window's HWND by passing in the Window object
-        var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(MainWindow.Instance);
+        nint hwnd = WinRT.Interop.WindowNative.GetWindowHandle(MainWindow.Instance);
 
         // Associate the HWND with the file picker
         WinRT.Interop.InitializeWithWindow.Initialize(fileOpenPicker, hwnd);

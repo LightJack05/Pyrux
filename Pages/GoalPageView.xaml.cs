@@ -14,7 +14,8 @@ namespace Pyrux.Pages
     public sealed partial class GoalPageView : Page
     {
         private PyruxSettings _pyruxSettings { get => PyruxSettings.Instance; }
-        Dictionary<int, TeachingTip> PageTeachingTips = new()
+
+        private Dictionary<int, TeachingTip> PageTeachingTips = new()
         {
 
         };
@@ -271,7 +272,7 @@ namespace Pyrux.Pages
 
         private void Player_Clicked(object sender, RoutedEventArgs e)
         {
-            
+
             if (SelectedToolIndex == 1)
             {
                 ChangeChipsTool(ActiveLevel.GoalMapLayout.CurrentPlayerPosition);

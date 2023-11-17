@@ -15,7 +15,8 @@ namespace Pyrux.Pages
     public sealed partial class ExercisePage : Page
     {
         private PyruxSettings _pyruxSettings { get => PyruxSettings.Instance; }
-        Dictionary<int, TeachingTip> PageTeachingTips = new()
+
+        private Dictionary<int, TeachingTip> PageTeachingTips = new()
         {
 
         };
@@ -148,7 +149,7 @@ namespace Pyrux.Pages
         /// <param name="e"></param>
         private void txtCodeEditor_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(ActiveLevel != null)
+            if (ActiveLevel != null)
             {
                 ActiveLevel.Script = txtCodeEditor.Text;
             }

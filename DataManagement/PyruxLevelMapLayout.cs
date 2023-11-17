@@ -169,7 +169,7 @@
             return true;
         }
 
-        public bool MatchGoalLayout( PyruxLevelMapLayout GoalLayout)
+        public bool MatchGoalLayout(PyruxLevelMapLayout GoalLayout)
         {
             if (GoalLayout == null) return false;
 

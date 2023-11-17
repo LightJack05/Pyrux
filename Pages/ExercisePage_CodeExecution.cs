@@ -6,7 +6,6 @@ using Pyrux.UserEndExceptions;
 using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
-using Windows.Storage.Streams;
 
 namespace Pyrux.Pages;
 
@@ -58,14 +57,14 @@ public sealed partial class ExercisePage
             }
         }
         System.Diagnostics.Debug.WriteLine(IsStepModeEnabled);
-        
+
     }
 
 
     private void btnStep_Click(object sender, RoutedEventArgs e)
     {
-        
-        if(!PythonScriptRunning)
+
+        if (!PythonScriptRunning)
         {
             IsNextStepRequested = true;
             IsStepModeEnabled = true;
@@ -163,13 +162,14 @@ public sealed partial class ExercisePage
 
             if (PyruxSettings.AutoRestartOnFinish && !ActiveLevel.Completed)
             {
-                if(PyruxSettings.AddDelayBeforeAutoReset)
+                if (PyruxSettings.AddDelayBeforeAutoReset)
                 {
-                    await Task.Run(() => {
+                    await Task.Run(() =>
+                    {
                         Thread.Sleep(PyruxSettings.DelayBeforeAutoReset);
-                        
+
                     });
-                    if(!PythonScriptRunning && !btnStart.IsEnabled && !btnStep.IsEnabled)
+                    if (!PythonScriptRunning && !btnStart.IsEnabled && !btnStep.IsEnabled)
                     {
                         ExecutionRanState = false;
                         PrepareToolSelection();
@@ -184,7 +184,7 @@ public sealed partial class ExercisePage
                 }
             }
         }
-        
+
     }
 
     public void SetupPythonConsoleOutput(ScriptEngine scriptEngine)

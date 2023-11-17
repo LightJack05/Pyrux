@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Windows.Storage;
 
 namespace Pyrux.LevelIO;
 
@@ -23,13 +22,13 @@ internal static class LevelLoading
         string levelsFolderOrganization;
         if (isBuiltIn)
         {
-            levelsFolderOrganization = Path.Combine(levelsFolder,"Builtins");
+            levelsFolderOrganization = Path.Combine(levelsFolder, "Builtins");
         }
         else
         {
             levelsFolderOrganization = Path.Combine(levelsFolder, "UserCreated");
         }
-        string levelFolder = Path.Combine(levelsFolderOrganization,levelName);
+        string levelFolder = Path.Combine(levelsFolderOrganization, levelName);
         if (Directory.Exists(levelFolder))
         {
             PyruxLevel level;
@@ -68,7 +67,7 @@ internal static class LevelLoading
             }
             else
             {
-                File.Create(Path.Combine(levelFolder,"LevelScript.py"));
+                File.Create(Path.Combine(levelFolder, "LevelScript.py"));
                 using (StreamWriter sw = new(Path.Combine(levelFolder, "LevelScript.py")))
                 {
                     sw.Write(level.Script);
@@ -127,7 +126,7 @@ internal static class LevelLoading
         }
         else
         {
-            File.Create(Path.Combine(levelFolder,"LevelScript.py"));
+            File.Create(Path.Combine(levelFolder, "LevelScript.py"));
             using (StreamWriter sw = new(Path.Combine(levelFolder, "LevelScript.py")))
             {
                 sw.Write(level.Script);

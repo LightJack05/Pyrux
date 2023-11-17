@@ -4,9 +4,9 @@ public sealed partial class ExercisePage
     public bool isGoalLayoutOverlayEnabled { get; set; }
     private void tswGoalLayoutOverlay_Toggled(object sender, RoutedEventArgs e)
     {
-        if(ActiveLevel != null)
+        if (ActiveLevel != null)
         {
-            if(ActiveLevel.GoalMapLayout != null)
+            if (ActiveLevel.GoalMapLayout != null)
             {
                 if (((ToggleSwitch)sender).IsOn)
                 {

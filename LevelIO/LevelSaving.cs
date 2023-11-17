@@ -1,7 +1,4 @@
-﻿using IronPython.Modules;
-using Windows.Storage;
-
-namespace Pyrux.LevelIO
+﻿namespace Pyrux.LevelIO
 {
     internal static class LevelSaving
     {
@@ -71,7 +68,7 @@ namespace Pyrux.LevelIO
             string levelDataPath = Path.Combine(levelFolder, "LevelData.json");
             string levelScriptPath = Path.Combine(levelFolder, "LevelScript.py");
 
-            
+
             if (File.Exists(levelDataPath))
             {
                 File.Delete(levelDataPath);
@@ -81,7 +78,7 @@ namespace Pyrux.LevelIO
             {
                 sw.Write(levelJson);
             }
-            
+
 
             if (File.Exists(levelScriptPath))
             {

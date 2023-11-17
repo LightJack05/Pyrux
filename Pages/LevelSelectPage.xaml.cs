@@ -15,9 +15,10 @@ namespace Pyrux.Pages
     public sealed partial class LevelSelectPage : Page
     {
         private PyruxSettings _pyruxSettings { get => PyruxSettings.Instance; }
-        Dictionary<int, TeachingTip> PageTeachingTips = new()
+
+        private Dictionary<int, TeachingTip> PageTeachingTips = new()
         {
-            
+
         };
         public LevelSelectPage()
         {
@@ -52,15 +53,15 @@ namespace Pyrux.Pages
             PageTeachingTips.Add(3, tctImport);
             PageTeachingTips.Add(4, tctNewLevel);
 
-            if(!PyruxSettings.SkipTutorialEnabled)
+            if (!PyruxSettings.SkipTutorialEnabled)
             {
                 try
                 {
                     PageTeachingTips[PyruxSettings.TutorialStateId].IsOpen = true;
                 }
-                catch 
-                { 
-                
+                catch
+                {
+
                 }
             }
         }
@@ -69,9 +70,9 @@ namespace Pyrux.Pages
         {
             PageTeachingTips[PyruxSettings.TutorialStateId].IsOpen = false;
             PyruxSettings.TutorialStateId++;
-            if(PageTeachingTips.Count <= PyruxSettings.TutorialStateId)
+            if (PageTeachingTips.Count <= PyruxSettings.TutorialStateId)
             {
-                btnNewLevel_Click(null,null);
+                btnNewLevel_Click(null, null);
             }
             else
             {
@@ -292,6 +293,6 @@ namespace Pyrux.Pages
 
         }
 
-        
+
     }
 }

@@ -1,7 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Windows.Storage;
-using System.IO;
-using Windows.Security.Cryptography.Core;
 
 namespace Pyrux.LevelIO
 {
@@ -45,12 +42,12 @@ namespace Pyrux.LevelIO
         /// <returns>True if the appdata folder is empty.</returns>
         public static async Task<bool> IsAppdataEmpty()
         {
-            string appdataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),"Pyrux");
+            string appdataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Pyrux");
             if (!Directory.Exists(appdataFolder))
             {
                 Directory.CreateDirectory(appdataFolder);
             }
-            if ((Directory.GetFileSystemEntries(appdataFolder)).Count() == 0)
+            if (Directory.GetFileSystemEntries(appdataFolder).Count() == 0)
             {
                 return true;
             }

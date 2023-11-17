@@ -22,7 +22,7 @@ namespace Pyrux.Pages.ContentDialogs
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            if(MainWindow.Instance.NavViewSelectedIndex == 2)
+            if (MainWindow.Instance.NavViewSelectedIndex == 2)
             {
                 ChipNumber = StaticDataStore.ActiveLevel.GoalMapLayout.GetChipNumberAtPosition(Position);
             }

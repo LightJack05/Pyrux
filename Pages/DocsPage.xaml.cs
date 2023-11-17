@@ -4,7 +4,6 @@
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
-using Pyrux.Pages.DocsPages;
 namespace Pyrux.Pages
 {
     /// <summary>
@@ -12,7 +11,7 @@ namespace Pyrux.Pages
     /// </summary>
     public sealed partial class DocsPage : Page
     {
-        Dictionary<int, TeachingTip> PageTeachingTips = new()
+        private Dictionary<int, TeachingTip> PageTeachingTips = new()
         {
 
         };
@@ -31,7 +30,7 @@ namespace Pyrux.Pages
 
         private void btnPopoutDocs_Click(object sender, RoutedEventArgs e)
         {
-            if(ApplicationWindows.DocumentationWindow.Instance != null)
+            if (ApplicationWindows.DocumentationWindow.Instance != null)
             {
                 ApplicationWindows.DocumentationWindow.Instance.Close();
             }

@@ -1,12 +1,10 @@
-﻿using Windows.Storage;
-
-namespace Pyrux.DataManagement
+﻿namespace Pyrux.DataManagement
 {
     public class PyruxSettings
     {
-        public PyruxSettings() 
-        { 
-        
+        public PyruxSettings()
+        {
+
         }
         /// <summary>
         /// Constructor for importing a json file into the settings.
@@ -14,7 +12,7 @@ namespace Pyrux.DataManagement
         /// </summary>
         /// <param name="executionSpeed">Speed of execution between instructions.</param>
         [JsonConstructor]
-        public PyruxSettings(int executionSpeed,int resetDelayInMilliseconds, bool autoRestartOnFinish, bool addDelayToReset, bool skipTutorialEnabled, Keybinds keybinds)
+        public PyruxSettings(int executionSpeed, int resetDelayInMilliseconds, bool autoRestartOnFinish, bool addDelayToReset, bool skipTutorialEnabled, Keybinds keybinds)
         {
             _executionSpeed = executionSpeed;
             _delayBeforeAutoReset = resetDelayInMilliseconds;
@@ -98,11 +96,11 @@ namespace Pyrux.DataManagement
                         DataManagement.PyruxSettings.Instance = JsonConvert.DeserializeObject<PyruxSettings>(fileContent);
                         sr.Close();
                     }
-                    if(Instance == null)
+                    if (Instance == null)
                     {
                         Instance = new PyruxSettings();
                     }
-                    if(Instance._keybinds == null)
+                    if (Instance._keybinds == null)
                     {
                         Instance._keybinds = new();
                     }

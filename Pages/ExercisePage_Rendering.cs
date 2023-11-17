@@ -1,7 +1,7 @@
 ﻿namespace Pyrux.Pages;
 public sealed partial class ExercisePage
 {
-    
+
     /// <summary>
     /// On resize, change the size of the grid to keep every tile square.
     /// </summary>
@@ -116,7 +116,7 @@ public sealed partial class ExercisePage
     public void UpdateDisplay()
     {
         // TODO: Prevent from updating when there is already a level loaded!
-        if (_displayedMapLayout == null || (_displayedMapLayout.SizeX != ActiveLevel.MapLayout.SizeX || _displayedMapLayout.SizeY != ActiveLevel.MapLayout.SizeY))
+        if (_displayedMapLayout == null || _displayedMapLayout.SizeX != ActiveLevel.MapLayout.SizeX || _displayedMapLayout.SizeY != ActiveLevel.MapLayout.SizeY)
         {
             BuildPlayGrid();
             FullDisplayRedraw();
@@ -184,7 +184,7 @@ public sealed partial class ExercisePage
     /// </summary>
     private void PrepareToolSelection()
     {
-        if(ActiveLevel != null)
+        if (ActiveLevel != null)
         {
             if (ActiveLevel.IsBuiltIn || isGoalLayoutOverlayEnabled)
             {
@@ -211,7 +211,7 @@ public sealed partial class ExercisePage
             btnPlayerTool.IsEnabled = false;
             SelectedToolIndex = -1;
         }
-        
+
     }
 
     private void btnReset_Click(object sender, RoutedEventArgs e)
@@ -258,12 +258,12 @@ public sealed partial class ExercisePage
     {
         StaticDataStore.OriginalActiveLevelMapLayout = ActiveLevel.MapLayout.Copy();
 
-        expTaskExpander.Header = new TextBlock { Text = ActiveLevel.LevelName, FontSize = 20, Margin = new(0,-3,0,0) };
+        expTaskExpander.Header = new TextBlock { Text = ActiveLevel.LevelName, FontSize = 20, Margin = new(0, -3, 0, 0) };
         txtLevelTask.Text = ActiveLevel.Task;
         txtCodeEditor.Text = ActiveLevel.Script;
 
         btnStart.IsEnabled = true;
-        btnStep.IsEnabled= true;
+        btnStep.IsEnabled = true;
         btnReset.IsEnabled = true;
         btnSave.IsEnabled = true;
         btnExport.IsEnabled = true;

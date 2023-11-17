@@ -1,6 +1,4 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
-
-namespace Pyrux.LevelIO;
+﻿namespace Pyrux.LevelIO;
 public static class BuiltInLevels
 {
     public static void ConstructLevels()

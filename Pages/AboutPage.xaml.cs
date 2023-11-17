@@ -6,7 +6,6 @@
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
 using Pyrux.Pages.AboutPages;
-using Pyrux.Pages.SettingsPages;
 
 namespace Pyrux.Pages
 {

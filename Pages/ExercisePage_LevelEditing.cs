@@ -1,6 +1,5 @@
 ﻿using Microsoft.UI.Xaml.Input;
 using Pyrux.Pages.ContentDialogs;
-using Windows.ApplicationModel.UserDataTasks;
 
 namespace Pyrux.Pages;
 
@@ -60,12 +59,12 @@ public sealed partial class ExercisePage
             Border clickedBorder = VisualTreeHelper.GetParent((Image)sender) as Border;
             PositionVector2 position = new(Grid.GetColumn(clickedBorder), Grid.GetRow(clickedBorder));
 
-            if(_dragStartedWithAdding is null)
+            if (_dragStartedWithAdding is null)
             {
                 _dragStartedWithAdding = !ActiveLevel.MapLayout.IsWallAtPosition(position);
             }
 
-            if(_dragStartedWithAdding == ActiveLevel.MapLayout.IsWallAtPosition(position))
+            if (_dragStartedWithAdding == ActiveLevel.MapLayout.IsWallAtPosition(position))
             {
                 SwitchWall(position);
             }
@@ -236,7 +235,7 @@ public sealed partial class ExercisePage
     /// </summary>
     private void ChipNumberChangeDialogFinished()
     {
-        UpdateChipCount(PlaceChipsDialog.Position, (PlaceChipsDialog.ChipNumber));
+        UpdateChipCount(PlaceChipsDialog.Position, PlaceChipsDialog.ChipNumber);
     }
     /// <summary>
     /// Update the chip count at a position.

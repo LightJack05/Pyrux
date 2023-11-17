@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.System;
+﻿using Windows.System;
 
 namespace Pyrux.DataManagement
 {
@@ -30,7 +25,7 @@ namespace Pyrux.DataManagement
         public VirtualKeyModifiers Modifier { get; set; }
         public VirtualKey Key { get; set; }
         public string Description { get; set; }
-        public KeyboardShortcut() 
+        public KeyboardShortcut()
         {
             Key = VirtualKey.None;
             Modifier = VirtualKeyModifiers.None;

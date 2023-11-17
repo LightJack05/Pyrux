@@ -1,24 +1,4 @@
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.System;
-using Windows.UI.Core;
-using System.Linq;
-using Microsoft.Scripting.Utils;
-using IronPython.Compiler.Ast;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -30,7 +10,7 @@ namespace Pyrux.Pages.SettingsPages
     /// </summary>
     public sealed partial class ShortcutSettings : Page
     {
-        private List<ComboBox> _keyComboBoxes = new(); 
+        private List<ComboBox> _keyComboBoxes = new();
         private List<ComboBox> _keyModifierComboBoxes = new();
 
         private Dictionary<uint, string> _virtualKeyModifierToString = new()
@@ -90,14 +70,14 @@ namespace Pyrux.Pages.SettingsPages
         private void ComboBoxModifier_Loaded(object sender, RoutedEventArgs e)
         {
             ((ComboBox)sender).SelectedItem = _virtualKeyModifierToString[(uint)((KeyboardShortcut)((ComboBox)sender).DataContext).Modifier];
-            _keyModifierComboBoxes.Add(((ComboBox)sender));
+            _keyModifierComboBoxes.Add((ComboBox)sender);
 
         }
 
         private void ComboBoxKey_Loaded(object sender, RoutedEventArgs e)
         {
             ((ComboBox)sender).SelectedItem = ((KeyboardShortcut)((ComboBox)sender).DataContext).Key.ToString();
-            _keyComboBoxes.Add(((ComboBox)sender));
+            _keyComboBoxes.Add((ComboBox)sender);
         }
 
         private void ItemsRepeater_ElementPrepared(ItemsRepeater sender, ItemsRepeaterElementPreparedEventArgs args)
@@ -112,12 +92,12 @@ namespace Pyrux.Pages.SettingsPages
         {
             PyruxSettings.Keybinds.Reset();
             PyruxSettings.SaveSettings();
-            foreach(ComboBox comboBox in _keyComboBoxes)
+            foreach (ComboBox comboBox in _keyComboBoxes)
             {
                 comboBox.SelectedItem = ((KeyboardShortcut)comboBox.DataContext).Key.ToString();
-                
+
             }
-            foreach(ComboBox comboBox in _keyModifierComboBoxes)
+            foreach (ComboBox comboBox in _keyModifierComboBoxes)
             {
                 comboBox.SelectedItem = _virtualKeyModifierToString[(uint)((KeyboardShortcut)comboBox.DataContext).Modifier];
             }

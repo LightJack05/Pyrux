@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Windows.Storage;
 
 namespace Pyrux.LevelIO
 {
@@ -15,9 +14,9 @@ namespace Pyrux.LevelIO
         public static async void ExportProcess(PyruxLevel exportingLevel)
         {
             string saveFile = await GetSavePathAsync(exportingLevel.LevelName);
-            
+
             SaveData(JsonConvert.SerializeObject(exportingLevel), saveFile);
-            
+
 
         }
         /// <summary>
@@ -50,7 +49,7 @@ namespace Pyrux.LevelIO
             fileSavePicker.SuggestedFileName = levelName;
 
             // Get the current window's HWND by passing in the Window object
-            var windowHandle = WinRT.Interop.WindowNative.GetWindowHandle(MainWindow.Instance);
+            nint windowHandle = WinRT.Interop.WindowNative.GetWindowHandle(MainWindow.Instance);
 
             // Associate the HWND with the file picker
             WinRT.Interop.InitializeWithWindow.Initialize(fileSavePicker, windowHandle);

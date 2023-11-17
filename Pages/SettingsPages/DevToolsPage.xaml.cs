@@ -3,7 +3,6 @@
 
 using Pyrux.LevelIO;
 using Windows.ApplicationModel.DataTransfer;
-using Windows.Storage;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -33,7 +32,7 @@ namespace Pyrux.Pages
                 }
                 else
                 {
-                    throw new Exception("Application package could not be determined.");       
+                    throw new Exception("Application package could not be determined.");
                 }
 
             }
@@ -42,10 +41,10 @@ namespace Pyrux.Pages
                 string appdataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Pyrux");
 
                 System.Diagnostics.Process.Start("explorer.exe", appdataFolder);
-                
+
             }
 
-            
+
         }
 
         private void btnCopyAppdataPath_Click(object sender, RoutedEventArgs e)

@@ -23,14 +23,14 @@ namespace Pyrux.DataManagement
 
         public static bool UnsavedChangesPresent { get; set; } = false;
 
-        public static string VersionNumber 
+        public static string VersionNumber
         {
             get => GetApplicationVersion();
         }
 
         private static string GetApplicationVersion()
         {
-            var version = Assembly.GetEntryAssembly().GetName().Version;
+            Version version = Assembly.GetEntryAssembly().GetName().Version;
             string applicationVersion = string.Format("{0}.{1}.{2}.{3}",
                 version.Major,
                 version.Minor,
