@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Pyrux.LevelIO;
 
@@ -76,8 +77,14 @@ public static class LevelImporting
 
         // Associate the HWND with the file picker
         WinRT.Interop.InitializeWithWindow.Initialize(fileOpenPicker, hwnd);
+        var file = (await fileOpenPicker.PickSingleFileAsync());
 
-        string saveFile = (await fileOpenPicker.PickSingleFileAsync()).Path;
+        string saveFile = String.Empty;
+        if (file != null)
+        {
+             saveFile = file.Path;
+        }
+        
         if (File.Exists(saveFile))
         {
             return saveFile;

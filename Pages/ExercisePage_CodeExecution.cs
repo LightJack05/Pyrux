@@ -4,6 +4,7 @@ using Pyrux.Pages.ContentDialogs;
 using Pyrux.Pages.ContentDialogs.ExceptionPages;
 using Pyrux.UserEndExceptions;
 using System.Collections.Concurrent;
+using System.Data.Common;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -89,7 +90,7 @@ public sealed partial class ExercisePage
     /// </summary>
     private async void ArbitraryCodeExecution()
     {
-
+        DataManagement.Restrictions.FunctionCallCount.ResetCallCount();
         Exception thrownException = null;
         string errorStackTrace = "";
 
@@ -153,7 +154,7 @@ public sealed partial class ExercisePage
             }
             else
             {
-                if (StaticDataStore.ActiveLevel.MapLayout.MatchGoalLayout(ActiveLevel.GoalMapLayout))
+                if (StaticDataStore.ActiveLevel.MapLayout.MatchGoalLayout(ActiveLevel.GoalMapLayout) && StaticDataStore.ActiveLevel.CheckCompletionRestrictionsSatisfied())
                 {
                     ActiveLevel.Completed = true;
                     ShowLevelCompletedDialogue();
@@ -184,8 +185,9 @@ public sealed partial class ExercisePage
                 }
             }
         }
-
     }
+
+    
 
     public void SetupPythonConsoleOutput(ScriptEngine scriptEngine)
     {

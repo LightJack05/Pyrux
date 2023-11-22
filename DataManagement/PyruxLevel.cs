@@ -35,6 +35,13 @@
         /// </summary>
         public bool Completed { get; set; } = false;
 
+        public List<Restrictions.Restriction> CompletionRestrictions { get; set; }
+
+        public PyruxLevel()
+        {
+
+        }
+
         /// <summary>
         /// Initialize a new PyruxLevel.
         /// </summary>
@@ -51,7 +58,7 @@
             Script = script;
         }
 
-        [JsonConstructor]
+        
         public PyruxLevel(string levelName, string task, bool isBuiltIn, PyruxLevelMapLayout mapLayout, string script, string hint, bool completed, PyruxLevelMapLayout goalMapLayout)
         {
             LevelName = levelName;
@@ -62,6 +69,38 @@
             Hint = hint;
             Completed = completed;
             GoalMapLayout = goalMapLayout;
+        }
+
+        [JsonConstructor]
+        public PyruxLevel(string levelName, string task, bool isBuiltIn, PyruxLevelMapLayout mapLayout, string script, string hint, bool completed, PyruxLevelMapLayout goalMapLayout, List<Restrictions.Restriction> completionRestrictions)
+        {
+            LevelName = levelName;
+            Task = task;
+            IsBuiltIn = isBuiltIn;
+            MapLayout = mapLayout;
+            Script = script;
+            Hint = hint;
+            Completed = completed;
+            GoalMapLayout = goalMapLayout;
+            CompletionRestrictions = completionRestrictions;
+        }
+
+        /// <summary>
+        /// Check if all restrictions in this level are satisfied in the current state.
+        /// </summary>
+        /// <returns>True if all restrictions satisfied, otherwise false.</returns>
+        public bool CheckCompletionRestrictionsSatisfied()
+        {
+            bool allSatisfied = true;
+            foreach (var restriction in CompletionRestrictions)
+            {
+                if (!restriction.IsSatisfied(this))
+                {
+                    allSatisfied = false;
+                    break;
+                }
+            }
+            return allSatisfied;
         }
         /// <summary>
         /// Creates a copy of the PyruxLevel that is not linked to the original.
@@ -77,7 +116,8 @@
                 Script,
                 Hint,
                 Completed,
-                GoalMapLayout
+                GoalMapLayout,
+                CompletionRestrictions
                 );
         }
     }
