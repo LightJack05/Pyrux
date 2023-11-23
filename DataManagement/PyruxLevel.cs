@@ -1,4 +1,6 @@
-﻿namespace Pyrux.DataManagement
+﻿using System.Collections.ObjectModel;
+
+namespace Pyrux.DataManagement
 {
     internal partial class PyruxLevel
     {
@@ -35,7 +37,7 @@
         /// </summary>
         public bool Completed { get; set; } = false;
 
-        public List<Restrictions.Restriction> CompletionRestrictions { get; set; }
+        public ObservableCollection<Restrictions.Restriction> CompletionRestrictions { get; set; }
 
         public PyruxLevel()
         {
@@ -72,7 +74,7 @@
         }
 
         [JsonConstructor]
-        public PyruxLevel(string levelName, string task, bool isBuiltIn, PyruxLevelMapLayout mapLayout, string script, string hint, bool completed, PyruxLevelMapLayout goalMapLayout, List<Restrictions.Restriction> completionRestrictions)
+        public PyruxLevel(string levelName, string task, bool isBuiltIn, PyruxLevelMapLayout mapLayout, string script, string hint, bool completed, PyruxLevelMapLayout goalMapLayout, ObservableCollection<Restrictions.Restriction> completionRestrictions)
         {
             LevelName = levelName;
             Task = task;

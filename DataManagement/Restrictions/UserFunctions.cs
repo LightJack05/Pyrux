@@ -1,6 +1,6 @@
 ﻿namespace Pyrux.DataManagement.Restrictions;
 
-public enum UserFuntion
+public enum UserFunction
 {
     GoForward,
     TurnLeft, 
@@ -18,7 +18,7 @@ public static class UserFunctionExtensions
     /// </summary>
     /// <param name="userFuntion">Function to convert to call string</param>
     /// <returns>A string representing a call to the function from python</returns>
-    public static string ToCallString(this UserFuntion userFuntion)
+    public static string ToCallString(this UserFunction userFuntion)
     {
         return userFuntion.ToString() + "()";
     }

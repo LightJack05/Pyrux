@@ -1,7 +1,9 @@
 // Copyright (c) Microsoft Corporation and Contributors.
 // Licensed under the MIT License.
 
+using Pyrux.DataManagement.Restrictions;
 using Pyrux.Pages.ContentDialogs;
+using System.Collections.ObjectModel;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -14,6 +16,9 @@ namespace Pyrux.Pages
     public sealed partial class GoalPageView : Page
     {
         private PyruxSettings _pyruxSettings { get => PyruxSettings.Instance; }
+        private ObservableCollection<DataManagement.Restrictions.Restriction> _completionRestrictions = StaticDataStore.ActiveLevel.CompletionRestrictions;
+
+
 
         private Dictionary<int, TeachingTip> PageTeachingTips = new()
         {
@@ -409,6 +414,75 @@ namespace Pyrux.Pages
             PyruxSettings.SkipTutorialEnabled = true;
             PyruxSettings.TutorialStateId = 0;
             PyruxSettings.SaveSettings();
+        }
+
+        private void irpRestrictions_ElementPrepared(ItemsRepeater sender, ItemsRepeaterElementPreparedEventArgs args)
+        {
+            if (args.Element is FrameworkElement element)
+            {
+                element.DataContext = _completionRestrictions[args.Index];
+            }
+        }
+
+        private void cbxRestrictionType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
+            {
+                ((Restriction)((ComboBox)sender).DataContext).Type = Restriction.UiStringToRestrictionTypeDictionary[e.AddedItems.FirstOrDefault().ToString()];
+            }
+            else
+            {
+                ((ComboBox)sender).SelectedItem = Restriction.RestrictionTypeToUiStringDictionary[((Restriction)((ComboBox)sender).DataContext).Type];
+            }
+        }
+
+        private void cbxRestrictedFunction_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
+            {
+                ((Restriction)((ComboBox)sender).DataContext).LimitedFunction = Restriction.FunctionUiTypeDictionary[e.AddedItems.FirstOrDefault().ToString()];
+            }
+            else
+            {
+                ((ComboBox)sender).SelectedItem = ((Restriction)((ComboBox)sender).DataContext).LimitedFunction.ToString();
+            }
+        }
+
+        private void cbxRestictionNumber_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
+            {
+                ((Restriction)((ComboBox)sender).DataContext).LimitValue = int.Parse(e.AddedItems.FirstOrDefault().ToString());
+            }
+            else
+            {
+                ((ComboBox)sender).SelectedItem = ((Restriction)((ComboBox)sender).DataContext).LimitValue;
+            }
+        }
+
+        private void cbxRestrictionType_Loaded(object sender, RoutedEventArgs e)
+        {
+            ((ComboBox)sender).SelectedItem = Restriction.RestrictionTypeToUiStringDictionary[((Restriction)((ComboBox)sender).DataContext).Type];
+        }
+
+        private void cbxRestrictedFunction_Loaded(object sender, RoutedEventArgs e)
+        {
+            ((ComboBox)sender).SelectedItem = ((Restriction)((ComboBox)sender).DataContext).LimitedFunction.ToString();
+        }
+
+        private void cbxRestictionNumber_Loaded(object sender, RoutedEventArgs e)
+        {
+            ((ComboBox)sender).SelectedItem = ((Restriction)((ComboBox)sender).DataContext).LimitValue;
+        }
+
+        private void btnAddRestriction_Click(object sender, RoutedEventArgs e)
+        {
+            _completionRestrictions.Add(new(RestrictionType.ReferenceLimit, UserFunction.GoForward, 1));
+        }
+
+        private void btnRemoveRestriction_Click(object sender, RoutedEventArgs e)
+        {
+            _completionRestrictions.Remove(((Restriction)((Button)sender).DataContext));
         }
     }
 }

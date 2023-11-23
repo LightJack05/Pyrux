@@ -7,7 +7,42 @@ namespace Pyrux.DataManagement.Restrictions
     {
         public RestrictionType Type;
         public int LimitValue;
-        public UserFuntion LimitedFunction;
+        public UserFunction LimitedFunction;
+
+        public static Dictionary<string, RestrictionType> UiStringToRestrictionTypeDictionary = new()
+        {
+            {"Maximum calls", RestrictionType.CallLimit},
+            {"Mimimum calls", RestrictionType.CallMin },
+            {"Maximum references", RestrictionType.ReferenceLimit },
+            {"Minimum references", RestrictionType.ReferenceMin }
+        };
+        public static Dictionary<RestrictionType, string> RestrictionTypeToUiStringDictionary = new()
+        {
+            {RestrictionType.CallLimit, "Maximum calls" },
+            {RestrictionType.CallMin, "Mimimum calls" },
+            {RestrictionType.ReferenceLimit , "Maximum references"},
+            {RestrictionType.ReferenceMin , "Minimum references"}
+        };
+        public static List<string> RestrictionTypeUiStrings { get => UiStringToRestrictionTypeDictionary.Keys.ToList(); }
+        public static List<RestrictionType> RestrictionTypes { get => UiStringToRestrictionTypeDictionary.Values.ToList(); }
+
+        public static Dictionary<string, UserFunction> FunctionUiTypeDictionary = new()
+        {
+            {"GoForward", UserFunction.GoForward},
+            {"TurnLeft", UserFunction.TurnLeft},
+            {"TurnRight", UserFunction.TurnRight},
+            {"TakeChip", UserFunction.TakeChip },
+            {"PlaceChip",UserFunction.PlaceChip },
+            {"ChipThere", UserFunction.ChipThere},
+            {"WallAhead", UserFunction.WallAhead},
+        };
+        public static List<string> FunctionTypeUiStrings { get => FunctionUiTypeDictionary.Keys.ToList(); }
+        public static List<UserFunction> FunctionTypes { get => FunctionUiTypeDictionary.Values.ToList(); }
+        public static List<int> AvailableNumbersForRestrictions = new()
+        {
+            1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32
+        };
+
 
         /// <summary>
         /// Create a new Restriction object. Add to PyruxLevel.CompletionRestrictions to add a restriction to a level.
@@ -16,7 +51,7 @@ namespace Pyrux.DataManagement.Restrictions
         /// <param name="limitedFunction">The function the restriction should restrict</param>
         /// <param name="limitValue">Limit the value the restriction will enforce. How it enforces depends on the type of restriction.</param>
         [JsonConstructor]
-        public Restriction(RestrictionType type, UserFuntion limitedFunction, int limitValue)
+        public Restriction(RestrictionType type, UserFunction limitedFunction, int limitValue)
         {
             Type = type;
             LimitValue = limitValue;

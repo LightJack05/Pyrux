@@ -175,8 +175,8 @@ public static class BuiltInLevels
                 ),
                 new()
                 {
-                    new Restriction(RestrictionType.ReferenceLimit, UserFuntion.GoForward, 2),
-                    new Restriction(RestrictionType.CallLimit, UserFuntion.WallAhead, 3)
+                    new Restriction(RestrictionType.ReferenceLimit, UserFunction.GoForward, 2),
+                    new Restriction(RestrictionType.CallLimit, UserFunction.WallAhead, 3)
                 }
             )
         };

@@ -11,7 +11,7 @@ internal partial class PyruxLevel
     /// </summary>
     public void TurnRight()
     {
-        Restrictions.FunctionCallCount.IncrementCounter(Restrictions.UserFuntion.TurnRight);
+        Restrictions.FunctionCallCount.IncrementCounter(Restrictions.UserFunction.TurnRight);
         MapLayout.CurrentPlayerDirection++;
         QueueUpdate();
         WaitAndCheckIfCancelled();
@@ -21,7 +21,7 @@ internal partial class PyruxLevel
     /// </summary>
     public void TurnLeft()
     {
-        Restrictions.FunctionCallCount.IncrementCounter(Restrictions.UserFuntion.TurnLeft);
+        Restrictions.FunctionCallCount.IncrementCounter(Restrictions.UserFunction.TurnLeft);
         MapLayout.CurrentPlayerDirection--;
         QueueUpdate();
         WaitAndCheckIfCancelled();
@@ -33,7 +33,7 @@ internal partial class PyruxLevel
     /// <exception cref="Pyrux.UserEndExceptions.WallAheadException">Thrown when the movement results in a collision with a wall, or the position would move outside the map.</exception>
     public void GoForward()
     {
-        Restrictions.FunctionCallCount.IncrementCounter(Restrictions.UserFuntion.GoForward);
+        Restrictions.FunctionCallCount.IncrementCounter(Restrictions.UserFunction.GoForward);
         PositionVector2 movementVector = new();
         switch (MapLayout.CurrentPlayerDirection * 90 % 360)
         {
@@ -70,7 +70,7 @@ internal partial class PyruxLevel
     /// <exception cref="Pyrux.UserEndExceptions.NoChipOnTileException">Thrown if there is no chip on the tile.</exception>
     public void TakeChip()
     {
-        Restrictions.FunctionCallCount.IncrementCounter(Restrictions.UserFuntion.TakeChip);
+        Restrictions.FunctionCallCount.IncrementCounter(Restrictions.UserFunction.TakeChip);
 
         if (MapLayout.GetChipNumberAtPosition(MapLayout.CurrentPlayerPosition) > 0)
         {
@@ -91,7 +91,7 @@ internal partial class PyruxLevel
     /// <exception cref="Pyrux.UserEndExceptions.NoChipInInventoryException">Thrown when there is no chip in the inventory.</exception>
     public void PlaceChip()
     {
-        Restrictions.FunctionCallCount.IncrementCounter(Restrictions.UserFuntion.PlaceChip);
+        Restrictions.FunctionCallCount.IncrementCounter(Restrictions.UserFunction.PlaceChip);
         if (MapLayout.PlayerChipInventory > 0)
         {
             MapLayout.SetChipNumberAtPosition(MapLayout.CurrentPlayerPosition, MapLayout.GetChipNumberAtPosition(MapLayout.CurrentPlayerPosition) + 1);
@@ -116,7 +116,7 @@ internal partial class PyruxLevel
     {
         if (!overrideCount)
         {
-            Restrictions.FunctionCallCount.IncrementCounter(Restrictions.UserFuntion.WallAhead);
+            Restrictions.FunctionCallCount.IncrementCounter(Restrictions.UserFunction.WallAhead);
         }
         PositionVector2 movementVector = new();
         switch (MapLayout.CurrentPlayerDirection * 90 % 360)
@@ -159,7 +159,7 @@ internal partial class PyruxLevel
     /// <returns>True if there is a chip in the inventory, otherwise false.</returns>
     public bool ChipThere()
     {
-        Restrictions.FunctionCallCount.IncrementCounter(Restrictions.UserFuntion.ChipThere);
+        Restrictions.FunctionCallCount.IncrementCounter(Restrictions.UserFunction.ChipThere);
         if (MapLayout.GetChipNumberAtPosition(MapLayout.CurrentPlayerPosition) > 0)
         {
             return true;

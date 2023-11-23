@@ -22,29 +22,29 @@ namespace Pyrux.DataManagement.Restrictions
         /// </summary>
         /// <param name="function">Function to increment counter for</param>
         /// <exception cref="ArgumentOutOfRangeException">Thrown when invalid function is given</exception>
-        public static void IncrementCounter(UserFuntion function)
+        public static void IncrementCounter(UserFunction function)
         {
             switch (function)
             {
-                case UserFuntion.GoForward:
+                case UserFunction.GoForward:
                     GoForwardFuntionCallCount++;
                     break;
-                case UserFuntion.TurnLeft:
+                case UserFunction.TurnLeft:
                     TurnLeftFuntionCallCount++;
                     break;
-                case UserFuntion.TurnRight:
+                case UserFunction.TurnRight:
                     TurnRightFuntionCallCount++;
                     break;
-                case UserFuntion.TakeChip:
+                case UserFunction.TakeChip:
                     TakeChipFuntionCallCount++;
                     break;
-                case UserFuntion.PlaceChip:
+                case UserFunction.PlaceChip:
                     PlaceChipFuntionCallCount++;
                     break;
-                case UserFuntion.ChipThere:
+                case UserFunction.ChipThere:
                     ChipThereFuntionCallCount++;
                     break;
-                case UserFuntion.WallAhead:
+                case UserFunction.WallAhead:
                     WallAheadFunctionCallCount++;
                     break;
                 default:
@@ -58,23 +58,23 @@ namespace Pyrux.DataManagement.Restrictions
         /// <param name="function">Function to get counter for</param>
         /// <returns>Value of the counter, representing the number of times the function has been called</returns>
         /// <exception cref="ArgumentOutOfRangeException">Thrown when invalid function is given</exception>
-        public static int GetCallCount(UserFuntion function)
+        public static int GetCallCount(UserFunction function)
         {
             switch (function)
             {
-                case UserFuntion.GoForward:
+                case UserFunction.GoForward:
                     return GoForwardFuntionCallCount;
-                case UserFuntion.TurnLeft:
+                case UserFunction.TurnLeft:
                     return TurnLeftFuntionCallCount;
-                case UserFuntion.TurnRight:
+                case UserFunction.TurnRight:
                     return TurnRightFuntionCallCount;
-                case UserFuntion.TakeChip:
+                case UserFunction.TakeChip:
                     return TakeChipFuntionCallCount;
-                case UserFuntion.PlaceChip:
+                case UserFunction.PlaceChip:
                     return PlaceChipFuntionCallCount;
-                case UserFuntion.ChipThere:
+                case UserFunction.ChipThere:
                     return ChipThereFuntionCallCount;
-                case UserFuntion.WallAhead:
+                case UserFunction.WallAhead:
                     return WallAheadFunctionCallCount;
                 default:
                     throw new ArgumentOutOfRangeException($"Invalid argument for positional argument of IncrementCounter (function): {function}");
