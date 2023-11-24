@@ -37,7 +37,7 @@ namespace Pyrux.DataManagement
         /// </summary>
         public bool Completed { get; set; } = false;
 
-        public ObservableCollection<Restrictions.Restriction> CompletionRestrictions { get; set; }
+        public ObservableCollection<Restrictions.Restriction> CompletionRestrictions { get; set; } = new();
 
         public PyruxLevel()
         {

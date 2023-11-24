@@ -4,6 +4,7 @@ namespace Pyrux.DataManagement
 {
     internal static class StaticDataStore
     {
+        public static bool RestrictionEditingForActiveLevelAvailable { get => ActiveLevel == null ? false : !ActiveLevel.IsBuiltIn; }
         /// <summary>
         /// The active level currently being displayed by the application.
         /// </summary>

@@ -4,7 +4,8 @@ using System.Text.RegularExpressions;
 namespace Pyrux.DataManagement.Restrictions
 {
     internal class Restriction
-    {
+    { 
+
         public RestrictionType Type;
         public int LimitValue;
         public UserFunction LimitedFunction;
