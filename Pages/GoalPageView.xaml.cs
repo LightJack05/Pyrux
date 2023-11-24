@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation and Contributors.
 // Licensed under the MIT License.
 
+using CommunityToolkit.WinUI.UI;
 using Pyrux.DataManagement.Restrictions;
 using Pyrux.Pages.ContentDialogs;
 using System.Collections.ObjectModel;
@@ -16,7 +17,7 @@ namespace Pyrux.Pages
     public sealed partial class GoalPageView : Page
     {
         private PyruxSettings _pyruxSettings { get => PyruxSettings.Instance; }
-        private ObservableCollection<DataManagement.Restrictions.Restriction> _completionRestrictions = StaticDataStore.ActiveLevel.CompletionRestrictions;
+        private ObservableCollection<DataManagement.Restrictions.Restriction> _completionRestrictions = new();
 
 
 
@@ -75,8 +76,19 @@ namespace Pyrux.Pages
                 LoadLevelIntoPage();
                 FullDisplayRedraw();
                 PrepareToolSelection();
+                ConstructCompletionRestrictionCollection();
             }
             InitTutorial();
+        }
+
+        private void ConstructCompletionRestrictionCollection()
+        {
+            _completionRestrictions.Clear();
+            foreach (Restriction restriction in StaticDataStore.ActiveLevel.CompletionRestrictions)
+            {
+                _completionRestrictions.Add(restriction);
+            }
+
         }
 
         private void PrepareToolSelection()
@@ -421,6 +433,12 @@ namespace Pyrux.Pages
             if (args.Element is FrameworkElement element)
             {
                 element.DataContext = _completionRestrictions[args.Index];
+                ComboBox comboBox = ((ComboBox)element.FindChildren().ToList()[0]);
+                comboBox.SelectedItem = Restriction.RestrictionTypeToUiStringDictionary[((Restriction)comboBox.DataContext).Type];
+                comboBox = ((ComboBox)element.FindChildren().ToList()[2]);
+                comboBox.SelectedItem = ((Restriction)(comboBox.DataContext)).LimitedFunction.ToString();
+                comboBox = ((ComboBox)element.FindChildren().ToList()[4]);
+                comboBox.SelectedItem = ((Restriction)(comboBox.DataContext)).LimitValue;
             }
         }
 
@@ -460,20 +478,7 @@ namespace Pyrux.Pages
             }
         }
 
-        private void cbxRestrictionType_Loaded(object sender, RoutedEventArgs e)
-        {
-            ((ComboBox)sender).SelectedItem = Restriction.RestrictionTypeToUiStringDictionary[((Restriction)((ComboBox)sender).DataContext).Type];
-        }
-
-        private void cbxRestrictedFunction_Loaded(object sender, RoutedEventArgs e)
-        {
-            ((ComboBox)sender).SelectedItem = ((Restriction)((ComboBox)sender).DataContext).LimitedFunction.ToString();
-        }
-
-        private void cbxRestictionNumber_Loaded(object sender, RoutedEventArgs e)
-        {
-            ((ComboBox)sender).SelectedItem = ((Restriction)((ComboBox)sender).DataContext).LimitValue;
-        }
+        
 
         private void btnAddRestriction_Click(object sender, RoutedEventArgs e)
         {
