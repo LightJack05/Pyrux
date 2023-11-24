@@ -154,10 +154,17 @@ public sealed partial class ExercisePage
             }
             else
             {
-                if (StaticDataStore.ActiveLevel.MapLayout.MatchGoalLayout(ActiveLevel.GoalMapLayout) && StaticDataStore.ActiveLevel.CheckCompletionRestrictionsSatisfied())
+                if (StaticDataStore.ActiveLevel.MapLayout.MatchGoalLayout(ActiveLevel.GoalMapLayout))
                 {
-                    ActiveLevel.Completed = true;
-                    ShowLevelCompletedDialogue();
+                    if (!StaticDataStore.ActiveLevel.CheckCompletionRestrictionsSatisfied())
+                    {
+                        ShowLevelFailedDueToRestrictionDialog();
+                    }
+                    else
+                    {
+                        ActiveLevel.Completed = true;
+                        ShowLevelCompletedDialogue();
+                    }
                 }
             }
 
@@ -201,6 +208,24 @@ public sealed partial class ExercisePage
             ExecutionCancelled = true;
             PythonCancellationTokenSource.Cancel();
         }
+    }
+
+    private async void ShowLevelFailedDueToRestrictionDialog()
+    {
+        ContentDialog levelFailedDueToRestrictionsDialog = new();
+        levelFailedDueToRestrictionsDialog.XamlRoot = this.Content.XamlRoot;
+        levelFailedDueToRestrictionsDialog.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
+        levelFailedDueToRestrictionsDialog.Title = "Level Failed!";
+
+        levelFailedDueToRestrictionsDialog.IsPrimaryButtonEnabled = false;
+        levelFailedDueToRestrictionsDialog.IsSecondaryButtonEnabled = false;
+        levelFailedDueToRestrictionsDialog.CloseButtonText = "Close";
+        levelFailedDueToRestrictionsDialog.DefaultButton = ContentDialogButton.Close;
+        LevelFailedDueToRestrictionsDialog dialogueContent = new();
+        levelFailedDueToRestrictionsDialog.Content = dialogueContent;
+
+        _ = await levelFailedDueToRestrictionsDialog.ShowAsync();
+
     }
 
     private async void ShowLevelCompletedDialogue()
