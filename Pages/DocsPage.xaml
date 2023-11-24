@@ -70,7 +70,7 @@
             x:Name="tctTutorialEnd"
             PreferredPlacement="Center"
             Title="End of Tutorial"
-            Subtitle="This is it for the UI Tutorial. To learn how to get started with Programming in Pyrux, check out the Demo Levels!"
+            Subtitle="This is it for the UI Tutorial. To learn how to get started with Programming in Pyrux, switch back to the Level page and check out the open tutorial level!"
             CloseButtonClick="TeachingTipCloseButtonClick">
 
             <StackPanel Orientation="Vertical">

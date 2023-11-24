@@ -41,9 +41,9 @@ namespace Pyrux.Pages
         private void InitTutorial()
         {
             PageTeachingTips.Clear();
-            PageTeachingTips.Add(21, tctDocsPageIntro);
-            PageTeachingTips.Add(22, tctPopout);
-            PageTeachingTips.Add(23, tctTutorialEnd);
+            PageTeachingTips.Add(23, tctDocsPageIntro);
+            PageTeachingTips.Add(24, tctPopout);
+            PageTeachingTips.Add(25, tctTutorialEnd);
 
             if (!PyruxSettings.SkipTutorialEnabled)
             {
@@ -62,7 +62,7 @@ namespace Pyrux.Pages
         {
             PageTeachingTips[PyruxSettings.TutorialStateId].IsOpen = false;
             PyruxSettings.TutorialStateId++;
-            if (PageTeachingTips.Count + 21 <= PyruxSettings.TutorialStateId)
+            if (PageTeachingTips.Count + 23 <= PyruxSettings.TutorialStateId)
             {
 
             }

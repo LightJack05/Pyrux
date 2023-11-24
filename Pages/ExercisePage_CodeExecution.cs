@@ -4,6 +4,7 @@ using Pyrux.Pages.ContentDialogs;
 using Pyrux.Pages.ContentDialogs.ExceptionPages;
 using Pyrux.UserEndExceptions;
 using System.Collections.Concurrent;
+using System.Data.Common;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -89,7 +90,7 @@ public sealed partial class ExercisePage
     /// </summary>
     private async void ArbitraryCodeExecution()
     {
-
+        DataManagement.Restrictions.FunctionCallCount.ResetCallCount();
         Exception thrownException = null;
         string errorStackTrace = "";
 
@@ -155,8 +156,15 @@ public sealed partial class ExercisePage
             {
                 if (StaticDataStore.ActiveLevel.MapLayout.MatchGoalLayout(ActiveLevel.GoalMapLayout))
                 {
-                    ActiveLevel.Completed = true;
-                    ShowLevelCompletedDialogue();
+                    if (!StaticDataStore.ActiveLevel.CheckCompletionRestrictionsSatisfied())
+                    {
+                        ShowLevelFailedDueToRestrictionDialog();
+                    }
+                    else
+                    {
+                        ActiveLevel.Completed = true;
+                        ShowLevelCompletedDialogue();
+                    }
                 }
             }
 
@@ -184,8 +192,9 @@ public sealed partial class ExercisePage
                 }
             }
         }
-
     }
+
+    
 
     public void SetupPythonConsoleOutput(ScriptEngine scriptEngine)
     {
@@ -199,6 +208,24 @@ public sealed partial class ExercisePage
             ExecutionCancelled = true;
             PythonCancellationTokenSource.Cancel();
         }
+    }
+
+    private async void ShowLevelFailedDueToRestrictionDialog()
+    {
+        ContentDialog levelFailedDueToRestrictionsDialog = new();
+        levelFailedDueToRestrictionsDialog.XamlRoot = this.Content.XamlRoot;
+        levelFailedDueToRestrictionsDialog.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
+        levelFailedDueToRestrictionsDialog.Title = "Level Failed!";
+
+        levelFailedDueToRestrictionsDialog.IsPrimaryButtonEnabled = false;
+        levelFailedDueToRestrictionsDialog.IsSecondaryButtonEnabled = false;
+        levelFailedDueToRestrictionsDialog.CloseButtonText = "Close";
+        levelFailedDueToRestrictionsDialog.DefaultButton = ContentDialogButton.Close;
+        LevelFailedDueToRestrictionsDialog dialogueContent = new();
+        levelFailedDueToRestrictionsDialog.Content = dialogueContent;
+
+        _ = await levelFailedDueToRestrictionsDialog.ShowAsync();
+
     }
 
     private async void ShowLevelCompletedDialogue()

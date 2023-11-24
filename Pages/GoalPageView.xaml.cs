@@ -1,7 +1,10 @@
 // Copyright (c) Microsoft Corporation and Contributors.
 // Licensed under the MIT License.
 
+using CommunityToolkit.WinUI.UI;
+using Pyrux.DataManagement.Restrictions;
 using Pyrux.Pages.ContentDialogs;
+using System.Collections.ObjectModel;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -14,6 +17,9 @@ namespace Pyrux.Pages
     public sealed partial class GoalPageView : Page
     {
         private PyruxSettings _pyruxSettings { get => PyruxSettings.Instance; }
+        private ObservableCollection<DataManagement.Restrictions.Restriction> _completionRestrictions = new();
+
+
 
         private Dictionary<int, TeachingTip> PageTeachingTips = new()
         {
@@ -70,8 +76,19 @@ namespace Pyrux.Pages
                 LoadLevelIntoPage();
                 FullDisplayRedraw();
                 PrepareToolSelection();
+                ConstructCompletionRestrictionCollection();
             }
             InitTutorial();
+        }
+
+        private void ConstructCompletionRestrictionCollection()
+        {
+            _completionRestrictions.Clear();
+            foreach (Restriction restriction in StaticDataStore.ActiveLevel.CompletionRestrictions)
+            {
+                _completionRestrictions.Add(restriction);
+            }
+
         }
 
         private void PrepareToolSelection()
@@ -371,8 +388,9 @@ namespace Pyrux.Pages
         private void InitTutorial()
         {
             PageTeachingTips.Clear();
-            PageTeachingTips.Add(19, tctGoalPageIntro);
-            PageTeachingTips.Add(20, tctToolsGoalLayout);
+            PageTeachingTips.Add(20, tctGoalPageIntro);
+            PageTeachingTips.Add(21, tctRestrictions);
+            PageTeachingTips.Add(22, tctToolsGoalLayout);
 
             if (!PyruxSettings.SkipTutorialEnabled)
             {
@@ -391,7 +409,7 @@ namespace Pyrux.Pages
         {
             PageTeachingTips[PyruxSettings.TutorialStateId].IsOpen = false;
             PyruxSettings.TutorialStateId++;
-            if (PageTeachingTips.Count + 19 <= PyruxSettings.TutorialStateId)
+            if (PageTeachingTips.Count + 20 <= PyruxSettings.TutorialStateId)
             {
                 MainWindow.Instance.NavViewSetSelectionInFooter(0);
                 MainWindow.Instance.NavViewNavigate("docs", new Microsoft.UI.Xaml.Media.Animation.CommonNavigationTransitionInfo());
@@ -409,6 +427,71 @@ namespace Pyrux.Pages
             PyruxSettings.SkipTutorialEnabled = true;
             PyruxSettings.TutorialStateId = 0;
             PyruxSettings.SaveSettings();
+        }
+
+        private void irpRestrictions_ElementPrepared(ItemsRepeater sender, ItemsRepeaterElementPreparedEventArgs args)
+        {
+            if (args.Element is FrameworkElement element)
+            {
+                element.DataContext = _completionRestrictions[args.Index];
+                ComboBox comboBox = ((ComboBox)element.FindChildren().ToList()[0]);
+                comboBox.SelectedItem = Restriction.RestrictionTypeToUiStringDictionary[((Restriction)comboBox.DataContext).Type];
+                comboBox = ((ComboBox)element.FindChildren().ToList()[2]);
+                comboBox.SelectedItem = ((Restriction)(comboBox.DataContext)).LimitedFunction.ToString();
+                comboBox = ((ComboBox)element.FindChildren().ToList()[4]);
+                comboBox.SelectedItem = ((Restriction)(comboBox.DataContext)).LimitValue;
+            }
+        }
+
+        private void cbxRestrictionType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
+            {
+                ((Restriction)((ComboBox)sender).DataContext).Type = Restriction.UiStringToRestrictionTypeDictionary[e.AddedItems.FirstOrDefault().ToString()];
+            }
+            else
+            {
+                ((ComboBox)sender).SelectedItem = Restriction.RestrictionTypeToUiStringDictionary[((Restriction)((ComboBox)sender).DataContext).Type];
+            }
+        }
+
+        private void cbxRestrictedFunction_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
+            {
+                ((Restriction)((ComboBox)sender).DataContext).LimitedFunction = Restriction.FunctionUiTypeDictionary[e.AddedItems.FirstOrDefault().ToString()];
+            }
+            else
+            {
+                ((ComboBox)sender).SelectedItem = ((Restriction)((ComboBox)sender).DataContext).LimitedFunction.ToString();
+            }
+        }
+
+        private void cbxRestictionNumber_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
+            {
+                ((Restriction)((ComboBox)sender).DataContext).LimitValue = int.Parse(e.AddedItems.FirstOrDefault().ToString());
+            }
+            else
+            {
+                ((ComboBox)sender).SelectedItem = ((Restriction)((ComboBox)sender).DataContext).LimitValue;
+            }
+        }
+
+        
+
+        private void btnAddRestriction_Click(object sender, RoutedEventArgs e)
+        {
+            Restriction restriction = new(RestrictionType.ReferenceLimit, UserFunction.GoForward, 1);
+            _completionRestrictions.Add(restriction);
+            StaticDataStore.ActiveLevel.CompletionRestrictions.Add(restriction);
+        }
+
+        private void btnRemoveRestriction_Click(object sender, RoutedEventArgs e)
+        {
+            _completionRestrictions.Remove(((Restriction)((Button)sender).DataContext));
+            StaticDataStore.ActiveLevel.CompletionRestrictions.Remove(((Restriction)((Button)sender).DataContext));
         }
     }
 }

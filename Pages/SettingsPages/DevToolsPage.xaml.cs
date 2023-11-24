@@ -81,5 +81,11 @@ namespace Pyrux.Pages
             await AppdataManagement.ConstructAppdataAsync();
             Microsoft.Windows.AppLifecycle.AppInstance.Restart("");
         }
+
+
+        private void btnRebuildBuiltins_Click(object sender, RoutedEventArgs e)
+        {
+            LevelIO.BuiltInLevels.ConstructLevels();
+        }
     }
 }

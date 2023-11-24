@@ -6,6 +6,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Pyrux.Pages"
+    xmlns:restrictions="using:Pyrux.DataManagement.Restrictions"
+    xmlns:dmgmt="using:Pyrux.DataManagement"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -14,69 +16,116 @@
     NavigationCacheMode="Required">
 
     <Grid>
-        <Border Grid.Column="1" Background="{ThemeResource ControlLargeAreaBackgroundBrush}" CornerRadius="10" Margin="10">
-            <Grid Margin="10,10,10,10">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*" MaxWidth="810"/>
+            </Grid.ColumnDefinitions>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0" Margin="10,10,10,10" x:Name="grdToolSelection">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" Background="{ThemeResource ControlLargeAreaBackgroundBrush}" CornerRadius="10" Margin="10">
+                <Grid Margin="10,10,10,10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <TextBlock Text="Goal Layout" TextAlignment="Center" HorizontalAlignment="Center" FontSize="18" Margin="5"/>
+                    </Grid>
+                    <Grid Grid.Row="1" Margin="10,10,10,10" x:Name="grdToolSelection">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-                    <Button Grid.Column="1" x:Name="btnChipTool" Margin="10" IsEnabled="False" Click="btnChipTool_Click" ToolTipService.ToolTip="Chips">
-                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE950;"/>
-                        <Button.KeyboardAccelerators>
-                            <KeyboardAccelerator
+                        <Button Grid.Column="1" x:Name="btnChipTool" Margin="10" IsEnabled="False" Click="btnChipTool_Click" ToolTipService.ToolTip="Chips">
+                            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE950;"/>
+                            <Button.KeyboardAccelerators>
+                                <KeyboardAccelerator
                                 Modifiers="{x:Bind _pyruxSettings._keybinds.ChipToolShortcut.Modifier, Mode=OneWay}"
                                 Key="{x:Bind _pyruxSettings._keybinds.ChipToolShortcut.Key, Mode=OneWay}"
                                 />
-                        </Button.KeyboardAccelerators>
-                    </Button>
-                    <Button Grid.Column="2" x:Name="btnPlayerTool" Margin="10" IsEnabled="False" Click="btnPlayerTool_Click" ToolTipService.ToolTip="Move player">
-                        <SymbolIcon Symbol="Contact"/>
-                        <Button.KeyboardAccelerators>
-                            <KeyboardAccelerator
+                            </Button.KeyboardAccelerators>
+                        </Button>
+                        <Button Grid.Column="2" x:Name="btnPlayerTool" Margin="10" IsEnabled="False" Click="btnPlayerTool_Click" ToolTipService.ToolTip="Move player">
+                            <SymbolIcon Symbol="Contact"/>
+                            <Button.KeyboardAccelerators>
+                                <KeyboardAccelerator
                                 Modifiers="{x:Bind _pyruxSettings._keybinds.PlayerToolShortcut.Modifier, Mode=OneWay}"
                                 Key="{x:Bind _pyruxSettings._keybinds.PlayerToolShortcut.Key, Mode=OneWay}"
                                 />
-                        </Button.KeyboardAccelerators>
-                    </Button>
-                    <Button Grid.Column="3" x:Name="btnRotate" Margin="10" IsEnabled="False" Click="btnRotate_Click" ToolTipService.ToolTip="Rotate player">
-                        <SymbolIcon Symbol="Rotate"/>
-                        <Button.KeyboardAccelerators>
-                            <KeyboardAccelerator
+                            </Button.KeyboardAccelerators>
+                        </Button>
+                        <Button Grid.Column="3" x:Name="btnRotate" Margin="10" IsEnabled="False" Click="btnRotate_Click" ToolTipService.ToolTip="Rotate player">
+                            <SymbolIcon Symbol="Rotate"/>
+                            <Button.KeyboardAccelerators>
+                                <KeyboardAccelerator
                                 Modifiers="{x:Bind _pyruxSettings._keybinds.RotatePlayerShortcut.Modifier, Mode=OneWay}"
                                 Key="{x:Bind _pyruxSettings._keybinds.RotatePlayerShortcut.Key, Mode=OneWay}"
                                 />
-                        </Button.KeyboardAccelerators>
-                    </Button>
+                            </Button.KeyboardAccelerators>
+                        </Button>
+                    </Grid>
 
+                    <Grid Grid.Row="2" Height="Auto" Width="Auto" Name="grdPlayFieldBoundary" SizeChanged="grdPlayFieldBoundary_SizeChanged">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
 
-
-                </Grid>
-
-                <Grid Grid.Row="1" Height="Auto" Width="Auto" Name="grdPlayFieldBoundary" SizeChanged="grdPlayFieldBoundary_SizeChanged">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-
-                    <Grid Name="grdPlayField" Background="Black" >
+                        <Grid Name="grdPlayField" Background="Black" >
+                        </Grid>
                     </Grid>
                 </Grid>
-            </Grid>
-        </Border>
+            </Border>
+
+            <Border Grid.Column="1" Background="{ThemeResource ControlLargeAreaBackgroundBrush}" CornerRadius="10" Margin="10" x:Name="bdrRestrictions">
+                <Grid Margin="10,10,10,10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <TextBlock Text="Restrictions" TextAlignment="Center" HorizontalAlignment="Center" FontSize="18" Margin="5"/>
+                    </Grid>
+                    <Grid Grid.Row="1" HorizontalAlignment="Center">
+                        <ScrollViewer>
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                                <ItemsRepeater ItemsSource="{x:Bind _completionRestrictions, Mode=OneWay}" HorizontalAlignment="Center" x:Name="irpRestrictions" ElementPrepared="irpRestrictions_ElementPrepared">
+                                    <ItemsRepeater.ItemTemplate>
+                                        <DataTemplate x:DataType="restrictions:Restriction">
+
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                <ComboBox Width="250" FontSize="18" VerticalAlignment="Center" Margin="5" x:Name="cbxRestrictionType" ItemsSource="{x:Bind restrictions:Restriction.RestrictionTypeUiStrings}" IsEnabled="{x:Bind dmgmt:StaticDataStore.RestrictionEditingForActiveLevelAvailable}" SelectionChanged="cbxRestrictionType_SelectionChanged"/>
+                                                <TextBlock Text="to function" FontSize="18" VerticalAlignment="Center" Margin="5"/>
+                                                <ComboBox Width="200" FontSize="18" VerticalAlignment="Center" Margin="5" x:Name="cbxRestrictedFunction" ItemsSource="{x:Bind restrictions:Restriction.FunctionTypeUiStrings}" IsEnabled="{x:Bind dmgmt:StaticDataStore.RestrictionEditingForActiveLevelAvailable}" SelectionChanged="cbxRestrictedFunction_SelectionChanged"/>
+                                                <TextBlock Text="are" FontSize="18" VerticalAlignment="Center" Margin="5"/>
+                                                <ComboBox Width="100" FontSize="18" VerticalAlignment="Center" Margin="5" x:Name="cbxRestictionNumber" ItemsSource="{x:Bind restrictions:Restriction.AvailableNumbersForRestrictions}" IsEnabled="{x:Bind dmgmt:StaticDataStore.RestrictionEditingForActiveLevelAvailable}" SelectionChanged="cbxRestictionNumber_SelectionChanged"/>
+                                                <Button x:Name="btnRemoveRestriction" Click="btnRemoveRestriction_Click" Margin="5" IsEnabled="{x:Bind dmgmt:StaticDataStore.RestrictionEditingForActiveLevelAvailable}">
+                                                    <SymbolIcon Symbol="Delete"/>
+                                                </Button>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ItemsRepeater.ItemTemplate>
+                                </ItemsRepeater>
+                                <Grid Margin="20">
+                                    <Button HorizontalAlignment="Center" x:Name="btnAddRestriction" Click="btnAddRestriction_Click" IsEnabled="{x:Bind dmgmt:StaticDataStore.RestrictionEditingForActiveLevelAvailable}">
+                                        <SymbolIcon Symbol="Add"/>
+                                    </Button>
+                                </Grid>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
         <TeachingTip
             x:Name="tctGoalPageIntro"
             PreferredPlacement="Center"
             Title="Goal Layout Page"
-            Subtitle="This page shows you the goal layout of the level opened. Once your code execution completes, your level has to look like this. It can be edited on custom levels."
+            Subtitle="This page shows you what you have to do to complete the level. You have to make your level layout match the goal layout, and satisfy all restrictions."
             CloseButtonClick="TeachingTipCloseButtonClick">
 
             <StackPanel Orientation="Vertical">
@@ -91,12 +140,33 @@
                 </Grid>
             </StackPanel>
         </TeachingTip>
-        
+
+        <TeachingTip
+        x:Name="tctRestrictions"
+        Target="{x:Bind bdrRestrictions}"
+        PreferredPlacement="Left"
+        Title="Restrictions"
+        Subtitle="This panel contains the restrictions for the open level. They can be edited in custom levels."
+        CloseButtonClick="TeachingTipCloseButtonClick">
+
+            <StackPanel Orientation="Vertical">
+                <Grid Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="1" Margin="5,0,0,0" Click="TeachingTipNext_Click">
+                        Next
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </TeachingTip>
+
         <TeachingTip
             x:Name="tctToolsGoalLayout"
             Target="{x:Bind grdToolSelection}"
             Title="Tool Selection"
-            Subtitle="These tools are the same as on the level page, except for the wall tool, which is not available here."
+            Subtitle="These tools are the same as on the level page, except for the wall tool, which is not available here. Because this is a built-in level, it can't be edited and the tools are disabled."
             CloseButtonClick="TeachingTipCloseButtonClick">
 
             <StackPanel Orientation="Vertical">
@@ -112,7 +182,7 @@
             </StackPanel>
         </TeachingTip>
 
-        
+
     </Grid>
 
 </Page>

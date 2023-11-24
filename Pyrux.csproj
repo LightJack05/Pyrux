@@ -20,7 +20,7 @@
     <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
     <AppxPackageDir>C:\Users\elias\OneDrive\Desktop\Pyrux_Alpha\</AppxPackageDir>
-    <Version>0.2.1.0</Version>
+    <Version>0.3.0.0</Version>
     <PackageCertificateKeyFile>Pyrux_TemporaryKey.pfx</PackageCertificateKeyFile>
 	  <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
   </PropertyGroup>
@@ -37,6 +37,7 @@
     <None Remove="Pages\ContentDialogs\LevelCreationDialogue.xaml" />
     <None Remove="Pages\ContentDialogs\LevelCreationFailed.xaml" />
     <None Remove="Pages\ContentDialogs\LevelExportDialogue.xaml" />
+    <None Remove="Pages\ContentDialogs\LevelFailedDueToRestrictionsDialog.xaml" />
     <None Remove="Pages\ContentDialogs\PlaceChipsDialog.xaml" />
     <None Remove="Pages\DevToolsPage.xaml" />
     <None Remove="Pages\DocsPage.xaml" />
@@ -132,6 +133,9 @@
     <None Update="Open Source Licenses\Newtonsoft.JSON.md">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Page Update="Pages\ContentDialogs\LevelFailedDueToRestrictionsDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="Pages\SettingsPages\ShortcutSettings.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -89,6 +89,7 @@ namespace Pyrux.Pages
                 StaticDataStore.OriginalActiveLevelMapLayout = ActiveLevel.MapLayout.Copy();
                 FullDisplayRedraw();
                 PrepareToolSelection();
+                ConstructCompletionRestrictionCollection();
             }
         }
 
@@ -153,6 +154,7 @@ namespace Pyrux.Pages
             {
                 ActiveLevel.Script = txtCodeEditor.Text;
             }
+            UpdateRestrictionSatisfaction();
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -176,18 +178,19 @@ namespace Pyrux.Pages
             PageTeachingTips.Clear();
             PageTeachingTips.Add(5, tctLevelPageIntro);
             PageTeachingTips.Add(6, tctNameTask);
-            PageTeachingTips.Add(7, tctCodeEditor);
-            PageTeachingTips.Add(8, tctLevelEnvironment);
-            PageTeachingTips.Add(9, tctPlayButton);
-            PageTeachingTips.Add(10, tctStepButton);
-            PageTeachingTips.Add(11, tctExecutionSpeed);
-            PageTeachingTips.Add(12, tctResetButton);
-            PageTeachingTips.Add(13, tctWallTool);
-            PageTeachingTips.Add(14, tctChipTool);
-            PageTeachingTips.Add(15, tctMovePlayer);
-            PageTeachingTips.Add(16, tctRotateTool);
-            PageTeachingTips.Add(17, tctSave);
-            PageTeachingTips.Add(18, tctExport);
+            PageTeachingTips.Add(7, tctRestrictions);
+            PageTeachingTips.Add(8, tctCodeEditor);
+            PageTeachingTips.Add(9, tctLevelEnvironment);
+            PageTeachingTips.Add(10, tctPlayButton);
+            PageTeachingTips.Add(11, tctStepButton);
+            PageTeachingTips.Add(12, tctExecutionSpeed);
+            PageTeachingTips.Add(13, tctResetButton);
+            PageTeachingTips.Add(14, tctWallTool);
+            PageTeachingTips.Add(15, tctChipTool);
+            PageTeachingTips.Add(16, tctMovePlayer);
+            PageTeachingTips.Add(17, tctRotateTool);
+            PageTeachingTips.Add(18, tctSave);
+            PageTeachingTips.Add(19, tctExport);
 
             if (!PyruxSettings.SkipTutorialEnabled)
             {

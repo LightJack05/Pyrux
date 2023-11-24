@@ -9,6 +9,8 @@
     xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:restrictions="using:Pyrux.DataManagement.Restrictions"
+    xmlns:dmgmt="using:Pyrux.DataManagement"
     mc:Ignorable="d"
     Background="{ThemeResource PageBackgroundBrush}"
     Loaded="Page_Loaded"
@@ -32,26 +34,49 @@
                 x:Name="expTaskExpander">
             <Grid HorizontalAlignment="Stretch">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.2*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition MaxHeight="500"/>
                 </Grid.RowDefinitions>
 
-                <Grid Grid.Row="0">
+                <Grid Grid.Row="0" Grid.Column="0" Margin="0,0,10,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <Border Background="{ThemeResource ControlLargeAreaBackgroundBrush}" CornerRadius="10" MinHeight="50">
-                        <ScrollViewer Grid.Row="1" MaxHeight="500" HorizontalAlignment="Stretch" Background="Transparent">
-                            <controls:MarkdownTextBlock Text="" HorizontalAlignment="Stretch" Margin="10" x:Name="txtLevelTask" Background="Transparent"/>
+                    <Border Background="{ThemeResource ControlLargeAreaBackgroundBrush}" CornerRadius="10" MinHeight="50" x:Name="bdrTask">
+                        <ScrollViewer Grid.Row="1" MaxHeight="250" Margin="10" HorizontalAlignment="Stretch" Background="Transparent">
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock FontSize="20" Text="Task"/>
+                                <controls:MarkdownTextBlock Text="" HorizontalAlignment="Stretch" Margin="0,0,60,0" x:Name="txtLevelTask" Background="Transparent"/>
+                            </StackPanel>
                         </ScrollViewer>
                     </Border>
                     <Button x:Name="btnEditTask" Margin="10,10,10,10" HorizontalAlignment="Right" VerticalAlignment="Top" IsEnabled="True" Click="btnEditTask_Click" ToolTipService.ToolTip="Edit the level description">
                         <SymbolIcon Symbol="Edit"/>
                     </Button>
+                </Grid>
+                <Grid Grid.Column="1" Margin="10,0,0,0">
+                    <Border Background="{ThemeResource ControlLargeAreaBackgroundBrush}" CornerRadius="10" MinHeight="50" x:Name="bdrRestrictions" >
+                        <ScrollViewer Grid.Row="1" MaxHeight="250" HorizontalAlignment="Left" Background="Transparent">
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="10">
+                                <TextBlock FontSize="20" Text="Restrictions" HorizontalAlignment="Left"/>
+                                <ItemsRepeater ItemsSource="{x:Bind _completionRestrictions, Mode=OneWay}" HorizontalAlignment="Center" x:Name="irpRestrictions" ElementPrepared="irpRestrictions_ElementPrepared">
+                                    <ItemsRepeater.ItemTemplate>
+                                        <DataTemplate x:DataType="restrictions:Restriction">
+
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                                <SymbolIcon Symbol="Accept" Foreground="Green"/>
+                                                <TextBlock Text="{x:Bind ToString()}" Margin="5" FontSize="16" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ItemsRepeater.ItemTemplate>
+                                </ItemsRepeater>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Border>
                 </Grid>
             </Grid>
         </Expander>
@@ -143,7 +168,7 @@
                             </Grid.ColumnDefinitions>
 
                             <Button Grid.Column="0" x:Name="btnWallTool" IsEnabled="False" Margin="10" Click="btnWallTool_Click" ToolTipService.ToolTip="Walls">
-                                
+
                                 <SymbolIcon Symbol="Placeholder"/>
                                 <Button.KeyboardAccelerators>
                                     <KeyboardAccelerator
@@ -233,7 +258,7 @@
         x:Name="tctLevelPageIntro"
         PreferredPlacement="Center"
         Title="Level page"
-        Subtitle="This page is the main page of the application."
+        Subtitle="This page is the main page of the application. We just opened the first tutorial level."
         CloseButtonClick="TeachingTipCloseButtonClick">
 
             <StackPanel Orientation="Vertical">
@@ -251,9 +276,29 @@
 
         <TeachingTip 
         x:Name="tctNameTask"
-        Target="{x:Bind expTaskExpander}"
+        Target="{x:Bind bdrTask}"
         Title="Name and task"
         Subtitle="Here you can see the level's name and the task."
+        CloseButtonClick="TeachingTipCloseButtonClick">
+
+            <StackPanel Orientation="Vertical">
+                <Grid Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="1" Margin="5,0,0,0" Click="TeachingTipNext_Click">
+                        Next
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </TeachingTip>
+
+        <TeachingTip 
+        x:Name="tctRestrictions"
+        Target="{x:Bind bdrRestrictions}"
+        Title="Restrictions"
+        Subtitle="Here you can see the restrictions, and whether you have completed them. Some of them are dependant on the code to be executed first, which means they are checked after your code ran."
         CloseButtonClick="TeachingTipCloseButtonClick">
 
             <StackPanel Orientation="Vertical">
