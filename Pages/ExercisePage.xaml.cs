@@ -89,6 +89,7 @@ namespace Pyrux.Pages
                 StaticDataStore.OriginalActiveLevelMapLayout = ActiveLevel.MapLayout.Copy();
                 FullDisplayRedraw();
                 PrepareToolSelection();
+                ConstructCompletionRestrictionCollection();
             }
         }
 
@@ -153,6 +154,7 @@ namespace Pyrux.Pages
             {
                 ActiveLevel.Script = txtCodeEditor.Text;
             }
+            UpdateRestrictionSatisfaction();
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)

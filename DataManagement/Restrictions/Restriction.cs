@@ -41,7 +41,7 @@ namespace Pyrux.DataManagement.Restrictions
         public static List<UserFunction> FunctionTypes { get => FunctionUiTypeDictionary.Values.ToList(); }
         public static List<int> AvailableNumbersForRestrictions = new()
         {
-            1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32
+            0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32
         };
 
 
@@ -103,6 +103,23 @@ namespace Pyrux.DataManagement.Restrictions
         private bool IsCallMinSatisfied()
         {
             return FunctionCallCount.GetCallCount(LimitedFunction) >= LimitValue;
+        }
+
+        public bool IsRuntimeDependant()
+        {
+            List<RestrictionType> runtimeDependantRestrictionTypes = new()
+            {
+                RestrictionType.CallMin, 
+                RestrictionType.CallLimit
+            };
+
+            return runtimeDependantRestrictionTypes.Contains(this.Type);
+
+        }
+
+        public override string ToString()
+        {
+            return $"{RestrictionTypeToUiStringDictionary[this.Type]} to function {this.LimitedFunction.ToString()} are {this.LimitValue}";
         }
     }
 }

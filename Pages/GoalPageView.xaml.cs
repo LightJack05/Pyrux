@@ -482,12 +482,15 @@ namespace Pyrux.Pages
 
         private void btnAddRestriction_Click(object sender, RoutedEventArgs e)
         {
-            _completionRestrictions.Add(new(RestrictionType.ReferenceLimit, UserFunction.GoForward, 1));
+            Restriction restriction = new(RestrictionType.ReferenceLimit, UserFunction.GoForward, 1);
+            _completionRestrictions.Add(restriction);
+            StaticDataStore.ActiveLevel.CompletionRestrictions.Add(restriction);
         }
 
         private void btnRemoveRestriction_Click(object sender, RoutedEventArgs e)
         {
             _completionRestrictions.Remove(((Restriction)((Button)sender).DataContext));
+            StaticDataStore.ActiveLevel.CompletionRestrictions.Remove(((Restriction)((Button)sender).DataContext));
         }
     }
 }
