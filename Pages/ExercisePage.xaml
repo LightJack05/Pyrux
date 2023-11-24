@@ -47,7 +47,7 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Border Background="{ThemeResource ControlLargeAreaBackgroundBrush}" CornerRadius="10" MinHeight="50"  >
-                        <ScrollViewer Grid.Row="1" MaxHeight="500" Margin="10" HorizontalAlignment="Stretch" Background="Transparent">
+                        <ScrollViewer Grid.Row="1" MaxHeight="250" Margin="10" HorizontalAlignment="Stretch" Background="Transparent">
                             <StackPanel Orientation="Vertical">
                                 <TextBlock FontSize="20" Text="Task"/>
                                 <controls:MarkdownTextBlock Text="" HorizontalAlignment="Stretch" Margin="0,0,60,0" x:Name="txtLevelTask" Background="Transparent"/>
@@ -60,7 +60,7 @@
                 </Grid>
                 <Grid Grid.Column="1" Margin="10,0,0,0">
                     <Border Background="{ThemeResource ControlLargeAreaBackgroundBrush}" CornerRadius="10" MinHeight="50"  >
-                        <ScrollViewer Grid.Row="1" MaxHeight="500" HorizontalAlignment="Stretch" Background="Transparent">
+                        <ScrollViewer Grid.Row="1" MaxHeight="250" HorizontalAlignment="Stretch" Background="Transparent">
                             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="10">
                                 <TextBlock FontSize="20" Text="Restrictions"/>
                                 <ItemsRepeater ItemsSource="{x:Bind _completionRestrictions, Mode=OneWay}" HorizontalAlignment="Center" x:Name="irpRestrictions" ElementPrepared="irpRestrictions_ElementPrepared">

@@ -55,7 +55,7 @@
             <NavigationView.MenuItems>
                 <NavigationViewItem Icon="ViewAll" Tag="levelSelect" Content="Level Selection"/>
                 <NavigationViewItem Icon="Play" Tag="exerciseView" Content="Level"/>
-                <NavigationViewItem Icon="Target" Tag="goalView" Content="Edit Goal Layout"/>
+                <NavigationViewItem Icon="Target" Tag="goalView" Content="Level Goals"/>
                 <NavigationViewItem Icon="Help" Tag="hint" Content="Hint"/>
             </NavigationView.MenuItems>
             <NavigationView.FooterMenuItems>

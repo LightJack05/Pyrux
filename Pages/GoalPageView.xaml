@@ -91,30 +91,32 @@
                         <TextBlock Text="Restrictions" TextAlignment="Center" HorizontalAlignment="Center" FontSize="18" Margin="5"/>
                     </Grid>
                     <Grid Grid.Row="1" HorizontalAlignment="Center">
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                            <ItemsRepeater ItemsSource="{x:Bind _completionRestrictions, Mode=OneWay}" HorizontalAlignment="Center" x:Name="irpRestrictions" ElementPrepared="irpRestrictions_ElementPrepared">
-                                <ItemsRepeater.ItemTemplate>
-                                    <DataTemplate x:DataType="restrictions:Restriction">
+                        <ScrollViewer>
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                                <ItemsRepeater ItemsSource="{x:Bind _completionRestrictions, Mode=OneWay}" HorizontalAlignment="Center" x:Name="irpRestrictions" ElementPrepared="irpRestrictions_ElementPrepared">
+                                    <ItemsRepeater.ItemTemplate>
+                                        <DataTemplate x:DataType="restrictions:Restriction">
 
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <ComboBox Width="250" FontSize="18" VerticalAlignment="Center" Margin="5" x:Name="cbxRestrictionType" ItemsSource="{x:Bind restrictions:Restriction.RestrictionTypeUiStrings}" IsEnabled="{x:Bind dmgmt:StaticDataStore.RestrictionEditingForActiveLevelAvailable}" SelectionChanged="cbxRestrictionType_SelectionChanged"/>
-                                            <TextBlock Text="to function" FontSize="18" VerticalAlignment="Center" Margin="5"/>
-                                            <ComboBox Width="200" FontSize="18" VerticalAlignment="Center" Margin="5" x:Name="cbxRestrictedFunction" ItemsSource="{x:Bind restrictions:Restriction.FunctionTypeUiStrings}" IsEnabled="{x:Bind dmgmt:StaticDataStore.RestrictionEditingForActiveLevelAvailable}" SelectionChanged="cbxRestrictedFunction_SelectionChanged"/>
-                                            <TextBlock Text="are" FontSize="18" VerticalAlignment="Center" Margin="5"/>
-                                            <ComboBox Width="100" FontSize="18" VerticalAlignment="Center" Margin="5" x:Name="cbxRestictionNumber" ItemsSource="{x:Bind restrictions:Restriction.AvailableNumbersForRestrictions}" IsEnabled="{x:Bind dmgmt:StaticDataStore.RestrictionEditingForActiveLevelAvailable}" SelectionChanged="cbxRestictionNumber_SelectionChanged"/>
-                                            <Button x:Name="btnRemoveRestriction" Click="btnRemoveRestriction_Click" Margin="5" IsEnabled="{x:Bind dmgmt:StaticDataStore.RestrictionEditingForActiveLevelAvailable}">
-                                                <SymbolIcon Symbol="Delete"/>
-                                            </Button>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ItemsRepeater.ItemTemplate>
-                            </ItemsRepeater>
-                            <Grid Margin="20">
-                                <Button HorizontalAlignment="Center" x:Name="btnAddRestriction" Click="btnAddRestriction_Click" IsEnabled="{x:Bind dmgmt:StaticDataStore.RestrictionEditingForActiveLevelAvailable}">
-                                    <SymbolIcon Symbol="Add"/>
-                                </Button>
-                            </Grid>
-                        </StackPanel>
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                <ComboBox Width="250" FontSize="18" VerticalAlignment="Center" Margin="5" x:Name="cbxRestrictionType" ItemsSource="{x:Bind restrictions:Restriction.RestrictionTypeUiStrings}" IsEnabled="{x:Bind dmgmt:StaticDataStore.RestrictionEditingForActiveLevelAvailable}" SelectionChanged="cbxRestrictionType_SelectionChanged"/>
+                                                <TextBlock Text="to function" FontSize="18" VerticalAlignment="Center" Margin="5"/>
+                                                <ComboBox Width="200" FontSize="18" VerticalAlignment="Center" Margin="5" x:Name="cbxRestrictedFunction" ItemsSource="{x:Bind restrictions:Restriction.FunctionTypeUiStrings}" IsEnabled="{x:Bind dmgmt:StaticDataStore.RestrictionEditingForActiveLevelAvailable}" SelectionChanged="cbxRestrictedFunction_SelectionChanged"/>
+                                                <TextBlock Text="are" FontSize="18" VerticalAlignment="Center" Margin="5"/>
+                                                <ComboBox Width="100" FontSize="18" VerticalAlignment="Center" Margin="5" x:Name="cbxRestictionNumber" ItemsSource="{x:Bind restrictions:Restriction.AvailableNumbersForRestrictions}" IsEnabled="{x:Bind dmgmt:StaticDataStore.RestrictionEditingForActiveLevelAvailable}" SelectionChanged="cbxRestictionNumber_SelectionChanged"/>
+                                                <Button x:Name="btnRemoveRestriction" Click="btnRemoveRestriction_Click" Margin="5" IsEnabled="{x:Bind dmgmt:StaticDataStore.RestrictionEditingForActiveLevelAvailable}">
+                                                    <SymbolIcon Symbol="Delete"/>
+                                                </Button>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ItemsRepeater.ItemTemplate>
+                                </ItemsRepeater>
+                                <Grid Margin="20">
+                                    <Button HorizontalAlignment="Center" x:Name="btnAddRestriction" Click="btnAddRestriction_Click" IsEnabled="{x:Bind dmgmt:StaticDataStore.RestrictionEditingForActiveLevelAvailable}">
+                                        <SymbolIcon Symbol="Add"/>
+                                    </Button>
+                                </Grid>
+                            </StackPanel>
+                        </ScrollViewer>
                     </Grid>
                 </Grid>
             </Border>
