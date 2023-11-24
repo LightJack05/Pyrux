@@ -23,6 +23,7 @@
                             <Button Content="Open Appdata" Margin="10" x:Name="btnOpenAppdata" Click="btnOpenAppdata_Click"/>
                             <Button Content="Copy Appdata Path" Margin="10" x:Name="btnCopyAppdataPath" Click="btnCopyAppdataPath_Click"/>
                             <Button Content="Clear Appdata" Margin="10" x:Name="btnClearAppdata" Click="btnClearAppdata_Click"/>
+                            <Button Content="Reconstruct built-in levels" Margin="10" x:Name="btnRebuildBuiltins" Click="btnRebuildBuiltins_Click"/>
                         </StackPanel>
                     </StackPanel>
                 </Grid>

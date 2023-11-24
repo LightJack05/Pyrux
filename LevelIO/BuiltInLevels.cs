@@ -27,6 +27,9 @@ public static class BuiltInLevels
                     0
                 ),
                 new()
+                {
+                    new Restriction(RestrictionType.ReferenceLimit, UserFunction.GoForward, 2)
+                }
             ),
             new(
                 "0 - 2 (Tutorial)",
@@ -48,6 +51,9 @@ public static class BuiltInLevels
                     0
                 ),
                 new()
+                {
+                    new Restriction(RestrictionType.ReferenceLimit, UserFunction.GoForward, 2)
+                }
             ),
             new(
                 "0 - 3 (Tutorial)",
@@ -72,7 +78,7 @@ public static class BuiltInLevels
             ),
             new(
                 "0 - 4 (Tutorial)",
-                "Oh no, this level is quite big. Do you really want to call GoForward() this often?\rWell, maybe there is an easier and quicker way to do it... ;)",
+                "Oh no, this level is quite big. And you're only allowed to reference `GoForward` on time?!\rWell, I'm sure there's a way to do it. ;)",
                 true,
                 new(
                     new bool[30, 30]{{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}},
@@ -90,10 +96,13 @@ public static class BuiltInLevels
                     0
                 ),
                 new()
+                {
+                    new Restriction(RestrictionType.ReferenceLimit, UserFunction.GoForward, 1)
+                }
             ),
             new(
                 "0 - 5 (Tutorial)",
-                "Oh look, it's chips! According to the goal layout, we have to pick up all of them.\r\rLet's try that! Have you looked at the Chip Documentation? There's `TakeScrew()` to pick up a screw. Let's give that a try! ",
+                "Oh look, it's chips! According to the goal layout, we have to pick up all of them.\r\rLet's try that! Have you looked at the Chip Documentation? There's `TakeChip()` to pick up a screw. Let's give that a try! ",
                 true,
                 new(
                     new bool[8, 8]{{false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false}},
@@ -114,7 +123,7 @@ public static class BuiltInLevels
             ),
             new(
                 "0 - 6 (Tutorial)",
-                "This level wants you to spread out the chips over multiple tiles.\rTo drop chips you can use `PlaceChip()`.\r\rAlso, you're doing this multiple times, maybe check on those for loops again? ;)",
+                "This level wants you to spread out the chips over multiple tiles.\rTo drop chips you can use `PlaceChip()`.\r\rLooks like you're repeating the same action multiple times again... Maybe check on those for loops again? ;)",
                 true,
                 new(
                     new bool[8, 8]{{false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false}},
@@ -132,6 +141,10 @@ public static class BuiltInLevels
                     0
                 ),
                 new()
+                {
+                    new Restriction(RestrictionType.ReferenceLimit, UserFunction.PlaceChip, 1),
+                    new Restriction(RestrictionType.ReferenceLimit, UserFunction.TakeChip, 1)
+                }
             ),
             new(
                 "1 - 1",
@@ -153,30 +166,9 @@ public static class BuiltInLevels
                     0
                 ),
                 new()
-            ),
-            new(
-                "RestrictionTest",
-                "In this level, you have to collect all the chips from the corners of the playfield and place them in the one empty corner.\rBy the way... You can use the same code for all these corners. ;)\r\r<Credit: ru_poshcat>",
-                true,
-                new(
-                    new bool[12, 12]{{false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false}},
-                    new int[12, 12]{{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}},
-                    new(0,0),
-                    0
-                ),
-                "",
-                "",
-                false,
-                new(
-                    new bool[12, 12]{{false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false}, {false, false, false, false, false, false, false, false, false, false, false, false}},
-                    new int[12, 12]{{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}},
-                    new(3,0),
-                    0
-                ),
-                new()
                 {
-                    new Restriction(RestrictionType.ReferenceLimit, UserFunction.GoForward, 2),
-                    new Restriction(RestrictionType.CallLimit, UserFunction.WallAhead, 3)
+                    new Restriction(RestrictionType.ReferenceLimit, UserFunction.GoForward, 3),
+                    new Restriction(RestrictionType.ReferenceLimit, UserFunction.TakeChip, 3)
                 }
             )
         };

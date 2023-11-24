@@ -109,7 +109,7 @@
             x:Name="tctBuiltInLevels"
             Target="{x:Bind bdrBuiltInLevels}"
             Title="Built in levels"
-            Subtitle="These levels are built in to Pyrux. They cannot be edited."
+            Subtitle="These levels are built in to Pyrux. They cannot be edited. They also include a basic tutorial to get you introduced to the basic API usage."
             CloseButtonClick="TeachingTipCloseButtonClick">
 
             <StackPanel Orientation="Vertical">
