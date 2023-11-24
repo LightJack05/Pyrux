@@ -72,7 +72,14 @@ namespace Pyrux.Pages
             PyruxSettings.TutorialStateId++;
             if (PageTeachingTips.Count <= PyruxSettings.TutorialStateId)
             {
-                btnNewLevel_Click(null, null);
+                if (StaticDataStore.BuiltInLevels[0] != null)
+                {
+                    OpenLevel(StaticDataStore.BuiltInLevels[0]);
+                }
+                else
+                {
+                    btnNewLevel_Click(null, null);
+                }
             }
             else
             {

@@ -388,8 +388,9 @@ namespace Pyrux.Pages
         private void InitTutorial()
         {
             PageTeachingTips.Clear();
-            PageTeachingTips.Add(19, tctGoalPageIntro);
-            PageTeachingTips.Add(20, tctToolsGoalLayout);
+            PageTeachingTips.Add(20, tctGoalPageIntro);
+            PageTeachingTips.Add(21, tctRestrictions);
+            PageTeachingTips.Add(22, tctToolsGoalLayout);
 
             if (!PyruxSettings.SkipTutorialEnabled)
             {
@@ -408,7 +409,7 @@ namespace Pyrux.Pages
         {
             PageTeachingTips[PyruxSettings.TutorialStateId].IsOpen = false;
             PyruxSettings.TutorialStateId++;
-            if (PageTeachingTips.Count + 19 <= PyruxSettings.TutorialStateId)
+            if (PageTeachingTips.Count + 20 <= PyruxSettings.TutorialStateId)
             {
                 MainWindow.Instance.NavViewSetSelectionInFooter(0);
                 MainWindow.Instance.NavViewNavigate("docs", new Microsoft.UI.Xaml.Media.Animation.CommonNavigationTransitionInfo());
