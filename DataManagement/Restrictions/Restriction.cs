@@ -69,37 +69,37 @@ namespace Pyrux.DataManagement.Restrictions
             switch(Type)
             {
                 case RestrictionType.ReferenceLimit:
-                    return isReferenceLimitSatisfied(level);
+                    return IsReferenceLimitSatisfied(level);
                 case RestrictionType.ReferenceMin:
-                    return isReferenceMinSatisfied(level);
+                    return IsReferenceMinSatisfied(level);
                 case RestrictionType.CallLimit:
-                    return isCallLimitSatisfied();
+                    return IsCallLimitSatisfied();
                 case RestrictionType.CallMin:
-                    return isCallMinSatisfied();
+                    return IsCallMinSatisfied();
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
 
 
-        private bool isReferenceLimitSatisfied(PyruxLevel level)
+        private bool IsReferenceLimitSatisfied(PyruxLevel level)
         {
             int countOfReferences = Regex.Matches(level.Script, LimitedFunction.ToCallString()).Count;
             return countOfReferences <= LimitValue;
         }
 
-        private bool isReferenceMinSatisfied(PyruxLevel level)
+        private bool IsReferenceMinSatisfied(PyruxLevel level)
         {
             int countOfReferences = Regex.Matches(level.Script, LimitedFunction.ToCallString()).Count;
             return countOfReferences >= LimitValue;
         }
 
-        private bool isCallLimitSatisfied()
+        private bool IsCallLimitSatisfied()
         {
             return FunctionCallCount.GetCallCount(LimitedFunction) <= LimitValue;
         }
 
-        private bool isCallMinSatisfied()
+        private bool IsCallMinSatisfied()
         {
             return FunctionCallCount.GetCallCount(LimitedFunction) >= LimitValue;
         }
