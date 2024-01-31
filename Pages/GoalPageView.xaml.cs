@@ -479,7 +479,7 @@ namespace Pyrux.Pages
             }
         }
 
-        
+
 
         private void btnAddRestriction_Click(object sender, RoutedEventArgs e)
         {

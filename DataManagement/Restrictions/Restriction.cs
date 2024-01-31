@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 namespace Pyrux.DataManagement.Restrictions
 {
     internal class Restriction
-    { 
+    {
 
         public RestrictionType Type;
         public int LimitValue;
@@ -67,7 +67,7 @@ namespace Pyrux.DataManagement.Restrictions
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         public bool IsSatisfied(PyruxLevel level)
         {
-            switch(Type)
+            switch (Type)
             {
                 case RestrictionType.ReferenceLimit:
                     return IsReferenceLimitSatisfied(level);
@@ -82,7 +82,7 @@ namespace Pyrux.DataManagement.Restrictions
             }
         }
 
-
+        //TODO: Fix this crash on cerating new level.
         private bool IsReferenceLimitSatisfied(PyruxLevel level)
         {
             int countOfReferences = Regex.Matches(level.Script, LimitedFunction.ToCallString()).Count;
@@ -109,7 +109,7 @@ namespace Pyrux.DataManagement.Restrictions
         {
             List<RestrictionType> runtimeDependantRestrictionTypes = new()
             {
-                RestrictionType.CallMin, 
+                RestrictionType.CallMin,
                 RestrictionType.CallLimit
             };
 

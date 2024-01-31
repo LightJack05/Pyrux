@@ -1,8 +1,6 @@
 ﻿using CommunityToolkit.WinUI.UI;
 using Pyrux.DataManagement.Restrictions;
 using System.Collections.ObjectModel;
-using Windows.Graphics.Printing;
-using Windows.Networking.NetworkOperators;
 using Windows.UI;
 
 namespace Pyrux.Pages;
@@ -32,7 +30,7 @@ public sealed partial class ExercisePage
             textBlock.Text = ((Restriction)element.DataContext).ToString();
             UpdateRestrictionSatisfaction();
         }
-        
+
     }
     private void UpdateRestrictionSatisfaction()
     {
@@ -56,5 +54,5 @@ public sealed partial class ExercisePage
         }
     }
 
-    
+
 }

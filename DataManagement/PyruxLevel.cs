@@ -60,7 +60,7 @@ namespace Pyrux.DataManagement
             Script = script;
         }
 
-        
+
         public PyruxLevel(string levelName, string task, bool isBuiltIn, PyruxLevelMapLayout mapLayout, string script, string hint, bool completed, PyruxLevelMapLayout goalMapLayout)
         {
             LevelName = levelName;

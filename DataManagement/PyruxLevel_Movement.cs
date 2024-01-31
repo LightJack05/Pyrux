@@ -111,7 +111,7 @@ internal partial class PyruxLevel
     /// <param name="overrideCount">Do not count the variable up when executing</param>
     /// <returns>True if a wall is found ahead, false if not.</returns>
     /// <exception cref="ArgumentOutOfRangeException">Thrown when the angle of the player on the map is not a valid movement direction (up,down,left,right).</exception>
-    
+
     public bool WallAhead(bool overrideCount = false)
     {
         if (!overrideCount)

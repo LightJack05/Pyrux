@@ -4,7 +4,6 @@ using Pyrux.Pages.ContentDialogs;
 using Pyrux.Pages.ContentDialogs.ExceptionPages;
 using Pyrux.UserEndExceptions;
 using System.Collections.Concurrent;
-using System.Data.Common;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -194,7 +193,7 @@ public sealed partial class ExercisePage
         }
     }
 
-    
+
 
     public void SetupPythonConsoleOutput(ScriptEngine scriptEngine)
     {

@@ -3,7 +3,7 @@
 public enum UserFunction
 {
     GoForward,
-    TurnLeft, 
+    TurnLeft,
     TurnRight,
     ChipThere,
     PlaceChip,

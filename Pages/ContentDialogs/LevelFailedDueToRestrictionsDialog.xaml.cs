@@ -22,7 +22,7 @@ namespace Pyrux.Pages.ContentDialogs
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             _failedRestrictions.Clear();
-            foreach (Restriction restriction in StaticDataStore.ActiveLevel.CompletionRestrictions) 
+            foreach (Restriction restriction in StaticDataStore.ActiveLevel.CompletionRestrictions)
             {
                 if (!restriction.IsSatisfied(StaticDataStore.ActiveLevel))
                 {
@@ -33,7 +33,7 @@ namespace Pyrux.Pages.ContentDialogs
 
         private void irpRestrictions_ElementPrepared(ItemsRepeater sender, ItemsRepeaterElementPreparedEventArgs args)
         {
-           
+
             if (args.Element is FrameworkElement element)
             {
                 element.DataContext = _failedRestrictions[args.Index];
